@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -297,6 +298,80 @@ class PostStruct extends FFFirebaseStruct {
           data['isStealth'],
           ParamType.bool,
           false,
+        ),
+      );
+
+  static PostStruct fromAlgoliaData(Map<String, dynamic> data) => PostStruct(
+        timestamp: convertAlgoliaParam(
+          data['timestamp'],
+          ParamType.DateTime,
+          false,
+        ),
+        caption: convertAlgoliaParam(
+          data['caption'],
+          ParamType.String,
+          false,
+        ),
+        author: convertAlgoliaParam(
+          data['author'],
+          ParamType.String,
+          false,
+        ),
+        netVotes: convertAlgoliaParam(
+          data['netVotes'],
+          ParamType.int,
+          false,
+        ),
+        images: convertAlgoliaParam<ImageHashStruct>(
+          data['images'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: ImageHashStruct.fromAlgoliaData,
+        ),
+        id: convertAlgoliaParam(
+          data['id'],
+          ParamType.String,
+          false,
+        ),
+        isExpanded: convertAlgoliaParam(
+          data['isExpanded'],
+          ParamType.bool,
+          false,
+        ),
+        upVoters: convertAlgoliaParam<String>(
+          data['upVoters'],
+          ParamType.String,
+          true,
+        ),
+        downVoters: convertAlgoliaParam<String>(
+          data['downVoters'],
+          ParamType.String,
+          true,
+        ),
+        isSpoiler: convertAlgoliaParam(
+          data['isSpoiler'],
+          ParamType.bool,
+          false,
+        ),
+        spoilerClickers: convertAlgoliaParam<String>(
+          data['spoilerClickers'],
+          ParamType.String,
+          true,
+        ),
+        comments: convertAlgoliaParam<CommentStruct>(
+          data['comments'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: CommentStruct.fromAlgoliaData,
+        ),
+        isStealth: convertAlgoliaParam(
+          data['isStealth'],
+          ParamType.bool,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

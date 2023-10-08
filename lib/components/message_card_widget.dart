@@ -46,6 +46,8 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 55.0,
@@ -59,8 +61,10 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
         children: [
           FutureBuilder<List<UsersRecord>>(
             future: queryUsersRecordOnce(
-              queryBuilder: (usersRecord) =>
-                  usersRecord.where('uid', isEqualTo: widget.user?.uid),
+              queryBuilder: (usersRecord) => usersRecord.where(
+                'uid',
+                isEqualTo: widget.user?.uid,
+              ),
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -71,7 +75,7 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
                     width: 50.0,
                     height: 50.0,
                     child: SpinKitRipple(
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 50.0,
                     ),
                   ),

@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -156,6 +157,43 @@ class PollStruct extends FFFirebaseStruct {
           data['option4Voters'],
           ParamType.String,
           true,
+        ),
+      );
+
+  static PollStruct fromAlgoliaData(Map<String, dynamic> data) => PollStruct(
+        options: convertAlgoliaParam<String>(
+          data['options'],
+          ParamType.String,
+          true,
+        ),
+        totalVotes: convertAlgoliaParam(
+          data['totalVotes'],
+          ParamType.int,
+          false,
+        ),
+        option1Voters: convertAlgoliaParam<String>(
+          data['option1Voters'],
+          ParamType.String,
+          true,
+        ),
+        option2Voters: convertAlgoliaParam<String>(
+          data['option2Voters'],
+          ParamType.String,
+          true,
+        ),
+        option3Voters: convertAlgoliaParam<String>(
+          data['option3Voters'],
+          ParamType.String,
+          true,
+        ),
+        option4Voters: convertAlgoliaParam<String>(
+          data['option4Voters'],
+          ParamType.String,
+          true,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

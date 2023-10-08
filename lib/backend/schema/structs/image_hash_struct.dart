@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -64,6 +65,24 @@ class ImageHashStruct extends FFFirebaseStruct {
           data['blurHash'],
           ParamType.String,
           false,
+        ),
+      );
+
+  static ImageHashStruct fromAlgoliaData(Map<String, dynamic> data) =>
+      ImageHashStruct(
+        image: convertAlgoliaParam(
+          data['image'],
+          ParamType.String,
+          false,
+        ),
+        blurHash: convertAlgoliaParam(
+          data['blurHash'],
+          ParamType.String,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

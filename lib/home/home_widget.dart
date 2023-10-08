@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/post_widget.dart';
@@ -5,7 +6,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +33,44 @@ class _HomeWidgetState extends State<HomeWidget> {
     super.initState();
     _model = createModel(context, () => HomeModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if ((currentUserPhoto != null && currentUserPhoto != '') &&
+          (valueOrDefault(currentUserDocument?.banner, '') != null &&
+              valueOrDefault(currentUserDocument?.banner, '') != '') &&
+          (valueOrDefault(currentUserDocument?.pincode, '') != null &&
+              valueOrDefault(currentUserDocument?.pincode, '') != '') &&
+          (valueOrDefault(currentUserDocument?.realName, '') != null &&
+              valueOrDefault(currentUserDocument?.realName, '') != '') &&
+          (valueOrDefault(currentUserDocument?.bio, '') != null &&
+              valueOrDefault(currentUserDocument?.bio, '') != '')) {
+        if (currentUserPhoto == null || currentUserPhoto == '') {
+          await currentUserReference!.update(createUsersRecordData(
+            photoUrl: functions.randomImage(
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/4coc7ha1oyzf/Untitled_design_(46).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/inwpdvg4chrm/Untitled_design_(48).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/gyjh91gyd9vb/Untitled_design_(47).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/s85og6bt0q1h/Untitled_design_(49).png'),
+          ));
+        }
+        if (valueOrDefault(currentUserDocument?.banner, '') == null ||
+            valueOrDefault(currentUserDocument?.banner, '') == '') {
+          await currentUserReference!.update(createUsersRecordData(
+            banner: functions.randomImage(
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/w1q2kw6q4kjy/Untitled_design_(50).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/sdc47u7s4wpf/Untitled_design_(51).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/itqvapymq9ia/Untitled_design_(52).png',
+                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/61zbp5495jvv/Untitled_design_(53).png'),
+          ));
+        }
+        return;
+      } else {
+        // Bad Profile
+
+        context.pushNamed('createProfile');
+      }
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -41,17 +83,22 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'Home',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: SafeArea(
               top: true,
               child: Stack(
+                alignment: AlignmentDirectional(0.0, 0.0),
                 children: [
                   if (responsiveVisibility(
                     context: context,
@@ -159,7 +206,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       height: 50.0,
                                       child: SpinKitRipple(
                                         color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                            .secondaryText,
                                         size: 50.0,
                                       ),
                                     ),
@@ -329,7 +376,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   child: SpinKitRipple(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primary,
+                                                        .secondaryText,
                                                     size: 50.0,
                                                   ),
                                                 ),

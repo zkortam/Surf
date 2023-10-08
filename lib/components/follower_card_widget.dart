@@ -51,6 +51,8 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 55.0,
@@ -64,8 +66,10 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
         children: [
           FutureBuilder<List<UsersRecord>>(
             future: queryUsersRecordOnce(
-              queryBuilder: (usersRecord) =>
-                  usersRecord.where('uid', isEqualTo: widget.user?.uid),
+              queryBuilder: (usersRecord) => usersRecord.where(
+                'uid',
+                isEqualTo: widget.user?.uid,
+              ),
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -76,7 +80,7 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                     width: 50.0,
                     height: 50.0,
                     child: SpinKitRipple(
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 50.0,
                     ),
                   ),
@@ -190,12 +194,21 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                       ),
                       onPressed: () async {
                         await widget.user!.reference.update({
-                          'followers': FieldValue.arrayUnion([currentUserUid]),
+                          ...mapToFirestore(
+                            {
+                              'followers':
+                                  FieldValue.arrayUnion([currentUserUid]),
+                            },
+                          ),
                         });
 
                         await currentUserReference!.update({
-                          'following':
-                              FieldValue.arrayUnion([widget.user?.uid]),
+                          ...mapToFirestore(
+                            {
+                              'following':
+                                  FieldValue.arrayUnion([widget.user?.uid]),
+                            },
+                          ),
                         });
                       },
                     ),
@@ -206,11 +219,20 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     await currentUserReference!.update({
-                      'followers': FieldValue.arrayRemove([widget.user?.uid]),
+                      ...mapToFirestore(
+                        {
+                          'followers':
+                              FieldValue.arrayRemove([widget.user?.uid]),
+                        },
+                      ),
                     });
 
                     await widget.user!.reference.update({
-                      'following': FieldValue.arrayRemove([currentUserUid]),
+                      ...mapToFirestore(
+                        {
+                          'following': FieldValue.arrayRemove([currentUserUid]),
+                        },
+                      ),
                     });
                   },
                   text: FFLocalizations.of(context).getText(

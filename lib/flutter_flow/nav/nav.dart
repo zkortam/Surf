@@ -5,11 +5,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
 import '../../auth/base_auth_user_provider.dart';
-
+import '../../backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -92,298 +94,310 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/',
           builder: (context, _) =>
               appStateNotifier.loggedIn ? NavBarPage() : EntryWidget(),
+          routes: [
+            FFRoute(
+              name: 'entry',
+              path: 'entry',
+              builder: (context, params) => EntryWidget(),
+            ),
+            FFRoute(
+              name: 'dateOfBirth',
+              path: 'dateOfBirth',
+              requireAuth: true,
+              builder: (context, params) => DateOfBirthWidget(),
+            ),
+            FFRoute(
+              name: 'signUp',
+              path: 'signUp',
+              builder: (context, params) => SignUpWidget(
+                email: params.getParam('email', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'welcome',
+              path: 'welcome',
+              requireAuth: true,
+              builder: (context, params) => WelcomeWidget(),
+            ),
+            FFRoute(
+              name: 'emailVerification',
+              path: 'emailVerification',
+              builder: (context, params) => EmailVerificationWidget(),
+            ),
+            FFRoute(
+              name: 'createProfile',
+              path: 'createProfile',
+              requireAuth: true,
+              builder: (context, params) => CreateProfileWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'Notifications',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Notifications')
+                  : NavBarPage(
+                      initialPage: 'Notifications',
+                      page: NotificationsWidget(),
+                    ),
+            ),
+            FFRoute(
+              name: 'Profile',
+              path: 'profile',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Profile')
+                  : NavBarPage(
+                      initialPage: 'Profile',
+                      page: ProfileWidget(
+                        userID: params.getParam('userID', ParamType.String),
+                      ),
+                    ),
+            ),
+            FFRoute(
+              name: 'forgotPassword',
+              path: 'forgotPassword',
+              builder: (context, params) => ForgotPasswordWidget(),
+            ),
+            FFRoute(
+              name: 'Threads',
+              path: 'threads',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Threads')
+                  : NavBarPage(
+                      initialPage: 'Threads',
+                      page: ThreadsWidget(),
+                    ),
+            ),
+            FFRoute(
+              name: 'createPost',
+              path: 'createPost',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'createPost')
+                  : NavBarPage(
+                      initialPage: 'createPost',
+                      page: CreatePostWidget(),
+                    ),
+            ),
+            FFRoute(
+              name: 'singleThread',
+              path: 'singleThread',
+              requireAuth: true,
+              asyncParams: {
+                'thread': getDoc(['thread'], ThreadRecord.fromSnapshot),
+              },
+              builder: (context, params) => SingleThreadWidget(
+                thread: params.getParam('thread', ParamType.Document),
+                action: params.getParam('action', ParamType.int),
+                username: params.getParam('username', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'singlePost',
+              path: 'singlePost',
+              requireAuth: true,
+              asyncParams: {
+                'posts': getDoc(['posts'], PostsRecord.fromSnapshot),
+              },
+              builder: (context, params) => SinglePostWidget(
+                posts: params.getParam('posts', ParamType.Document),
+                action: params.getParam('action', ParamType.int),
+                username: params.getParam('username', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'scrollPost',
+              path: 'scrollPost',
+              requireAuth: true,
+              asyncParams: {
+                'post': getDoc(['posts'], PostsRecord.fromSnapshot),
+              },
+              builder: (context, params) => ScrollPostWidget(
+                uid: params.getParam('uid', ParamType.String),
+                post: params.getParam('post', ParamType.Document),
+              ),
+            ),
+            FFRoute(
+              name: 'enterPin',
+              path: 'enterPin',
+              requireAuth: true,
+              builder: (context, params) => EnterPinWidget(),
+            ),
+            FFRoute(
+              name: 'settings',
+              path: 'settings',
+              requireAuth: true,
+              builder: (context, params) => SettingsWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'createPin',
+              path: 'createPin',
+              requireAuth: true,
+              builder: (context, params) => CreatePinWidget(),
+            ),
+            FFRoute(
+              name: 'BiometricTest',
+              path: 'biometricTest',
+              requireAuth: true,
+              builder: (context, params) => BiometricTestWidget(),
+            ),
+            FFRoute(
+              name: 'accountDeleted',
+              path: 'accountDeleted',
+              requireAuth: true,
+              builder: (context, params) => AccountDeletedWidget(),
+            ),
+            FFRoute(
+              name: 'BiometricPin',
+              path: 'biometricPin',
+              requireAuth: true,
+              builder: (context, params) => BiometricPinWidget(),
+            ),
+            FFRoute(
+              name: 'userInterface',
+              path: 'userInterface',
+              requireAuth: true,
+              builder: (context, params) => UserInterfaceWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'privacy',
+              path: 'privacy',
+              requireAuth: true,
+              builder: (context, params) => PrivacyWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'notificationsSettings',
+              path: 'notificationsSettings',
+              requireAuth: true,
+              builder: (context, params) => NotificationsSettingsWidget(),
+            ),
+            FFRoute(
+              name: 'security',
+              path: 'security',
+              requireAuth: true,
+              builder: (context, params) => SecurityWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'blocked',
+              path: 'blocked',
+              requireAuth: true,
+              builder: (context, params) => BlockedWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'following',
+              path: 'following',
+              requireAuth: true,
+              builder: (context, params) => FollowingWidget(
+                uid: params.getParam('uid', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'followers',
+              path: 'followers',
+              requireAuth: true,
+              builder: (context, params) => FollowersWidget(
+                uid: params.getParam('uid', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'changePassword',
+              path: 'changePassword',
+              requireAuth: true,
+              builder: (context, params) => ChangePasswordWidget(),
+            ),
+            FFRoute(
+              name: 'changePin',
+              path: 'changePin',
+              requireAuth: true,
+              builder: (context, params) => ChangePinWidget(),
+            ),
+            FFRoute(
+              name: 'viewData',
+              path: 'viewData',
+              requireAuth: true,
+              builder: (context, params) => ViewDataWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'Search',
+              path: 'search',
+              requireAuth: true,
+              builder: (context, params) => SearchWidget(),
+            ),
+            FFRoute(
+              name: 'chat_main',
+              path: 'chatMain',
+              requireAuth: true,
+              builder: (context, params) => ChatMainWidget(),
+            ),
+            FFRoute(
+              name: 'chatSearch',
+              path: 'chatSearch',
+              requireAuth: true,
+              builder: (context, params) => ChatSearchWidget(),
+            ),
+            FFRoute(
+              name: 'CheckProfile',
+              path: 'checkProfile',
+              requireAuth: true,
+              builder: (context, params) => CheckProfileWidget(),
+            ),
+            FFRoute(
+              name: 'EditProfile',
+              path: 'editProfile',
+              requireAuth: true,
+              builder: (context, params) => EditProfileWidget(),
+            ),
+            FFRoute(
+              name: 'chats_page',
+              path: 'chatsPage',
+              requireAuth: true,
+              builder: (context, params) => ChatsPageWidget(
+                userName: params.getParam('userName', ParamType.String),
+                email: params.getParam('email', ParamType.String),
+                chatUser: params.getParam(
+                    'chatUser', ParamType.DocumentReference, false, ['chats']),
+                userRef: params.getParam(
+                    'userRef', ParamType.DocumentReference, false, ['users']),
+                userProfile: params.getParam('userProfile', ParamType.String),
+                userb: params.getParam(
+                    'userb', ParamType.DocumentReference, false, ['users']),
+                usera: params.getParam(
+                    'usera', ParamType.DocumentReference, false, ['users']),
+              ),
+            ),
+            FFRoute(
+              name: 'muluploadtest',
+              path: 'muluploadtest',
+              requireAuth: true,
+              builder: (context, params) => MuluploadtestWidget(),
+            ),
+            FFRoute(
+              name: 'Home',
+              path: 'home',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Home')
+                  : NavBarPage(
+                      initialPage: 'Home',
+                      page: HomeWidget(),
+                    ),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
-        FFRoute(
-          name: 'entry',
-          path: '/entry',
-          builder: (context, params) => EntryWidget(),
-        ),
-        FFRoute(
-          name: 'signUp',
-          path: '/signUp',
-          builder: (context, params) => SignUpWidget(),
-        ),
-        FFRoute(
-          name: 'dateOfBirth',
-          path: '/dateOfBirth',
-          requireAuth: true,
-          builder: (context, params) => DateOfBirthWidget(),
-        ),
-        FFRoute(
-          name: 'welcome',
-          path: '/welcome',
-          requireAuth: true,
-          builder: (context, params) => WelcomeWidget(),
-        ),
-        FFRoute(
-          name: 'createProfile',
-          path: '/createProfile',
-          requireAuth: true,
-          builder: (context, params) => CreateProfileWidget(),
-        ),
-        FFRoute(
-          name: 'emailVerification',
-          path: '/emailVerification',
-          builder: (context, params) => EmailVerificationWidget(),
-        ),
-        FFRoute(
-          name: 'Notifications',
-          path: '/Notifications',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Notifications')
-              : NavBarPage(
-                  initialPage: 'Notifications',
-                  page: NotificationsWidget(),
-                ),
-        ),
-        FFRoute(
-          name: 'Profile',
-          path: '/profile',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Profile')
-              : NavBarPage(
-                  initialPage: 'Profile',
-                  page: ProfileWidget(
-                    userID: params.getParam('userID', ParamType.String),
-                  ),
-                ),
-        ),
-        FFRoute(
-          name: 'forgotPassword',
-          path: '/forgotPassword',
-          builder: (context, params) => ForgotPasswordWidget(),
-        ),
-        FFRoute(
-          name: 'Threads',
-          path: '/threads',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Threads')
-              : NavBarPage(
-                  initialPage: 'Threads',
-                  page: ThreadsWidget(),
-                ),
-        ),
-        FFRoute(
-          name: 'createPost',
-          path: '/createPost',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'createPost')
-              : NavBarPage(
-                  initialPage: 'createPost',
-                  page: CreatePostWidget(),
-                ),
-        ),
-        FFRoute(
-          name: 'singleThread',
-          path: '/singleThread',
-          requireAuth: true,
-          asyncParams: {
-            'thread': getDoc(['thread'], ThreadRecord.fromSnapshot),
-          },
-          builder: (context, params) => SingleThreadWidget(
-            thread: params.getParam('thread', ParamType.Document),
-            action: params.getParam('action', ParamType.int),
-            username: params.getParam('username', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'singlePost',
-          path: '/singlePost',
-          requireAuth: true,
-          asyncParams: {
-            'posts': getDoc(['posts'], PostsRecord.fromSnapshot),
-          },
-          builder: (context, params) => SinglePostWidget(
-            posts: params.getParam('posts', ParamType.Document),
-            action: params.getParam('action', ParamType.int),
-            username: params.getParam('username', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'scrollPost',
-          path: '/scrollPost',
-          requireAuth: true,
-          asyncParams: {
-            'post': getDoc(['posts'], PostsRecord.fromSnapshot),
-          },
-          builder: (context, params) => ScrollPostWidget(
-            uid: params.getParam('uid', ParamType.String),
-            post: params.getParam('post', ParamType.Document),
-          ),
-        ),
-        FFRoute(
-          name: 'settings',
-          path: '/settings',
-          requireAuth: true,
-          builder: (context, params) => SettingsWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'enterPin',
-          path: '/enterPin',
-          requireAuth: true,
-          builder: (context, params) => EnterPinWidget(),
-        ),
-        FFRoute(
-          name: 'createPin',
-          path: '/createPin',
-          requireAuth: true,
-          builder: (context, params) => CreatePinWidget(),
-        ),
-        FFRoute(
-          name: 'BiometricPin',
-          path: '/biometricPin',
-          requireAuth: true,
-          builder: (context, params) => BiometricPinWidget(),
-        ),
-        FFRoute(
-          name: 'BiometricTest',
-          path: '/biometricTest',
-          requireAuth: true,
-          builder: (context, params) => BiometricTestWidget(),
-        ),
-        FFRoute(
-          name: 'accountDeleted',
-          path: '/accountDeleted',
-          requireAuth: true,
-          builder: (context, params) => AccountDeletedWidget(),
-        ),
-        FFRoute(
-          name: 'privacy',
-          path: '/privacy',
-          requireAuth: true,
-          builder: (context, params) => PrivacyWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'userInterface',
-          path: '/userInterface',
-          requireAuth: true,
-          builder: (context, params) => UserInterfaceWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'notificationsSettings',
-          path: '/notificationsSettings',
-          requireAuth: true,
-          builder: (context, params) => NotificationsSettingsWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'security',
-          path: '/security',
-          requireAuth: true,
-          builder: (context, params) => SecurityWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'blocked',
-          path: '/blocked',
-          requireAuth: true,
-          builder: (context, params) => BlockedWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'following',
-          path: '/following',
-          requireAuth: true,
-          builder: (context, params) => FollowingWidget(
-            uid: params.getParam('uid', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'followers',
-          path: '/followers',
-          requireAuth: true,
-          builder: (context, params) => FollowersWidget(
-            uid: params.getParam('uid', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'changePassword',
-          path: '/changePassword',
-          requireAuth: true,
-          builder: (context, params) => ChangePasswordWidget(),
-        ),
-        FFRoute(
-          name: 'changePin',
-          path: '/changePin',
-          requireAuth: true,
-          builder: (context, params) => ChangePinWidget(),
-        ),
-        FFRoute(
-          name: 'viewData',
-          path: '/viewData',
-          requireAuth: true,
-          builder: (context, params) => ViewDataWidget(
-            settingsKey: params.getParam('settingsKey', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'Search',
-          path: '/search',
-          requireAuth: true,
-          builder: (context, params) => SearchWidget(),
-        ),
-        FFRoute(
-          name: 'chat_main',
-          path: '/chatMain',
-          requireAuth: true,
-          builder: (context, params) => ChatMainWidget(),
-        ),
-        FFRoute(
-          name: 'chats_page',
-          path: '/chatsPage',
-          requireAuth: true,
-          builder: (context, params) => ChatsPageWidget(
-            userName: params.getParam('userName', ParamType.String),
-            email: params.getParam('email', ParamType.String),
-            chatUser: params.getParam(
-                'chatUser', ParamType.DocumentReference, false, ['chats']),
-            userRef: params.getParam(
-                'userRef', ParamType.DocumentReference, false, ['users']),
-            userProfile: params.getParam('userProfile', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'chatSearch',
-          path: '/chatSearch',
-          requireAuth: true,
-          builder: (context, params) => ChatSearchWidget(),
-        ),
-        FFRoute(
-          name: 'CheckProfile',
-          path: '/checkProfile',
-          requireAuth: true,
-          builder: (context, params) => CheckProfileWidget(),
-        ),
-        FFRoute(
-          name: 'EditProfile',
-          path: '/editProfile',
-          requireAuth: true,
-          builder: (context, params) => EditProfileWidget(),
-        ),
-        FFRoute(
-          name: 'Home',
-          path: '/home',
-          requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Home')
-              : NavBarPage(
-                  initialPage: 'Home',
-                  page: HomeWidget(),
-                ),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
     );
@@ -574,7 +588,7 @@ class FFRoute {
                     ),
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
@@ -609,7 +623,11 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(
+        hasTransition: true,
+        transitionType: PageTransitionType.fade,
+        duration: Duration(milliseconds: 300),
+      );
 }
 
 class _RouteErrorBuilder extends StatefulWidget {
@@ -638,4 +656,24 @@ class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
 
   @override
   Widget build(BuildContext context) => widget.child;
+}
+
+class RootPageContext {
+  const RootPageContext(this.isRootPage, [this.errorRoute]);
+  final bool isRootPage;
+  final String? errorRoute;
+
+  static bool isInactiveRootPage(BuildContext context) {
+    final rootPageContext = context.read<RootPageContext?>();
+    final isRootPage = rootPageContext?.isRootPage ?? false;
+    final location = GoRouter.of(context).location;
+    return isRootPage &&
+        location != '/' &&
+        location != rootPageContext?.errorRoute;
+  }
+
+  static Widget wrap(Widget child, {String? errorRoute}) => Provider.value(
+        value: RootPageContext(true, errorRoute),
+        child: child,
+      );
 }

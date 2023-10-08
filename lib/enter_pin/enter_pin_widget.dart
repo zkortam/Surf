@@ -81,11 +81,15 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'enterPin',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -239,6 +243,9 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                 ),
                                               },
                                             );
+
+                                            FFAppState().paramholder =
+                                                'pintosettapp';
                                           }
                                         },
                                         autovalidateMode:
@@ -270,15 +277,11 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                         currentUserDocument
                                                             ?.pincode,
                                                         '')) {
+                                                  FFAppState().paramholder =
+                                                      'pintosettapp';
+
                                                   context.pushNamed(
                                                     'settings',
-                                                    queryParameters: {
-                                                      'settingsKey':
-                                                          serializeParam(
-                                                        true,
-                                                        ParamType.bool,
-                                                      ),
-                                                    }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
                                                           TransitionInfo(
@@ -298,10 +301,16 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                     context: context,
                                                     builder: (context) {
                                                       return GestureDetector(
-                                                        onTap: () => FocusScope
-                                                                .of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode),
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
                                                         child: Padding(
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
@@ -315,7 +324,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                       );
                                                     },
                                                   ).then((value) =>
-                                                      setState(() {}));
+                                                      safeSetState(() {}));
                                                 }
                                               },
                                               text: FFLocalizations.of(context)

@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometric permissions are needed for biometric settings access";
+PermissionGroupNotification = "Enable Notifications for Posts, Threads, & Messages";

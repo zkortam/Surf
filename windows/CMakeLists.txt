@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(surf2 LANGUAGES CXX)
+project(surf LANGUAGES CXX)
 
-set(BINARY_NAME "surf2")
+set(BINARY_NAME "surf")
 
 cmake_policy(SET CMP0063 NEW)
 

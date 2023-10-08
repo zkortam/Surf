@@ -76,11 +76,15 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'emailVerification',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -174,10 +178,14 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget>
                                               context: context,
                                               builder: (context) {
                                                 return GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode),
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
                                                   child: Padding(
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
@@ -188,7 +196,8 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget>
                                                   ),
                                                 );
                                               },
-                                            ).then((value) => setState(() {}));
+                                            ).then(
+                                                (value) => safeSetState(() {}));
 
                                             await authManager
                                                 .sendEmailVerification();

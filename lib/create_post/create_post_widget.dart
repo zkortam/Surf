@@ -15,6 +15,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -119,11 +120,15 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'createPost',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -454,215 +459,260 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                         ),
                                                         FFButtonWidget(
                                                           onPressed: () async {
-                                                            final firestoreBatch =
-                                                                FirebaseFirestore
-                                                                    .instance
-                                                                    .batch();
-                                                            try {
-                                                              if (currentUserEmailVerified) {
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  enableDrag:
-                                                                      false,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(
-                                                                              _model.unfocusNode),
+                                                            if (currentUserEmailVerified) {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                enableDrag:
+                                                                    false,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () => _model
+                                                                            .unfocusNode
+                                                                            .canRequestFocus
+                                                                        ? FocusScope.of(context).requestFocus(_model
+                                                                            .unfocusNode)
+                                                                        : FocusScope.of(context)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            BottomNotifWidget(
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'sritglym' /* Posting */,
-                                                                          ),
+                                                                          BottomNotifWidget(
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'sritglym' /* Posting */,
                                                                         ),
                                                                       ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
 
-                                                                firestoreBatch
-                                                                    .set(
-                                                                        PostsRecord
-                                                                            .collection
-                                                                            .doc(),
-                                                                        createPostsRecordData(
-                                                                          post:
-                                                                              createPostStruct(
-                                                                            timestamp:
-                                                                                getCurrentTimestamp,
-                                                                            caption:
-                                                                                _model.textController1.text,
-                                                                            author:
-                                                                                currentUserUid,
-                                                                            netVotes:
-                                                                                0,
-                                                                            id: 'P${currentUserUid}${(currentUserDocument?.posts?.toList() ?? []).length.toString()}',
-                                                                            isExpanded:
-                                                                                false,
-                                                                            isSpoiler:
-                                                                                _model.isSpoiler,
-                                                                            isStealth:
-                                                                                valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                            fieldValues: {
-                                                                              'spoilerClickers': [
-                                                                                currentUserUid
-                                                                              ],
-                                                                              'images': [
-                                                                                getImageHashFirestoreData(
-                                                                                  createImageHashStruct(
-                                                                                    image: _model.uploadedFileUrl,
-                                                                                    blurHash: _model.uploadedLocalFile.blurHash,
-                                                                                    clearUnsetFields: false,
-                                                                                    create: true,
-                                                                                  ),
-                                                                                  true,
-                                                                                )
-                                                                              ],
-                                                                            },
-                                                                            clearUnsetFields:
-                                                                                false,
-                                                                            create:
-                                                                                true,
-                                                                          ),
-                                                                        ));
+                                                              setState(() {
+                                                                _model.postID =
+                                                                    'P${currentUserUid}[]${(currentUserDocument?.posts?.toList() ?? []).length.toString()}${random_data.randomString(
+                                                                  2,
+                                                                  12,
+                                                                  true,
+                                                                  true,
+                                                                  true,
+                                                                )}';
+                                                              });
 
-                                                                firestoreBatch
-                                                                    .update(
-                                                                        currentUserReference!,
-                                                                        {
-                                                                      'Posts':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        getPostFirestoreData(
-                                                                          createPostStruct(
-                                                                            timestamp:
-                                                                                getCurrentTimestamp,
-                                                                            caption:
-                                                                                _model.textController1.text,
-                                                                            author:
-                                                                                currentUserUid,
-                                                                            netVotes:
-                                                                                0,
-                                                                            id: 'P${currentUserUid}${(currentUserDocument?.posts?.toList() ?? []).length.toString()}',
-                                                                            isExpanded:
-                                                                                false,
-                                                                            isSpoiler:
-                                                                                _model.isSpoiler,
-                                                                            isStealth:
-                                                                                valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                            fieldValues: {
-                                                                              'spoilerClickers': FieldValue.arrayUnion([
-                                                                                currentUserUid
-                                                                              ]),
-                                                                              'images': FieldValue.arrayUnion([
-                                                                                getImageHashFirestoreData(
-                                                                                  createImageHashStruct(
-                                                                                    image: _model.uploadedFileUrl,
-                                                                                    blurHash: _model.uploadedLocalFile.blurHash,
-                                                                                    clearUnsetFields: false,
-                                                                                  ),
-                                                                                  true,
-                                                                                )
-                                                                              ]),
-                                                                            },
-                                                                            clearUnsetFields:
-                                                                                false,
-                                                                          ),
+                                                              await PostsRecord
+                                                                  .collection
+                                                                  .doc()
+                                                                  .set(
+                                                                      createPostsRecordData(
+                                                                    post:
+                                                                        createPostStruct(
+                                                                      timestamp:
+                                                                          getCurrentTimestamp,
+                                                                      caption: _model
+                                                                          .textController1
+                                                                          .text,
+                                                                      author:
+                                                                          currentUserUid,
+                                                                      netVotes:
+                                                                          0,
+                                                                      id: _model
+                                                                          .postID,
+                                                                      isExpanded:
+                                                                          false,
+                                                                      isSpoiler:
+                                                                          _model
+                                                                              .isSpoiler,
+                                                                      isStealth: valueOrDefault<
+                                                                              bool>(
+                                                                          currentUserDocument
+                                                                              ?.isStealth,
+                                                                          false),
+                                                                      fieldValues: {
+                                                                        'spoilerClickers':
+                                                                            [
+                                                                          currentUserUid
+                                                                        ],
+                                                                        'images':
+                                                                            [
+                                                                          getImageHashFirestoreData(
+                                                                            createImageHashStruct(
+                                                                              image: _model.uploadedFileUrl,
+                                                                              blurHash: _model.uploadedLocalFile.blurHash,
+                                                                              clearUnsetFields: false,
+                                                                              create: true,
+                                                                            ),
+                                                                            true,
+                                                                          )
+                                                                        ],
+                                                                      },
+                                                                      clearUnsetFields:
+                                                                          false,
+                                                                      create:
                                                                           true,
-                                                                        )
-                                                                      ]),
-                                                                    });
+                                                                    ),
+                                                                  ));
 
-                                                                context.goNamed(
-                                                                    'Home');
+                                                              await currentUserReference!
+                                                                  .update({
+                                                                ...mapToFirestore(
+                                                                  {
+                                                                    'Posts':
+                                                                        FieldValue
+                                                                            .arrayUnion([
+                                                                      getPostFirestoreData(
+                                                                        createPostStruct(
+                                                                          timestamp:
+                                                                              getCurrentTimestamp,
+                                                                          caption: _model
+                                                                              .textController1
+                                                                              .text,
+                                                                          author:
+                                                                              currentUserUid,
+                                                                          netVotes:
+                                                                              0,
+                                                                          id: _model
+                                                                              .postID,
+                                                                          isExpanded:
+                                                                              false,
+                                                                          isSpoiler:
+                                                                              _model.isSpoiler,
+                                                                          isStealth: valueOrDefault<bool>(
+                                                                              currentUserDocument?.isStealth,
+                                                                              false),
+                                                                          fieldValues: {
+                                                                            'spoilerClickers':
+                                                                                FieldValue.arrayUnion([
+                                                                              currentUserUid
+                                                                            ]),
+                                                                            'images':
+                                                                                FieldValue.arrayUnion([
+                                                                              getImageHashFirestoreData(
+                                                                                createImageHashStruct(
+                                                                                  image: _model.uploadedFileUrl,
+                                                                                  blurHash: _model.uploadedLocalFile.blurHash,
+                                                                                  clearUnsetFields: false,
+                                                                                ),
+                                                                                true,
+                                                                              )
+                                                                            ]),
+                                                                          },
+                                                                          clearUnsetFields:
+                                                                              false,
+                                                                        ),
+                                                                        true,
+                                                                      )
+                                                                    ]),
+                                                                  },
+                                                                ),
+                                                              });
 
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  enableDrag:
-                                                                      false,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(
-                                                                              _model.unfocusNode),
+                                                              context.goNamed(
+                                                                'Home',
+                                                                extra: <String,
+                                                                    dynamic>{
+                                                                  kTransitionInfoKey:
+                                                                      TransitionInfo(
+                                                                    hasTransition:
+                                                                        true,
+                                                                    transitionType:
+                                                                        PageTransitionType
+                                                                            .fade,
+                                                                  ),
+                                                                },
+                                                              );
+
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                enableDrag:
+                                                                    false,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () => _model
+                                                                            .unfocusNode
+                                                                            .canRequestFocus
+                                                                        ? FocusScope.of(context).requestFocus(_model
+                                                                            .unfocusNode)
+                                                                        : FocusScope.of(context)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            BottomNotifWidget(
-                                                                          text:
-                                                                              'Posted',
+                                                                          BottomNotifWidget(
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'kx41gmij' /* Posted */,
                                                                         ),
                                                                       ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
-                                                              } else {
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  enableDrag:
-                                                                      false,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(
-                                                                              _model.unfocusNode),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            } else {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                enableDrag:
+                                                                    false,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () => _model
+                                                                            .unfocusNode
+                                                                            .canRequestFocus
+                                                                        ? FocusScope.of(context).requestFocus(_model
+                                                                            .unfocusNode)
+                                                                        : FocusScope.of(context)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
                                                                       child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            BottomBarErrorWidget(
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'go7rhtxx' /* Please write a caption and upl... */,
-                                                                          ),
+                                                                          BottomBarErrorWidget(
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'go7rhtxx' /* Please write a caption and upl... */,
                                                                         ),
                                                                       ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
-                                                              }
-                                                            } finally {
-                                                              await firestoreBatch
-                                                                  .commit();
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
                                                             }
+
+                                                            context.pushNamed(
+                                                                'Home');
                                                           },
                                                           text: FFLocalizations
                                                                   .of(context)
@@ -717,70 +767,96 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                   ],
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 50.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                    border: Border.all(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      width: 3.0,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 0.0,
-                                                                8.0, 0.0),
-                                                    child: TextFormField(
-                                                      controller: _model
-                                                          .textController1,
-                                                      autofocus: true,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium,
-                                                        hintText:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                          '3ftumxfo' /* Caption */,
-                                                        ),
-                                                        hintStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium,
-                                                        enabledBorder:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        errorBorder:
-                                                            InputBorder.none,
-                                                        focusedErrorBorder:
-                                                            InputBorder.none,
-                                                      ),
-                                                      style:
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.00, 0.00),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10.0, 10.0,
+                                                          10.0, 0.0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _model.textController1,
+                                                    autofocus: true,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyMedium,
-                                                      validator: _model
-                                                          .textController1Validator
-                                                          .asValidator(context),
+                                                              .labelMedium,
+                                                      hintText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        '3ftumxfo' /* Caption */,
+                                                      ),
+                                                      hintStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 3.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 3.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 3.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 3.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      contentPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  10.0),
                                                     ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                    textAlign: TextAlign.start,
+                                                    validator: _model
+                                                        .textController1Validator
+                                                        .asValidator(context),
                                                   ),
                                                 ),
                                               ),
@@ -905,10 +981,17 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                         context: context,
                                                         builder: (context) {
                                                           return GestureDetector(
-                                                            onTap: () => FocusScope
-                                                                    .of(context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode),
+                                                            onTap: () => _model
+                                                                    .unfocusNode
+                                                                    .canRequestFocus
+                                                                ? FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode)
+                                                                : FocusScope.of(
+                                                                        context)
+                                                                    .unfocus(),
                                                             child: Padding(
                                                               padding: MediaQuery
                                                                   .viewInsetsOf(
@@ -925,7 +1008,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() {}));
 
                                                       setState(() {
                                                         _model.addToImages(
@@ -1174,67 +1257,105 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                       .instance
                                                                       .batch();
                                                               try {
-                                                                if (_model
-                                                                    .isPoll) {
-                                                                  await showModalBottomSheet(
-                                                                    isScrollControlled:
-                                                                        true,
-                                                                    backgroundColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    enableDrag:
-                                                                        false,
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (context) {
-                                                                      return GestureDetector(
-                                                                        onTap: () =>
-                                                                            FocusScope.of(context).requestFocus(_model.unfocusNode),
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
                                                                         child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              MediaQuery.viewInsetsOf(context),
-                                                                          child:
-                                                                              BottomNotifWidget(
-                                                                            text:
-                                                                                FFLocalizations.of(context).getText(
-                                                                              'cnnkodt7' /* Posting */,
-                                                                            ),
+                                                                            BottomNotifWidget(
+                                                                          text:
+                                                                              FFLocalizations.of(context).getText(
+                                                                            'mbi8v1fn' /* Posting */,
                                                                           ),
                                                                         ),
-                                                                      );
-                                                                    },
-                                                                  ).then((value) =>
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+
+                                                                if (_model
+                                                                    .isPoll) {
+                                                                  setState(() {
+                                                                    _model.addToOptions(_model
+                                                                        .textController3
+                                                                        .text);
+                                                                  });
+                                                                  setState(() {
+                                                                    _model.addToOptions(_model
+                                                                        .textController4
+                                                                        .text);
+                                                                  });
+                                                                  if (_model
+                                                                      .option3) {
+                                                                    setState(
+                                                                        () {
+                                                                      _model.addToOptions(_model
+                                                                          .textController5
+                                                                          .text);
+                                                                    });
+                                                                    if (_model
+                                                                        .option4) {
                                                                       setState(
-                                                                          () {}));
+                                                                          () {
+                                                                        _model.addToOptions(_model
+                                                                            .textController6
+                                                                            .text);
+                                                                      });
+                                                                    }
+                                                                  }
 
                                                                   firestoreBatch
                                                                       .update(
                                                                           currentUserReference!,
                                                                           {
-                                                                        'threads':
-                                                                            FieldValue.arrayUnion([
-                                                                          getThreadFirestoreData(
-                                                                            createThreadStruct(
-                                                                              timestamp: getCurrentTimestamp,
-                                                                              author: currentUserUid,
-                                                                              title: _model.textController2.text,
-                                                                              netVotes: 0,
-                                                                              id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
-                                                                              isPoll: _model.isPoll,
-                                                                              poll: createPollStruct(
-                                                                                fieldValues: {
-                                                                                  'options': _model.options,
-                                                                                },
-                                                                                clearUnsetFields: false,
-                                                                              ),
-                                                                              isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                              clearUnsetFields: false,
-                                                                            ),
-                                                                            true,
-                                                                          )
-                                                                        ]),
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'threads':
+                                                                                FieldValue.arrayUnion([
+                                                                              getThreadFirestoreData(
+                                                                                createThreadStruct(
+                                                                                  timestamp: getCurrentTimestamp,
+                                                                                  author: currentUserUid,
+                                                                                  title: _model.textController2.text,
+                                                                                  netVotes: 0,
+                                                                                  id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                                  isPoll: _model.isPoll,
+                                                                                  poll: createPollStruct(
+                                                                                    fieldValues: {
+                                                                                      'options': _model.options,
+                                                                                    },
+                                                                                    clearUnsetFields: false,
+                                                                                  ),
+                                                                                  isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                                  clearUnsetFields: false,
+                                                                                ),
+                                                                                true,
+                                                                              )
+                                                                            ]),
+                                                                          },
+                                                                        ),
                                                                       });
 
                                                                   firestoreBatch
@@ -1264,174 +1385,174 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                             ),
                                                                           ));
                                                                 } else {
-                                                                  await showModalBottomSheet(
-                                                                    isScrollControlled:
-                                                                        true,
-                                                                    backgroundColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    enableDrag:
-                                                                        false,
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (context) {
-                                                                      return GestureDetector(
-                                                                        onTap: () =>
-                                                                            FocusScope.of(context).requestFocus(_model.unfocusNode),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              MediaQuery.viewInsetsOf(context),
-                                                                          child:
-                                                                              BottomNotifWidget(
-                                                                            text:
-                                                                                FFLocalizations.of(context).getText(
-                                                                              'mbi8v1fn' /* Posting */,
-                                                                            ),
+                                                                  if (functions.getStringLength(_model
+                                                                          .textController7
+                                                                          .text) >
+                                                                      749) {
+                                                                    _model.threadSummary =
+                                                                        await actions
+                                                                            .chatGPT(
+                                                                      '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',
+                                                                      'Please summarize all of this in no more than 2 sentances.${_model.textController7.text}',
+                                                                      1000,
+                                                                      0.1,
+                                                                    );
+
+                                                                    firestoreBatch
+                                                                        .update(
+                                                                            currentUserReference!,
+                                                                            {
+                                                                          ...mapToFirestore(
+                                                                            {
+                                                                              'threads': FieldValue.arrayUnion([
+                                                                                getThreadFirestoreData(
+                                                                                  createThreadStruct(
+                                                                                    timestamp: getCurrentTimestamp,
+                                                                                    author: currentUserUid,
+                                                                                    title: _model.textController2.text,
+                                                                                    text: functions.threadTextStripper(_model.textController7.text),
+                                                                                    netVotes: 0,
+                                                                                    id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                                    isPoll: _model.isPoll,
+                                                                                    poll: createPollStruct(
+                                                                                      fieldValues: {
+                                                                                        'options': _model.options,
+                                                                                      },
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    link: functions.cutURL(_model.textController7.text) != null && functions.cutURL(_model.textController7.text) != '' ? functions.cutURL(_model.textController7.text) : null,
+                                                                                    summary: functions.substringerGPT(_model.threadSummary!),
+                                                                                    isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                                    fieldValues: {
+                                                                                      'hashtags': functions.extractHashtags(_model.textController7.text),
+                                                                                    },
+                                                                                    clearUnsetFields: false,
+                                                                                  ),
+                                                                                  true,
+                                                                                )
+                                                                              ]),
+                                                                            },
                                                                           ),
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ).then((value) =>
-                                                                      setState(
-                                                                          () {}));
+                                                                        });
 
-                                                                  _model.isPoliticalGPT =
-                                                                      await actions
-                                                                          .chatGPT(
-                                                                    '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',
-                                                                    'For the following prompt, please answer in the following manner. If the prompt is a political prompt, reply 1. Otherwise, reply 0.${functions.threadTextStripper(_model.textController7.text)}',
-                                                                    250,
-                                                                    0.2,
-                                                                  );
-                                                                  _model.isBiasGPT =
-                                                                      await actions
-                                                                          .chatGPT(
-                                                                    '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',
-                                                                    'For the following prompt, please answer in the following manner. If the prompt is a prompt that has a conservative bias, please reply 1. liberal bias, reply -1, otherwise, 0. ${functions.threadTextStripper(_model.textController7.text)}',
-                                                                    250,
-                                                                    0.2,
-                                                                  );
-                                                                  _model.isGenreGPT =
-                                                                      await actions
-                                                                          .chatGPT(
-                                                                    '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',
-                                                                    'For the following prompt, please answer in the following manner. If the prompt is a prompt that is best described as \"Nerdy\", respond with 0. \"Informational\" respond with 1. \"Retro\" respond with 2. \"Historical\" respond with 3. \"Celebrity\" respond with 4. \"Political\" respond with 5. \"Fun\" respond with 6. \"Life\" respond with 7. ${functions.threadTextStripper(_model.textController7.text)}',
-                                                                    250,
-                                                                    0.1,
-                                                                  );
-                                                                  _model.threadSummary =
-                                                                      await actions
-                                                                          .chatGPT(
-                                                                    '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',
-                                                                    'Please summarize all of this in no more than 2 sentances. 75 characters max. ${_model.textController7.text}',
-                                                                    1000,
-                                                                    0.1,
-                                                                  );
+                                                                    firestoreBatch.set(
+                                                                        ThreadRecord.collection.doc(),
+                                                                        createThreadRecordData(
+                                                                          thread:
+                                                                              createThreadStruct(
+                                                                            timestamp:
+                                                                                getCurrentTimestamp,
+                                                                            author:
+                                                                                currentUserUid,
+                                                                            title:
+                                                                                _model.textController2.text,
+                                                                            text:
+                                                                                functions.threadTextStripper(_model.textController7.text),
+                                                                            id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                            netVotes:
+                                                                                0,
+                                                                            isPoll:
+                                                                                false,
+                                                                            link:
+                                                                                functions.cutURL(_model.textController7.text),
+                                                                            summary:
+                                                                                functions.substringerGPT(_model.threadSummary!),
+                                                                            isStealth:
+                                                                                valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                            fieldValues: {
+                                                                              'hashtags': functions.extractHashtags(_model.textController7.text),
+                                                                            },
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                            create:
+                                                                                true,
+                                                                          ),
+                                                                        ));
+                                                                  } else {
+                                                                    firestoreBatch
+                                                                        .update(
+                                                                            currentUserReference!,
+                                                                            {
+                                                                          ...mapToFirestore(
+                                                                            {
+                                                                              'threads': FieldValue.arrayUnion([
+                                                                                getThreadFirestoreData(
+                                                                                  createThreadStruct(
+                                                                                    timestamp: getCurrentTimestamp,
+                                                                                    author: currentUserUid,
+                                                                                    title: _model.textController2.text,
+                                                                                    text: functions.threadTextStripper(_model.textController7.text),
+                                                                                    netVotes: 0,
+                                                                                    id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                                    isPoll: _model.isPoll,
+                                                                                    poll: createPollStruct(
+                                                                                      fieldValues: {
+                                                                                        'options': _model.options,
+                                                                                      },
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    link: functions.cutURL(_model.textController7.text) != null && functions.cutURL(_model.textController7.text) != '' ? functions.cutURL(_model.textController7.text) : null,
+                                                                                    isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                                    fieldValues: {
+                                                                                      'hashtags': functions.extractHashtags(_model.textController7.text),
+                                                                                    },
+                                                                                    clearUnsetFields: false,
+                                                                                  ),
+                                                                                  true,
+                                                                                )
+                                                                              ]),
+                                                                            },
+                                                                          ),
+                                                                        });
 
-                                                                  firestoreBatch
-                                                                      .update(
-                                                                          currentUserReference!,
-                                                                          {
-                                                                        'threads':
-                                                                            FieldValue.arrayUnion([
-                                                                          getThreadFirestoreData(
-                                                                            createThreadStruct(
-                                                                              timestamp: getCurrentTimestamp,
-                                                                              author: currentUserUid,
-                                                                              title: _model.textController2.text,
-                                                                              text: functions.threadTextStripper(_model.textController7.text),
-                                                                              netVotes: 0,
-                                                                              id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
-                                                                              isPoll: _model.isPoll,
-                                                                              poll: createPollStruct(
-                                                                                fieldValues: {
-                                                                                  'options': _model.options,
-                                                                                },
-                                                                                clearUnsetFields: false,
-                                                                              ),
-                                                                              link: functions.cutURL(_model.textController7.text) != null && functions.cutURL(_model.textController7.text) != '' ? functions.cutURL(_model.textController7.text) : null,
-                                                                              isPolitical: _model.isPoliticalGPT == '1',
-                                                                              politicalPosition: functions.stringToInt(_model.isBiasGPT!),
-                                                                              genre: functions.stringToInt(_model.isGenreGPT!),
-                                                                              summary: functions.substringerGPT(_model.threadSummary!),
-                                                                              isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                              fieldValues: {
-                                                                                'hashtags': functions.extractHashtags(_model.textController7.text),
-                                                                              },
-                                                                              clearUnsetFields: false,
-                                                                            ),
-                                                                            true,
-                                                                          )
-                                                                        ]),
-                                                                      });
-
-                                                                  firestoreBatch
-                                                                      .set(
-                                                                          ThreadRecord
-                                                                              .collection
-                                                                              .doc(),
-                                                                          createThreadRecordData(
-                                                                            thread:
-                                                                                createThreadStruct(
-                                                                              timestamp: getCurrentTimestamp,
-                                                                              author: currentUserUid,
-                                                                              title: _model.textController2.text,
-                                                                              text: functions.threadTextStripper(_model.textController7.text),
-                                                                              id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
-                                                                              netVotes: 0,
-                                                                              isPoll: false,
-                                                                              isPolitical: _model.isPoliticalGPT == '1',
-                                                                              politicalPosition: functions.stringToInt(_model.isBiasGPT!),
-                                                                              genre: functions.stringToInt(_model.isGenreGPT!),
-                                                                              link: functions.cutURL(_model.textController7.text),
-                                                                              summary: functions.substringerGPT(_model.threadSummary!),
-                                                                              isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                              fieldValues: {
-                                                                                'hashtags': functions.extractHashtags(_model.textController7.text),
-                                                                              },
-                                                                              clearUnsetFields: false,
-                                                                              create: true,
-                                                                            ),
-                                                                          ));
+                                                                    firestoreBatch.set(
+                                                                        ThreadRecord.collection.doc(),
+                                                                        createThreadRecordData(
+                                                                          thread:
+                                                                              createThreadStruct(
+                                                                            timestamp:
+                                                                                getCurrentTimestamp,
+                                                                            author:
+                                                                                currentUserUid,
+                                                                            title:
+                                                                                _model.textController2.text,
+                                                                            text:
+                                                                                functions.threadTextStripper(_model.textController7.text),
+                                                                            id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                            netVotes:
+                                                                                0,
+                                                                            isPoll:
+                                                                                false,
+                                                                            link:
+                                                                                functions.cutURL(_model.textController7.text),
+                                                                            isStealth:
+                                                                                valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                            fieldValues: {
+                                                                              'hashtags': functions.extractHashtags(_model.textController7.text),
+                                                                            },
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                            create:
+                                                                                true,
+                                                                          ),
+                                                                        ));
+                                                                  }
                                                                 }
 
                                                                 context.goNamed(
-                                                                    'Threads');
-
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  enableDrag:
-                                                                      false,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => FocusScope.of(
-                                                                              context)
-                                                                          .requestFocus(
-                                                                              _model.unfocusNode),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            BottomNotifWidget(
-                                                                          text:
-                                                                              'Posted',
-                                                                        ),
-                                                                      ),
-                                                                    );
+                                                                  'Threads',
+                                                                  extra: <String,
+                                                                      dynamic>{
+                                                                    kTransitionInfoKey:
+                                                                        TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                    ),
                                                                   },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
+                                                                );
                                                               } finally {
                                                                 await firestoreBatch
                                                                     .commit();
@@ -1497,66 +1618,90 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 0.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 50.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                    border: Border.all(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      width: 3.0,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 0.0,
-                                                                8.0, 0.0),
-                                                    child: TextFormField(
-                                                      controller: _model
-                                                          .textController2,
-                                                      autofocus: true,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelStyle:
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.textController2,
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium,
+                                                    hintText:
+                                                        _model.isPoll == true
+                                                            ? 'Question'
+                                                            : 'Title',
+                                                    hintStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium,
-                                                        hintText:
-                                                            _model.isPoll ==
-                                                                    true
-                                                                ? 'Question'
-                                                                : 'Title',
-                                                        hintStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium,
-                                                        enabledBorder:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        errorBorder:
-                                                            InputBorder.none,
-                                                        focusedErrorBorder:
-                                                            InputBorder.none,
+                                                                .alternate,
+                                                        width: 3.0,
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium,
-                                                      validator: _model
-                                                          .textController2Validator
-                                                          .asValidator(context),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
                                                     ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 3.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 3.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 3.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                    ),
+                                                    contentPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10.0,
+                                                                10.0,
+                                                                0.0,
+                                                                10.0),
                                                   ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  validator: _model
+                                                      .textController2Validator
+                                                      .asValidator(context),
                                                 ),
                                               ),
                                               Stack(
@@ -1653,11 +1798,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                             child:
                                                                                 TextFormField(
                                                                               controller: _model.textController3,
-                                                                              onFieldSubmitted: (_) async {
-                                                                                setState(() {
-                                                                                  _model.addToOptions(_model.textController3.text);
-                                                                                });
-                                                                              },
                                                                               autofocus: true,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
@@ -1711,11 +1851,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                             child:
                                                                                 TextFormField(
                                                                               controller: _model.textController4,
-                                                                              onFieldSubmitted: (_) async {
-                                                                                setState(() {
-                                                                                  _model.addToOptions(_model.textController4.text);
-                                                                                });
-                                                                              },
                                                                               autofocus: true,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
@@ -1823,11 +1958,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                               child: TextFormField(
                                                                                 controller: _model.textController6,
-                                                                                onFieldSubmitted: (_) async {
-                                                                                  setState(() {
-                                                                                    _model.addToOptions(_model.textController6.text);
-                                                                                  });
-                                                                                },
                                                                                 autofocus: true,
                                                                                 obscureText: false,
                                                                                 decoration: InputDecoration(
@@ -1906,17 +2036,14 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
-                                                                                  Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                    child: Text(
-                                                                                      FFLocalizations.of(context).getText(
-                                                                                        'eiit5qbi' /* More Options */,
-                                                                                      ),
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: 'Outfit',
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                          ),
+                                                                                  Text(
+                                                                                    FFLocalizations.of(context).getText(
+                                                                                      'xfy0f6lg' /* More options */,
                                                                                     ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                        ),
                                                                                   ),
                                                                                 ],
                                                                               ),
@@ -1955,71 +2082,105 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                 0.4,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
                                                                           12.0),
                                                             ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  TextFormField(
-                                                                controller: _model
-                                                                    .textController7,
-                                                                autofocus: true,
-                                                                obscureText:
-                                                                    false,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  labelStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium,
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'gugcmwwk' /* What's happening? */,
-                                                                  ),
-                                                                  hintStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium,
-                                                                  enabledBorder:
-                                                                      InputBorder
-                                                                          .none,
-                                                                  focusedBorder:
-                                                                      InputBorder
-                                                                          .none,
-                                                                  errorBorder:
-                                                                      InputBorder
-                                                                          .none,
-                                                                  focusedErrorBorder:
-                                                                      InputBorder
-                                                                          .none,
-                                                                  contentPadding:
-                                                                      EdgeInsetsDirectional.fromSTEB(
-                                                                          5.0,
-                                                                          5.0,
-                                                                          5.0,
-                                                                          5.0),
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
+                                                            child:
+                                                                TextFormField(
+                                                              controller: _model
+                                                                  .textController7,
+                                                              autofocus: true,
+                                                              obscureText:
+                                                                  false,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                labelStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
-                                                                maxLines: 20,
-                                                                minLines: 1,
-                                                                validator: _model
-                                                                    .textController7Validator
-                                                                    .asValidator(
-                                                                        context),
+                                                                    .labelMedium,
+                                                                hintText:
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                  'gugcmwwk' /* What's happening? */,
+                                                                ),
+                                                                hintStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium,
+                                                                enabledBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .alternate,
+                                                                    width: 3.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                    width: 3.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                errorBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    width: 3.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                focusedErrorBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    width: 3.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                contentPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            10.0,
+                                                                            15.0,
+                                                                            10.0,
+                                                                            15.0),
                                                               ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                              maxLines: 20,
+                                                              minLines: 5,
+                                                              validator: _model
+                                                                  .textController7Validator
+                                                                  .asValidator(
+                                                                      context),
                                                             ),
                                                           ),
                                                         ),
@@ -2119,8 +2280,9 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                       builder:
                                                                           (context) {
                                                                         return GestureDetector(
-                                                                          onTap: () =>
-                                                                              FocusScope.of(context).requestFocus(_model.unfocusNode),
+                                                                          onTap: () => _model.unfocusNode.canRequestFocus
+                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                              : FocusScope.of(context).unfocus(),
                                                                           child:
                                                                               Padding(
                                                                             padding:
@@ -2133,13 +2295,13 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                         );
                                                                       },
                                                                     ).then((value) =>
-                                                                        setState(
+                                                                        safeSetState(
                                                                             () {}));
 
                                                                     _model.gptOut =
                                                                         await actions
                                                                             .chatGPT(
-                                                                      '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',
+                                                                      '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',
                                                                       '${_model.textController7.text}Fix all of the grammar and spelling mistakes in this prompt.',
                                                                       1000,
                                                                       0.0,
@@ -2157,8 +2319,9 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                       builder:
                                                                           (context) {
                                                                         return GestureDetector(
-                                                                          onTap: () =>
-                                                                              FocusScope.of(context).requestFocus(_model.unfocusNode),
+                                                                          onTap: () => _model.unfocusNode.canRequestFocus
+                                                                              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                              : FocusScope.of(context).unfocus(),
                                                                           child:
                                                                               Padding(
                                                                             padding:
@@ -2171,7 +2334,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                         );
                                                                       },
                                                                     ).then((value) =>
-                                                                        setState(
+                                                                        safeSetState(
                                                                             () {}));
 
                                                                     setState(

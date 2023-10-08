@@ -20,7 +20,12 @@ import 'sign_up_model.dart';
 export 'sign_up_model.dart';
 
 class SignUpWidget extends StatefulWidget {
-  const SignUpWidget({Key? key}) : super(key: key);
+  const SignUpWidget({
+    Key? key,
+    this.email,
+  }) : super(key: key);
+
+  final String? email;
 
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
@@ -75,7 +80,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
     _model = createModel(context, () => SignUpModel());
 
     _model.usernameController ??= TextEditingController();
-    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressController ??= TextEditingController(
+        text: widget.email != null && widget.email != '' ? widget.email : '');
     _model.passwordController ??= TextEditingController();
     _model.confirmPasswordController ??= TextEditingController();
 
@@ -91,11 +97,15 @@ class _SignUpWidgetState extends State<SignUpWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'signUp',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -172,13 +182,9 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
-                                      child: StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord.where('display_name',
-                                                  isEqualTo: _model
-                                                      .usernameController.text),
-                                          singleRecord: true,
+                                      child: FutureBuilder<List<UsersRecord>>(
+                                        future: UsersRecord.search(
+                                          term: _model.usernameController.text,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -190,7 +196,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                 child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primary,
+                                                      .secondaryText,
                                                   size: 50.0,
                                                 ),
                                               ),
@@ -199,11 +205,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                           List<UsersRecord>
                                               usernameUsersRecordList =
                                               snapshot.data!;
-                                          final usernameUsersRecord =
-                                              usernameUsersRecordList.isNotEmpty
-                                                  ? usernameUsersRecordList
-                                                      .first
-                                                  : null;
                                           return Container(
                                             width: double.infinity,
                                             child: TextFormField(
@@ -226,10 +227,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
                                                           child: Padding(
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
@@ -243,7 +251,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        setState(() {}));
+                                                        safeSetState(() {}));
 
                                                     setState(() {
                                                       _model.usernameController
@@ -267,10 +275,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
                                                           child: Padding(
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
@@ -284,7 +299,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        setState(() {}));
+                                                        safeSetState(() {}));
 
                                                     setState(() {
                                                       _model.usernameController
@@ -308,10 +323,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
                                                           child: Padding(
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
@@ -325,7 +347,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        setState(() {}));
+                                                        safeSetState(() {}));
 
                                                     setState(() {
                                                       _model.usernameController
@@ -340,10 +362,27 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         false,
                                                       )}');
                                                     });
+                                                    safeSetState(() => _model
+                                                            .algoliaSearchResults =
+                                                        null);
+                                                    await UsersRecord.search(
+                                                      term: _model
+                                                          .usernameController
+                                                          .text,
+                                                    )
+                                                        .then((r) => _model
+                                                                .algoliaSearchResults =
+                                                            r)
+                                                        .onError((_, __) =>
+                                                            _model.algoliaSearchResults =
+                                                                [])
+                                                        .whenComplete(() =>
+                                                            setState(() {}));
                                                   }
-                                                  if ((usernameUsersRecord !=
-                                                          null) ==
-                                                      true) {
+                                                  if (_model
+                                                          .algoliaSearchResults
+                                                          ?.length !=
+                                                      null) {
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -351,10 +390,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
                                                           child: Padding(
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
@@ -368,7 +414,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        setState(() {}));
+                                                        safeSetState(() {}));
 
                                                     setState(() {
                                                       _model.usernameController
@@ -377,8 +423,15 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                               .usernameStripper(
                                                                   '${_model.usernameController.text}${random_data.randomInteger(1, 10000000).toString()}');
                                                     });
-                                                    if (usernameUsersRecord !=
-                                                        null) {
+                                                    if (usernameUsersRecordList
+                                                            .where((e) =>
+                                                                e.displayName ==
+                                                                _model
+                                                                    .usernameController
+                                                                    .text)
+                                                            .toList()
+                                                            .length >
+                                                        0) {
                                                       await showModalBottomSheet(
                                                         isScrollControlled:
                                                             true,
@@ -387,10 +440,17 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                         context: context,
                                                         builder: (context) {
                                                           return GestureDetector(
-                                                            onTap: () => FocusScope
-                                                                    .of(context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode),
+                                                            onTap: () => _model
+                                                                    .unfocusNode
+                                                                    .canRequestFocus
+                                                                ? FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode)
+                                                                : FocusScope.of(
+                                                                        context)
+                                                                    .unfocus(),
                                                             child: Padding(
                                                               padding: MediaQuery
                                                                   .viewInsetsOf(
@@ -404,7 +464,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() {}));
 
                                                       setState(() {
                                                         _model.usernameController
@@ -815,10 +875,14 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                               context: context,
                                               builder: (context) {
                                                 return GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode),
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
                                                   child: Padding(
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
@@ -828,7 +892,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                   ),
                                                 );
                                               },
-                                            ).then((value) => setState(() {}));
+                                            ).then(
+                                                (value) => safeSetState(() {}));
 
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
@@ -887,10 +952,14 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                               context: context,
                                               builder: (context) {
                                                 return GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode),
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
                                                   child: Padding(
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
@@ -902,7 +971,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                                   ),
                                                 );
                                               },
-                                            ).then((value) => setState(() {}));
+                                            ).then(
+                                                (value) => safeSetState(() {}));
                                           }
 
                                           _navigate();

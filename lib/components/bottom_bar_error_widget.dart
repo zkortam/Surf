@@ -52,6 +52,8 @@ class _BottomBarErrorWidgetState extends State<BottomBarErrorWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: AlignmentDirectional(0.00, 1.00),
       child: Padding(

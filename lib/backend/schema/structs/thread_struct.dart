@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -391,6 +392,106 @@ class ThreadStruct extends FFFirebaseStruct {
           data['isStealth'],
           ParamType.bool,
           false,
+        ),
+      );
+
+  static ThreadStruct fromAlgoliaData(Map<String, dynamic> data) =>
+      ThreadStruct(
+        timestamp: convertAlgoliaParam(
+          data['timestamp'],
+          ParamType.DateTime,
+          false,
+        ),
+        author: convertAlgoliaParam(
+          data['author'],
+          ParamType.String,
+          false,
+        ),
+        title: convertAlgoliaParam(
+          data['title'],
+          ParamType.String,
+          false,
+        ),
+        text: convertAlgoliaParam(
+          data['text'],
+          ParamType.String,
+          false,
+        ),
+        netVotes: convertAlgoliaParam(
+          data['netVotes'],
+          ParamType.int,
+          false,
+        ),
+        id: convertAlgoliaParam(
+          data['id'],
+          ParamType.String,
+          false,
+        ),
+        upVoters: convertAlgoliaParam<String>(
+          data['upVoters'],
+          ParamType.String,
+          true,
+        ),
+        downVoters: convertAlgoliaParam<String>(
+          data['downVoters'],
+          ParamType.String,
+          true,
+        ),
+        poll: convertAlgoliaParam(
+          data['poll'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: PollStruct.fromAlgoliaData,
+        ),
+        isPoll: convertAlgoliaParam(
+          data['isPoll'],
+          ParamType.bool,
+          false,
+        ),
+        isPolitical: convertAlgoliaParam(
+          data['isPolitical'],
+          ParamType.bool,
+          false,
+        ),
+        politicalPosition: convertAlgoliaParam(
+          data['politicalPosition'],
+          ParamType.int,
+          false,
+        ),
+        genre: convertAlgoliaParam(
+          data['genre'],
+          ParamType.int,
+          false,
+        ),
+        hashtags: convertAlgoliaParam<String>(
+          data['hashtags'],
+          ParamType.String,
+          true,
+        ),
+        link: convertAlgoliaParam(
+          data['link'],
+          ParamType.String,
+          false,
+        ),
+        summary: convertAlgoliaParam(
+          data['summary'],
+          ParamType.String,
+          false,
+        ),
+        comments: convertAlgoliaParam<CommentStruct>(
+          data['comments'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: CommentStruct.fromAlgoliaData,
+        ),
+        isStealth: convertAlgoliaParam(
+          data['isStealth'],
+          ParamType.bool,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

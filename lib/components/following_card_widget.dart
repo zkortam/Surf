@@ -49,6 +49,8 @@ class _FollowingCardWidgetState extends State<FollowingCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 55.0,
@@ -62,8 +64,10 @@ class _FollowingCardWidgetState extends State<FollowingCardWidget> {
         children: [
           FutureBuilder<List<UsersRecord>>(
             future: queryUsersRecordOnce(
-              queryBuilder: (usersRecord) =>
-                  usersRecord.where('uid', isEqualTo: widget.user?.uid),
+              queryBuilder: (usersRecord) => usersRecord.where(
+                'uid',
+                isEqualTo: widget.user?.uid,
+              ),
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -74,7 +78,7 @@ class _FollowingCardWidgetState extends State<FollowingCardWidget> {
                     width: 50.0,
                     height: 50.0,
                     child: SpinKitRipple(
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 50.0,
                     ),
                   ),
@@ -173,11 +177,20 @@ class _FollowingCardWidgetState extends State<FollowingCardWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     await currentUserReference!.update({
-                      'following': FieldValue.arrayRemove([widget.user?.uid]),
+                      ...mapToFirestore(
+                        {
+                          'following':
+                              FieldValue.arrayRemove([widget.user?.uid]),
+                        },
+                      ),
                     });
 
                     await widget.user!.reference.update({
-                      'followers': FieldValue.arrayRemove([currentUserUid]),
+                      ...mapToFirestore(
+                        {
+                          'followers': FieldValue.arrayRemove([currentUserUid]),
+                        },
+                      ),
                     });
                   },
                   text: FFLocalizations.of(context).getText(

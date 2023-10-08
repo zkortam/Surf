@@ -1,4 +1,4 @@
-# Surf2
+# Surf
 
 A new Flutter project.
 

@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/comment_widget.dart';
+import '/components/p_c_comment_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -74,8 +76,9 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
             context: context,
             builder: (context) {
               return GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
                   child: BottomNotifWidget(
@@ -84,7 +87,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                 ),
               );
             },
-          ).then((value) => setState(() {}));
+          ).then((value) => safeSetState(() {}));
         }
       }
     });
@@ -102,11 +105,15 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Builder(
       builder: (context) => StreamBuilder<List<UsersRecord>>(
         stream: queryUsersRecord(
-          queryBuilder: (usersRecord) =>
-              usersRecord.where('uid', isEqualTo: widget.posts?.post?.author),
+          queryBuilder: (usersRecord) => usersRecord.where(
+            'uid',
+            isEqualTo: widget.posts?.post?.author,
+          ),
           singleRecord: true,
         ),
         builder: (context, snapshot) {
@@ -119,7 +126,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                   width: 50.0,
                   height: 50.0,
                   child: SpinKitRipple(
-                    color: FlutterFlowTheme.of(context).primary,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     size: 50.0,
                   ),
                 ),
@@ -138,8 +145,9 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
               title: 'singlePost',
               color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
               child: GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Scaffold(
                   key: scaffoldKey,
                   backgroundColor:
@@ -167,6 +175,72 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
+                                        StreamBuilder<List<PostsRecord>>(
+                                          stream: queryPostsRecord(
+                                            queryBuilder: (postsRecord) =>
+                                                postsRecord
+                                                    .where(
+                                                      'post.id',
+                                                      isEqualTo: widget
+                                                          .posts?.post?.id,
+                                                    )
+                                                    .where(
+                                                      'post.timestamp',
+                                                      isEqualTo: widget.posts
+                                                          ?.post?.timestamp,
+                                                    ),
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitRipple(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 50.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<PostsRecord>
+                                                columnPostsRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final columnPostsRecord =
+                                                columnPostsRecordList.isNotEmpty
+                                                    ? columnPostsRecordList
+                                                        .first
+                                                    : null;
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 10.0),
+                                                  child: wrapWithModel(
+                                                    model: _model.postModel,
+                                                    updateCallback: () =>
+                                                        setState(() {}),
+                                                    updateOnChange: true,
+                                                    child: PostWidget(
+                                                      isComment: false,
+                                                      post: columnPostsRecord!,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
                                         if (responsiveVisibility(
                                           context: context,
                                           desktop: false,
@@ -273,20 +347,6 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                               ),
                                             ),
                                           ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 10.0, 10.0, 10.0),
-                                          child: wrapWithModel(
-                                            model: _model.postModel,
-                                            updateCallback: () =>
-                                                setState(() {}),
-                                            child: PostWidget(
-                                              post: widget.posts!,
-                                              isComment: false,
-                                            ),
-                                          ),
-                                        ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -446,12 +506,15 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                           UsersRecord>>(
                                                                     stream:
                                                                         queryUsersRecord(
-                                                                      queryBuilder: (usersRecord) => usersRecord.where(
-                                                                          'uid',
-                                                                          isEqualTo: widget
-                                                                              .posts
-                                                                              ?.post
-                                                                              ?.author),
+                                                                      queryBuilder:
+                                                                          (usersRecord) =>
+                                                                              usersRecord.where(
+                                                                        'uid',
+                                                                        isEqualTo: widget
+                                                                            .posts
+                                                                            ?.post
+                                                                            ?.author,
+                                                                      ),
                                                                       singleRecord:
                                                                           true,
                                                                     ),
@@ -470,7 +533,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                 50.0,
                                                                             child:
                                                                                 SpinKitRipple(
-                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
                                                                               size: 50.0,
                                                                             ),
                                                                           ),
@@ -863,13 +926,16 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                   UsersRecord>>(
                                                             stream:
                                                                 queryUsersRecord(
-                                                              queryBuilder: (usersRecord) =>
-                                                                  usersRecord.where(
-                                                                      'uid',
-                                                                      isEqualTo: widget
-                                                                          .posts
-                                                                          ?.post
-                                                                          ?.author),
+                                                              queryBuilder:
+                                                                  (usersRecord) =>
+                                                                      usersRecord
+                                                                          .where(
+                                                                'uid',
+                                                                isEqualTo: widget
+                                                                    .posts
+                                                                    ?.post
+                                                                    ?.author,
+                                                              ),
                                                               singleRecord:
                                                                   true,
                                                             ),
@@ -888,7 +954,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                         SpinKitRipple(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primary,
+                                                                          .secondaryText,
                                                                       size:
                                                                           50.0,
                                                                     ),
@@ -1003,23 +1069,49 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                         .update(
                                                                             buttonUsersRecord!.reference,
                                                                             {
-                                                                          'notifications':
-                                                                              FieldValue.arrayUnion([
-                                                                            getNotificationFirestoreData(
-                                                                              createNotificationStruct(
-                                                                                category: 1,
-                                                                                itemID: widget.posts?.post?.id,
-                                                                                time: getCurrentTimestamp,
-                                                                                userID: currentUserUid,
-                                                                                isMarkedAsRead: false,
-                                                                                notifID: 'NP${buttonUsersRecord?.notifications?.length?.toString()}',
-                                                                                iDUserFrom: currentUserUid,
-                                                                                clearUnsetFields: false,
-                                                                              ),
-                                                                              true,
-                                                                            )
-                                                                          ]),
+                                                                          ...mapToFirestore(
+                                                                            {
+                                                                              'notifications': FieldValue.arrayUnion([
+                                                                                getNotificationFirestoreData(
+                                                                                  createNotificationStruct(
+                                                                                    category: 1,
+                                                                                    itemID: widget.posts?.post?.id,
+                                                                                    time: getCurrentTimestamp,
+                                                                                    userID: currentUserUid,
+                                                                                    isMarkedAsRead: false,
+                                                                                    notifID: 'NP${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                                    iDUserFrom: currentUserUid,
+                                                                                    clearUnsetFields: false,
+                                                                                  ),
+                                                                                  true,
+                                                                                )
+                                                                              ]),
+                                                                            },
+                                                                          ),
                                                                         });
+                                                                    triggerPushNotification(
+                                                                      notificationTitle:
+                                                                          '@${currentUserDisplayName}has commented on your post',
+                                                                      notificationText: _model
+                                                                          .textController
+                                                                          .text,
+                                                                      notificationImageUrl: _model.uploadedFileUrl != null &&
+                                                                              _model.uploadedFileUrl !=
+                                                                                  ''
+                                                                          ? _model
+                                                                              .uploadedFileUrl
+                                                                          : 'null',
+                                                                      userRefs: [
+                                                                        buttonUsersRecord!
+                                                                            .reference
+                                                                      ],
+                                                                      initialPageName:
+                                                                          'singlePost',
+                                                                      parameterData: {
+                                                                        'posts':
+                                                                            widget.posts,
+                                                                      },
+                                                                    );
                                                                     return;
                                                                   } finally {
                                                                     await firestoreBatch
@@ -1093,9 +1185,10 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                               queryBuilder: (commentsRecord) =>
                                                   commentsRecord
                                                       .where(
-                                                          'comment.idReplyTo',
-                                                          isEqualTo: widget
-                                                              .posts?.post?.id)
+                                                        'comment.idReplyTo',
+                                                        isEqualTo: widget
+                                                            .posts?.post?.id,
+                                                      )
                                                       .orderBy(
                                                           'comment.timestamp',
                                                           descending: true),
@@ -1111,7 +1204,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
+                                                              .secondaryText,
                                                       size: 50.0,
                                                     ),
                                                   ),
@@ -1131,21 +1224,44 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                   return Container(
                                                     width: 600.0,
                                                     decoration: BoxDecoration(),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0,
-                                                                  5.0),
-                                                      child: CommentWidget(
-                                                        key: Key(
-                                                            'Key4ov_${columnIndex}_of_${columnCommentsRecordList.length}'),
-                                                        comment:
-                                                            columnCommentsRecord
-                                                                .comment,
-                                                      ),
+                                                    child: Stack(
+                                                      children: [
+                                                        if (responsiveVisibility(
+                                                          context: context,
+                                                          tablet: false,
+                                                          tabletLandscape:
+                                                              false,
+                                                          desktop: false,
+                                                        ))
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        5.0,
+                                                                        5.0,
+                                                                        5.0),
+                                                            child:
+                                                                CommentWidget(
+                                                              key: Key(
+                                                                  'Key4ov_${columnIndex}_of_${columnCommentsRecordList.length}'),
+                                                              comment:
+                                                                  columnCommentsRecord
+                                                                      .comment,
+                                                            ),
+                                                          ),
+                                                        if (responsiveVisibility(
+                                                          context: context,
+                                                          phone: false,
+                                                        ))
+                                                          PCCommentWidget(
+                                                            key: Key(
+                                                                'Keykq9_${columnIndex}_of_${columnCommentsRecordList.length}'),
+                                                            comment:
+                                                                columnCommentsRecord
+                                                                    .comment,
+                                                          ),
+                                                      ],
                                                     ),
                                                   );
                                                 }),

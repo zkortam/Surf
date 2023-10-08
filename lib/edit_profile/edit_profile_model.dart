@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'edit_profile_widget.dart' show EditProfileWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -19,7 +20,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class EditProfileModel extends FlutterFlowModel {
+class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   ///  Local state fields for this page.
 
   bool isUsernameValid = true;
@@ -43,6 +44,8 @@ class EditProfileModel extends FlutterFlowModel {
   // State field(s) for username widget.
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
+  // Algolia Search Results from action on username
+  List<UsersRecord>? algoliaSearchResults = [];
   // State field(s) for bio widget.
   TextEditingController? bioController;
   String? Function(BuildContext, String?)? bioControllerValidator;

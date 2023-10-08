@@ -246,3 +246,69 @@ String nameClipper(String name) {
     return name.substring(0, 25);
   }
 }
+
+List<ChatsRecord> decideChatstoLoad(
+  List<ChatsRecord> allchats,
+  DocumentReference userloggedin,
+) {
+  List<ChatsRecord> rtrn = [];
+
+  for (ChatsRecord chat in allchats) {
+    if (chat.userA == userloggedin || chat.userB == userloggedin) {
+      rtrn.add(chat);
+    }
+  }
+  return rtrn;
+}
+
+int detwhichchatuser(
+  DocumentReference userloggedin,
+  ChatsRecord chat,
+) {
+  if (chat.userA == userloggedin) {
+    return 1;
+  } else {
+    return 2;
+  }
+}
+
+ChatsRecord? findpreexistingchatifpossible(
+  List<ChatsRecord> allchats,
+  DocumentReference userloggedin,
+  DocumentReference usertobemsged,
+) {
+  for (ChatsRecord chat in allchats) {
+    if ((chat.userA == userloggedin && chat.userB == usertobemsged) ||
+        (chat.userA == usertobemsged && chat.userB == usertobemsged)) {
+      return chat;
+    }
+  }
+}
+
+List<String> appendlists(
+  List<String> list1,
+  List<String> list2,
+) {
+  list1.addAll(list2);
+  return list1;
+}
+
+String arrtostr(List<String> array) {
+  return array.toString();
+}
+
+List<String> emptylist() {
+  return [];
+}
+
+String randomImage(
+  String str1,
+  String str2,
+  String str3,
+  String str4,
+) {
+  int randomNumber = math.Random().nextInt(4);
+  List<String> urls = [str1, str2, str3, str4];
+
+  return urls[randomNumber];
+}

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/thread_widget.dart';
@@ -59,11 +60,14 @@ class _ProfileWidgetState extends State<ProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return FutureBuilder<List<UsersRecord>>(
       future: queryUsersRecordOnce(
-        queryBuilder: (usersRecord) => usersRecord.where('uid',
-            isEqualTo:
-                functions.decideWhoToLoad(widget.userID, currentUserUid)),
+        queryBuilder: (usersRecord) => usersRecord.where(
+          'uid',
+          isEqualTo: functions.decideWhoToLoad(widget.userID, currentUserUid),
+        ),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
@@ -76,7 +80,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                 width: 50.0,
                 height: 50.0,
                 child: SpinKitRipple(
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                   size: 50.0,
                 ),
               ),
@@ -95,8 +99,9 @@ class _ProfileWidgetState extends State<ProfileWidget>
             title: 'Profile',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () =>
-                  FocusScope.of(context).requestFocus(_model.unfocusNode),
+              onTap: () => _model.unfocusNode.canRequestFocus
+                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                  : FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -313,11 +318,16 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                             context: context,
                                                             builder: (context) {
                                                               return GestureDetector(
-                                                                onTap: () => FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode),
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
                                                                 child: Padding(
                                                                   padding: MediaQuery
                                                                       .viewInsetsOf(
@@ -331,7 +341,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               );
                                                             },
                                                           ).then((value) =>
-                                                              setState(() {}));
+                                                              safeSetState(
+                                                                  () {}));
                                                         },
                                                         child: Column(
                                                           mainAxisSize:
@@ -391,8 +402,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       0.0,
                                                                       0.0),
                                                           child: Container(
-                                                            width: 55.0,
-                                                            height: 55.0,
+                                                            width: 50.0,
+                                                            height: 50.0,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: FlutterFlowTheme
@@ -431,29 +442,21 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                             18.0,
                                                                       ),
                                                                 ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          3.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '90zmglg9' /* Posts */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Outfit',
-                                                                          fontSize:
-                                                                              10.0,
-                                                                        ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '90zmglg9' /* Posts */,
                                                                   ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        fontSize:
+                                                                            10.0,
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),
@@ -493,8 +496,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               );
                                                             },
                                                             child: Container(
-                                                              width: 55.0,
-                                                              height: 55.0,
+                                                              width: 50.0,
+                                                              height: 50.0,
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color: FlutterFlowTheme.of(
@@ -528,29 +531,21 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                               18.0,
                                                                         ),
                                                                   ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            3.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'dck285gb' /* Following */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Outfit',
-                                                                            fontSize:
-                                                                                10.0,
-                                                                          ),
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'dck285gb' /* Following */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          fontSize:
+                                                                              10.0,
+                                                                        ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -591,8 +586,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               );
                                                             },
                                                             child: Container(
-                                                              width: 55.0,
-                                                              height: 55.0,
+                                                              width: 50.0,
+                                                              height: 50.0,
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color: FlutterFlowTheme.of(
@@ -626,29 +621,21 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                               18.0,
                                                                         ),
                                                                   ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            3.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'j38cebw1' /* Followers */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Outfit',
-                                                                            fontSize:
-                                                                                10.0,
-                                                                          ),
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'j38cebw1' /* Followers */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          fontSize:
+                                                                              10.0,
+                                                                        ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -668,24 +655,19 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    AuthUserStreamWidget(
-                                                      builder: (context) =>
-                                                          Text(
-                                                        valueOrDefault(
-                                                                currentUserDocument
-                                                                    ?.bio,
-                                                                '')
-                                                            .maybeHandleOverflow(
-                                                                maxChars: 100),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Outfit',
-                                                              fontSize: 13.0,
-                                                            ),
-                                                      ),
+                                                    Text(
+                                                      profileUsersRecord!.bio
+                                                          .maybeHandleOverflow(
+                                                              maxChars: 100),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Outfit',
+                                                                fontSize: 13.0,
+                                                              ),
                                                     ),
                                                   ],
                                                 ),
@@ -735,37 +717,49 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         firestoreBatch.update(
                                                                             profileUsersRecord!.reference,
                                                                             {
-                                                                              'followers': FieldValue.arrayUnion([
-                                                                                currentUserUid
-                                                                              ]),
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'followers': FieldValue.arrayUnion([
+                                                                                    currentUserUid
+                                                                                  ]),
+                                                                                },
+                                                                              ),
                                                                             });
 
                                                                         firestoreBatch.update(
                                                                             currentUserReference!,
                                                                             {
-                                                                              'following': FieldValue.arrayUnion([
-                                                                                widget.userID
-                                                                              ]),
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'following': FieldValue.arrayUnion([
+                                                                                    widget.userID
+                                                                                  ]),
+                                                                                },
+                                                                              ),
                                                                             });
 
                                                                         firestoreBatch.update(
                                                                             profileUsersRecord!.reference,
                                                                             {
-                                                                              'notifications': FieldValue.arrayUnion([
-                                                                                getNotificationFirestoreData(
-                                                                                  createNotificationStruct(
-                                                                                    category: 2,
-                                                                                    itemID: currentUserUid,
-                                                                                    time: getCurrentTimestamp,
-                                                                                    isMarkedAsRead: false,
-                                                                                    notifID: 'NF${profileUsersRecord?.notifications?.length?.toString()}',
-                                                                                    userID: profileUsersRecord?.uid,
-                                                                                    iDUserFrom: currentUserUid,
-                                                                                    clearUnsetFields: false,
-                                                                                  ),
-                                                                                  true,
-                                                                                )
-                                                                              ]),
+                                                                              ...mapToFirestore(
+                                                                                {
+                                                                                  'notifications': FieldValue.arrayUnion([
+                                                                                    getNotificationFirestoreData(
+                                                                                      createNotificationStruct(
+                                                                                        category: 2,
+                                                                                        itemID: currentUserUid,
+                                                                                        time: getCurrentTimestamp,
+                                                                                        isMarkedAsRead: false,
+                                                                                        notifID: 'NF${profileUsersRecord?.notifications?.length?.toString()}',
+                                                                                        userID: profileUsersRecord?.uid,
+                                                                                        iDUserFrom: currentUserUid,
+                                                                                        clearUnsetFields: false,
+                                                                                      ),
+                                                                                      true,
+                                                                                    )
+                                                                                  ]),
+                                                                                },
+                                                                              ),
                                                                             });
 
                                                                         context
@@ -779,6 +773,19 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                               ParamType.String,
                                                                             ),
                                                                           }.withoutNulls,
+                                                                        );
+
+                                                                        triggerPushNotification(
+                                                                          notificationTitle:
+                                                                              'New Follower',
+                                                                          notificationText:
+                                                                              '@${currentUserDisplayName} followed you',
+                                                                          userRefs: [
+                                                                            profileUsersRecord!.reference
+                                                                          ],
+                                                                          initialPageName:
+                                                                              'Profile',
+                                                                          parameterData: {},
                                                                         );
                                                                       } finally {
                                                                         await firestoreBatch
@@ -853,19 +860,26 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       await profileUsersRecord!
                                                                           .reference
                                                                           .update({
-                                                                        'followers':
-                                                                            FieldValue.arrayRemove([
-                                                                          currentUserUid
-                                                                        ]),
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'followers':
+                                                                                FieldValue.arrayRemove([
+                                                                              currentUserUid
+                                                                            ]),
+                                                                          },
+                                                                        ),
                                                                       });
 
                                                                       await currentUserReference!
                                                                           .update({
-                                                                        'following':
-                                                                            FieldValue.arrayRemove([
-                                                                          widget
-                                                                              .userID
-                                                                        ]),
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'following':
+                                                                                FieldValue.arrayRemove([
+                                                                              widget.userID
+                                                                            ]),
+                                                                          },
+                                                                        ),
                                                                       });
 
                                                                       context
@@ -943,15 +957,17 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     ChatsRecord>>(
                                                               future:
                                                                   queryChatsRecordOnce(
-                                                                queryBuilder: (chatsRecord) => chatsRecord
-                                                                    .where(
-                                                                        'user_a',
-                                                                        isEqualTo:
-                                                                            currentUserReference)
-                                                                    .where(
-                                                                        'user_b',
-                                                                        isEqualTo:
-                                                                            profileUsersRecord?.reference),
+                                                                queryBuilder:
+                                                                    (chatsRecord) =>
+                                                                        chatsRecord
+                                                                            .where(
+                                                                              'user_a',
+                                                                              isEqualTo: currentUserReference,
+                                                                            )
+                                                                            .where(
+                                                                              'user_b',
+                                                                              isEqualTo: profileUsersRecord?.reference,
+                                                                            ),
                                                                 singleRecord:
                                                                     true,
                                                               ),
@@ -970,7 +986,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       child:
                                                                           SpinKitRipple(
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                            .secondaryText,
                                                                         size:
                                                                             50.0,
                                                                       ),
@@ -1021,6 +1037,16 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                               serializeParam(
                                                                             profileUsersRecord?.photoUrl,
                                                                             ParamType.String,
+                                                                          ),
+                                                                          'userb':
+                                                                              serializeParam(
+                                                                            profileUsersRecord?.reference,
+                                                                            ParamType.DocumentReference,
+                                                                          ),
+                                                                          'usera':
+                                                                              serializeParam(
+                                                                            currentUserReference,
+                                                                            ParamType.DocumentReference,
                                                                           ),
                                                                         }.withoutNulls,
                                                                       );
@@ -1083,6 +1109,16 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                               serializeParam(
                                                                             profileUsersRecord?.photoUrl,
                                                                             ParamType.String,
+                                                                          ),
+                                                                          'userb':
+                                                                              serializeParam(
+                                                                            profileUsersRecord?.reference,
+                                                                            ParamType.DocumentReference,
+                                                                          ),
+                                                                          'usera':
+                                                                              serializeParam(
+                                                                            currentUserReference,
+                                                                            ParamType.DocumentReference,
                                                                           ),
                                                                         }.withoutNulls,
                                                                       );
@@ -1412,16 +1448,22 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                   PostsRecord>>(
                                                             stream:
                                                                 queryPostsRecord(
-                                                              queryBuilder: (postsRecord) => postsRecord
-                                                                  .where(
-                                                                      'post.author',
-                                                                      isEqualTo:
-                                                                          profileUsersRecord
-                                                                              ?.uid)
-                                                                  .orderBy(
-                                                                      'post.timestamp',
-                                                                      descending:
-                                                                          true),
+                                                              queryBuilder: (postsRecord) =>
+                                                                  postsRecord
+                                                                      .where(
+                                                                        'post.author',
+                                                                        isEqualTo:
+                                                                            profileUsersRecord?.uid,
+                                                                      )
+                                                                      .where(
+                                                                        'post.isStealth',
+                                                                        isEqualTo:
+                                                                            false,
+                                                                      )
+                                                                      .orderBy(
+                                                                          'post.timestamp',
+                                                                          descending:
+                                                                              true),
                                                             ),
                                                             builder: (context,
                                                                 snapshot) {
@@ -1438,7 +1480,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         SpinKitRipple(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primary,
+                                                                          .secondaryText,
                                                                       size:
                                                                           50.0,
                                                                     ),
@@ -1601,16 +1643,22 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     ThreadRecord>>(
                                                               stream:
                                                                   queryThreadRecord(
-                                                                queryBuilder: (threadRecord) => threadRecord
-                                                                    .where(
-                                                                        'thread.author',
-                                                                        isEqualTo:
-                                                                            profileUsersRecord
-                                                                                ?.uid)
-                                                                    .orderBy(
-                                                                        'thread.timestamp',
-                                                                        descending:
-                                                                            true),
+                                                                queryBuilder: (threadRecord) =>
+                                                                    threadRecord
+                                                                        .where(
+                                                                          'thread.author',
+                                                                          isEqualTo:
+                                                                              profileUsersRecord?.uid,
+                                                                        )
+                                                                        .where(
+                                                                          'thread.isStealth',
+                                                                          isEqualTo:
+                                                                              false,
+                                                                        )
+                                                                        .orderBy(
+                                                                            'thread.timestamp',
+                                                                            descending:
+                                                                                true),
                                                               ),
                                                               builder: (context,
                                                                   snapshot) {
@@ -1627,7 +1675,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       child:
                                                                           SpinKitRipple(
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                            .secondaryText,
                                                                         size:
                                                                             50.0,
                                                                       ),
@@ -1712,7 +1760,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         SpinKitRipple(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primary,
+                                                                          .secondaryText,
                                                                       size:
                                                                           50.0,
                                                                     ),

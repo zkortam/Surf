@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/comment_widget.dart';
+import '/components/p_c_comment_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/thread_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -73,8 +75,9 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
             context: context,
             builder: (context) {
               return GestureDetector(
-                onTap: () =>
-                    FocusScope.of(context).requestFocus(_model.unfocusNode),
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
                   child: BottomNotifWidget(
@@ -83,7 +86,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                 ),
               );
             },
-          ).then((value) => setState(() {}));
+          ).then((value) => safeSetState(() {}));
         }
       }
     });
@@ -101,13 +104,16 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Builder(
       builder: (context) => Title(
           title: 'singleThread',
           color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
           child: GestureDetector(
-            onTap: () =>
-                FocusScope.of(context).requestFocus(_model.unfocusNode),
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
             child: Scaffold(
               key: scaffoldKey,
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -230,18 +236,71 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                           ),
                                         ),
                                       ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 10.0, 5.0, 5.0),
-                                      child: wrapWithModel(
-                                        model: _model.threadModel,
-                                        updateCallback: () => setState(() {}),
-                                        child: ThreadWidget(
-                                          thread: widget.thread!,
-                                          isComment: true,
-                                          isCommentAllowed: false,
-                                        ),
+                                    StreamBuilder<List<ThreadRecord>>(
+                                      stream: queryThreadRecord(
+                                        queryBuilder: (threadRecord) =>
+                                            threadRecord
+                                                .where(
+                                                  'thread.id',
+                                                  isEqualTo:
+                                                      widget.thread?.thread?.id,
+                                                )
+                                                .where(
+                                                  'thread.timestamp',
+                                                  isEqualTo: widget.thread
+                                                      ?.thread?.timestamp,
+                                                ),
+                                        singleRecord: true,
                                       ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitRipple(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 50.0,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ThreadRecord>
+                                            columnThreadRecordList =
+                                            snapshot.data!;
+                                        // Return an empty Container when the item does not exist.
+                                        if (snapshot.data!.isEmpty) {
+                                          return Container();
+                                        }
+                                        final columnThreadRecord =
+                                            columnThreadRecordList.isNotEmpty
+                                                ? columnThreadRecordList.first
+                                                : null;
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      5.0, 10.0, 5.0, 5.0),
+                                              child: wrapWithModel(
+                                                model: _model.threadModel,
+                                                updateCallback: () =>
+                                                    setState(() {}),
+                                                updateOnChange: true,
+                                                child: ThreadWidget(
+                                                  thread: columnThreadRecord!,
+                                                  isComment: true,
+                                                  isCommentAllowed: false,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -411,12 +470,16 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                       UsersRecord>>(
                                                                 stream:
                                                                     queryUsersRecord(
-                                                                  queryBuilder: (usersRecord) => usersRecord.where(
-                                                                      'uid',
-                                                                      isEqualTo: widget
-                                                                          .thread
-                                                                          ?.thread
-                                                                          ?.author),
+                                                                  queryBuilder:
+                                                                      (usersRecord) =>
+                                                                          usersRecord
+                                                                              .where(
+                                                                    'uid',
+                                                                    isEqualTo: widget
+                                                                        .thread
+                                                                        ?.thread
+                                                                        ?.author,
+                                                                  ),
                                                                   singleRecord:
                                                                       true,
                                                                 ),
@@ -435,7 +498,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                         child:
                                                                             SpinKitRipple(
                                                                           color:
-                                                                              FlutterFlowTheme.of(context).primary,
+                                                                              FlutterFlowTheme.of(context).secondaryText,
                                                                           size:
                                                                               50.0,
                                                                         ),
@@ -802,13 +865,16 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                           List<UsersRecord>>(
                                                         stream:
                                                             queryUsersRecord(
-                                                          queryBuilder: (usersRecord) =>
-                                                              usersRecord.where(
-                                                                  'uid',
-                                                                  isEqualTo: widget
-                                                                      .thread
-                                                                      ?.thread
-                                                                      ?.author),
+                                                          queryBuilder:
+                                                              (usersRecord) =>
+                                                                  usersRecord
+                                                                      .where(
+                                                            'uid',
+                                                            isEqualTo: widget
+                                                                .thread
+                                                                ?.thread
+                                                                ?.author,
+                                                          ),
                                                           singleRecord: true,
                                                         ),
                                                         builder: (context,
@@ -824,7 +890,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                     SpinKitRipple(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
+                                                                      .secondaryText,
                                                                   size: 50.0,
                                                                 ),
                                                               ),
@@ -944,32 +1010,52 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                     buttonUsersRecord!
                                                                         .reference,
                                                                     {
-                                                                      'notifications':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        getNotificationFirestoreData(
-                                                                          createNotificationStruct(
-                                                                            category:
-                                                                                1,
-                                                                            itemID:
-                                                                                widget.thread?.thread?.id,
-                                                                            time:
-                                                                                getCurrentTimestamp,
-                                                                            userID:
-                                                                                currentUserUid,
-                                                                            isMarkedAsRead:
-                                                                                false,
-                                                                            notifID:
-                                                                                'NT${buttonUsersRecord?.notifications?.length?.toString()}',
-                                                                            iDUserFrom:
-                                                                                currentUserUid,
-                                                                            clearUnsetFields:
-                                                                                false,
-                                                                          ),
-                                                                          true,
-                                                                        )
-                                                                      ]),
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'notifications':
+                                                                              FieldValue.arrayUnion([
+                                                                            getNotificationFirestoreData(
+                                                                              createNotificationStruct(
+                                                                                category: 1,
+                                                                                itemID: widget.thread?.thread?.id,
+                                                                                time: getCurrentTimestamp,
+                                                                                userID: currentUserUid,
+                                                                                isMarkedAsRead: false,
+                                                                                notifID: 'NT${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                                iDUserFrom: currentUserUid,
+                                                                                clearUnsetFields: false,
+                                                                              ),
+                                                                              true,
+                                                                            )
+                                                                          ]),
+                                                                        },
+                                                                      ),
                                                                     });
+                                                                triggerPushNotification(
+                                                                  notificationTitle:
+                                                                      '@${currentUserDisplayName}has commented on your post',
+                                                                  notificationText:
+                                                                      _model
+                                                                          .textController
+                                                                          .text,
+                                                                  notificationImageUrl: _model.uploadedFileUrl !=
+                                                                              null &&
+                                                                          _model.uploadedFileUrl !=
+                                                                              ''
+                                                                      ? _model
+                                                                          .uploadedFileUrl
+                                                                      : 'null',
+                                                                  userRefs: [
+                                                                    buttonUsersRecord!
+                                                                        .reference
+                                                                  ],
+                                                                  initialPageName:
+                                                                      'singleThread',
+                                                                  parameterData: {
+                                                                    'thread': widget
+                                                                        .thread,
+                                                                  },
+                                                                );
                                                                 return;
                                                               } finally {
                                                                 await firestoreBatch
@@ -1043,9 +1129,11 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                         stream: queryCommentsRecord(
                                           queryBuilder: (commentsRecord) =>
                                               commentsRecord
-                                                  .where('comment.idReplyTo',
-                                                      isEqualTo: widget
-                                                          .thread?.thread?.id)
+                                                  .where(
+                                                    'comment.idReplyTo',
+                                                    isEqualTo: widget
+                                                        .thread?.thread?.id,
+                                                  )
                                                   .orderBy('comment.timestamp',
                                                       descending: true),
                                         ),
@@ -1059,7 +1147,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                 child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primary,
+                                                      .secondaryText,
                                                   size: 50.0,
                                                 ),
                                               ),
@@ -1079,17 +1167,42 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                               return Container(
                                                 width: 500.0,
                                                 decoration: BoxDecoration(),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 5.0, 5.0, 5.0),
-                                                  child: CommentWidget(
-                                                    key: Key(
-                                                        'Keyone_${columnIndex}_of_${columnCommentsRecordList.length}'),
-                                                    comment:
-                                                        columnCommentsRecord
-                                                            .comment,
-                                                  ),
+                                                child: Stack(
+                                                  children: [
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      tablet: false,
+                                                      tabletLandscape: false,
+                                                      desktop: false,
+                                                    ))
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    5.0,
+                                                                    5.0,
+                                                                    5.0),
+                                                        child: CommentWidget(
+                                                          key: Key(
+                                                              'Keyone_${columnIndex}_of_${columnCommentsRecordList.length}'),
+                                                          comment:
+                                                              columnCommentsRecord
+                                                                  .comment,
+                                                        ),
+                                                      ),
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      phone: false,
+                                                    ))
+                                                      PCCommentWidget(
+                                                        key: Key(
+                                                            'Key212_${columnIndex}_of_${columnCommentsRecordList.length}'),
+                                                        comment:
+                                                            columnCommentsRecord
+                                                                .comment,
+                                                      ),
+                                                  ],
                                                 ),
                                               );
                                             }),

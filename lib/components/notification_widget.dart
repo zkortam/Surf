@@ -49,6 +49,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: 50.0,
@@ -67,8 +69,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(
-                    queryBuilder: (usersRecord) => usersRecord.where('uid',
-                        isEqualTo: widget.notification?.iDUserFrom),
+                    queryBuilder: (usersRecord) => usersRecord.where(
+                      'uid',
+                      isEqualTo: widget.notification?.iDUserFrom,
+                    ),
                     singleRecord: true,
                   ),
                   builder: (context, snapshot) {
@@ -79,7 +83,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                           width: 50.0,
                           height: 50.0,
                           child: SpinKitRipple(
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             size: 50.0,
                           ),
                         ),
@@ -142,8 +146,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                   children: [
                     StreamBuilder<List<UsersRecord>>(
                       stream: queryUsersRecord(
-                        queryBuilder: (usersRecord) => usersRecord.where('uid',
-                            isEqualTo: widget.notification?.iDUserFrom),
+                        queryBuilder: (usersRecord) => usersRecord.where(
+                          'uid',
+                          isEqualTo: widget.notification?.iDUserFrom,
+                        ),
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
@@ -154,7 +160,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                               width: 50.0,
                               height: 50.0,
                               child: SpinKitRipple(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 size: 50.0,
                               ),
                             ),
@@ -239,8 +246,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
           ),
           StreamBuilder<List<ThreadRecord>>(
             stream: queryThreadRecord(
-              queryBuilder: (threadRecord) => threadRecord.where('thread.id',
-                  isEqualTo: widget.notification?.itemID),
+              queryBuilder: (threadRecord) => threadRecord.where(
+                'thread.id',
+                isEqualTo: widget.notification?.itemID,
+              ),
               singleRecord: true,
             ),
             builder: (context, snapshot) {
@@ -251,7 +260,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                     width: 50.0,
                     height: 50.0,
                     child: SpinKitRipple(
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 50.0,
                     ),
                   ),
@@ -269,8 +278,9 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                     child: FutureBuilder<List<PostsRecord>>(
                       future: queryPostsRecordOnce(
                         queryBuilder: (postsRecord) => postsRecord.where(
-                            'post.id',
-                            isEqualTo: widget.notification?.itemID),
+                          'post.id',
+                          isEqualTo: widget.notification?.itemID,
+                        ),
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
@@ -281,7 +291,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                               width: 50.0,
                               height: 50.0,
                               child: SpinKitRipple(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 size: 50.0,
                               ),
                             ),

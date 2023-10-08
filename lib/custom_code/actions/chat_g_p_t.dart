@@ -29,12 +29,12 @@ Future<String> chatGPT(
 
   final headers = {
     'Authorization':
-        'Bearer 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',
+        'Bearer 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',
     'Content-Type': 'application/json'
   };
   final request = http.Request(
     'POST',
-    Uri.parse('https://api.openai.com/v1/engines/text-davinci-002/completions'),
+    Uri.parse('https://api.openai.com/v1/engines/text-davinci-003/completions'),
   );
   request.body = json.encode(data);
   request.headers.addAll(headers);

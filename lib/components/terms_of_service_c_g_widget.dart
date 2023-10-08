@@ -50,6 +50,8 @@ class _TermsOfServiceCGWidgetState extends State<TermsOfServiceCGWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 400.0,
       height: 275.0,

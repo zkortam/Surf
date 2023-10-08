@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Surf2</string>
+	<string>Surf</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleLocalizations</key>
@@ -21,6 +21,7 @@
 		<string>en</string>
 		<string>ar</string>
 		<string>af</string>
+		<string>ak</string>
 		<string>sq</string>
 		<string>am</string>
 		<string>hy</string>
@@ -54,6 +55,7 @@
 		<string>kk</string>
 		<string>ko</string>
 		<string>lo</string>
+		<string>la</string>
 		<string>lv</string>
 		<string>lt</string>
 		<string>mk</string>
@@ -97,7 +99,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.577071998373-e8g5p0c234jrntv3qphr15pnodm1ktd9</string>
+                <string>com.googleusercontent.apps.577071998373-1s364od4p35m3497nk1tfm7h035gsr6h</string>
                 
             </array>
         </dict>
@@ -106,10 +108,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>surf2</string>
+        <string>surf</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>com.surf.app</string>
+        <string>com.surfsocial.app</string>
         </array>
         </dict>
     </array>
@@ -127,8 +129,14 @@
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>NSFaceIDUsageDescription</key>
-    <string>This app requires permissions to perform a biometric verification.</string>
-
+    <string>Biometric permissions are needed for biometric settings access</string>
+	<key>PermissionGroupNotification</key>
+    <string>Enable Notifications for Posts, Threads, & Messages</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
 
 	<key>UILaunchStoryboardName</key>

@@ -73,11 +73,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'EditProfile',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -550,10 +554,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                     context: context,
                                                     builder: (context) {
                                                       return GestureDetector(
-                                                        onTap: () => FocusScope
-                                                                .of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode),
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
                                                         child: Padding(
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
@@ -567,7 +577,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                       );
                                                     },
                                                   ).then((value) =>
-                                                      setState(() {}));
+                                                      safeSetState(() {}));
                                                 }
                                               },
                                               autofocus: true,
@@ -670,7 +680,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
+                                                              .secondaryText,
                                                       size: 50.0,
                                                     ),
                                                   ),
@@ -705,12 +715,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                           context: context,
                                                           builder: (context) {
                                                             return GestureDetector(
-                                                              onTap: () => FocusScope
-                                                                      .of(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
                                                                           context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode),
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child: Padding(
                                                                 padding: MediaQuery
                                                                     .viewInsetsOf(
@@ -724,7 +739,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             );
                                                           },
                                                         ).then((value) =>
-                                                            setState(() {}));
+                                                            safeSetState(
+                                                                () {}));
 
                                                         setState(() {
                                                           _model.usernameController
@@ -749,12 +765,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                           context: context,
                                                           builder: (context) {
                                                             return GestureDetector(
-                                                              onTap: () => FocusScope
-                                                                      .of(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
                                                                           context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode),
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child: Padding(
                                                                 padding: MediaQuery
                                                                     .viewInsetsOf(
@@ -768,7 +789,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             );
                                                           },
                                                         ).then((value) =>
-                                                            setState(() {}));
+                                                            safeSetState(
+                                                                () {}));
 
                                                         setState(() {
                                                           _model.usernameController
@@ -793,12 +815,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                           context: context,
                                                           builder: (context) {
                                                             return GestureDetector(
-                                                              onTap: () => FocusScope
-                                                                      .of(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
                                                                           context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode),
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child: Padding(
                                                                 padding: MediaQuery
                                                                     .viewInsetsOf(
@@ -812,7 +839,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             );
                                                           },
                                                         ).then((value) =>
-                                                            setState(() {}));
+                                                            safeSetState(
+                                                                () {}));
 
                                                         setState(() {
                                                           _model.usernameController
@@ -827,16 +855,29 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             false,
                                                           )}');
                                                         });
+                                                        safeSetState(() => _model
+                                                                .algoliaSearchResults =
+                                                            null);
+                                                        await UsersRecord
+                                                                .search(
+                                                          term: _model
+                                                              .usernameController
+                                                              .text,
+                                                        )
+                                                            .then((r) => _model
+                                                                    .algoliaSearchResults =
+                                                                r)
+                                                            .onError((_, __) =>
+                                                                _model.algoliaSearchResults =
+                                                                    [])
+                                                            .whenComplete(() =>
+                                                                setState(
+                                                                    () {}));
                                                       }
-                                                      if (usernameUsersRecordList
-                                                              .where((e) =>
-                                                                  e.displayName ==
-                                                                  _model
-                                                                      .usernameController
-                                                                      .text)
-                                                              .toList()
-                                                              .length >
-                                                          0) {
+                                                      if (_model
+                                                              .algoliaSearchResults
+                                                              ?.length !=
+                                                          null) {
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,
@@ -846,12 +887,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                           context: context,
                                                           builder: (context) {
                                                             return GestureDetector(
-                                                              onTap: () => FocusScope
-                                                                      .of(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
                                                                           context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode),
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child: Padding(
                                                                 padding: MediaQuery
                                                                     .viewInsetsOf(
@@ -865,7 +911,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             );
                                                           },
                                                         ).then((value) =>
-                                                            setState(() {}));
+                                                            safeSetState(
+                                                                () {}));
 
                                                         setState(() {
                                                           _model.usernameController
@@ -892,11 +939,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                             context: context,
                                                             builder: (context) {
                                                               return GestureDetector(
-                                                                onTap: () => FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode),
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
                                                                 child: Padding(
                                                                   padding: MediaQuery
                                                                       .viewInsetsOf(
@@ -910,7 +962,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                               );
                                                             },
                                                           ).then((value) =>
-                                                              setState(() {}));
+                                                              safeSetState(
+                                                                  () {}));
 
                                                           setState(() {
                                                             _model.usernameController
@@ -1080,10 +1133,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                     context: context,
                                                     builder: (context) {
                                                       return GestureDetector(
-                                                        onTap: () => FocusScope
-                                                                .of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode),
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
                                                         child: Padding(
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
@@ -1097,7 +1156,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                       );
                                                     },
                                                   ).then((value) =>
-                                                      setState(() {}));
+                                                      safeSetState(() {}));
                                                 }
                                               },
                                               autofocus: true,

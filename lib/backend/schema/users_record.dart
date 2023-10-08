@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/serialization_util.dart';
 import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
@@ -138,6 +139,11 @@ class UsersRecord extends FirestoreRecord {
   bool get complete => _complete ?? false;
   bool hasComplete() => _complete != null;
 
+  // "isCompressed" field.
+  bool? _isCompressed;
+  bool get isCompressed => _isCompressed ?? false;
+  bool hasIsCompressed() => _isCompressed != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -172,6 +178,7 @@ class UsersRecord extends FirestoreRecord {
     _blocked = getDataList(snapshotData['blocked']);
     _isStealth = snapshotData['isStealth'] as bool?;
     _complete = snapshotData['complete'] as bool?;
+    _isCompressed = snapshotData['isCompressed'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -201,9 +208,10 @@ class UsersRecord extends FirestoreRecord {
           'display_name': snapshot.data['display_name'],
           'photo_url': snapshot.data['photo_url'],
           'uid': snapshot.data['uid'],
-          'created_time': safeGet(
-            () => DateTime.fromMillisecondsSinceEpoch(
-                snapshot.data['created_time']),
+          'created_time': convertAlgoliaParam(
+            snapshot.data['created_time'],
+            ParamType.DateTime,
+            false,
           ),
           'phone_number': snapshot.data['phone_number'],
           'realName': snapshot.data['realName'],
@@ -215,60 +223,12 @@ class UsersRecord extends FirestoreRecord {
           'emailNotifStatus': snapshot.data['emailNotifStatus'],
           'threads': safeGet(
             () => (snapshot.data['threads'] as Iterable)
-                .map(
-                  (data) => createThreadStruct(
-                    timestamp: safeGet(
-                      () => DateTime.fromMillisecondsSinceEpoch(
-                          (data as Map<String, dynamic>)['timestamp']),
-                    ),
-                    author: (data as Map<String, dynamic>)['author'],
-                    title: (data as Map<String, dynamic>)['title'],
-                    text: (data as Map<String, dynamic>)['text'],
-                    netVotes:
-                        (data as Map<String, dynamic>)['netVotes']?.round(),
-                    id: (data as Map<String, dynamic>)['id'],
-                    poll: createPollStruct(
-                      totalVotes: ((data as Map<String, dynamic>)['poll'] ??
-                              {})['totalVotes']
-                          ?.round(),
-                      create: true,
-                      clearUnsetFields: false,
-                    ),
-                    isPoll: (data as Map<String, dynamic>)['isPoll'],
-                    isPolitical: (data as Map<String, dynamic>)['isPolitical'],
-                    politicalPosition:
-                        (data as Map<String, dynamic>)['politicalPosition']
-                            ?.round(),
-                    genre: (data as Map<String, dynamic>)['genre']?.round(),
-                    link: (data as Map<String, dynamic>)['link'],
-                    summary: (data as Map<String, dynamic>)['summary'],
-                    isStealth: (data as Map<String, dynamic>)['isStealth'],
-                    create: true,
-                    clearUnsetFields: false,
-                  ).toMap(),
-                )
+                .map((d) => ThreadStruct.fromAlgoliaData(d))
                 .toList(),
           ),
           'Posts': safeGet(
             () => (snapshot.data['Posts'] as Iterable)
-                .map(
-                  (data) => createPostStruct(
-                    timestamp: safeGet(
-                      () => DateTime.fromMillisecondsSinceEpoch(
-                          (data as Map<String, dynamic>)['timestamp']),
-                    ),
-                    caption: (data as Map<String, dynamic>)['caption'],
-                    author: (data as Map<String, dynamic>)['author'],
-                    netVotes:
-                        (data as Map<String, dynamic>)['netVotes']?.round(),
-                    id: (data as Map<String, dynamic>)['id'],
-                    isExpanded: (data as Map<String, dynamic>)['isExpanded'],
-                    isSpoiler: (data as Map<String, dynamic>)['isSpoiler'],
-                    isStealth: (data as Map<String, dynamic>)['isStealth'],
-                    create: true,
-                    clearUnsetFields: false,
-                  ).toMap(),
-                )
+                .map((d) => PostStruct.fromAlgoliaData(d))
                 .toList(),
           ),
           'banner': snapshot.data['banner'],
@@ -283,25 +243,7 @@ class UsersRecord extends FirestoreRecord {
           ),
           'notifications': safeGet(
             () => (snapshot.data['notifications'] as Iterable)
-                .map(
-                  (data) => createNotificationStruct(
-                    category:
-                        (data as Map<String, dynamic>)['category']?.round(),
-                    itemID: (data as Map<String, dynamic>)['itemID'],
-                    time: safeGet(
-                      () => DateTime.fromMillisecondsSinceEpoch(
-                          (data as Map<String, dynamic>)['time']),
-                    ),
-                    link: (data as Map<String, dynamic>)['link'],
-                    userID: (data as Map<String, dynamic>)['userID'],
-                    isMarkedAsRead:
-                        (data as Map<String, dynamic>)['isMarkedAsRead'],
-                    notifID: (data as Map<String, dynamic>)['notifID'],
-                    iDUserFrom: (data as Map<String, dynamic>)['IDUserFrom'],
-                    create: true,
-                    clearUnsetFields: false,
-                  ).toMap(),
-                )
+                .map((d) => NotificationStruct.fromAlgoliaData(d))
                 .toList(),
           ),
           'isBiometric': snapshot.data['isBiometric'],
@@ -310,6 +252,7 @@ class UsersRecord extends FirestoreRecord {
           ),
           'isStealth': snapshot.data['isStealth'],
           'complete': snapshot.data['complete'],
+          'isCompressed': snapshot.data['isCompressed'],
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -363,6 +306,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isBiometric,
   bool? isStealth,
   bool? complete,
+  bool? isCompressed,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -383,6 +327,7 @@ Map<String, dynamic> createUsersRecordData({
       'isBiometric': isBiometric,
       'isStealth': isStealth,
       'complete': complete,
+      'isCompressed': isCompressed,
     }.withoutNulls,
   );
 
@@ -418,7 +363,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isBiometric == e2?.isBiometric &&
         listEquality.equals(e1?.blocked, e2?.blocked) &&
         e1?.isStealth == e2?.isStealth &&
-        e1?.complete == e2?.complete;
+        e1?.complete == e2?.complete &&
+        e1?.isCompressed == e2?.isCompressed;
   }
 
   @override
@@ -446,7 +392,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isBiometric,
         e?.blocked,
         e?.isStealth,
-        e?.complete
+        e?.complete,
+        e?.isCompressed
       ]);
 
   @override

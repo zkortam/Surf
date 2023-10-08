@@ -50,47 +50,627 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 500.0,
-      constraints: BoxConstraints(
-        minHeight: 135.0,
-        maxHeight: 265.0,
-      ),
       decoration: BoxDecoration(),
-      child: Container(
-        width: double.infinity,
-        child: Stack(
-          children: [
-            if ((functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option1Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option2Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option3Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option4Voters.toList()) ==
-                    false))
-              Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  minHeight: 135.0,
-                  maxHeight: 265.0,
-                ),
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
-                  child: Container(
-                    width: 10.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      borderRadius: BorderRadius.circular(15.0),
+      child: Stack(
+        children: [
+          if (!((functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option1Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option2Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option3Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option4Voters.toList()) ==
+                  false)))
+            Container(
+              width: 500.0,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 55.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Stack(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        LinearPercentIndicator(
+                                          percent: functions.pollDivider(
+                                              widget.thrad!.thread.poll
+                                                  .option1Voters.length,
+                                              widget.thrad!.thread.poll
+                                                  .totalVotes),
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.78,
+                                          lineHeight: 50.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor: Color(0xFF558DD6),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          barRadius: Radius.circular(150.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                      ))
+                                        LinearPercentIndicator(
+                                          percent: functions.pollDivider(
+                                              widget.thrad!.thread.poll
+                                                  .option1Voters.length,
+                                              widget.thrad!.thread.poll
+                                                  .totalVotes),
+                                          width: 440.0,
+                                          lineHeight: 50.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor: Color(0xFF558DD6),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          barRadius: Radius.circular(150.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 4.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 10.0, 0.0, 0.0),
+                                          child: Text(
+                                            widget
+                                                .thrad!.thread.poll.options[0],
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  fontSize: 15.0,
+                                                ),
+                                          ),
+                                        ),
+                                        if (functions.stringInArr(
+                                                currentUserUid,
+                                                widget.thrad!.thread.poll
+                                                    .option1Voters
+                                                    .toList()) ==
+                                            true)
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 10.0, 0.0, 0.0),
+                                            child: Icon(
+                                              Icons.check_circle,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              size: 24.0,
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  7.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  functions.percentFinder(
+                                      widget.thrad!.thread.poll.totalVotes,
+                                      widget.thrad!.thread.poll.option1Voters
+                                          .length),
+                                  '0%',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 16.0,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 55.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Flexible(
+                              child: Stack(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        tablet: false,
+                                        tabletLandscape: false,
+                                        desktop: false,
+                                      ))
+                                        LinearPercentIndicator(
+                                          percent: functions.pollDivider(
+                                              widget.thrad!.thread.poll
+                                                  .option2Voters.length,
+                                              widget.thrad!.thread.poll
+                                                  .totalVotes),
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.78,
+                                          lineHeight: 50.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor: Color(0xFF558DD6),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          barRadius: Radius.circular(150.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                      ))
+                                        LinearPercentIndicator(
+                                          percent: functions.pollDivider(
+                                              widget.thrad!.thread.poll
+                                                  .option2Voters.length,
+                                              widget.thrad!.thread.poll
+                                                  .totalVotes),
+                                          width: 440.0,
+                                          lineHeight: 50.0,
+                                          animation: true,
+                                          animateFromLastPercent: true,
+                                          progressColor: Color(0xFF558DD6),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          barRadius: Radius.circular(100.0),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 4.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 10.0, 0.0, 0.0),
+                                          child: Text(
+                                            widget
+                                                .thrad!.thread.poll.options[1],
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  fontSize: 15.0,
+                                                ),
+                                          ),
+                                        ),
+                                        if (functions.stringInArr(
+                                                currentUserUid,
+                                                widget.thrad!.thread.poll
+                                                    .option2Voters
+                                                    .toList()) ==
+                                            true)
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 10.0, 0.0, 0.0),
+                                            child: Icon(
+                                              Icons.check_circle,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              size: 24.0,
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  7.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  functions.percentFinder(
+                                      widget.thrad!.thread.poll.totalVotes,
+                                      widget.thrad!.thread.poll.option2Voters
+                                          .length),
+                                  '0%',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 16.0,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (widget.thrad!.thread.poll.options.length >= 3)
+                    Flexible(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 55.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: Stack(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                        ))
+                                          LinearPercentIndicator(
+                                            percent: functions.pollDivider(
+                                                widget.thrad!.thread.poll
+                                                    .option3Voters.length,
+                                                widget.thrad!.thread.poll
+                                                    .totalVotes),
+                                            width: 440.0,
+                                            lineHeight: 50.0,
+                                            animation: true,
+                                            animateFromLastPercent: true,
+                                            progressColor: Color(0xFF558DD6),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                            barRadius: Radius.circular(150.0),
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          tablet: false,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          LinearPercentIndicator(
+                                            percent: functions.pollDivider(
+                                                widget.thrad!.thread.poll
+                                                    .option3Voters.length,
+                                                widget.thrad!.thread.poll
+                                                    .totalVotes),
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.78,
+                                            lineHeight: 50.0,
+                                            animation: true,
+                                            animateFromLastPercent: true,
+                                            progressColor: Color(0xFF558DD6),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                            barRadius: Radius.circular(150.0),
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 10.0, 0.0, 0.0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                widget.thrad?.thread?.poll
+                                                    ?.options?[2],
+                                                'None',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        fontSize: 15.0,
+                                                      ),
+                                            ),
+                                          ),
+                                          if (functions.stringInArr(
+                                                  currentUserUid,
+                                                  widget.thrad!.thread.poll
+                                                      .option2Voters
+                                                      .toList()) ==
+                                              true)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      5.0, 10.0, 0.0, 0.0),
+                                              child: Icon(
+                                                Icons.check_circle,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    7.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    functions.percentFinder(
+                                        widget.thrad!.thread.poll.totalVotes,
+                                        widget.thrad!.thread.poll.option3Voters
+                                            .length),
+                                    '0%',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (widget.thrad?.thread?.poll?.options?.length == 4)
+                    Flexible(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: 55.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: Stack(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                        ))
+                                          LinearPercentIndicator(
+                                            percent: functions.pollDivider(
+                                                widget.thrad!.thread.poll
+                                                    .option4Voters.length,
+                                                widget.thrad!.thread.poll
+                                                    .totalVotes),
+                                            width: 440.0,
+                                            lineHeight: 50.0,
+                                            animation: true,
+                                            animateFromLastPercent: true,
+                                            progressColor: Color(0xFF558DD6),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                            barRadius: Radius.circular(100.0),
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          tablet: false,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          LinearPercentIndicator(
+                                            percent: functions.pollDivider(
+                                                widget.thrad!.thread.poll
+                                                    .option4Voters.length,
+                                                widget.thrad!.thread.poll
+                                                    .totalVotes),
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.78,
+                                            lineHeight: 50.0,
+                                            animation: true,
+                                            animateFromLastPercent: true,
+                                            progressColor: Color(0xFF558DD6),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                            barRadius: Radius.circular(100.0),
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 10.0, 0.0, 0.0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                widget.thrad?.thread?.poll
+                                                    ?.options?[3],
+                                                'None',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        fontSize: 15.0,
+                                                      ),
+                                            ),
+                                          ),
+                                          if (functions.stringInArr(
+                                                  currentUserUid,
+                                                  widget.thrad!.thread.poll
+                                                      .option2Voters
+                                                      .toList()) ==
+                                              true)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      5.0, 10.0, 0.0, 0.0),
+                                              child: Icon(
+                                                Icons.check_circle,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    7.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    functions.percentFinder(
+                                        widget.thrad!.thread.poll.totalVotes,
+                                        widget.thrad!.thread.poll.option4Voters
+                                            .length),
+                                    '0%',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          if ((functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option1Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option2Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option3Voters.toList()) ==
+                  false) &&
+              (functions.stringInArr(currentUserUid,
+                      widget.thrad!.thread.poll.option4Voters.toList()) ==
+                  false))
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -121,7 +701,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               },
                               child: Container(
                                 width: double.infinity,
-                                height: 55.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -132,7 +712,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      widget.thrad!.thread.poll.options.first,
+                                      valueOrDefault<String>(
+                                        widget.thrad?.thread?.poll?.options
+                                            ?.first,
+                                        'None',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -174,7 +758,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               },
                               child: Container(
                                 width: double.infinity,
-                                height: 55.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -185,7 +769,10 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      widget.thrad!.thread.poll.options[1],
+                                      valueOrDefault<String>(
+                                        widget.thrad?.thread?.poll?.options?[1],
+                                        'None',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -229,7 +816,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                 },
                                 child: Container(
                                   width: double.infinity,
-                                  height: 55.0,
+                                  height: 50.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -240,7 +827,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        widget.thrad!.thread.poll.options[2],
+                                        valueOrDefault<String>(
+                                          widget
+                                              .thrad?.thread?.poll?.options?[2],
+                                          'None',
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -255,11 +846,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               ),
                             ),
                           ),
-                        if (widget.thrad!.thread.poll.options.length >= 4)
+                        if (widget.thrad?.thread?.poll?.options?.length == 4)
                           Flexible(
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 5.0, 5.0, 5.0),
+                                  5.0, 5.0, 5.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -284,7 +875,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                 },
                                 child: Container(
                                   width: double.infinity,
-                                  height: 55.0,
+                                  height: 50.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -295,7 +886,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        widget.thrad!.thread.poll.options[3],
+                                        valueOrDefault<String>(
+                                          widget
+                                              .thrad?.thread?.poll?.options?[3],
+                                          'None',
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -315,587 +910,8 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                   ),
                 ),
               ),
-            if (!((functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option1Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option2Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option3Voters.toList()) ==
-                    false) &&
-                (functions.stringInArr(currentUserUid,
-                        widget.thrad!.thread.poll.option4Voters.toList()) ==
-                    false)))
-              Container(
-                width: 500.0,
-                constraints: BoxConstraints(
-                  minHeight: 135.0,
-                  maxHeight: 265.0,
-                ),
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Flexible(
-                                child: Stack(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          tablet: false,
-                                          tabletLandscape: false,
-                                          desktop: false,
-                                        ))
-                                          LinearPercentIndicator(
-                                            percent: functions.pollDivider(
-                                                widget.thrad!.thread.poll
-                                                    .option1Voters.length,
-                                                widget.thrad!.thread.poll
-                                                    .totalVotes),
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.78,
-                                            lineHeight: 50.0,
-                                            animation: true,
-                                            progressColor: Color(0xFF558DD6),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            barRadius: Radius.circular(150.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          phone: false,
-                                        ))
-                                          LinearPercentIndicator(
-                                            percent: functions.pollDivider(
-                                                widget.thrad!.thread.poll
-                                                    .option1Voters.length,
-                                                widget.thrad!.thread.poll
-                                                    .totalVotes),
-                                            width: 440.0,
-                                            lineHeight: 50.0,
-                                            animation: true,
-                                            progressColor: Color(0xFF558DD6),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            barRadius: Radius.circular(150.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 4.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 0.0, 0.0),
-                                            child: Text(
-                                              widget.thrad!.thread.poll
-                                                  .options[0],
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        fontSize: 15.0,
-                                                      ),
-                                            ),
-                                          ),
-                                          if (functions.stringInArr(
-                                                  currentUserUid,
-                                                  widget.thrad!.thread.poll
-                                                      .option1Voters
-                                                      .toList()) ==
-                                              true)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      5.0, 10.0, 0.0, 0.0),
-                                              child: Icon(
-                                                Icons.check_circle,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                size: 24.0,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    7.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    functions.percentFinder(
-                                        widget.thrad!.thread.poll.totalVotes,
-                                        widget.thrad!.thread.poll.option1Voters
-                                            .length),
-                                    '0%',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        fontSize: 16.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Flexible(
-                                child: Stack(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          tablet: false,
-                                          tabletLandscape: false,
-                                          desktop: false,
-                                        ))
-                                          LinearPercentIndicator(
-                                            percent: functions.pollDivider(
-                                                widget.thrad!.thread.poll
-                                                    .option2Voters.length,
-                                                widget.thrad!.thread.poll
-                                                    .totalVotes),
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.78,
-                                            lineHeight: 50.0,
-                                            animation: true,
-                                            progressColor: Color(0xFF558DD6),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            barRadius: Radius.circular(150.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          phone: false,
-                                        ))
-                                          LinearPercentIndicator(
-                                            percent: functions.pollDivider(
-                                                widget.thrad!.thread.poll
-                                                    .option2Voters.length,
-                                                widget.thrad!.thread.poll
-                                                    .totalVotes),
-                                            width: 440.0,
-                                            lineHeight: 50.0,
-                                            animation: true,
-                                            progressColor: Color(0xFF558DD6),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            barRadius: Radius.circular(100.0),
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 4.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 0.0, 0.0),
-                                            child: Text(
-                                              widget.thrad!.thread.poll
-                                                  .options[1],
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        fontSize: 15.0,
-                                                      ),
-                                            ),
-                                          ),
-                                          if (functions.stringInArr(
-                                                  currentUserUid,
-                                                  widget.thrad!.thread.poll
-                                                      .option2Voters
-                                                      .toList()) ==
-                                              true)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      5.0, 10.0, 0.0, 0.0),
-                                              child: Icon(
-                                                Icons.check_circle,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                size: 24.0,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    7.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    functions.percentFinder(
-                                        widget.thrad!.thread.poll.totalVotes,
-                                        widget.thrad!.thread.poll.option2Voters
-                                            .length),
-                                    '0%',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        fontSize: 16.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (widget.thrad!.thread.poll.options.length >= 3)
-                      Flexible(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              5.0, 5.0, 5.0, 0.0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 55.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Flexible(
-                                  child: Stack(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                          ))
-                                            LinearPercentIndicator(
-                                              percent: functions.pollDivider(
-                                                  widget.thrad!.thread.poll
-                                                      .option2Voters.length,
-                                                  widget.thrad!.thread.poll
-                                                      .totalVotes),
-                                              width: 440.0,
-                                              lineHeight: 50.0,
-                                              animation: true,
-                                              progressColor: Color(0xFF558DD6),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              barRadius: Radius.circular(150.0),
-                                              padding: EdgeInsets.zero,
-                                            ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            LinearPercentIndicator(
-                                              percent: functions.pollDivider(
-                                                  widget.thrad!.thread.poll
-                                                      .option2Voters.length,
-                                                  widget.thrad!.thread.poll
-                                                      .totalVotes),
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.78,
-                                              lineHeight: 50.0,
-                                              animation: true,
-                                              progressColor: Color(0xFF558DD6),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              barRadius: Radius.circular(150.0),
-                                              padding: EdgeInsets.zero,
-                                            ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 0.0, 0.0),
-                                              child: Text(
-                                                widget.thrad!.thread.poll
-                                                    .options[1],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          fontSize: 15.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            if (functions.stringInArr(
-                                                    currentUserUid,
-                                                    widget.thrad!.thread.poll
-                                                        .option2Voters
-                                                        .toList()) ==
-                                                true)
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 10.0, 0.0, 0.0),
-                                                child: Icon(
-                                                  Icons.check_circle,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      7.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      functions.percentFinder(
-                                          widget.thrad!.thread.poll.totalVotes,
-                                          widget.thrad!.thread.poll
-                                              .option3Voters.length),
-                                      '0%',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          fontSize: 16.0,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (widget.thrad!.thread.poll.options.length >= 4)
-                      Flexible(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              5.0, 5.0, 5.0, 0.0),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: 55.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Flexible(
-                                  child: Stack(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                          ))
-                                            LinearPercentIndicator(
-                                              percent: functions.pollDivider(
-                                                  widget.thrad!.thread.poll
-                                                      .option2Voters.length,
-                                                  widget.thrad!.thread.poll
-                                                      .totalVotes),
-                                              width: 440.0,
-                                              lineHeight: 50.0,
-                                              animation: true,
-                                              progressColor: Color(0xFF558DD6),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              barRadius: Radius.circular(100.0),
-                                              padding: EdgeInsets.zero,
-                                            ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            LinearPercentIndicator(
-                                              percent: functions.pollDivider(
-                                                  widget.thrad!.thread.poll
-                                                      .option2Voters.length,
-                                                  widget.thrad!.thread.poll
-                                                      .totalVotes),
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.78,
-                                              lineHeight: 50.0,
-                                              animation: true,
-                                              progressColor: Color(0xFF558DD6),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              barRadius: Radius.circular(100.0),
-                                              padding: EdgeInsets.zero,
-                                            ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 0.0, 0.0),
-                                              child: Text(
-                                                widget.thrad!.thread.poll
-                                                    .options[1],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          fontSize: 15.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            if (functions.stringInArr(
-                                                    currentUserUid,
-                                                    widget.thrad!.thread.poll
-                                                        .option2Voters
-                                                        .toList()) ==
-                                                true)
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 10.0, 0.0, 0.0),
-                                                child: Icon(
-                                                  Icons.check_circle,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      7.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      functions.percentFinder(
-                                          widget.thrad!.thread.poll.totalVotes,
-                                          widget.thrad!.thread.poll
-                                              .option4Voters.length),
-                                      '0%',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          fontSize: 16.0,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

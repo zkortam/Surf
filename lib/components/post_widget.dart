@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/comment_widget.dart';
 import '/components/home_comp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -62,6 +63,8 @@ class _PostWidgetState extends State<PostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Stack(
       children: [
         if (responsiveVisibility(
@@ -88,7 +91,7 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                   );
                 },
-              ).then((value) => setState(() {}));
+              ).then((value) => safeSetState(() {}));
             },
             child: Container(
               width: 450.0,
@@ -149,7 +152,7 @@ class _PostWidgetState extends State<PostWidget> {
                         width: double.infinity,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xF514181B),
+                          color: Color(0xF914181B),
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         child: Column(
@@ -200,7 +203,10 @@ class _PostWidgetState extends State<PostWidget> {
                           },
                           child: Container(
                             width: double.infinity,
-                            height: 60.0,
+                            constraints: BoxConstraints(
+                              minHeight: 60.0,
+                              maxHeight: 80.0,
+                            ),
                             decoration: BoxDecoration(
                               color: Color(0x6E000000),
                               borderRadius: BorderRadius.circular(12.0),
@@ -209,315 +215,396 @@ class _PostWidgetState extends State<PostWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   2.0, 2.0, 2.0, 2.0),
                               child: Row(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.69,
-                                    height: 60.0,
-                                    decoration: BoxDecoration(),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          1.0, 0.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -1.00, -1.00),
-                                                child: Container(
-                                                  height: 32.0,
-                                                  constraints: BoxConstraints(
-                                                    minWidth: 90.0,
-                                                    maxWidth: 200.0,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0x40000000),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            300.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(5.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: StreamBuilder<
-                                                        List<UsersRecord>>(
-                                                      stream: queryUsersRecord(
-                                                        queryBuilder: (usersRecord) =>
-                                                            usersRecord.where(
-                                                                'uid',
-                                                                isEqualTo: widget
-                                                                        .post!
-                                                                        .post
-                                                                        .isStealth
-                                                                    ? 'anon'
-                                                                    : widget
-                                                                        .post
-                                                                        ?.post
-                                                                        ?.author),
-                                                        singleRecord: true,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  SpinKitRipple(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                size: 50.0,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<UsersRecord>
-                                                            rowUsersRecordList =
-                                                            snapshot.data!;
-                                                        final rowUsersRecord =
-                                                            rowUsersRecordList
-                                                                    .isNotEmpty
-                                                                ? rowUsersRecordList
-                                                                    .first
-                                                                : null;
-                                                        return InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            if (widget
-                                                                .post!
-                                                                .post
-                                                                .isStealth) {
-                                                              return;
-                                                            }
-
-                                                            context.pushNamed(
-                                                              'Profile',
-                                                              queryParameters: {
-                                                                'userID':
-                                                                    serializeParam(
-                                                                  rowUsersRecord
-                                                                      ?.uid,
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                              }.withoutNulls,
-                                                            );
-                                                          },
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            1.0,
-                                                                            0.0,
-                                                                            5.0,
-                                                                            0.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 25.0,
-                                                                  height: 25.0,
-                                                                  clipBehavior:
-                                                                      Clip.antiAlias,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                  ),
-                                                                  child: Image
-                                                                      .network(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      rowUsersRecord
-                                                                          ?.photoUrl,
-                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
-                                                                    ),
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Flexible(
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          2.0,
-                                                                          0.0,
-                                                                          15.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    '@${valueOrDefault<String>(
-                                                                      rowUsersRecord
-                                                                          ?.displayName,
-                                                                      'Anonymous',
-                                                                    )}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Outfit',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14.0,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        1.0, 0.0, 0.0, 0.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  -1.00, -1.00),
+                                              child: Container(
+                                                height: 32.0,
+                                                constraints: BoxConstraints(
+                                                  minWidth: 90.0,
+                                                  maxWidth: 200.0,
                                                 ),
-                                              ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -1.00, -1.00),
+                                                decoration: BoxDecoration(
+                                                  color: Color(0x40000000),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          300.0),
+                                                ),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          2.0, 0.0, 0.0, 0.0),
-                                                  child: Container(
-                                                    width: 32.0,
-                                                    height: 32.0,
-                                                    constraints: BoxConstraints(
-                                                      minWidth: 40.0,
-                                                      maxWidth: 90.0,
+                                                          5.0, 0.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<UsersRecord>>(
+                                                    stream: queryUsersRecord(
+                                                      queryBuilder:
+                                                          (usersRecord) =>
+                                                              usersRecord.where(
+                                                        'uid',
+                                                        isEqualTo: widget.post!
+                                                                .post.isStealth
+                                                            ? 'anon'
+                                                            : widget.post?.post
+                                                                ?.author,
+                                                      ),
+                                                      singleRecord: true,
                                                     ),
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0x3F000000),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30.0),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
-                                                            '0',
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                SpinKitRipple(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 50.0,
+                                                            ),
                                                           ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color:
-                                                                    valueOrDefault<
-                                                                        Color>(
-                                                                  () {
-                                                                    if (widget
-                                                                            .post
-                                                                            ?.post
-                                                                            ?.netVotes ==
-                                                                        0) {
-                                                                      return Colors
-                                                                          .white;
-                                                                    } else if (widget
-                                                                            .post!
-                                                                            .post
-                                                                            .netVotes >
-                                                                        0) {
-                                                                      return Color(
-                                                                          0xFF21E744);
-                                                                    } else {
-                                                                      return Color(
-                                                                          0xFFE5200B);
-                                                                    }
-                                                                  }(),
-                                                                  Colors.white,
-                                                                ),
-                                                                fontSize: 14.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
+                                                        );
+                                                      }
+                                                      List<UsersRecord>
+                                                          rowUsersRecordList =
+                                                          snapshot.data!;
+                                                      final rowUsersRecord =
+                                                          rowUsersRecordList
+                                                                  .isNotEmpty
+                                                              ? rowUsersRecordList
+                                                                  .first
+                                                              : null;
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          if (widget.post!.post
+                                                              .isStealth) {
+                                                            return;
+                                                          }
+
+                                                          context.pushNamed(
+                                                            'Profile',
+                                                            queryParameters: {
+                                                              'userID':
+                                                                  serializeParam(
+                                                                rowUsersRecord
+                                                                    ?.uid,
+                                                                ParamType
+                                                                    .String,
                                                               ),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          1.0,
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                              child: Container(
+                                                                width: 25.0,
+                                                                height: 25.0,
+                                                                clipBehavior: Clip
+                                                                    .antiAlias,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                                child: Image
+                                                                    .network(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    rowUsersRecord
+                                                                        ?.photoUrl,
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
+                                                                  ),
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Flexible(
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2.0,
+                                                                            0.0,
+                                                                            15.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  '@${valueOrDefault<String>(
+                                                                    rowUsersRecord
+                                                                        ?.displayName,
+                                                                    'Anonymous',
+                                                                  )}',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 2.0, 0.0, 0.0),
-                                            child: Text(
-                                              widget.post!.post.caption,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: Colors.white,
-                                                        fontSize: 13.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
                                             ),
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  -1.00, -1.00),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        2.0, 0.0, 0.0, 0.0),
+                                                child: Container(
+                                                  width: 32.0,
+                                                  height: 32.0,
+                                                  constraints: BoxConstraints(
+                                                    minWidth: 40.0,
+                                                    maxWidth: 90.0,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x3F000000),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30.0),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
+                                                          '0',
+                                                        ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Outfit',
+                                                              color:
+                                                                  valueOrDefault<
+                                                                      Color>(
+                                                                () {
+                                                                  if (widget
+                                                                          .post
+                                                                          ?.post
+                                                                          ?.netVotes ==
+                                                                      0) {
+                                                                    return Colors
+                                                                        .white;
+                                                                  } else if (widget
+                                                                          .post!
+                                                                          .post
+                                                                          .netVotes >
+                                                                      0) {
+                                                                    return Color(
+                                                                        0xFF21E744);
+                                                                  } else {
+                                                                    return Color(
+                                                                        0xFFE5200B);
+                                                                  }
+                                                                }(),
+                                                                Colors.white,
+                                                              ),
+                                                              fontSize: 14.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 2.0, 0.0, 0.0),
+                                          child: Text(
+                                            widget.post!.post.caption
+                                                .maybeHandleOverflow(
+                                                    maxChars: 50),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Colors.white,
+                                                  fontSize: 13.0,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Container(
-                                    width: 100.0,
-                                    height: 100.0,
-                                    decoration: BoxDecoration(),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 10.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          FlutterFlowIconButton(
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 10.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FlutterFlowIconButton(
+                                          borderRadius: 20.0,
+                                          borderWidth: 1.0,
+                                          buttonSize: 40.0,
+                                          icon: Icon(
+                                            Icons.thumb_up,
+                                            color: Colors.white,
+                                            size: 30.0,
+                                          ),
+                                          onPressed: () async {
+                                            final firestoreBatch =
+                                                FirebaseFirestore.instance
+                                                    .batch();
+                                            try {
+                                              if (functions.stringInArr(
+                                                  currentUserUid,
+                                                  widget.post!.post.upVoters
+                                                      .toList())) {
+                                                firestoreBatch.update(
+                                                    widget.post!.reference,
+                                                    createPostsRecordData(
+                                                      post: createPostStruct(
+                                                        fieldValues: {
+                                                          'upVoters': FieldValue
+                                                              .arrayRemove([
+                                                            currentUserUid
+                                                          ]),
+                                                          'netVotes': FieldValue
+                                                              .increment(-(1)),
+                                                        },
+                                                        clearUnsetFields: false,
+                                                      ),
+                                                    ));
+                                                return;
+                                              } else {
+                                                if (functions.stringInArr(
+                                                    currentUserUid,
+                                                    widget.post!.post.downVoters
+                                                        .toList())) {
+                                                  firestoreBatch.update(
+                                                      widget.post!.reference,
+                                                      createPostsRecordData(
+                                                        post: createPostStruct(
+                                                          fieldValues: {
+                                                            'upVoters':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              currentUserUid
+                                                            ]),
+                                                            'netVotes':
+                                                                FieldValue
+                                                                    .increment(
+                                                                        2),
+                                                            'downVoters':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              currentUserUid
+                                                            ]),
+                                                          },
+                                                          clearUnsetFields:
+                                                              false,
+                                                        ),
+                                                      ));
+                                                } else {
+                                                  firestoreBatch.update(
+                                                      widget.post!.reference,
+                                                      createPostsRecordData(
+                                                        post: createPostStruct(
+                                                          fieldValues: {
+                                                            'upVoters':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              currentUserUid
+                                                            ]),
+                                                            'netVotes':
+                                                                FieldValue
+                                                                    .increment(
+                                                                        1),
+                                                          },
+                                                          clearUnsetFields:
+                                                              false,
+                                                        ),
+                                                      ));
+                                                }
+
+                                                return;
+                                              }
+                                            } finally {
+                                              await firestoreBatch.commit();
+                                            }
+                                          },
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 0.0, 0.0, 0.0),
+                                          child: FlutterFlowIconButton(
                                             borderRadius: 20.0,
                                             borderWidth: 1.0,
                                             buttonSize: 40.0,
                                             icon: Icon(
-                                              Icons.thumb_up,
+                                              Icons.thumb_down,
                                               color: Colors.white,
                                               size: 30.0,
                                             ),
@@ -528,21 +615,22 @@ class _PostWidgetState extends State<PostWidget> {
                                               try {
                                                 if (functions.stringInArr(
                                                     currentUserUid,
-                                                    widget.post!.post.upVoters
+                                                    widget.post!.post.downVoters
                                                         .toList())) {
                                                   firestoreBatch.update(
                                                       widget.post!.reference,
                                                       createPostsRecordData(
                                                         post: createPostStruct(
                                                           fieldValues: {
-                                                            'upVoters': FieldValue
-                                                                .arrayRemove([
-                                                              currentUserUid
-                                                            ]),
                                                             'netVotes':
                                                                 FieldValue
                                                                     .increment(
-                                                                        -(1)),
+                                                                        1),
+                                                            'downVoters':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              currentUserUid
+                                                            ]),
                                                           },
                                                           clearUnsetFields:
                                                               false,
@@ -552,8 +640,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                 } else {
                                                   if (functions.stringInArr(
                                                       currentUserUid,
-                                                      widget
-                                                          .post!.post.downVoters
+                                                      widget.post!.post.upVoters
                                                           .toList())) {
                                                     firestoreBatch.update(
                                                         widget.post!.reference,
@@ -561,18 +648,17 @@ class _PostWidgetState extends State<PostWidget> {
                                                           post:
                                                               createPostStruct(
                                                             fieldValues: {
-                                                              'upVoters':
-                                                                  FieldValue
-                                                                      .arrayUnion([
+                                                              'upVoters': FieldValue
+                                                                  .arrayRemove([
                                                                 currentUserUid
                                                               ]),
                                                               'netVotes':
                                                                   FieldValue
                                                                       .increment(
-                                                                          2),
+                                                                          -(2)),
                                                               'downVoters':
                                                                   FieldValue
-                                                                      .arrayRemove([
+                                                                      .arrayUnion([
                                                                 currentUserUid
                                                               ]),
                                                             },
@@ -587,15 +673,15 @@ class _PostWidgetState extends State<PostWidget> {
                                                           post:
                                                               createPostStruct(
                                                             fieldValues: {
-                                                              'upVoters':
+                                                              'netVotes':
+                                                                  FieldValue
+                                                                      .increment(
+                                                                          -(1)),
+                                                              'downVoters':
                                                                   FieldValue
                                                                       .arrayUnion([
                                                                 currentUserUid
                                                               ]),
-                                                              'netVotes':
-                                                                  FieldValue
-                                                                      .increment(
-                                                                          1),
                                                             },
                                                             clearUnsetFields:
                                                                 false,
@@ -610,116 +696,8 @@ class _PostWidgetState extends State<PostWidget> {
                                               }
                                             },
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 0.0, 0.0),
-                                            child: FlutterFlowIconButton(
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              icon: Icon(
-                                                Icons.thumb_down,
-                                                color: Colors.white,
-                                                size: 30.0,
-                                              ),
-                                              onPressed: () async {
-                                                final firestoreBatch =
-                                                    FirebaseFirestore.instance
-                                                        .batch();
-                                                try {
-                                                  if (functions.stringInArr(
-                                                      currentUserUid,
-                                                      widget
-                                                          .post!.post.downVoters
-                                                          .toList())) {
-                                                    firestoreBatch.update(
-                                                        widget.post!.reference,
-                                                        createPostsRecordData(
-                                                          post:
-                                                              createPostStruct(
-                                                            fieldValues: {
-                                                              'netVotes':
-                                                                  FieldValue
-                                                                      .increment(
-                                                                          1),
-                                                              'downVoters':
-                                                                  FieldValue
-                                                                      .arrayRemove([
-                                                                currentUserUid
-                                                              ]),
-                                                            },
-                                                            clearUnsetFields:
-                                                                false,
-                                                          ),
-                                                        ));
-                                                    return;
-                                                  } else {
-                                                    if (functions.stringInArr(
-                                                        currentUserUid,
-                                                        widget
-                                                            .post!.post.upVoters
-                                                            .toList())) {
-                                                      firestoreBatch.update(
-                                                          widget
-                                                              .post!.reference,
-                                                          createPostsRecordData(
-                                                            post:
-                                                                createPostStruct(
-                                                              fieldValues: {
-                                                                'upVoters':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  currentUserUid
-                                                                ]),
-                                                                'netVotes':
-                                                                    FieldValue
-                                                                        .increment(
-                                                                            -(2)),
-                                                                'downVoters':
-                                                                    FieldValue
-                                                                        .arrayUnion([
-                                                                  currentUserUid
-                                                                ]),
-                                                              },
-                                                              clearUnsetFields:
-                                                                  false,
-                                                            ),
-                                                          ));
-                                                    } else {
-                                                      firestoreBatch.update(
-                                                          widget
-                                                              .post!.reference,
-                                                          createPostsRecordData(
-                                                            post:
-                                                                createPostStruct(
-                                                              fieldValues: {
-                                                                'netVotes':
-                                                                    FieldValue
-                                                                        .increment(
-                                                                            -(1)),
-                                                                'downVoters':
-                                                                    FieldValue
-                                                                        .arrayUnion([
-                                                                  currentUserUid
-                                                                ]),
-                                                              },
-                                                              clearUnsetFields:
-                                                                  false,
-                                                            ),
-                                                          ));
-                                                    }
-
-                                                    return;
-                                                  }
-                                                } finally {
-                                                  await firestoreBatch.commit();
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -767,7 +745,7 @@ class _PostWidgetState extends State<PostWidget> {
                           ),
                         );
                       },
-                    ).then((value) => setState(() {}));
+                    ).then((value) => safeSetState(() {}));
                   },
                   child: Container(
                     width: 600.0,
@@ -830,8 +808,8 @@ class _PostWidgetState extends State<PostWidget> {
                               width: double.infinity,
                               height: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xF514181B),
-                                borderRadius: BorderRadius.circular(12.0),
+                                color: Color(0xFC14181B),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -853,107 +831,104 @@ class _PostWidgetState extends State<PostWidget> {
                               ),
                             ),
                           ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  3.0, 0.0, 3.0, 3.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onDoubleTap: () async {
-                                  context.pushNamed(
-                                    'singlePost',
-                                    queryParameters: {
-                                      'posts': serializeParam(
-                                        widget.post,
-                                        ParamType.Document,
-                                      ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      'posts': widget.post,
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 65.0,
-                                  constraints: BoxConstraints(
-                                    minHeight: 65.0,
-                                    maxHeight: 95.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Color(0x6E000000),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        2.0, 2.0, 2.0, 2.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 400.0,
-                                          constraints: BoxConstraints(
-                                            minHeight: 65.0,
-                                            maxHeight: 95.0,
-                                          ),
-                                          decoration: BoxDecoration(),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    1.0, 0.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              -1.00, -1.00),
-                                                      child: Container(
-                                                        height: 32.0,
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          minWidth: 90.0,
-                                                          maxWidth: 200.0,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0x40000000),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      300.0),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: StreamBuilder<
-                                                              List<
-                                                                  UsersRecord>>(
-                                                            stream:
-                                                                queryUsersRecord(
-                                                              queryBuilder: (usersRecord) => usersRecord.where(
+                        Align(
+                          alignment: AlignmentDirectional(0.00, 0.00),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    3.0, 0.0, 3.0, 3.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onDoubleTap: () async {
+                                    context.pushNamed(
+                                      'singlePost',
+                                      queryParameters: {
+                                        'posts': serializeParam(
+                                          widget.post,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'posts': widget.post,
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 65.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x6E000000),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          2.0, 2.0, 2.0, 2.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: 400.0,
+                                            height: 60.0,
+                                            decoration: BoxDecoration(),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(1.0, 0.0, 0.0, 0.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                -1.00, -1.00),
+                                                        child: Container(
+                                                          height: 32.0,
+                                                          constraints:
+                                                              BoxConstraints(
+                                                            minWidth: 90.0,
+                                                            maxWidth: 200.0,
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Color(
+                                                                0x40000000),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        300.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: StreamBuilder<
+                                                                List<
+                                                                    UsersRecord>>(
+                                                              stream:
+                                                                  queryUsersRecord(
+                                                                queryBuilder:
+                                                                    (usersRecord) =>
+                                                                        usersRecord
+                                                                            .where(
                                                                   'uid',
                                                                   isEqualTo: widget
                                                                           .post!
@@ -963,465 +938,355 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       : widget
                                                                           .post
                                                                           ?.post
-                                                                          ?.author),
-                                                              singleRecord:
-                                                                  true,
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50.0,
-                                                                    height:
-                                                                        50.0,
+                                                                          ?.author,
+                                                                ),
+                                                                singleRecord:
+                                                                    true,
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
                                                                     child:
-                                                                        SpinKitRipple(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
+                                                                        SizedBox(
+                                                                      width:
                                                                           50.0,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<UsersRecord>
-                                                                  rowUsersRecordList =
-                                                                  snapshot
-                                                                      .data!;
-                                                              final rowUsersRecord =
-                                                                  rowUsersRecordList
-                                                                          .isNotEmpty
-                                                                      ? rowUsersRecordList
-                                                                          .first
-                                                                      : null;
-                                                              return InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  if (widget
-                                                                      .post!
-                                                                      .post
-                                                                      .isStealth) {
-                                                                    return;
-                                                                  }
-
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'Profile',
-                                                                    queryParameters:
-                                                                        {
-                                                                      'userID':
-                                                                          serializeParam(
-                                                                        rowUsersRecord
-                                                                            ?.uid,
-                                                                        ParamType
-                                                                            .String,
+                                                                      height:
+                                                                          50.0,
+                                                                      child:
+                                                                          SpinKitRipple(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            50.0,
                                                                       ),
-                                                                    }.withoutNulls,
+                                                                    ),
                                                                   );
-                                                                },
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          1.0,
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            25.0,
-                                                                        height:
-                                                                            25.0,
-                                                                        clipBehavior:
-                                                                            Clip.antiAlias,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          shape:
-                                                                              BoxShape.circle,
+                                                                }
+                                                                List<UsersRecord>
+                                                                    rowUsersRecordList =
+                                                                    snapshot
+                                                                        .data!;
+                                                                final rowUsersRecord =
+                                                                    rowUsersRecordList
+                                                                            .isNotEmpty
+                                                                        ? rowUsersRecordList
+                                                                            .first
+                                                                        : null;
+                                                                return InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    if (widget
+                                                                        .post!
+                                                                        .post
+                                                                        .isStealth) {
+                                                                      return;
+                                                                    }
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'Profile',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'userID':
+                                                                            serializeParam(
+                                                                          rowUsersRecord
+                                                                              ?.uid,
+                                                                          ParamType
+                                                                              .String,
                                                                         ),
-                                                                        child: Image
-                                                                            .network(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            rowUsersRecord?.photoUrl,
-                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
-                                                                          ),
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Flexible(
-                                                                      child:
-                                                                          Padding(
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  },
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            2.0,
+                                                                            1.0,
                                                                             0.0,
-                                                                            15.0,
+                                                                            5.0,
                                                                             0.0),
                                                                         child:
-                                                                            Text(
-                                                                          '@${valueOrDefault<String>(
-                                                                            rowUsersRecord?.displayName,
-                                                                            'Anonymous',
-                                                                          )}',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Outfit',
-                                                                                color: Colors.white,
-                                                                                fontSize: 15.0,
-                                                                                fontWeight: FontWeight.w500,
-                                                                              ),
+                                                                            Container(
+                                                                          width:
+                                                                              25.0,
+                                                                          height:
+                                                                              25.0,
+                                                                          clipBehavior:
+                                                                              Clip.antiAlias,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            shape:
+                                                                                BoxShape.circle,
+                                                                          ),
+                                                                          child:
+                                                                              Image.network(
+                                                                            valueOrDefault<String>(
+                                                                              rowUsersRecord?.photoUrl,
+                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
+                                                                            ),
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              -1.00, -1.00),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    2.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Container(
-                                                          width: 32.0,
-                                                          height: 32.0,
-                                                          constraints:
-                                                              BoxConstraints(
-                                                            minWidth: 40.0,
-                                                            maxWidth: 90.0,
-                                                          ),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Color(
-                                                                0x3F000000),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        30.0),
-                                                          ),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
-                                                                  '0',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      color: valueOrDefault<
-                                                                          Color>(
-                                                                        () {
-                                                                          if (widget.post?.post?.netVotes ==
-                                                                              0) {
-                                                                            return Colors.white;
-                                                                          } else if (widget.post!.post.netVotes >
-                                                                              0) {
-                                                                            return Color(0xFF21E744);
-                                                                          } else {
-                                                                            return Color(0xFFE5200B);
-                                                                          }
-                                                                        }(),
-                                                                        Colors
-                                                                            .white,
+                                                                      Flexible(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              2.0,
+                                                                              0.0,
+                                                                              15.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            '@${valueOrDefault<String>(
+                                                                              rowUsersRecord?.displayName,
+                                                                              'Anonymous',
+                                                                            )}',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Outfit',
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 15.0,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                ),
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                      fontSize:
-                                                                          15.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                    ),
-                                                              ),
-                                                            ],
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Stack(
-                                                  children: [
-                                                    if (responsiveVisibility(
-                                                      context: context,
-                                                      tabletLandscape: false,
-                                                      desktop: false,
-                                                    ))
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    2.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          widget.post!.post
-                                                              .caption,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                              ),
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                -1.00, -1.00),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      2.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Container(
+                                                            width: 32.0,
+                                                            height: 32.0,
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minWidth: 40.0,
+                                                              maxWidth: 90.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Color(
+                                                                  0x3F000000),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30.0),
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
+                                                                    '0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        color: valueOrDefault<
+                                                                            Color>(
+                                                                          () {
+                                                                            if (widget.post?.post?.netVotes ==
+                                                                                0) {
+                                                                              return Colors.white;
+                                                                            } else if (widget.post!.post.netVotes >
+                                                                                0) {
+                                                                              return Color(0xFF21E744);
+                                                                            } else {
+                                                                              return Color(0xFFE5200B);
+                                                                            }
+                                                                          }(),
+                                                                          Colors
+                                                                              .white,
+                                                                        ),
+                                                                        fontSize:
+                                                                            15.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
-                                                    if (responsiveVisibility(
-                                                      context: context,
-                                                      phone: false,
-                                                      tablet: false,
-                                                    ))
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    2.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          widget.post!.post
-                                                              .caption,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 15.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                              ),
+                                                    ],
+                                                  ),
+                                                  Stack(
+                                                    children: [
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        tabletLandscape: false,
+                                                        desktop: false,
+                                                      ))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      8.0,
+                                                                      2.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            widget.post!.post
+                                                                .caption
+                                                                .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        50),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                  ],
-                                                ),
-                                              ],
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                      ))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      8.0,
+                                                                      2.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            widget.post!.post
+                                                                .caption
+                                                                .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        50),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      15.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 10.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                tabletLandscape: false,
-                                                desktop: false,
-                                              ))
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 20.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 40.0,
-                                                    icon: Icon(
-                                                      Icons.comment_rounded,
-                                                      color: Colors.white,
-                                                      size: 30.0,
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 20.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                if (responsiveVisibility(
+                                                  context: context,
+                                                  tabletLandscape: false,
+                                                  desktop: false,
+                                                ))
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(5.0, 0.0,
+                                                                5.0, 0.0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 20.0,
+                                                      borderWidth: 1.0,
+                                                      buttonSize: 40.0,
+                                                      icon: Icon(
+                                                        Icons.comment_rounded,
+                                                        color: Colors.white,
+                                                        size: 30.0,
+                                                      ),
+                                                      onPressed: () {
+                                                        print(
+                                                            'IconButton pressed ...');
+                                                      },
                                                     ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
                                                   ),
-                                                ),
-                                              FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 20.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.thumb_up,
-                                                  color: functions.stringInArr(
-                                                          currentUserUid,
-                                                          widget.post!.post
-                                                              .upVoters
-                                                              .toList())
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary
-                                                      : Colors.white,
-                                                  size: 30.0,
-                                                ),
-                                                onPressed: () async {
-                                                  final firestoreBatch =
-                                                      FirebaseFirestore.instance
-                                                          .batch();
-                                                  try {
-                                                    if (functions.stringInArr(
-                                                        currentUserUid,
-                                                        widget
-                                                            .post!.post.upVoters
-                                                            .toList())) {
-                                                      firestoreBatch.update(
-                                                          widget
-                                                              .post!.reference,
-                                                          createPostsRecordData(
-                                                            post:
-                                                                createPostStruct(
-                                                              fieldValues: {
-                                                                'upVoters':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  currentUserUid
-                                                                ]),
-                                                                'netVotes':
-                                                                    FieldValue
-                                                                        .increment(
-                                                                            -(1)),
-                                                              },
-                                                              clearUnsetFields:
-                                                                  false,
-                                                            ),
-                                                          ));
-                                                      return;
-                                                    } else {
-                                                      if (functions.stringInArr(
-                                                          currentUserUid,
-                                                          widget.post!.post
-                                                              .downVoters
-                                                              .toList())) {
-                                                        firestoreBatch.update(
-                                                            widget.post!
-                                                                .reference,
-                                                            createPostsRecordData(
-                                                              post:
-                                                                  createPostStruct(
-                                                                fieldValues: {
-                                                                  'upVoters':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    currentUserUid
-                                                                  ]),
-                                                                  'netVotes':
-                                                                      FieldValue
-                                                                          .increment(
-                                                                              2),
-                                                                  'downVoters':
-                                                                      FieldValue
-                                                                          .arrayRemove([
-                                                                    currentUserUid
-                                                                  ]),
-                                                                },
-                                                                clearUnsetFields:
-                                                                    false,
-                                                              ),
-                                                            ));
-                                                      } else {
-                                                        firestoreBatch.update(
-                                                            widget.post!
-                                                                .reference,
-                                                            createPostsRecordData(
-                                                              post:
-                                                                  createPostStruct(
-                                                                fieldValues: {
-                                                                  'upVoters':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    currentUserUid
-                                                                  ]),
-                                                                  'netVotes':
-                                                                      FieldValue
-                                                                          .increment(
-                                                                              1),
-                                                                },
-                                                                clearUnsetFields:
-                                                                    false,
-                                                              ),
-                                                            ));
-                                                      }
-
-                                                      return;
-                                                    }
-                                                  } finally {
-                                                    await firestoreBatch
-                                                        .commit();
-                                                  }
-                                                },
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
-                                                child: FlutterFlowIconButton(
+                                                FlutterFlowIconButton(
                                                   borderColor:
                                                       Colors.transparent,
                                                   borderRadius: 20.0,
                                                   borderWidth: 1.0,
                                                   buttonSize: 40.0,
                                                   icon: Icon(
-                                                    Icons.thumb_down,
+                                                    Icons.thumb_up,
                                                     color: functions
                                                             .stringInArr(
                                                                 currentUserUid,
                                                                 widget
                                                                     .post!
                                                                     .post
-                                                                    .downVoters
+                                                                    .upVoters
                                                                     .toList())
                                                         ? FlutterFlowTheme.of(
                                                                 context)
@@ -1438,7 +1303,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                       if (functions.stringInArr(
                                                           currentUserUid,
                                                           widget.post!.post
-                                                              .downVoters
+                                                              .upVoters
                                                               .toList())) {
                                                         firestoreBatch.update(
                                                             widget.post!
@@ -1447,21 +1312,19 @@ class _PostWidgetState extends State<PostWidget> {
                                                               post:
                                                                   createPostStruct(
                                                                 fieldValues: {
-                                                                  'netVotes':
-                                                                      FieldValue
-                                                                          .increment(
-                                                                              1),
-                                                                  'downVoters':
+                                                                  'upVoters':
                                                                       FieldValue
                                                                           .arrayRemove([
                                                                     currentUserUid
                                                                   ]),
+                                                                  'netVotes': FieldValue
+                                                                      .increment(
+                                                                          -(1)),
                                                                 },
                                                                 clearUnsetFields:
                                                                     false,
                                                               ),
                                                             ));
-                                                        return;
                                                       } else {
                                                         if (functions
                                                             .stringInArr(
@@ -1469,7 +1332,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                 widget
                                                                     .post!
                                                                     .post
-                                                                    .upVoters
+                                                                    .downVoters
                                                                     .toList())) {
                                                           firestoreBatch.update(
                                                               widget.post!
@@ -1480,15 +1343,15 @@ class _PostWidgetState extends State<PostWidget> {
                                                                   fieldValues: {
                                                                     'upVoters':
                                                                         FieldValue
-                                                                            .arrayRemove([
+                                                                            .arrayUnion([
                                                                       currentUserUid
                                                                     ]),
                                                                     'netVotes':
-                                                                        FieldValue.increment(
-                                                                            -(2)),
+                                                                        FieldValue
+                                                                            .increment(2),
                                                                     'downVoters':
                                                                         FieldValue
-                                                                            .arrayUnion([
+                                                                            .arrayRemove([
                                                                       currentUserUid
                                                                     ]),
                                                                   },
@@ -1504,14 +1367,14 @@ class _PostWidgetState extends State<PostWidget> {
                                                                 post:
                                                                     createPostStruct(
                                                                   fieldValues: {
-                                                                    'netVotes':
-                                                                        FieldValue.increment(
-                                                                            -(1)),
-                                                                    'downVoters':
+                                                                    'upVoters':
                                                                         FieldValue
                                                                             .arrayUnion([
                                                                       currentUserUid
                                                                     ]),
+                                                                    'netVotes':
+                                                                        FieldValue
+                                                                            .increment(1),
                                                                   },
                                                                   clearUnsetFields:
                                                                       false,
@@ -1527,17 +1390,137 @@ class _PostWidgetState extends State<PostWidget> {
                                                     }
                                                   },
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 0.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.thumb_down,
+                                                      color: functions
+                                                              .stringInArr(
+                                                                  currentUserUid,
+                                                                  widget
+                                                                      .post!
+                                                                      .post
+                                                                      .downVoters
+                                                                      .toList())
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                          : Colors.white,
+                                                      size: 30.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      final firestoreBatch =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .batch();
+                                                      try {
+                                                        if (functions
+                                                            .stringInArr(
+                                                                currentUserUid,
+                                                                widget
+                                                                    .post!
+                                                                    .post
+                                                                    .downVoters
+                                                                    .toList())) {
+                                                          firestoreBatch.update(
+                                                              widget.post!
+                                                                  .reference,
+                                                              createPostsRecordData(
+                                                                post:
+                                                                    createPostStruct(
+                                                                  fieldValues: {
+                                                                    'netVotes':
+                                                                        FieldValue
+                                                                            .increment(1),
+                                                                    'downVoters':
+                                                                        FieldValue
+                                                                            .arrayRemove([
+                                                                      currentUserUid
+                                                                    ]),
+                                                                  },
+                                                                  clearUnsetFields:
+                                                                      false,
+                                                                ),
+                                                              ));
+                                                        } else {
+                                                          if (functions.stringInArr(
+                                                              currentUserUid,
+                                                              widget.post!.post
+                                                                  .upVoters
+                                                                  .toList())) {
+                                                            firestoreBatch
+                                                                .update(
+                                                                    widget.post!
+                                                                        .reference,
+                                                                    createPostsRecordData(
+                                                                      post:
+                                                                          createPostStruct(
+                                                                        fieldValues: {
+                                                                          'upVoters':
+                                                                              FieldValue.arrayRemove([
+                                                                            currentUserUid
+                                                                          ]),
+                                                                          'netVotes':
+                                                                              FieldValue.increment(-(2)),
+                                                                          'downVoters':
+                                                                              FieldValue.arrayUnion([
+                                                                            currentUserUid
+                                                                          ]),
+                                                                        },
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                    ));
+                                                          } else {
+                                                            firestoreBatch
+                                                                .update(
+                                                                    widget.post!
+                                                                        .reference,
+                                                                    createPostsRecordData(
+                                                                      post:
+                                                                          createPostStruct(
+                                                                        fieldValues: {
+                                                                          'netVotes':
+                                                                              FieldValue.increment(-(1)),
+                                                                          'downVoters':
+                                                                              FieldValue.arrayUnion([
+                                                                            currentUserUid
+                                                                          ]),
+                                                                        },
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                    ));
+                                                          }
+
+                                                          return;
+                                                        }
+                                                      } finally {
+                                                        await firestoreBatch
+                                                            .commit();
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -1564,8 +1547,10 @@ class _PostWidgetState extends State<PostWidget> {
                             child: StreamBuilder<List<CommentsRecord>>(
                               stream: queryCommentsRecord(
                                 queryBuilder: (commentsRecord) =>
-                                    commentsRecord.where('comment.idReplyTo',
-                                        isEqualTo: widget.post?.post?.id),
+                                    commentsRecord.where(
+                                  'comment.idReplyTo',
+                                  isEqualTo: widget.post?.post?.id,
+                                ),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -1576,7 +1561,7 @@ class _PostWidgetState extends State<PostWidget> {
                                       height: 50.0,
                                       child: SpinKitRipple(
                                         color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                            .secondaryText,
                                         size: 50.0,
                                       ),
                                     ),
@@ -1919,9 +1904,11 @@ class _PostWidgetState extends State<PostWidget> {
                                         StreamBuilder<List<UsersRecord>>(
                                           stream: queryUsersRecord(
                                             queryBuilder: (usersRecord) =>
-                                                usersRecord.where('uid',
-                                                    isEqualTo: widget
-                                                        .post?.post?.author),
+                                                usersRecord.where(
+                                              'uid',
+                                              isEqualTo:
+                                                  widget.post?.post?.author,
+                                            ),
                                             singleRecord: true,
                                           ),
                                           builder: (context, snapshot) {
@@ -1934,7 +1921,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                   child: SpinKitRipple(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primary,
+                                                        .secondaryText,
                                                     size: 50.0,
                                                   ),
                                                 ),
@@ -1970,10 +1957,11 @@ class _PostWidgetState extends State<PostWidget> {
                                                                 createCommentStruct(
                                                                   isPostComment:
                                                                       true,
-                                                                  idReplyTo: widget
-                                                                      .post
-                                                                      ?.post
-                                                                      ?.author,
+                                                                  idReplyTo:
+                                                                      widget
+                                                                          .post
+                                                                          ?.post
+                                                                          ?.id,
                                                                   text: _model
                                                                       .textController
                                                                       .text,
@@ -2075,33 +2063,60 @@ class _PostWidgetState extends State<PostWidget> {
                                                       buttonUsersRecord!
                                                           .reference,
                                                       {
-                                                        'notifications':
-                                                            FieldValue
-                                                                .arrayUnion([
-                                                          getNotificationFirestoreData(
-                                                            createNotificationStruct(
-                                                              category: 1,
-                                                              itemID: widget
-                                                                  .post
-                                                                  ?.post
-                                                                  ?.id,
-                                                              time:
-                                                                  getCurrentTimestamp,
-                                                              userID:
-                                                                  currentUserUid,
-                                                              isMarkedAsRead:
-                                                                  false,
-                                                              notifID:
-                                                                  'NP${buttonUsersRecord?.notifications?.length?.toString()}',
-                                                              iDUserFrom:
-                                                                  currentUserUid,
-                                                              clearUnsetFields:
-                                                                  false,
-                                                            ),
-                                                            true,
-                                                          )
-                                                        ]),
+                                                        ...mapToFirestore(
+                                                          {
+                                                            'notifications':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              getNotificationFirestoreData(
+                                                                createNotificationStruct(
+                                                                  category: 1,
+                                                                  itemID: widget
+                                                                      .post
+                                                                      ?.post
+                                                                      ?.id,
+                                                                  time:
+                                                                      getCurrentTimestamp,
+                                                                  userID:
+                                                                      currentUserUid,
+                                                                  isMarkedAsRead:
+                                                                      false,
+                                                                  notifID:
+                                                                      'NP${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                  iDUserFrom:
+                                                                      currentUserUid,
+                                                                  clearUnsetFields:
+                                                                      false,
+                                                                ),
+                                                                true,
+                                                              )
+                                                            ]),
+                                                          },
+                                                        ),
                                                       });
+                                                  triggerPushNotification(
+                                                    notificationTitle:
+                                                        '@${currentUserDisplayName}has commented on your post',
+                                                    notificationText: _model
+                                                        .textController.text,
+                                                    notificationImageUrl:
+                                                        _model.uploadedFileUrl !=
+                                                                    null &&
+                                                                _model.uploadedFileUrl !=
+                                                                    ''
+                                                            ? _model
+                                                                .uploadedFileUrl
+                                                            : 'null',
+                                                    userRefs: [
+                                                      buttonUsersRecord!
+                                                          .reference
+                                                    ],
+                                                    initialPageName:
+                                                        'singlePost',
+                                                    parameterData: {
+                                                      'posts': widget.post,
+                                                    },
+                                                  );
                                                   return;
                                                 } finally {
                                                   await firestoreBatch.commit();

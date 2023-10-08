@@ -15,6 +15,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
+import 'create_post_widget.dart' show CreatePostWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +27,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CreatePostModel extends FlutterFlowModel {
+class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   ///  Local state fields for this page.
 
   List<ImageHashStruct> images = [];
   void addToImages(ImageHashStruct item) => images.add(item);
   void removeFromImages(ImageHashStruct item) => images.remove(item);
   void removeAtIndexFromImages(int index) => images.removeAt(index);
+  void insertAtIndexInImages(int index, ImageHashStruct item) =>
+      images.insert(index, item);
   void updateImagesAtIndex(int index, Function(ImageHashStruct) updateFn) =>
       images[index] = updateFn(images[index]);
 
@@ -47,10 +51,14 @@ class CreatePostModel extends FlutterFlowModel {
   void addToOptions(String item) => options.add(item);
   void removeFromOptions(String item) => options.remove(item);
   void removeAtIndexFromOptions(int index) => options.removeAt(index);
+  void insertAtIndexInOptions(int index, String item) =>
+      options.insert(index, item);
   void updateOptionsAtIndex(int index, Function(String) updateFn) =>
       options[index] = updateFn(options[index]);
 
   bool isSpoiler = true;
+
+  String postID = 'a';
 
   ///  State fields for stateful widgets in this page.
 
@@ -70,12 +78,6 @@ class CreatePostModel extends FlutterFlowModel {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  // Stores action output result for [Custom Action - chatGPT] action in Button widget.
-  String? isPoliticalGPT;
-  // Stores action output result for [Custom Action - chatGPT] action in Button widget.
-  String? isBiasGPT;
-  // Stores action output result for [Custom Action - chatGPT] action in Button widget.
-  String? isGenreGPT;
   // Stores action output result for [Custom Action - chatGPT] action in Button widget.
   String? threadSummary;
   // State field(s) for TextField widget.

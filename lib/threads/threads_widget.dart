@@ -87,11 +87,15 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'Threads',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -237,7 +241,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                 child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primary,
+                                                      .secondaryText,
                                                   size: 50.0,
                                                 ),
                                               ),
@@ -262,7 +266,11 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                   key: Key(
                                                       'Key5kl_${columnIndex}_of_${columnThreadRecordList.length}'),
                                                   thread: columnThreadRecord,
-                                                  isComment: false,
+                                                  isComment: columnThreadRecord
+                                                          .thread
+                                                          .comments
+                                                          .length >
+                                                      2,
                                                   isCommentAllowed:
                                                       _model.isCommentAllowed,
                                                 ).animateOnPageLoad(animationsMap[
@@ -462,7 +470,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                       height: 50.0,
                                       child: SpinKitRipple(
                                         color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                            .secondaryText,
                                         size: 50.0,
                                       ),
                                     ),
@@ -485,6 +493,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                             'Key1c5_${columnIndex}_of_${columnThreadRecordList.length}'),
                                         thread: columnThreadRecord,
                                         isComment: false,
+                                        isCommentAllowed: false,
                                       ).animateOnPageLoad(animationsMap[
                                           'threadOnPageLoadAnimation2']!),
                                     );

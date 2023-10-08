@@ -81,14 +81,10 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
       }
 
       if (_model.isVerifiedBio!) {
+        FFAppState().paramholder = 'pintosettapp';
+
         context.goNamed(
           'settings',
-          queryParameters: {
-            'settingsKey': serializeParam(
-              true,
-              ParamType.bool,
-            ),
-          }.withoutNulls,
           extra: <String, dynamic>{
             kTransitionInfoKey: TransitionInfo(
               hasTransition: true,
@@ -121,11 +117,15 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'BiometricTest',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

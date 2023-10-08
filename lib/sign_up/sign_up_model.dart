@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'sign_up_widget.dart' show SignUpWidget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class SignUpModel extends FlutterFlowModel {
+class SignUpModel extends FlutterFlowModel<SignUpWidget> {
   ///  Local state fields for this page.
 
   bool isUsernameValid = true;
@@ -30,6 +31,8 @@ class SignUpModel extends FlutterFlowModel {
   // State field(s) for username widget.
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
+  // Algolia Search Results from action on username
+  List<UsersRecord>? algoliaSearchResults = [];
   // State field(s) for emailAddress widget.
   TextEditingController? emailAddressController;
   String? Function(BuildContext, String?)? emailAddressControllerValidator;

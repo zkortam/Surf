@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class Surf2FirebaseUser extends BaseAuthUser {
-  Surf2FirebaseUser(this.user);
+class SurfFirebaseUser extends BaseAuthUser {
+  SurfFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -47,17 +47,17 @@ class Surf2FirebaseUser extends BaseAuthUser {
 
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
-  static BaseAuthUser fromFirebaseUser(User? user) => Surf2FirebaseUser(user);
+  static BaseAuthUser fromFirebaseUser(User? user) => SurfFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> surf2FirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> surfFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = Surf2FirebaseUser(user);
+        currentUser = SurfFirebaseUser(user);
         return currentUser!;
       },
     );

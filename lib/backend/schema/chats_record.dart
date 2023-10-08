@@ -61,6 +61,11 @@ class ChatsRecord extends FirestoreRecord {
   String get userBId => _userBId ?? '';
   bool hasUserBId() => _userBId != null;
 
+  // "last_message_sender_id" field.
+  String? _lastMessageSenderId;
+  String get lastMessageSenderId => _lastMessageSenderId ?? '';
+  bool hasLastMessageSenderId() => _lastMessageSenderId != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _userA = snapshotData['user_a'] as DocumentReference?;
@@ -71,6 +76,7 @@ class ChatsRecord extends FirestoreRecord {
     _messageSeen = snapshotData['message_seen'] as bool?;
     _userAId = snapshotData['user_a_id'] as String?;
     _userBId = snapshotData['user_b_id'] as String?;
+    _lastMessageSenderId = snapshotData['last_message_sender_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createChatsRecordData({
   bool? messageSeen,
   String? userAId,
   String? userBId,
+  String? lastMessageSenderId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createChatsRecordData({
       'message_seen': messageSeen,
       'user_a_id': userAId,
       'user_b_id': userBId,
+      'last_message_sender_id': lastMessageSenderId,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e1?.image == e2?.image &&
         e1?.messageSeen == e2?.messageSeen &&
         e1?.userAId == e2?.userAId &&
-        e1?.userBId == e2?.userBId;
+        e1?.userBId == e2?.userBId &&
+        e1?.lastMessageSenderId == e2?.lastMessageSenderId;
   }
 
   @override
@@ -160,7 +169,8 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.image,
         e?.messageSeen,
         e?.userAId,
-        e?.userBId
+        e?.userBId,
+        e?.lastMessageSenderId
       ]);
 
   @override

@@ -69,11 +69,15 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'Notifications',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -431,8 +435,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             await currentUserReference!.update({
-                                              'notifications':
-                                                  FieldValue.delete(),
+                                              ...mapToFirestore(
+                                                {
+                                                  'notifications':
+                                                      FieldValue.delete(),
+                                                },
+                                              ),
                                             });
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
@@ -442,10 +450,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               context: context,
                                               builder: (context) {
                                                 return GestureDetector(
-                                                  onTap: () => FocusScope.of(
-                                                          context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode),
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
                                                   child: Padding(
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
@@ -457,7 +469,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   ),
                                                 );
                                               },
-                                            ).then((value) => setState(() {}));
+                                            ).then(
+                                                (value) => safeSetState(() {}));
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(

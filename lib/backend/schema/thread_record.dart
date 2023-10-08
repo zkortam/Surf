@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/serialization_util.dart';
 import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
@@ -50,34 +51,7 @@ class ThreadRecord extends FirestoreRecord {
   static ThreadRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       ThreadRecord.getDocumentFromData(
         {
-          'thread': createThreadStruct(
-            timestamp: safeGet(
-              () => DateTime.fromMillisecondsSinceEpoch(
-                  (snapshot.data['thread'] ?? {})['timestamp']),
-            ),
-            author: (snapshot.data['thread'] ?? {})['author'],
-            title: (snapshot.data['thread'] ?? {})['title'],
-            text: (snapshot.data['thread'] ?? {})['text'],
-            netVotes: (snapshot.data['thread'] ?? {})['netVotes']?.round(),
-            id: (snapshot.data['thread'] ?? {})['id'],
-            poll: createPollStruct(
-              totalVotes:
-                  ((snapshot.data['thread'] ?? {})['poll'] ?? {})['totalVotes']
-                      ?.round(),
-              create: true,
-              clearUnsetFields: false,
-            ),
-            isPoll: (snapshot.data['thread'] ?? {})['isPoll'],
-            isPolitical: (snapshot.data['thread'] ?? {})['isPolitical'],
-            politicalPosition:
-                (snapshot.data['thread'] ?? {})['politicalPosition']?.round(),
-            genre: (snapshot.data['thread'] ?? {})['genre']?.round(),
-            link: (snapshot.data['thread'] ?? {})['link'],
-            summary: (snapshot.data['thread'] ?? {})['summary'],
-            isStealth: (snapshot.data['thread'] ?? {})['isStealth'],
-            create: true,
-            clearUnsetFields: false,
-          ).toMap(),
+          'thread': ThreadStruct.fromAlgoliaData(snapshot.data['thread'] ?? {}),
         },
         ThreadRecord.collection.doc(snapshot.objectID),
       );

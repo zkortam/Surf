@@ -47,11 +47,15 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'Search',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -199,7 +203,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   '_model.textController1',
                                                   Duration(milliseconds: 2000),
                                                   () async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .algoliaSearchResults1 =
                                                         null);
                                                     await UsersRecord.search(
@@ -264,7 +268,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   '_model.textController2',
                                                   Duration(milliseconds: 2000),
                                                   () async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .algoliaSearchResults2 =
                                                         null);
                                                     await PostsRecord.search(
@@ -329,7 +333,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   '_model.textController3',
                                                   Duration(milliseconds: 2000),
                                                   () async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .algoliaSearchResults3 =
                                                         null);
                                                     await ThreadRecord.search(
@@ -584,7 +588,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
+                                                              .secondaryText,
                                                       size: 50.0,
                                                     ),
                                                   ),
@@ -642,7 +646,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .secondaryText,
                                                         size: 50.0,
                                                       ),
                                                     ),
@@ -700,7 +704,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
+                                                              .secondaryText,
                                                       size: 50.0,
                                                     ),
                                                   ),

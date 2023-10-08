@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/view_image_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -49,6 +50,8 @@ class _CommentWidgetState extends State<CommentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
@@ -83,10 +86,11 @@ class _CommentWidgetState extends State<CommentWidget> {
                       child: StreamBuilder<List<UsersRecord>>(
                         stream: queryUsersRecord(
                           queryBuilder: (usersRecord) => usersRecord.where(
-                              'uid',
-                              isEqualTo: widget.comment!.isStealth
-                                  ? 'anon'
-                                  : widget.comment?.authorid),
+                            'uid',
+                            isEqualTo: widget.comment!.isStealth
+                                ? 'anon'
+                                : widget.comment?.authorid,
+                          ),
                           singleRecord: true,
                         ),
                         builder: (context, snapshot) {
@@ -97,7 +101,8 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 width: 50.0,
                                 height: 50.0,
                                 child: SpinKitRipple(
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   size: 50.0,
                                 ),
                               ),
@@ -229,9 +234,10 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 child: StreamBuilder<List<UsersRecord>>(
                                   stream: queryUsersRecord(
                                     queryBuilder: (usersRecord) =>
-                                        usersRecord.where('uid',
-                                            isEqualTo:
-                                                widget.comment?.idReplyTo),
+                                        usersRecord.where(
+                                      'uid',
+                                      isEqualTo: widget.comment?.idReplyTo,
+                                    ),
                                     singleRecord: true,
                                   ),
                                   builder: (context, snapshot) {
@@ -243,7 +249,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                                           height: 50.0,
                                           child: SpinKitRipple(
                                             color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                                .secondaryText,
                                             size: 50.0,
                                           ),
                                         ),
@@ -336,10 +342,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
                       child: SelectionArea(
                           child: AutoSizeText(
-                        valueOrDefault<String>(
-                          widget.comment?.text,
-                          'text',
-                        ).maybeHandleOverflow(maxChars: 400),
+                        widget.comment!.text.maybeHandleOverflow(maxChars: 400),
                         maxLines: 5,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
@@ -364,18 +367,40 @@ class _CommentWidgetState extends State<CommentWidget> {
                     child: Visibility(
                       visible: widget.comment?.imageHash?.image != null &&
                           widget.comment?.imageHash?.image != '',
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: OctoImage(
-                          placeholderBuilder: OctoPlaceholder.blurHash(
-                            widget.comment!.imageHash.blurHash,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: ViewImageWidget(
+                                  image: widget.comment!.imageHash.image,
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: OctoImage(
+                            placeholderBuilder: OctoPlaceholder.blurHash(
+                              widget.comment!.imageHash.blurHash,
+                            ),
+                            image: NetworkImage(
+                              widget.comment!.imageHash.image,
+                            ),
+                            width: 300.0,
+                            height: 200.0,
+                            fit: BoxFit.cover,
                           ),
-                          image: NetworkImage(
-                            widget.comment!.imageHash.image,
-                          ),
-                          width: 300.0,
-                          height: 200.0,
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ),

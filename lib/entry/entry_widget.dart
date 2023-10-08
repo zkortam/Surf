@@ -84,11 +84,15 @@ class _EntryWidgetState extends State<EntryWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'entry',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -599,7 +603,27 @@ class _EntryWidgetState extends State<EntryWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          context.pushNamed('signUp');
+                                          if (_model.emailAddressController
+                                                          .text ==
+                                                      null ||
+                                                  _model.emailAddressController
+                                                          .text ==
+                                                      ''
+                                              ? true
+                                              : false) {
+                                            context.pushNamed('signUp');
+                                          } else {
+                                            context.pushNamed(
+                                              'signUp',
+                                              queryParameters: {
+                                                'email': serializeParam(
+                                                  _model.emailAddressController
+                                                      .text,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          }
                                         },
                                         child: RichText(
                                           textScaleFactor:

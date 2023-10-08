@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,13 @@ class _FollowingWidgetState extends State<FollowingWidget> {
     super.initState();
     _model = createModel(context, () => FollowingModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().paramholder != 'pintosettapp') {
+        context.pushNamed('enterPin');
+      }
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -46,10 +54,14 @@ class _FollowingWidgetState extends State<FollowingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<List<UsersRecord>>(
       stream: queryUsersRecord(
-        queryBuilder: (usersRecord) =>
-            usersRecord.where('uid', isEqualTo: widget.uid),
+        queryBuilder: (usersRecord) => usersRecord.where(
+          'uid',
+          isEqualTo: widget.uid,
+        ),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
@@ -62,7 +74,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                 width: 50.0,
                 height: 50.0,
                 child: SpinKitRipple(
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                   size: 50.0,
                 ),
               ),
@@ -81,8 +93,9 @@ class _FollowingWidgetState extends State<FollowingWidget> {
             title: 'following',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () =>
-                  FocusScope.of(context).requestFocus(_model.unfocusNode),
+              onTap: () => _model.unfocusNode.canRequestFocus
+                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                  : FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -247,7 +260,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .secondaryText,
                                                         size: 50.0,
                                                       ),
                                                     ),

@@ -39,7 +39,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await _model.listViewController?.animateTo(
-        0,
+        _model.listViewController!.position.maxScrollExtent,
         duration: Duration(milliseconds: 100),
         curve: Curves.ease,
       );
@@ -57,11 +57,15 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'scrollPost',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -80,9 +84,18 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                           child: StreamBuilder<List<PostsRecord>>(
                             stream: queryPostsRecord(
                               queryBuilder: (postsRecord) => postsRecord
-                                  .where('post.author', isEqualTo: widget.uid)
-                                  .where('post.timestamp',
-                                      isLessThan: widget.post?.post?.timestamp)
+                                  .where(
+                                    'post.author',
+                                    isEqualTo: widget.uid,
+                                  )
+                                  .where(
+                                    'post.timestamp',
+                                    isLessThan: widget.post?.post?.timestamp,
+                                  )
+                                  .where(
+                                    'post.isStealth',
+                                    isEqualTo: false,
+                                  )
                                   .orderBy('post.timestamp'),
                             ),
                             builder: (context, snapshot) {
@@ -93,8 +106,8 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                     width: 50.0,
                                     height: 50.0,
                                     child: SpinKitRipple(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       size: 50.0,
                                     ),
                                   ),
@@ -113,6 +126,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                     key: Key(
                                         'Keyw4v_${columnIndex}_of_${columnPostsRecordList.length}'),
                                     post: columnPostsRecord,
+                                    isComment: false,
                                   );
                                 }).divide(SizedBox(height: 10.0)),
                               );
@@ -144,10 +158,18 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                           child: StreamBuilder<List<PostsRecord>>(
                             stream: queryPostsRecord(
                               queryBuilder: (postsRecord) => postsRecord
-                                  .where('post.author', isEqualTo: widget.uid)
-                                  .where('post.timestamp',
-                                      isGreaterThan:
-                                          widget.post?.post?.timestamp)
+                                  .where(
+                                    'post.author',
+                                    isEqualTo: widget.uid,
+                                  )
+                                  .where(
+                                    'post.timestamp',
+                                    isGreaterThan: widget.post?.post?.timestamp,
+                                  )
+                                  .where(
+                                    'post.isStealth',
+                                    isEqualTo: false,
+                                  )
                                   .orderBy('post.timestamp', descending: true),
                             ),
                             builder: (context, snapshot) {
@@ -158,8 +180,8 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                     width: 50.0,
                                     height: 50.0,
                                     child: SpinKitRipple(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       size: 50.0,
                                     ),
                                   ),
@@ -250,8 +272,10 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                       StreamBuilder<List<UsersRecord>>(
                                         stream: queryUsersRecord(
                                           queryBuilder: (usersRecord) =>
-                                              usersRecord.where('uid',
-                                                  isEqualTo: widget.uid),
+                                              usersRecord.where(
+                                            'uid',
+                                            isEqualTo: widget.uid,
+                                          ),
                                           singleRecord: true,
                                         ),
                                         builder: (context, snapshot) {
@@ -264,7 +288,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                                 child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primary,
+                                                      .secondaryText,
                                                   size: 50.0,
                                                 ),
                                               ),

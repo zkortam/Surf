@@ -1,4 +1,4 @@
-package com.surf.app
+package com.surfsocial.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

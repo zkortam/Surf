@@ -42,6 +42,8 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 400.0,
       height: 275.0,

@@ -49,6 +49,8 @@ class _PcommentWidgetState extends State<PcommentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
@@ -70,10 +72,12 @@ class _PcommentWidgetState extends State<PcommentWidget> {
             children: [
               StreamBuilder<List<UsersRecord>>(
                 stream: queryUsersRecord(
-                  queryBuilder: (usersRecord) => usersRecord.where('uid',
-                      isEqualTo: widget.comment!.isStealth
-                          ? 'anon'
-                          : widget.comment?.authorid),
+                  queryBuilder: (usersRecord) => usersRecord.where(
+                    'uid',
+                    isEqualTo: widget.comment!.isStealth
+                        ? 'anon'
+                        : widget.comment?.authorid,
+                  ),
                   singleRecord: true,
                 ),
                 builder: (context, snapshot) {
@@ -84,7 +88,7 @@ class _PcommentWidgetState extends State<PcommentWidget> {
                         width: 50.0,
                         height: 50.0,
                         child: SpinKitRipple(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).secondaryText,
                           size: 50.0,
                         ),
                       ),
@@ -210,10 +214,8 @@ class _PcommentWidgetState extends State<PcommentWidget> {
                             EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
                         child: SelectionArea(
                             child: AutoSizeText(
-                          valueOrDefault<String>(
-                            widget.comment?.text,
-                            'text',
-                          ).maybeHandleOverflow(maxChars: 400),
+                          widget.comment!.text
+                              .maybeHandleOverflow(maxChars: 400),
                           maxLines: 5,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(

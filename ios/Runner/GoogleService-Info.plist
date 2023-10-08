@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>577071998373-e8g5p0c234jrntv3qphr15pnodm1ktd9.apps.googleusercontent.com</string>
+	<string>577071998373-1s364od4p35m3497nk1tfm7h035gsr6h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.577071998373-e8g5p0c234jrntv3qphr15pnodm1ktd9</string>
+	<string>com.googleusercontent.apps.577071998373-1s364od4p35m3497nk1tfm7h035gsr6h</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>577071998373-ik5cfodjkvt41bhppudmnpickq3ad6ru.apps.googleusercontent.com</string>
+	<string>577071998373-2auahf10iitvv2j8rt6rauoqfeak8c29.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBvvCUXnPk7G3Lacphdnfu49CBk5aQGlQM</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.surf.app</string>
+	<string>com.surfsocial.app</string>
 	<key>PROJECT_ID</key>
 	<string>surfappofficial</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:577071998373:ios:ba0704dc9e21d0995f344c</string>
+	<string>1:577071998373:ios:3f526be12a3b525c5f344c</string>
 	<key>DATABASE_URL</key>
 	<string>https://surfappofficial-default-rtdb.firebaseio.com</string>
 </dict>

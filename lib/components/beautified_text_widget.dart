@@ -49,6 +49,8 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
       child: Container(
@@ -191,7 +193,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                               ),
                             );
                           },
-                        ).then((value) => setState(() {}));
+                        ).then((value) => safeSetState(() {}));
                       },
                       child: FaIcon(
                         FontAwesomeIcons.clipboard,
@@ -221,7 +223,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                             ),
                           );
                         },
-                      ).then((value) => setState(() {}));
+                      ).then((value) => safeSetState(() {}));
                     },
                     child: Text(
                       FFLocalizations.of(context).getText(

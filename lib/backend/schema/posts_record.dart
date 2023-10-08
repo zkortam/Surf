@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/serialization_util.dart';
 import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
@@ -50,21 +51,7 @@ class PostsRecord extends FirestoreRecord {
   static PostsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       PostsRecord.getDocumentFromData(
         {
-          'post': createPostStruct(
-            timestamp: safeGet(
-              () => DateTime.fromMillisecondsSinceEpoch(
-                  (snapshot.data['post'] ?? {})['timestamp']),
-            ),
-            caption: (snapshot.data['post'] ?? {})['caption'],
-            author: (snapshot.data['post'] ?? {})['author'],
-            netVotes: (snapshot.data['post'] ?? {})['netVotes']?.round(),
-            id: (snapshot.data['post'] ?? {})['id'],
-            isExpanded: (snapshot.data['post'] ?? {})['isExpanded'],
-            isSpoiler: (snapshot.data['post'] ?? {})['isSpoiler'],
-            isStealth: (snapshot.data['post'] ?? {})['isStealth'],
-            create: true,
-            clearUnsetFields: false,
-          ).toMap(),
+          'post': PostStruct.fromAlgoliaData(snapshot.data['post'] ?? {}),
         },
         PostsRecord.collection.doc(snapshot.objectID),
       );

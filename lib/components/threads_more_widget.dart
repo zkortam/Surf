@@ -51,6 +51,8 @@ class _ThreadsMoreWidgetState extends State<ThreadsMoreWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
       child: Container(
@@ -184,7 +186,7 @@ acti... */
                               ),
                             );
                           },
-                        ).then((value) => setState(() {}));
+                        ).then((value) => safeSetState(() {}));
                       },
                       text: FFLocalizations.of(context).getText(
                         '0mlaqnvh' /* View Hashtags */,
@@ -226,7 +228,7 @@ acti... */
                             ),
                           );
                         },
-                      ).then((value) => setState(() {}));
+                      ).then((value) => safeSetState(() {}));
                     },
                     text: FFLocalizations.of(context).getText(
                       'tc55cbwn' /* Link */,

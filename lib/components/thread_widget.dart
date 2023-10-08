@@ -64,6 +64,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -86,7 +88,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                   ),
                 );
               },
-            ).then((value) => setState(() {}));
+            ).then((value) => safeSetState(() {}));
           },
           child: Container(
             width: 500.0,
@@ -122,11 +124,12 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                               child: StreamBuilder<List<UsersRecord>>(
                                 stream: queryUsersRecord(
                                   queryBuilder: (usersRecord) =>
-                                      usersRecord.where('uid',
-                                          isEqualTo: widget
-                                                  .thread!.thread.isStealth
-                                              ? 'anon'
-                                              : widget.thread?.thread?.author),
+                                      usersRecord.where(
+                                    'uid',
+                                    isEqualTo: widget.thread!.thread.isStealth
+                                        ? 'anon'
+                                        : widget.thread?.thread?.author,
+                                  ),
                                   singleRecord: true,
                                 ),
                                 builder: (context, snapshot) {
@@ -138,7 +141,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         height: 50.0,
                                         child: SpinKitRipple(
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .secondaryText,
                                           size: 50.0,
                                         ),
                                       ),
@@ -511,44 +514,36 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                           },
                                         ),
                                       ),
-                                      if (responsiveVisibility(
-                                        context: context,
-                                        tablet: false,
-                                        tabletLandscape: false,
-                                        desktop: false,
-                                      ))
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 0.0, 0.0),
-                                          child: FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 20.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 40.0,
-                                            icon: Icon(
-                                              Icons.insert_comment,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 28.0,
-                                            ),
-                                            onPressed: () async {
-                                              context.pushNamed(
-                                                'singleThread',
-                                                queryParameters: {
-                                                  'thread': serializeParam(
-                                                    widget.thread,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'thread': widget.thread,
-                                                },
-                                              );
-                                            },
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 0.0, 0.0, 0.0),
+                                        child: FlutterFlowIconButton(
+                                          borderColor: Colors.transparent,
+                                          borderRadius: 20.0,
+                                          borderWidth: 1.0,
+                                          buttonSize: 40.0,
+                                          icon: Icon(
+                                            Icons.insert_comment,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 28.0,
                                           ),
+                                          onPressed: () async {
+                                            context.pushNamed(
+                                              'singleThread',
+                                              queryParameters: {
+                                                'thread': serializeParam(
+                                                  widget.thread,
+                                                  ParamType.Document,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                'thread': widget.thread,
+                                              },
+                                            );
+                                          },
                                         ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -607,9 +602,10 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         stream: queryCommentsRecord(
                                           queryBuilder: (commentsRecord) =>
                                               commentsRecord.where(
-                                                  'comment.idReplyTo',
-                                                  isEqualTo: widget
-                                                      .thread?.thread?.id),
+                                            'comment.idReplyTo',
+                                            isEqualTo:
+                                                widget.thread?.thread?.id,
+                                          ),
                                           limit: 3,
                                         ),
                                         builder: (context, snapshot) {
@@ -622,7 +618,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 child: SpinKitRipple(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primary,
+                                                      .secondaryText,
                                                   size: 50.0,
                                                 ),
                                               ),
@@ -768,12 +764,13 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     child: StreamBuilder<List<UsersRecord>>(
                                       stream: queryUsersRecord(
                                         queryBuilder: (usersRecord) =>
-                                            usersRecord.where('uid',
-                                                isEqualTo: widget.thread!.thread
-                                                        .isStealth
-                                                    ? 'anon'
-                                                    : widget.thread?.thread
-                                                        ?.author),
+                                            usersRecord.where(
+                                          'uid',
+                                          isEqualTo: widget
+                                                  .thread!.thread.isStealth
+                                              ? 'anon'
+                                              : widget.thread?.thread?.author,
+                                        ),
                                         singleRecord: true,
                                       ),
                                       builder: (context, snapshot) {
@@ -786,7 +783,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                               child: SpinKitRipple(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                        .secondaryText,
                                                 size: 50.0,
                                               ),
                                             ),
@@ -1099,7 +1096,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           0.0, 10.0, 0.0, 0.0),
                                                   child: Container(
                                                     width: double.infinity,
-                                                    height: 80.0,
+                                                    height: 85.0,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1120,7 +1117,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       3.0,
-                                                                      5.0,
+                                                                      3.0,
                                                                       0.0,
                                                                       5.0),
                                                           child: Row(
@@ -1300,7 +1297,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() {}));
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -1380,7 +1377,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() {}));
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -1471,7 +1468,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() {}));
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -1771,13 +1768,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                             }
                                           },
                                         ),
-                                        if (!widget.isComment &&
-                                            responsiveVisibility(
-                                              context: context,
-                                              tablet: false,
-                                              tabletLandscape: false,
-                                              desktop: false,
-                                            ))
+                                        if (!widget.isComment)
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1867,9 +1858,10 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                           stream: queryCommentsRecord(
                                             queryBuilder: (commentsRecord) =>
                                                 commentsRecord.where(
-                                                    'comment.idReplyTo',
-                                                    isEqualTo: widget
-                                                        .thread?.thread?.id),
+                                              'comment.idReplyTo',
+                                              isEqualTo:
+                                                  widget.thread?.thread?.id,
+                                            ),
                                             limit: 3,
                                           ),
                                           builder: (context, snapshot) {
@@ -1882,7 +1874,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                   child: SpinKitRipple(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primary,
+                                                        .secondaryText,
                                                     size: 50.0,
                                                   ),
                                                 ),

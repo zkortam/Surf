@@ -139,11 +139,15 @@ class _ChangePinWidgetState extends State<ChangePinWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'changePin',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -362,12 +366,17 @@ class _ChangePinWidgetState extends State<ChangePinWidget>
                                                           context: context,
                                                           builder: (context) {
                                                             return GestureDetector(
-                                                              onTap: () => FocusScope
-                                                                      .of(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
                                                                           context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode),
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
                                                               child: Padding(
                                                                 padding: MediaQuery
                                                                     .viewInsetsOf(
@@ -381,7 +390,8 @@ class _ChangePinWidgetState extends State<ChangePinWidget>
                                                             );
                                                           },
                                                         ).then((value) =>
-                                                            setState(() {}));
+                                                            safeSetState(
+                                                                () {}));
                                                       }
                                                     },
                                                     text: FFLocalizations.of(

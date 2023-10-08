@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +46,15 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'chatSearch',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -171,7 +176,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                           '_model.textController',
                                           Duration(milliseconds: 2000),
                                           () async {
-                                            setState(() => _model
+                                            safeSetState(() => _model
                                                 .algoliaSearchResults = null);
                                             await UsersRecord.search(
                                               term: _model.textController.text,
@@ -240,7 +245,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                   onTap: () async {
                                                     _model.textController
                                                         ?.clear();
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .algoliaSearchResults =
                                                         null);
                                                     await UsersRecord.search(
@@ -284,175 +289,207 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 0.0),
-                                  child: FutureBuilder<List<UsersRecord>>(
-                                    future: UsersRecord.search(
-                                      term: _model.textController.text,
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: SpinKitRipple(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 50.0,
+                                  child: AuthUserStreamWidget(
+                                    builder: (context) =>
+                                        FutureBuilder<List<UsersRecord>>(
+                                      future: UsersRecord.search(
+                                        term: currentUserDisplayName ==
+                                                _model.textController.text
+                                            ? ''
+                                            : _model.textController.text,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitRipple(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 50.0,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                      List<UsersRecord> columnUsersRecordList =
-                                          snapshot.data!;
-                                      // Customize what your widget looks like with no search results.
-                                      if (snapshot.data!.isEmpty) {
-                                        return Container(
-                                          height: 100,
-                                          child: Center(
-                                            child: Text('No results.'),
-                                          ),
-                                        );
-                                      }
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: List.generate(
-                                            columnUsersRecordList.length,
-                                            (columnIndex) {
-                                          final columnUsersRecord =
-                                              columnUsersRecordList[
-                                                  columnIndex];
-                                          return FutureBuilder<
-                                              List<ChatsRecord>>(
-                                            future: queryChatsRecordOnce(
-                                              queryBuilder: (chatsRecord) =>
-                                                  chatsRecord
-                                                      .where(
-                                                          'user_a',
-                                                          isEqualTo:
-                                                              currentUserReference)
-                                                      .where('user_b',
-                                                          isEqualTo:
-                                                              columnUsersRecord
-                                                                  .reference),
-                                              singleRecord: true,
+                                          );
+                                        }
+                                        List<UsersRecord>
+                                            columnUsersRecordList =
+                                            snapshot.data!;
+                                        // Customize what your widget looks like with no search results.
+                                        if (snapshot.data!.isEmpty) {
+                                          return Container(
+                                            height: 100,
+                                            child: Center(
+                                              child: Text('No results.'),
                                             ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child: SpinKitRipple(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 50.0,
+                                          );
+                                        }
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: List.generate(
+                                              columnUsersRecordList.length,
+                                              (columnIndex) {
+                                            final columnUsersRecord =
+                                                columnUsersRecordList[
+                                                    columnIndex];
+                                            return FutureBuilder<
+                                                List<ChatsRecord>>(
+                                              future: queryChatsRecordOnce(),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child: SpinKitRipple(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 50.0,
+                                                      ),
                                                     ),
+                                                  );
+                                                }
+                                                List<ChatsRecord>
+                                                    messageCardChatsRecordList =
+                                                    snapshot.data!;
+                                                return InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    if (functions.findpreexistingchatifpossible(
+                                                            messageCardChatsRecordList
+                                                                .toList(),
+                                                            currentUserReference!,
+                                                            columnUsersRecord
+                                                                .reference) !=
+                                                        null) {
+                                                      context.pushNamed(
+                                                        'chats_page',
+                                                        queryParameters: {
+                                                          'userName':
+                                                              serializeParam(
+                                                            columnUsersRecord
+                                                                .displayName,
+                                                            ParamType.String,
+                                                          ),
+                                                          'email':
+                                                              serializeParam(
+                                                            columnUsersRecord
+                                                                .email,
+                                                            ParamType.String,
+                                                          ),
+                                                          'chatUser':
+                                                              serializeParam(
+                                                            functions
+                                                                .findpreexistingchatifpossible(
+                                                                    messageCardChatsRecordList
+                                                                        .toList(),
+                                                                    currentUserReference!,
+                                                                    columnUsersRecord
+                                                                        .reference)
+                                                                ?.reference,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                          'userRef':
+                                                              serializeParam(
+                                                            currentUserReference,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                          'userProfile':
+                                                              serializeParam(
+                                                            columnUsersRecord
+                                                                .photoUrl,
+                                                            ParamType.String,
+                                                          ),
+                                                          'userb':
+                                                              serializeParam(
+                                                            functions
+                                                                .findpreexistingchatifpossible(
+                                                                    messageCardChatsRecordList
+                                                                        .toList(),
+                                                                    currentUserReference!,
+                                                                    columnUsersRecord
+                                                                        .reference)
+                                                                ?.userB,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                          'usera':
+                                                              serializeParam(
+                                                            functions
+                                                                .findpreexistingchatifpossible(
+                                                                    messageCardChatsRecordList
+                                                                        .toList(),
+                                                                    currentUserReference!,
+                                                                    columnUsersRecord
+                                                                        .reference)
+                                                                ?.userA,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          kTransitionInfoKey:
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                          ),
+                                                        },
+                                                      );
+                                                    } else {
+                                                      await ChatsRecord
+                                                          .collection
+                                                          .doc()
+                                                          .set(
+                                                              createChatsRecordData(
+                                                            user:
+                                                                currentUserReference,
+                                                            userA:
+                                                                currentUserReference,
+                                                            userB:
+                                                                columnUsersRecord
+                                                                    .reference,
+                                                            lastMessage: 'NA',
+                                                            lastMessageTime:
+                                                                getCurrentTimestamp,
+                                                            image:
+                                                                columnUsersRecord
+                                                                    .photoUrl,
+                                                            messageSeen: false,
+                                                          ));
+
+                                                      context.pushNamed(
+                                                          'chat_main');
+                                                    }
+                                                  },
+                                                  child: MessageCardWidget(
+                                                    key: Key(
+                                                        'Keyd0y_${columnIndex}_of_${columnUsersRecordList.length}'),
+                                                    user: columnUsersRecord,
                                                   ),
                                                 );
-                                              }
-                                              List<ChatsRecord>
-                                                  messageCardChatsRecordList =
-                                                  snapshot.data!;
-                                              final messageCardChatsRecord =
-                                                  messageCardChatsRecordList
-                                                          .isNotEmpty
-                                                      ? messageCardChatsRecordList
-                                                          .first
-                                                      : null;
-                                              return InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  if (messageCardChatsRecord !=
-                                                      null) {
-                                                    context.pushNamed(
-                                                      'chats_page',
-                                                      queryParameters: {
-                                                        'userName':
-                                                            serializeParam(
-                                                          columnUsersRecord
-                                                              .displayName,
-                                                          ParamType.String,
-                                                        ),
-                                                        'email': serializeParam(
-                                                          columnUsersRecord
-                                                              .email,
-                                                          ParamType.String,
-                                                        ),
-                                                        'chatUser':
-                                                            serializeParam(
-                                                          messageCardChatsRecord
-                                                              ?.reference,
-                                                          ParamType
-                                                              .DocumentReference,
-                                                        ),
-                                                        'userRef':
-                                                            serializeParam(
-                                                          currentUserReference,
-                                                          ParamType
-                                                              .DocumentReference,
-                                                        ),
-                                                        'userProfile':
-                                                            serializeParam(
-                                                          columnUsersRecord
-                                                              .photoUrl,
-                                                          ParamType.String,
-                                                        ),
-                                                      }.withoutNulls,
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                        ),
-                                                      },
-                                                    );
-                                                  } else {
-                                                    await ChatsRecord.collection
-                                                        .doc()
-                                                        .set(
-                                                            createChatsRecordData(
-                                                          user:
-                                                              currentUserReference,
-                                                          userA:
-                                                              currentUserReference,
-                                                          userB:
-                                                              columnUsersRecord
-                                                                  .reference,
-                                                          lastMessage: 'NA',
-                                                          lastMessageTime:
-                                                              getCurrentTimestamp,
-                                                          image:
-                                                              columnUsersRecord
-                                                                  .photoUrl,
-                                                          messageSeen: false,
-                                                        ));
-
-                                                    context
-                                                        .pushNamed('chat_main');
-                                                  }
-                                                },
-                                                child: MessageCardWidget(
-                                                  key: Key(
-                                                      'Keyd0y_${columnIndex}_of_${columnUsersRecordList.length}'),
-                                                  user: columnUsersRecord,
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        }).divide(SizedBox(height: 10.0)),
-                                      );
-                                    },
+                                              },
+                                            );
+                                          }).divide(SizedBox(height: 10.0)),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],

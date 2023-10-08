@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -302,6 +303,85 @@ class CommentStruct extends FFFirebaseStruct {
           data['isAuthorStealth'],
           ParamType.bool,
           false,
+        ),
+      );
+
+  static CommentStruct fromAlgoliaData(Map<String, dynamic> data) =>
+      CommentStruct(
+        isPostComment: convertAlgoliaParam(
+          data['isPostComment'],
+          ParamType.bool,
+          false,
+        ),
+        idReplyTo: convertAlgoliaParam(
+          data['idReplyTo'],
+          ParamType.String,
+          false,
+        ),
+        text: convertAlgoliaParam(
+          data['text'],
+          ParamType.String,
+          false,
+        ),
+        authorid: convertAlgoliaParam(
+          data['authorid'],
+          ParamType.String,
+          false,
+        ),
+        link: convertAlgoliaParam(
+          data['link'],
+          ParamType.String,
+          false,
+        ),
+        likes: convertAlgoliaParam(
+          data['likes'],
+          ParamType.int,
+          false,
+        ),
+        dislikes: convertAlgoliaParam(
+          data['dislikes'],
+          ParamType.String,
+          false,
+        ),
+        likers: convertAlgoliaParam<String>(
+          data['likers'],
+          ParamType.String,
+          true,
+        ),
+        dislikers: convertAlgoliaParam<String>(
+          data['dislikers'],
+          ParamType.String,
+          true,
+        ),
+        timestamp: convertAlgoliaParam(
+          data['timestamp'],
+          ParamType.DateTime,
+          false,
+        ),
+        id: convertAlgoliaParam(
+          data['id'],
+          ParamType.String,
+          false,
+        ),
+        imageHash: convertAlgoliaParam(
+          data['imageHash'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: ImageHashStruct.fromAlgoliaData,
+        ),
+        isStealth: convertAlgoliaParam(
+          data['isStealth'],
+          ParamType.bool,
+          false,
+        ),
+        isAuthorStealth: convertAlgoliaParam(
+          data['isAuthorStealth'],
+          ParamType.bool,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

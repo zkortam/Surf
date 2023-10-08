@@ -46,6 +46,8 @@ class _ThreadsHashtagsWidgetState extends State<ThreadsHashtagsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
       child: Container(

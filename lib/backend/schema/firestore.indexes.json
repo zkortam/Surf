@@ -9,6 +9,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "post.isStealth",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "post.timestamp",
           "order": "DESCENDING"
         }
@@ -20,6 +24,10 @@
       "fields": [
         {
           "fieldPath": "thread.author",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "thread.isStealth",
           "order": "ASCENDING"
         },
         {
@@ -65,6 +73,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "post.isStealth",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "post.timestamp",
           "order": "ASCENDING"
         }
@@ -93,8 +105,12 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "user_b",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "last_message_time",
-          "order": "DESCENDING"
+          "order": "ASCENDING"
         }
       ]
     },
@@ -109,6 +125,18 @@
         {
           "fieldPath": "timestamp",
           "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "fcm_tokens",
+      "fieldPath": "fcm_token",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
         }
       ]
     }

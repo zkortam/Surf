@@ -49,6 +49,8 @@ class _BlockedCardWidgetState extends State<BlockedCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 55.0,
@@ -110,7 +112,11 @@ class _BlockedCardWidgetState extends State<BlockedCardWidget> {
             child: FFButtonWidget(
               onPressed: () async {
                 await currentUserReference!.update({
-                  'blocked': FieldValue.arrayRemove([widget.user?.uid]),
+                  ...mapToFirestore(
+                    {
+                      'blocked': FieldValue.arrayRemove([widget.user?.uid]),
+                    },
+                  ),
                 });
               },
               text: FFLocalizations.of(context).getText(

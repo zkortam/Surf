@@ -49,6 +49,8 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
       child: Container(

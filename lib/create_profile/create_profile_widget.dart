@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/bottom_bar_error_widget.dart';
-import '/components/bottom_notif_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -70,11 +69,15 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Title(
         title: 'createProfile',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -144,7 +147,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                             0.0, 12.0, 0.0, 24.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
-                                            't096mhnb' /* Please fill the following  inf... */,
+                                            't096mhnb' /* Please fill the following info... */,
                                           ),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -223,34 +226,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               return;
                                             }
                                           }
-
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: BottomNotifWidget(
-                                                    text: 'Uploading',
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then((value) => setState(() {}));
-
-                                          setState(() {
-                                            _model.banner =
-                                                _model.uploadedFileUrl1;
-                                          });
                                         },
                                         child: Container(
                                           width: double.infinity,
@@ -262,7 +237,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               fit: BoxFit.cover,
                                               image: CachedNetworkImageProvider(
                                                 valueOrDefault<String>(
-                                                  _model.banner,
+                                                  _model.uploadedFileUrl1,
                                                   'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/hmqwc6b8q2re/Untitled_design_(8).png',
                                                 ),
                                               ),
@@ -371,32 +346,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                         return;
                                                       }
                                                     }
-
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => FocusScope
-                                                                  .of(context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                BottomNotifWidget(
-                                                              text: 'Uploading',
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        setState(() {}));
                                                   },
                                                   child: Container(
                                                     width: 120.0,
@@ -416,7 +365,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                         _model.uploadedFileUrl2,
                                                         'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/lts37dry7dgk/Untitled_design_(9).png',
                                                       ),
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                     ),
                                                   ),
                                                 ),
@@ -478,15 +427,19 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                             ),
                                             Stack(
                                               children: [
-                                                if (_model.banner != null &&
-                                                    _model.banner != '')
+                                                if (_model.uploadedFileUrl1 !=
+                                                        null &&
+                                                    _model.uploadedFileUrl1 !=
+                                                        '')
                                                   Icon(
                                                     Icons.check_circle,
                                                     color: Color(0xFF39C727),
                                                     size: 24.0,
                                                   ),
-                                                if (_model.banner == null ||
-                                                    _model.banner == '')
+                                                if (_model.uploadedFileUrl1 ==
+                                                        null ||
+                                                    _model.uploadedFileUrl1 ==
+                                                        '')
                                                   Icon(
                                                     Icons.not_interested,
                                                     color: FlutterFlowTheme.of(
@@ -533,10 +486,16 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   context: context,
                                                   builder: (context) {
                                                     return GestureDetector(
-                                                      onTap: () => FocusScope
-                                                              .of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode),
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
                                                       child: Padding(
                                                         padding: MediaQuery
                                                             .viewInsetsOf(
@@ -549,8 +508,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                       ),
                                                     );
                                                   },
-                                                ).then(
-                                                    (value) => setState(() {}));
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
                                               }
                                             },
                                             autofocus: true,
@@ -722,10 +681,16 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   context: context,
                                                   builder: (context) {
                                                     return GestureDetector(
-                                                      onTap: () => FocusScope
-                                                              .of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode),
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
                                                       child: Padding(
                                                         padding: MediaQuery
                                                             .viewInsetsOf(
@@ -738,8 +703,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                       ),
                                                     );
                                                   },
-                                                ).then(
-                                                    (value) => setState(() {}));
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
                                               }
                                             },
                                             autofocus: true,
@@ -833,18 +798,44 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                             .text !=
                                                         '')) {
                                               await currentUserReference!
-                                                  .update(createUsersRecordData(
-                                                realName: functions.nameClipper(
-                                                    _model.nameController.text),
-                                                email: '',
-                                                bio: _model.bioController.text,
-                                                pfpBlurHash: _model
-                                                    .uploadedLocalFile2
-                                                    .blurHash,
-                                                photoUrl:
-                                                    _model.uploadedFileUrl2,
-                                                banner: _model.uploadedFileUrl1,
-                                              ));
+                                                  .update({
+                                                ...createUsersRecordData(
+                                                  realName: functions
+                                                      .nameClipper(_model
+                                                          .nameController.text),
+                                                  email: '',
+                                                  bio: valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.bio,
+                                                                  '') !=
+                                                              null &&
+                                                          valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.bio,
+                                                                  '') !=
+                                                              ''
+                                                      ? valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.bio,
+                                                          '')
+                                                      : ' ',
+                                                  pfpBlurHash: _model
+                                                      .uploadedLocalFile2
+                                                      .blurHash,
+                                                  photoUrl:
+                                                      _model.uploadedFileUrl2,
+                                                  banner:
+                                                      _model.uploadedFileUrl1,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'saved':
+                                                        functions.emptylist(),
+                                                    'blocked':
+                                                        functions.emptylist(),
+                                                  },
+                                                ),
+                                              });
 
                                               context.goNamed('createPin');
                                             } else {
@@ -856,10 +847,14 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                 context: context,
                                                 builder: (context) {
                                                   return GestureDetector(
-                                                    onTap: () => FocusScope.of(
-                                                            context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode),
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
                                                     child: Padding(
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
@@ -872,8 +867,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                     ),
                                                   );
                                                 },
-                                              ).then(
-                                                  (value) => setState(() {}));
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
                                             }
                                           },
                                           text: FFLocalizations.of(context)
