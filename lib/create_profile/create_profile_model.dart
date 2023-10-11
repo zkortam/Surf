@@ -11,6 +11,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'create_profile_widget.dart' show CreateProfileWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
+  ///  Local state fields for this page.
+
+  bool usernameValid = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -36,6 +41,9 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   // State field(s) for name widget.
   TextEditingController? nameController;
   String? Function(BuildContext, String?)? nameControllerValidator;
+  // State field(s) for username widget.
+  TextEditingController? usernameController;
+  String? Function(BuildContext, String?)? usernameControllerValidator;
   // State field(s) for phoneNumber widget.
   TextEditingController? phoneNumberController;
   String? Function(BuildContext, String?)? phoneNumberControllerValidator;
@@ -50,6 +58,7 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   void dispose() {
     unfocusNode.dispose();
     nameController?.dispose();
+    usernameController?.dispose();
     phoneNumberController?.dispose();
     bioController?.dispose();
   }

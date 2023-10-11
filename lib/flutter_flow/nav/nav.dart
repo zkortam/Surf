@@ -182,19 +182,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'singleThread',
-              path: 'singleThread',
-              requireAuth: true,
-              asyncParams: {
-                'thread': getDoc(['thread'], ThreadRecord.fromSnapshot),
-              },
-              builder: (context, params) => SingleThreadWidget(
-                thread: params.getParam('thread', ParamType.Document),
-                action: params.getParam('action', ParamType.int),
-                username: params.getParam('username', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'singlePost',
               path: 'singlePost',
               requireAuth: true,
@@ -203,6 +190,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               },
               builder: (context, params) => SinglePostWidget(
                 posts: params.getParam('posts', ParamType.Document),
+                action: params.getParam('action', ParamType.int),
+                username: params.getParam('username', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'singleThread',
+              path: 'singleThread',
+              requireAuth: true,
+              asyncParams: {
+                'thread': getDoc(['thread'], ThreadRecord.fromSnapshot),
+              },
+              builder: (context, params) => SingleThreadWidget(
+                thread: params.getParam('thread', ParamType.Document),
                 action: params.getParam('action', ParamType.int),
                 username: params.getParam('username', ParamType.String),
               ),
@@ -395,6 +395,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       initialPage: 'Home',
                       page: HomeWidget(),
                     ),
+            ),
+            FFRoute(
+              name: 'LoggingIn',
+              path: 'loggingIn',
+              requireAuth: true,
+              builder: (context, params) => LoggingInWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

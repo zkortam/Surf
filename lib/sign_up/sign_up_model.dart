@@ -1,15 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/bottom_bar_error_widget.dart';
 import '/components/terms_of_service_c_g_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'sign_up_widget.dart' show SignUpWidget;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -28,11 +24,6 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for username widget.
-  TextEditingController? usernameController;
-  String? Function(BuildContext, String?)? usernameControllerValidator;
-  // Algolia Search Results from action on username
-  List<UsersRecord>? algoliaSearchResults = [];
   // State field(s) for emailAddress widget.
   TextEditingController? emailAddressController;
   String? Function(BuildContext, String?)? emailAddressControllerValidator;
@@ -54,7 +45,6 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    usernameController?.dispose();
     emailAddressController?.dispose();
     passwordController?.dispose();
     confirmPasswordController?.dispose();

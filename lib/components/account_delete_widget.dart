@@ -66,7 +66,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
               },
               child: Container(
                 width: double.infinity,
-                height: 200.0,
+                height: 190.0,
                 constraints: BoxConstraints(
                   maxWidth: 350.0,
                   maxHeight: 275.0,

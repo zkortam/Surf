@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "thread",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "thread.author",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "thread.timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "posts",
       "queryScope": "COLLECTION",
       "fields": [
@@ -125,6 +139,20 @@
         {
           "fieldPath": "timestamp",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "post.author",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "post.timestamp",
+          "order": "DESCENDING"
         }
       ]
     }

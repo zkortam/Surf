@@ -20,6 +20,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -459,260 +460,285 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                         ),
                                                         FFButtonWidget(
                                                           onPressed: () async {
-                                                            if (currentUserEmailVerified) {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                enableDrag:
-                                                                    false,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                            final firestoreBatch =
+                                                                FirebaseFirestore
+                                                                    .instance
+                                                                    .batch();
+                                                            try {
+                                                              if (currentUserEmailVerified &&
+                                                                  (_model.textController1
+                                                                              .text !=
+                                                                          null &&
+                                                                      _model.textController1
+                                                                              .text !=
+                                                                          '') &&
+                                                                  (_model.uploadedFileUrl !=
+                                                                          null &&
+                                                                      _model.uploadedFileUrl !=
+                                                                          '')) {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          BottomNotifWidget(
-                                                                        text: FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'sritglym' /* Posting */,
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            BottomNotifWidget(
+                                                                          text:
+                                                                              FFLocalizations.of(context).getText(
+                                                                            'sritglym' /* Posting */,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
-
-                                                              setState(() {
-                                                                _model.postID =
-                                                                    'P${currentUserUid}[]${(currentUserDocument?.posts?.toList() ?? []).length.toString()}${random_data.randomString(
-                                                                  2,
-                                                                  12,
-                                                                  true,
-                                                                  true,
-                                                                  true,
-                                                                )}';
-                                                              });
-
-                                                              await PostsRecord
-                                                                  .collection
-                                                                  .doc()
-                                                                  .set(
-                                                                      createPostsRecordData(
-                                                                    post:
-                                                                        createPostStruct(
-                                                                      timestamp:
-                                                                          getCurrentTimestamp,
-                                                                      caption: _model
-                                                                          .textController1
-                                                                          .text,
-                                                                      author:
-                                                                          currentUserUid,
-                                                                      netVotes:
-                                                                          0,
-                                                                      id: _model
-                                                                          .postID,
-                                                                      isExpanded:
-                                                                          false,
-                                                                      isSpoiler:
-                                                                          _model
-                                                                              .isSpoiler,
-                                                                      isStealth: valueOrDefault<
-                                                                              bool>(
-                                                                          currentUserDocument
-                                                                              ?.isStealth,
-                                                                          false),
-                                                                      fieldValues: {
-                                                                        'spoilerClickers':
-                                                                            [
-                                                                          currentUserUid
-                                                                        ],
-                                                                        'images':
-                                                                            [
-                                                                          getImageHashFirestoreData(
-                                                                            createImageHashStruct(
-                                                                              image: _model.uploadedFileUrl,
-                                                                              blurHash: _model.uploadedLocalFile.blurHash,
-                                                                              clearUnsetFields: false,
-                                                                              create: true,
-                                                                            ),
-                                                                            true,
-                                                                          )
-                                                                        ],
-                                                                      },
-                                                                      clearUnsetFields:
-                                                                          false,
-                                                                      create:
-                                                                          true,
-                                                                    ),
-                                                                  ));
-
-                                                              await currentUserReference!
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'Posts':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      getPostFirestoreData(
-                                                                        createPostStruct(
-                                                                          timestamp:
-                                                                              getCurrentTimestamp,
-                                                                          caption: _model
-                                                                              .textController1
-                                                                              .text,
-                                                                          author:
-                                                                              currentUserUid,
-                                                                          netVotes:
-                                                                              0,
-                                                                          id: _model
-                                                                              .postID,
-                                                                          isExpanded:
-                                                                              false,
-                                                                          isSpoiler:
-                                                                              _model.isSpoiler,
-                                                                          isStealth: valueOrDefault<bool>(
-                                                                              currentUserDocument?.isStealth,
-                                                                              false),
-                                                                          fieldValues: {
-                                                                            'spoilerClickers':
-                                                                                FieldValue.arrayUnion([
-                                                                              currentUserUid
-                                                                            ]),
-                                                                            'images':
-                                                                                FieldValue.arrayUnion([
-                                                                              getImageHashFirestoreData(
-                                                                                createImageHashStruct(
-                                                                                  image: _model.uploadedFileUrl,
-                                                                                  blurHash: _model.uploadedLocalFile.blurHash,
-                                                                                  clearUnsetFields: false,
-                                                                                ),
-                                                                                true,
-                                                                              )
-                                                                            ]),
-                                                                          },
-                                                                          clearUnsetFields:
-                                                                              false,
-                                                                        ),
-                                                                        true,
-                                                                      )
-                                                                    ]),
+                                                                    );
                                                                   },
-                                                                ),
-                                                              });
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
 
-                                                              context.goNamed(
-                                                                'Home',
-                                                                extra: <String,
-                                                                    dynamic>{
-                                                                  kTransitionInfoKey:
-                                                                      TransitionInfo(
-                                                                    hasTransition:
-                                                                        true,
-                                                                    transitionType:
-                                                                        PageTransitionType
-                                                                            .fade,
-                                                                  ),
-                                                                },
-                                                              );
-
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
+                                                                setState(() {
+                                                                  _model.postID =
+                                                                      'P${currentUserUid}[]${(currentUserDocument?.posts?.toList() ?? []).length.toString()}${random_data.randomString(
+                                                                    2,
+                                                                    12,
                                                                     true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                enableDrag:
-                                                                    false,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                                    true,
+                                                                    true,
+                                                                  )}';
+                                                                });
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          BottomNotifWidget(
-                                                                        text: FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'kx41gmij' /* Posted */,
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            BottomNotifWidget(
+                                                                          text:
+                                                                              FFLocalizations.of(context).getText(
+                                                                            'kx41gmij' /* Posting */,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
-                                                            } else {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                enableDrag:
-                                                                    false,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+
+                                                                var postsRecordReference =
+                                                                    PostsRecord
+                                                                        .collection
+                                                                        .doc();
+                                                                firestoreBatch.set(
+                                                                    postsRecordReference,
+                                                                    createPostsRecordData(
+                                                                      post:
+                                                                          createPostStruct(
+                                                                        timestamp:
+                                                                            getCurrentTimestamp,
+                                                                        caption: _model
+                                                                            .textController1
+                                                                            .text,
+                                                                        author:
+                                                                            currentUserUid,
+                                                                        netVotes:
+                                                                            0,
+                                                                        id: _model
+                                                                            .postID,
+                                                                        isExpanded:
+                                                                            false,
+                                                                        isSpoiler:
+                                                                            _model.isSpoiler,
+                                                                        isStealth: valueOrDefault<bool>(
+                                                                            currentUserDocument?.isStealth,
+                                                                            false),
+                                                                        fieldValues: {
+                                                                          'spoilerClickers':
+                                                                              [
+                                                                            currentUserUid
+                                                                          ],
+                                                                          'images':
+                                                                              [
+                                                                            getImageHashFirestoreData(
+                                                                              createImageHashStruct(
+                                                                                image: _model.uploadedFileUrl,
+                                                                                blurHash: _model.uploadedLocalFile.blurHash,
+                                                                                clearUnsetFields: false,
+                                                                                create: true,
+                                                                              ),
+                                                                              true,
+                                                                            )
+                                                                          ],
+                                                                        },
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                        create:
+                                                                            true,
+                                                                      ),
+                                                                    ));
+                                                                _model.post = PostsRecord
+                                                                    .getDocumentFromData(
+                                                                        createPostsRecordData(
+                                                                          post:
+                                                                              createPostStruct(
+                                                                            timestamp:
+                                                                                getCurrentTimestamp,
+                                                                            caption:
+                                                                                _model.textController1.text,
+                                                                            author:
+                                                                                currentUserUid,
+                                                                            netVotes:
+                                                                                0,
+                                                                            id: _model.postID,
+                                                                            isExpanded:
+                                                                                false,
+                                                                            isSpoiler:
+                                                                                _model.isSpoiler,
+                                                                            isStealth:
+                                                                                valueOrDefault<bool>(currentUserDocument?.isStealth, false),
+                                                                            fieldValues: {
+                                                                              'spoilerClickers': [
+                                                                                currentUserUid
+                                                                              ],
+                                                                              'images': [
+                                                                                getImageHashFirestoreData(
+                                                                                  createImageHashStruct(
+                                                                                    image: _model.uploadedFileUrl,
+                                                                                    blurHash: _model.uploadedLocalFile.blurHash,
+                                                                                    clearUnsetFields: false,
+                                                                                    create: true,
+                                                                                  ),
+                                                                                  true,
+                                                                                )
+                                                                              ],
+                                                                            },
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                            create:
+                                                                                true,
+                                                                          ),
+                                                                        ),
+                                                                        postsRecordReference);
+
+                                                                firestoreBatch
+                                                                    .update(
+                                                                        currentUserReference!,
+                                                                        {
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'Posts':
+                                                                              FieldValue.arrayUnion([
+                                                                            getPostFirestoreData(
+                                                                              updatePostStruct(
+                                                                                _model.post?.post,
+                                                                                clearUnsetFields: false,
+                                                                              ),
+                                                                              true,
+                                                                            )
+                                                                          ]),
+                                                                        },
+                                                                      ),
+                                                                    });
+                                                                setState(() {
+                                                                  _model
+                                                                      .textController1
+                                                                      ?.clear();
+                                                                });
+                                                                setState(() {
+                                                                  _model.isDataUploading =
+                                                                      false;
+                                                                  _model.uploadedLocalFile =
+                                                                      FFUploadedFile(
+                                                                          bytes:
+                                                                              Uint8List.fromList([]));
+                                                                  _model.uploadedFileUrl =
+                                                                      '';
+                                                                });
+                                                              } else {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          BottomBarErrorWidget(
-                                                                        text: FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'go7rhtxx' /* Please write a caption and upl... */,
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            BottomBarErrorWidget(
+                                                                          text:
+                                                                              FFLocalizations.of(context).getText(
+                                                                            'go7rhtxx' /* Please write a caption and upl... */,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+                                                              }
+
+                                                              context.pushNamed(
+                                                                  'Home');
+                                                            } finally {
+                                                              await firestoreBatch
+                                                                  .commit();
                                                             }
 
-                                                            context.pushNamed(
-                                                                'Home');
+                                                            setState(() {});
                                                           },
                                                           text: FFLocalizations
                                                                   .of(context)
@@ -854,6 +880,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                             context)
                                                         .bodyMedium,
                                                     textAlign: TextAlign.start,
+                                                    maxLength: 50,
+                                                    maxLengthEnforcement:
+                                                        MaxLengthEnforcement
+                                                            .enforced,
                                                     validator: _model
                                                         .textController1Validator
                                                         .asValidator(context),
@@ -1699,6 +1729,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium,
+                                                  maxLength: 50,
+                                                  maxLengthEnforcement:
+                                                      MaxLengthEnforcement
+                                                          .enforced,
                                                   validator: _model
                                                       .textController2Validator
                                                       .asValidator(context),
@@ -2177,6 +2211,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                   .bodyMedium,
                                                               maxLines: 20,
                                                               minLines: 5,
+                                                              maxLength: 2000,
+                                                              maxLengthEnforcement:
+                                                                  MaxLengthEnforcement
+                                                                      .enforced,
                                                               validator: _model
                                                                   .textController7Validator
                                                                   .asValidator(

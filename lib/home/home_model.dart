@@ -20,6 +20,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   bool isComment = false;
 
+  bool isFollowersOnly = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

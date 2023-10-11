@@ -102,7 +102,7 @@ class _FollowingCardWidgetState extends State<FollowingCardWidget> {
                     'Profile',
                     queryParameters: {
                       'userID': serializeParam(
-                        rowUsersRecord?.uid,
+                        widget.user?.uid,
                         ParamType.String,
                       ),
                     }.withoutNulls,

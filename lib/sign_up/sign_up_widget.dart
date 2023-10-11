@@ -1,14 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/bottom_bar_error_widget.dart';
 import '/components/terms_of_service_c_g_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -79,7 +75,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
     super.initState();
     _model = createModel(context, () => SignUpModel());
 
-    _model.usernameController ??= TextEditingController();
     _model.emailAddressController ??= TextEditingController(
         text: widget.email != null && widget.email != '' ? widget.email : '');
     _model.passwordController ??= TextEditingController();
@@ -177,419 +172,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .labelLarge,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: FutureBuilder<List<UsersRecord>>(
-                                        future: UsersRecord.search(
-                                          term: _model.usernameController.text,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitRipple(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              usernameUsersRecordList =
-                                              snapshot.data!;
-                                          return Container(
-                                            width: double.infinity,
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.usernameController,
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                '_model.usernameController',
-                                                Duration(milliseconds: 2000),
-                                                () async {
-                                                  if (functions.isUsernameCharValid(
-                                                          _model
-                                                              .usernameController
-                                                              .text) ==
-                                                      true) {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => _model
-                                                                  .unfocusNode
-                                                                  .canRequestFocus
-                                                              ? FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode)
-                                                              : FocusScope.of(
-                                                                      context)
-                                                                  .unfocus(),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                BottomBarErrorWidget(
-                                                              text:
-                                                                  'Only Letters, Numbers, and Underscores allowed.',
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-
-                                                    setState(() {
-                                                      _model.usernameController
-                                                              ?.text =
-                                                          functions
-                                                              .usernameStripper(
-                                                                  _model
-                                                                      .usernameController
-                                                                      .text);
-                                                    });
-                                                  }
-                                                  if (functions.getStringLength(
-                                                          _model
-                                                              .usernameController
-                                                              .text) >
-                                                      15) {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => _model
-                                                                  .unfocusNode
-                                                                  .canRequestFocus
-                                                              ? FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode)
-                                                              : FocusScope.of(
-                                                                      context)
-                                                                  .unfocus(),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                BottomBarErrorWidget(
-                                                              text:
-                                                                  'Username must be less than 15 characters.',
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-
-                                                    setState(() {
-                                                      _model.usernameController
-                                                              ?.text =
-                                                          functions
-                                                              .usernameStripper(
-                                                                  _model
-                                                                      .usernameController
-                                                                      .text);
-                                                    });
-                                                  }
-                                                  if (functions.getStringLength(
-                                                          _model
-                                                              .usernameController
-                                                              .text) <
-                                                      1) {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => _model
-                                                                  .unfocusNode
-                                                                  .canRequestFocus
-                                                              ? FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode)
-                                                              : FocusScope.of(
-                                                                      context)
-                                                                  .unfocus(),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                BottomBarErrorWidget(
-                                                              text:
-                                                                  'Username must have at least 1 character.',
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-
-                                                    setState(() {
-                                                      _model.usernameController
-                                                              ?.text =
-                                                          functions
-                                                              .usernameStripper(
-                                                                  '${_model.usernameController.text}${random_data.randomString(
-                                                        3,
-                                                        10,
-                                                        true,
-                                                        false,
-                                                        false,
-                                                      )}');
-                                                    });
-                                                    safeSetState(() => _model
-                                                            .algoliaSearchResults =
-                                                        null);
-                                                    await UsersRecord.search(
-                                                      term: _model
-                                                          .usernameController
-                                                          .text,
-                                                    )
-                                                        .then((r) => _model
-                                                                .algoliaSearchResults =
-                                                            r)
-                                                        .onError((_, __) =>
-                                                            _model.algoliaSearchResults =
-                                                                [])
-                                                        .whenComplete(() =>
-                                                            setState(() {}));
-                                                  }
-                                                  if (_model
-                                                          .algoliaSearchResults
-                                                          ?.length !=
-                                                      null) {
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () => _model
-                                                                  .unfocusNode
-                                                                  .canRequestFocus
-                                                              ? FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      _model
-                                                                          .unfocusNode)
-                                                              : FocusScope.of(
-                                                                      context)
-                                                                  .unfocus(),
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                BottomBarErrorWidget(
-                                                              text:
-                                                                  'Username already taken.',
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-
-                                                    setState(() {
-                                                      _model.usernameController
-                                                              ?.text =
-                                                          functions
-                                                              .usernameStripper(
-                                                                  '${_model.usernameController.text}${random_data.randomInteger(1, 10000000).toString()}');
-                                                    });
-                                                    if (usernameUsersRecordList
-                                                            .where((e) =>
-                                                                e.displayName ==
-                                                                _model
-                                                                    .usernameController
-                                                                    .text)
-                                                            .toList()
-                                                            .length >
-                                                        0) {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () => _model
-                                                                    .unfocusNode
-                                                                    .canRequestFocus
-                                                                ? FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode)
-                                                                : FocusScope.of(
-                                                                        context)
-                                                                    .unfocus(),
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child:
-                                                                  BottomBarErrorWidget(
-                                                                text:
-                                                                    'Username already taken.',
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-
-                                                      setState(() {
-                                                        _model.usernameController
-                                                                ?.text =
-                                                            functions
-                                                                .usernameStripper(
-                                                                    '${_model.usernameController.text}${random_data.randomInteger(1, 1000000000).toString()}');
-                                                      });
-                                                      setState(() {
-                                                        _model.isUsernameValid =
-                                                            true;
-                                                      });
-                                                    } else {
-                                                      setState(() {
-                                                        _model.isUsernameValid =
-                                                            true;
-                                                      });
-                                                    }
-                                                  } else {
-                                                    setState(() {
-                                                      _model.isUsernameValid =
-                                                          true;
-                                                    });
-                                                  }
-                                                },
-                                              ),
-                                              autofocus: true,
-                                              autofillHints: [
-                                                AutofillHints.email
-                                              ],
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  '43glzivd' /* Username */,
-                                                ),
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color:
-                                                        valueOrDefault<Color>(
-                                                      _model.isUsernameValid ==
-                                                              true
-                                                          ? (_model.isUsernameSet ==
-                                                                  true
-                                                              ? Color(
-                                                                  0xFF17A617)
-                                                              : FlutterFlowTheme
-                                                                      .of(
-                                                                          context)
-                                                                  .primaryBackground)
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      Color(0xFF757575),
-                                                    ),
-                                                    width: 1.5,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 1.5,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.5,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.5,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                suffixIcon: Icon(
-                                                  Icons.check_circle,
-                                                  color: valueOrDefault<Color>(
-                                                    _model.isUsernameValid
-                                                        ? Color(0xFF39C727)
-                                                        : Color(0xFF757575),
-                                                    Color(0xFF757575),
-                                                  ),
-                                                  size: 22.0,
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
-                                              validator: _model
-                                                  .usernameControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          );
-                                        },
                                       ),
                                     ),
                                     Padding(
@@ -865,117 +447,70 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                           0.0, 0.0, 0.0, 16.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          Function() _navigate = () {};
-                                          if (_model.isUsernameValid) {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () => _model
-                                                          .unfocusNode
-                                                          .canRequestFocus
-                                                      ? FocusScope.of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode)
-                                                      : FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child:
-                                                        TermsOfServiceCGWidget(),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
-
-                                            GoRouter.of(context)
-                                                .prepareAuthEvent();
-                                            if (_model
-                                                    .passwordController.text !=
-                                                _model.confirmPasswordController
-                                                    .text) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Passwords don\'t match!',
-                                                  ),
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            enableDrag: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child:
+                                                      TermsOfServiceCGWidget(),
                                                 ),
                                               );
-                                              return;
-                                            }
+                                            },
+                                          ).then(
+                                              (value) => safeSetState(() {}));
 
-                                            final user = await authManager
-                                                .createAccountWithEmail(
-                                              context,
-                                              _model
-                                                  .emailAddressController.text,
-                                              _model.passwordController.text,
+                                          GoRouter.of(context)
+                                              .prepareAuthEvent();
+                                          if (_model.passwordController.text !=
+                                              _model.confirmPasswordController
+                                                  .text) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Passwords don\'t match!',
+                                                ),
+                                              ),
                                             );
-                                            if (user == null) {
-                                              return;
-                                            }
-
-                                            await UsersRecord.collection
-                                                .doc(user.uid)
-                                                .update(createUsersRecordData(
-                                                  email: _model
-                                                      .emailAddressController
-                                                      .text,
-                                                  displayName:
-                                                      _model.isUsernameValid ==
-                                                              true
-                                                          ? _model
-                                                              .usernameController
-                                                              .text
-                                                          : 'Placeholder',
-                                                  createdTime:
-                                                      getCurrentTimestamp,
-                                                ));
-
-                                            _navigate = () =>
-                                                context.goNamedAuth(
-                                                    'Home', context.mounted);
-                                          } else {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () => _model
-                                                          .unfocusNode
-                                                          .canRequestFocus
-                                                      ? FocusScope.of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode)
-                                                      : FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: BottomBarErrorWidget(
-                                                      text:
-                                                          'Improper information.',
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
+                                            return;
                                           }
 
-                                          _navigate();
+                                          final user = await authManager
+                                              .createAccountWithEmail(
+                                            context,
+                                            _model.emailAddressController.text,
+                                            _model.passwordController.text,
+                                          );
+                                          if (user == null) {
+                                            return;
+                                          }
+
+                                          await UsersRecord.collection
+                                              .doc(user.uid)
+                                              .update(createUsersRecordData(
+                                                email: _model
+                                                    .emailAddressController
+                                                    .text,
+                                                createdTime:
+                                                    getCurrentTimestamp,
+                                              ));
+
+                                          context.goNamedAuth(
+                                              'Home', context.mounted);
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(

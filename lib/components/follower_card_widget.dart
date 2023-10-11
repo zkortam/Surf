@@ -17,9 +17,11 @@ class FollowerCardWidget extends StatefulWidget {
   const FollowerCardWidget({
     Key? key,
     required this.user,
+    required this.id,
   }) : super(key: key);
 
   final UsersRecord? user;
+  final String? id;
 
   @override
   _FollowerCardWidgetState createState() => _FollowerCardWidgetState();
@@ -174,11 +176,12 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              if (functions.stringInArr(
-                      widget.user!.uid,
-                      (currentUserDocument?.following?.toList() ?? [])
-                          .toList()) ==
-                  false)
+              if ((functions.stringInArr(
+                          widget.user!.uid,
+                          (currentUserDocument?.following?.toList() ?? [])
+                              .toList()) ==
+                      false) &&
+                  (currentUserUid != widget.user?.uid))
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                   child: AuthUserStreamWidget(
@@ -214,50 +217,55 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                     ),
                   ),
                 ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'followers':
-                              FieldValue.arrayRemove([widget.user?.uid]),
-                        },
-                      ),
-                    });
-
-                    await widget.user!.reference.update({
-                      ...mapToFirestore(
-                        {
-                          'following': FieldValue.arrayRemove([currentUserUid]),
-                        },
-                      ),
-                    });
-                  },
-                  text: FFLocalizations.of(context).getText(
-                    'vqmpcjwj' /* Remove */,
-                  ),
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Outfit',
-                          color: FlutterFlowTheme.of(context).primaryBackground,
+              if (currentUserUid == widget.id)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      await currentUserReference!.update({
+                        ...mapToFirestore(
+                          {
+                            'followers':
+                                FieldValue.arrayRemove([widget.user?.uid]),
+                          },
                         ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                      });
+
+                      await widget.user!.reference.update({
+                        ...mapToFirestore(
+                          {
+                            'following':
+                                FieldValue.arrayRemove([currentUserUid]),
+                          },
+                        ),
+                      });
+                    },
+                    text: FFLocalizations.of(context).getText(
+                      'vqmpcjwj' /* Remove */,
                     ),
-                    borderRadius: BorderRadius.circular(30.0),
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Outfit',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ],

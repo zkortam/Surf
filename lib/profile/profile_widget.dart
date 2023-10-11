@@ -168,6 +168,12 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
+                                                  Text(
+                                                    widget.userID,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
                                                   Material(
                                                     color: Colors.transparent,
                                                     elevation: 2.0,
@@ -710,87 +716,81 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       FFButtonWidget(
                                                                     onPressed:
                                                                         () async {
-                                                                      final firestoreBatch = FirebaseFirestore
-                                                                          .instance
-                                                                          .batch();
-                                                                      try {
-                                                                        firestoreBatch.update(
-                                                                            profileUsersRecord!.reference,
+                                                                      await currentUserReference!
+                                                                          .update({
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'following':
+                                                                                FieldValue.arrayUnion([
+                                                                              widget.userID
+                                                                            ]),
+                                                                          },
+                                                                        ),
+                                                                      });
+
+                                                                      await profileUsersRecord!
+                                                                          .reference
+                                                                          .update({
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'followers':
+                                                                                FieldValue.arrayUnion([
+                                                                              currentUserUid
+                                                                            ]),
+                                                                          },
+                                                                        ),
+                                                                      });
+
+                                                                      context
+                                                                          .goNamed(
+                                                                        'Profile',
+                                                                        queryParameters:
                                                                             {
-                                                                              ...mapToFirestore(
-                                                                                {
-                                                                                  'followers': FieldValue.arrayUnion([
-                                                                                    currentUserUid
-                                                                                  ]),
-                                                                                },
-                                                                              ),
-                                                                            });
+                                                                          'userID':
+                                                                              serializeParam(
+                                                                            widget.userID,
+                                                                            ParamType.String,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                      );
 
-                                                                        firestoreBatch.update(
-                                                                            currentUserReference!,
-                                                                            {
-                                                                              ...mapToFirestore(
-                                                                                {
-                                                                                  'following': FieldValue.arrayUnion([
-                                                                                    widget.userID
-                                                                                  ]),
-                                                                                },
-                                                                              ),
-                                                                            });
-
-                                                                        firestoreBatch.update(
-                                                                            profileUsersRecord!.reference,
-                                                                            {
-                                                                              ...mapToFirestore(
-                                                                                {
-                                                                                  'notifications': FieldValue.arrayUnion([
-                                                                                    getNotificationFirestoreData(
-                                                                                      createNotificationStruct(
-                                                                                        category: 2,
-                                                                                        itemID: currentUserUid,
-                                                                                        time: getCurrentTimestamp,
-                                                                                        isMarkedAsRead: false,
-                                                                                        notifID: 'NF${profileUsersRecord?.notifications?.length?.toString()}',
-                                                                                        userID: profileUsersRecord?.uid,
-                                                                                        iDUserFrom: currentUserUid,
-                                                                                        clearUnsetFields: false,
-                                                                                      ),
-                                                                                      true,
-                                                                                    )
-                                                                                  ]),
-                                                                                },
-                                                                              ),
-                                                                            });
-
-                                                                        context
-                                                                            .goNamed(
-                                                                          'Profile',
-                                                                          queryParameters:
-                                                                              {
-                                                                            'userID':
-                                                                                serializeParam(
-                                                                              widget.userID,
-                                                                              ParamType.String,
-                                                                            ),
-                                                                          }.withoutNulls,
-                                                                        );
-
-                                                                        triggerPushNotification(
-                                                                          notificationTitle:
-                                                                              'New Follower',
-                                                                          notificationText:
-                                                                              '@${currentUserDisplayName} followed you',
-                                                                          userRefs: [
-                                                                            profileUsersRecord!.reference
-                                                                          ],
-                                                                          initialPageName:
-                                                                              'Profile',
-                                                                          parameterData: {},
-                                                                        );
-                                                                      } finally {
-                                                                        await firestoreBatch
-                                                                            .commit();
-                                                                      }
+                                                                      await profileUsersRecord!
+                                                                          .reference
+                                                                          .update({
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'notifications':
+                                                                                FieldValue.arrayUnion([
+                                                                              getNotificationFirestoreData(
+                                                                                createNotificationStruct(
+                                                                                  category: 2,
+                                                                                  itemID: currentUserUid,
+                                                                                  time: getCurrentTimestamp,
+                                                                                  isMarkedAsRead: false,
+                                                                                  notifID: 'NF${profileUsersRecord?.notifications?.length?.toString()}',
+                                                                                  userID: profileUsersRecord?.uid,
+                                                                                  iDUserFrom: currentUserUid,
+                                                                                  clearUnsetFields: false,
+                                                                                ),
+                                                                                true,
+                                                                              )
+                                                                            ]),
+                                                                          },
+                                                                        ),
+                                                                      });
+                                                                      triggerPushNotification(
+                                                                        notificationTitle:
+                                                                            'New Follower',
+                                                                        notificationText:
+                                                                            '@${currentUserDisplayName} followed you',
+                                                                        userRefs: [
+                                                                          profileUsersRecord!
+                                                                              .reference
+                                                                        ],
+                                                                        initialPageName:
+                                                                            'Profile',
+                                                                        parameterData: {},
+                                                                      );
                                                                     },
                                                                     text: FFLocalizations.of(
                                                                             context)

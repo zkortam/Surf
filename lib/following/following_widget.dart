@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -34,13 +33,6 @@ class _FollowingWidgetState extends State<FollowingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => FollowingModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().paramholder != 'pintosettapp') {
-        context.pushNamed('enterPin');
-      }
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

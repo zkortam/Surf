@@ -1,9 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/bottom_bar_error_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -46,6 +49,17 @@ class _DateOfBirthWidgetState extends State<DateOfBirthWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => DateOfBirthModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if ((valueOrDefault(currentUserDocument?.realName, '') != null &&
+              valueOrDefault(currentUserDocument?.realName, '') != '') &&
+          (currentUserPhoto != null && currentUserPhoto != '')) {
+        context.goNamed('Home');
+      } else {
+        return;
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -201,6 +215,11 @@ class _DateOfBirthWidgetState extends State<DateOfBirthWidget>
                                           if (functions.checkBirthday(
                                               _model.datePicked!)) {
                                             context.goNamed('createProfile');
+
+                                            await currentUserReference!
+                                                .update(createUsersRecordData(
+                                              dob: _model.datePicked,
+                                            ));
                                           } else {
                                             context.goNamed('entry');
 

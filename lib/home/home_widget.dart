@@ -356,53 +356,129 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             ),
                                           ),
                                         ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 0.0),
-                                        child: StreamBuilder<List<PostsRecord>>(
-                                          stream: queryPostsRecord(
-                                            queryBuilder: (postsRecord) =>
-                                                postsRecord.orderBy(
-                                                    'post.timestamp',
-                                                    descending: true),
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child: SpinKitRipple(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 50.0,
-                                                  ),
+                                      Stack(
+                                        children: [
+                                          if (!_model.isFollowersOnly)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 10.0, 10.0, 0.0),
+                                              child: StreamBuilder<
+                                                  List<PostsRecord>>(
+                                                stream: queryPostsRecord(
+                                                  queryBuilder: (postsRecord) =>
+                                                      postsRecord.orderBy(
+                                                          'post.timestamp',
+                                                          descending: true),
                                                 ),
-                                              );
-                                            }
-                                            List<PostsRecord>
-                                                columnPostsRecordList =
-                                                snapshot.data!;
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: List.generate(
-                                                  columnPostsRecordList.length,
-                                                  (columnIndex) {
-                                                final columnPostsRecord =
-                                                    columnPostsRecordList[
-                                                        columnIndex];
-                                                return PostWidget(
-                                                  key: Key(
-                                                      'Key07v_${columnIndex}_of_${columnPostsRecordList.length}'),
-                                                  post: columnPostsRecord,
-                                                  isComment: _model.isComment,
-                                                );
-                                              }).divide(SizedBox(height: 10.0)),
-                                            );
-                                          },
-                                        ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child: SpinKitRipple(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 50.0,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<PostsRecord>
+                                                      columnPostsRecordList =
+                                                      snapshot.data!;
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: List.generate(
+                                                        columnPostsRecordList
+                                                            .length,
+                                                        (columnIndex) {
+                                                      final columnPostsRecord =
+                                                          columnPostsRecordList[
+                                                              columnIndex];
+                                                      return PostWidget(
+                                                        key: Key(
+                                                            'Key07v_${columnIndex}_of_${columnPostsRecordList.length}'),
+                                                        post: columnPostsRecord,
+                                                        isComment:
+                                                            _model.isComment,
+                                                      );
+                                                    }).divide(
+                                                        SizedBox(height: 10.0)),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          if (_model.isFollowersOnly)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 10.0, 10.0, 0.0),
+                                              child: AuthUserStreamWidget(
+                                                builder: (context) =>
+                                                    StreamBuilder<
+                                                        List<PostsRecord>>(
+                                                  stream: queryPostsRecord(
+                                                    queryBuilder: (postsRecord) => postsRecord
+                                                        .whereIn(
+                                                            'post.author',
+                                                            (currentUserDocument
+                                                                    ?.following
+                                                                    ?.toList() ??
+                                                                []))
+                                                        .orderBy(
+                                                            'post.timestamp',
+                                                            descending: true),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child: SpinKitRipple(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 50.0,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<PostsRecord>
+                                                        columnPostsRecordList =
+                                                        snapshot.data!;
+                                                    return Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: List.generate(
+                                                          columnPostsRecordList
+                                                              .length,
+                                                          (columnIndex) {
+                                                        final columnPostsRecord =
+                                                            columnPostsRecordList[
+                                                                columnIndex];
+                                                        return PostWidget(
+                                                          key: Key(
+                                                              'Key80e_${columnIndex}_of_${columnPostsRecordList.length}'),
+                                                          post:
+                                                              columnPostsRecord,
+                                                          isComment:
+                                                              _model.isComment,
+                                                        );
+                                                      }).divide(SizedBox(
+                                                          height: 10.0)),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -461,8 +537,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             },
                                           ),
                                           FlutterFlowIconButton(
-                                            borderColor:
-                                                FlutterFlowTheme.of(context)
+                                            borderColor: _model.isFollowersOnly
+                                                ? Color(0xFFF5C338)
+                                                : FlutterFlowTheme.of(context)
                                                     .primaryText,
                                             borderRadius: 20.0,
                                             borderWidth: 3.0,
@@ -474,8 +551,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       .primaryText,
                                               size: 22.0,
                                             ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                            onPressed: () async {
+                                              if (_model.isFollowersOnly) {
+                                                setState(() {
+                                                  _model.isFollowersOnly =
+                                                      false;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _model.isFollowersOnly = true;
+                                                });
+                                              }
                                             },
                                           ),
                                         ],

@@ -132,18 +132,18 @@ final parametersBuilderMap =
   'forgotPassword': ParameterData.none(),
   'Threads': ParameterData.none(),
   'createPost': ParameterData.none(),
-  'singleThread': (data) async => ParameterData(
-        allParams: {
-          'thread': await getDocumentParameter<ThreadRecord>(
-              data, 'thread', ThreadRecord.fromSnapshot),
-          'action': getParameter<int>(data, 'action'),
-          'username': getParameter<String>(data, 'username'),
-        },
-      ),
   'singlePost': (data) async => ParameterData(
         allParams: {
           'posts': await getDocumentParameter<PostsRecord>(
               data, 'posts', PostsRecord.fromSnapshot),
+          'action': getParameter<int>(data, 'action'),
+          'username': getParameter<String>(data, 'username'),
+        },
+      ),
+  'singleThread': (data) async => ParameterData(
+        allParams: {
+          'thread': await getDocumentParameter<ThreadRecord>(
+              data, 'thread', ThreadRecord.fromSnapshot),
           'action': getParameter<int>(data, 'action'),
           'username': getParameter<String>(data, 'username'),
         },
@@ -221,6 +221,7 @@ final parametersBuilderMap =
       ),
   'muluploadtest': ParameterData.none(),
   'Home': ParameterData.none(),
+  'LoggingIn': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

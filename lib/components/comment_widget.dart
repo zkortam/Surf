@@ -223,6 +223,14 @@ class _CommentWidgetState extends State<CommentWidget> {
                                                 ),
                                           ),
                                         ),
+                                        Text(
+                                          valueOrDefault<String>(
+                                            widget.comment?.authorid,
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -355,51 +363,55 @@ class _CommentWidgetState extends State<CommentWidget> {
               ),
               if (widget.comment?.imageHash?.image != null &&
                   widget.comment?.imageHash?.image != '')
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 240.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Visibility(
-                      visible: widget.comment?.imageHash?.image != null &&
-                          widget.comment?.imageHash?.image != '',
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: ViewImageWidget(
-                                  image: widget.comment!.imageHash.image,
-                                ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: OctoImage(
-                            placeholderBuilder: OctoPlaceholder.blurHash(
-                              widget.comment!.imageHash.blurHash,
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 240.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Visibility(
+                        visible: widget.comment?.imageHash?.image != null &&
+                            widget.comment?.imageHash?.image != '',
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: ViewImageWidget(
+                                    image: widget.comment!.imageHash.image,
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: OctoImage(
+                              placeholderBuilder: OctoPlaceholder.blurHash(
+                                widget.comment!.imageHash.blurHash,
+                              ),
+                              image: NetworkImage(
+                                widget.comment!.imageHash.image,
+                              ),
+                              width: 300.0,
+                              height: 200.0,
+                              fit: BoxFit.cover,
                             ),
-                            image: NetworkImage(
-                              widget.comment!.imageHash.image,
-                            ),
-                            width: 300.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

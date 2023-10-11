@@ -144,6 +144,11 @@ class UsersRecord extends FirestoreRecord {
   bool get isCompressed => _isCompressed ?? false;
   bool hasIsCompressed() => _isCompressed != null;
 
+  // "dob" field.
+  DateTime? _dob;
+  DateTime? get dob => _dob;
+  bool hasDob() => _dob != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -179,6 +184,7 @@ class UsersRecord extends FirestoreRecord {
     _isStealth = snapshotData['isStealth'] as bool?;
     _complete = snapshotData['complete'] as bool?;
     _isCompressed = snapshotData['isCompressed'] as bool?;
+    _dob = snapshotData['dob'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -253,6 +259,11 @@ class UsersRecord extends FirestoreRecord {
           'isStealth': snapshot.data['isStealth'],
           'complete': snapshot.data['complete'],
           'isCompressed': snapshot.data['isCompressed'],
+          'dob': convertAlgoliaParam(
+            snapshot.data['dob'],
+            ParamType.DateTime,
+            false,
+          ),
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -307,6 +318,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isStealth,
   bool? complete,
   bool? isCompressed,
+  DateTime? dob,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -328,6 +340,7 @@ Map<String, dynamic> createUsersRecordData({
       'isStealth': isStealth,
       'complete': complete,
       'isCompressed': isCompressed,
+      'dob': dob,
     }.withoutNulls,
   );
 
@@ -364,7 +377,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.blocked, e2?.blocked) &&
         e1?.isStealth == e2?.isStealth &&
         e1?.complete == e2?.complete &&
-        e1?.isCompressed == e2?.isCompressed;
+        e1?.isCompressed == e2?.isCompressed &&
+        e1?.dob == e2?.dob;
   }
 
   @override
@@ -393,7 +407,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.blocked,
         e?.isStealth,
         e?.complete,
-        e?.isCompressed
+        e?.isCompressed,
+        e?.dob
       ]);
 
   @override

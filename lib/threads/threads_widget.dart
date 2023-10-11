@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/thread_widget.dart';
@@ -50,6 +51,25 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
       ],
     ),
     'threadOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(-48.0, 0.0),
+          end: Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'threadOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         MoveEffect(
@@ -221,67 +241,172 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                           ),
                                         ),
                                       ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 0.0, 5.0, 0.0),
-                                      child: StreamBuilder<List<ThreadRecord>>(
-                                        stream: queryThreadRecord(
-                                          queryBuilder: (threadRecord) =>
-                                              threadRecord.orderBy(
-                                                  'thread.timestamp',
-                                                  descending: true),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitRipple(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 50.0,
-                                                ),
+                                    Stack(
+                                      children: [
+                                        if (!_model.isFollowersOnly)
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 0.0, 5.0, 0.0),
+                                            child: StreamBuilder<
+                                                List<ThreadRecord>>(
+                                              stream: queryThreadRecord(
+                                                queryBuilder: (threadRecord) =>
+                                                    threadRecord.orderBy(
+                                                        'thread.timestamp',
+                                                        descending: true),
                                               ),
-                                            );
-                                          }
-                                          List<ThreadRecord>
-                                              columnThreadRecordList =
-                                              snapshot.data!;
-                                          return Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                    columnThreadRecordList
-                                                        .length, (columnIndex) {
-                                              final columnThreadRecord =
-                                                  columnThreadRecordList[
-                                                      columnIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 5.0, 0.0),
-                                                child: ThreadWidget(
-                                                  key: Key(
-                                                      'Key5kl_${columnIndex}_of_${columnThreadRecordList.length}'),
-                                                  thread: columnThreadRecord,
-                                                  isComment: columnThreadRecord
-                                                          .thread
-                                                          .comments
-                                                          .length >
-                                                      2,
-                                                  isCommentAllowed:
-                                                      _model.isCommentAllowed,
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'threadOnPageLoadAnimation1']!),
-                                              );
-                                            })
-                                                .divide(SizedBox(height: 10.0))
-                                                .around(SizedBox(height: 10.0)),
-                                          );
-                                        },
-                                      ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child: SpinKitRipple(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 50.0,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<ThreadRecord>
+                                                    columnThreadRecordList =
+                                                    snapshot.data!;
+                                                return Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                          columnThreadRecordList
+                                                              .length,
+                                                          (columnIndex) {
+                                                    final columnThreadRecord =
+                                                        columnThreadRecordList[
+                                                            columnIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  0.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                      child: ThreadWidget(
+                                                        key: Key(
+                                                            'Key5kl_${columnIndex}_of_${columnThreadRecordList.length}'),
+                                                        thread:
+                                                            columnThreadRecord,
+                                                        isComment:
+                                                            columnThreadRecord
+                                                                    .thread
+                                                                    .comments
+                                                                    .length >
+                                                                2,
+                                                        isCommentAllowed: _model
+                                                            .isCommentAllowed,
+                                                      ).animateOnPageLoad(
+                                                          animationsMap[
+                                                              'threadOnPageLoadAnimation1']!),
+                                                    );
+                                                  })
+                                                      .divide(SizedBox(
+                                                          height: 10.0))
+                                                      .around(SizedBox(
+                                                          height: 10.0)),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        if (_model.isFollowersOnly)
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 0.0, 5.0, 0.0),
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) =>
+                                                  StreamBuilder<
+                                                      List<ThreadRecord>>(
+                                                stream: queryThreadRecord(
+                                                  queryBuilder: (threadRecord) =>
+                                                      threadRecord
+                                                          .whereIn(
+                                                              'thread.author',
+                                                              (currentUserDocument
+                                                                      ?.following
+                                                                      ?.toList() ??
+                                                                  []))
+                                                          .orderBy(
+                                                              'thread.timestamp',
+                                                              descending: true),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child: SpinKitRipple(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 50.0,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<ThreadRecord>
+                                                      columnThreadRecordList =
+                                                      snapshot.data!;
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: List.generate(
+                                                            columnThreadRecordList
+                                                                .length,
+                                                            (columnIndex) {
+                                                      final columnThreadRecord =
+                                                          columnThreadRecordList[
+                                                              columnIndex];
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                        child: ThreadWidget(
+                                                          key: Key(
+                                                              'Keyw84_${columnIndex}_of_${columnThreadRecordList.length}'),
+                                                          thread:
+                                                              columnThreadRecord,
+                                                          isComment:
+                                                              columnThreadRecord
+                                                                      .thread
+                                                                      .comments
+                                                                      .length >
+                                                                  2,
+                                                          isCommentAllowed: _model
+                                                              .isCommentAllowed,
+                                                        ).animateOnPageLoad(
+                                                            animationsMap[
+                                                                'threadOnPageLoadAnimation2']!),
+                                                      );
+                                                    })
+                                                        .divide(SizedBox(
+                                                            height: 10.0))
+                                                        .around(SizedBox(
+                                                            height: 10.0)),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -338,8 +463,9 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                           },
                                         ),
                                         FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
+                                          borderColor: _model.isFollowersOnly
+                                              ? Color(0xFFF5C338)
+                                              : FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           borderRadius: 20.0,
                                           borderWidth: 3.0,
@@ -350,8 +476,16 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                 .primaryText,
                                             size: 22.0,
                                           ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
+                                          onPressed: () async {
+                                            if (_model.isFollowersOnly) {
+                                              setState(() {
+                                                _model.isFollowersOnly = false;
+                                              });
+                                            } else {
+                                              setState(() {
+                                                _model.isFollowersOnly = true;
+                                              });
+                                            }
                                           },
                                         ),
                                       ],
@@ -495,7 +629,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                         isComment: false,
                                         isCommentAllowed: false,
                                       ).animateOnPageLoad(animationsMap[
-                                          'threadOnPageLoadAnimation2']!),
+                                          'threadOnPageLoadAnimation3']!),
                                     );
                                   })
                                       .divide(SizedBox(height: 10.0))

@@ -470,7 +470,7 @@ class _EntryWidgetState extends State<EntryWidget>
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           GoRouter.of(context)
-                                              .prepareAuthEvent(true);
+                                              .prepareAuthEvent();
                                           final user = await authManager
                                               .signInWithGoogle(context);
                                           if (user == null) {
@@ -478,9 +478,16 @@ class _EntryWidgetState extends State<EntryWidget>
                                           }
 
                                           context.goNamedAuth(
-                                            'dateOfBirth',
+                                            'LoggingIn',
                                             context.mounted,
-                                            ignoreRedirect: true,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                              ),
+                                            },
                                           );
                                         },
                                         text:
@@ -534,7 +541,7 @@ class _EntryWidgetState extends State<EntryWidget>
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 GoRouter.of(context)
-                                                    .prepareAuthEvent(true);
+                                                    .prepareAuthEvent();
                                                 final user = await authManager
                                                     .signInWithApple(context);
                                                 if (user == null) {
@@ -542,9 +549,17 @@ class _EntryWidgetState extends State<EntryWidget>
                                                 }
 
                                                 context.goNamedAuth(
-                                                  'dateOfBirth',
+                                                  'LoggingIn',
                                                   context.mounted,
-                                                  ignoreRedirect: true,
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
                                                 );
                                               },
                                               text: FFLocalizations.of(context)

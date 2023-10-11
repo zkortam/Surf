@@ -312,3 +312,33 @@ String randomImage(
 
   return urls[randomNumber];
 }
+
+int identifySocialMediaPlatform(String link) {
+  if (link.contains('twitter.com') ||
+      link.contains('t.co') ||
+      link.contains('x.com')) {
+    if (link.contains("reddit.com")) {
+      return -1;
+    } else {
+      return 10; // Twitter
+    }
+  } else if (link.contains('instagram.com')) {
+    return 1; // Instagram
+  } else if (link.contains('facebook.com')) {
+    return 2; // Facebook
+  } else if (link.contains('youtube.com') || link.contains('youtu.be')) {
+    return 3; // YouTube
+  } else if (link.contains('tiktok.com')) {
+    return 4; // TikTok
+  } else if (link.contains('gettr.com')) {
+    return 5; // Gettr
+  } else if (link.contains('linkedin.com')) {
+    return 7; // LinkedIn
+  } else if (link.contains('rumble.com')) {
+    return 8; // Rumble
+  } else if (link.contains('reddit.com')) {
+    return -1; // Reddit
+  } else {
+    return -1; // Unrecognized or other platform
+  }
+}

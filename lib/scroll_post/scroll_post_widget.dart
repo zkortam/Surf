@@ -146,6 +146,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                 updateCallback: () => setState(() {}),
                                 child: PostWidget(
                                   post: widget.post!,
+                                  isComment: false,
                                 ),
                               ),
                             ),

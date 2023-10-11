@@ -14,6 +14,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,6 +52,13 @@ class _ThreadWidgetState extends State<ThreadWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ThreadModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.firstCommentID = widget.thread!.thread.comments.first.authorid;
+      });
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -1256,339 +1264,626 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     width: 160.0,
                                     height: 45.0,
                                     decoration: BoxDecoration(),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  2.0, 0.0, 5.0, 0.0),
-                                          child: Stack(
-                                            children: [
-                                              if (widget.thread?.thread?.link !=
-                                                      null &&
-                                                  widget.thread?.thread?.link !=
-                                                      '')
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                ThreadsLinkWidget(
-                                                              link: widget
-                                                                  .thread
-                                                                  ?.thread
-                                                                  ?.link,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      'syqe9c88' /* Link */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 110.0,
-                                                      height: 37.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: Color(0xFFDA721A),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    2.0, 0.0, 5.0, 0.0),
+                                            child: Stack(
+                                              children: [
+                                                if ((widget.thread?.thread
+                                                                ?.link !=
+                                                            null &&
+                                                        widget.thread?.thread
+                                                                ?.link !=
+                                                            '') &&
+                                                    (functions
+                                                            .identifySocialMediaPlatform(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link) ==
+                                                        -1))
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.00, 0.00),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  ThreadsLinkWidget(
+                                                                link: widget
+                                                                    .thread
+                                                                    ?.thread
+                                                                    ?.link,
                                                               ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                              if (widget.thread!.thread.hashtags
-                                                      .length >
-                                                  0)
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                ThreadsHashtagsWidget(
-                                                              hashtags: functions
-                                                                  .listToString(widget
-                                                                      .thread!
-                                                                      .thread
-                                                                      .hashtags
-                                                                      .toList()),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      '82dxbpkx' /* Hashtags */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 110.0,
-                                                      height: 37.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: Color(0xFF284EFB),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                              ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                              if ((widget.thread?.thread
-                                                              ?.link !=
-                                                          null &&
-                                                      widget.thread?.thread
-                                                              ?.link !=
-                                                          '') &&
-                                                  (widget.thread!.thread
-                                                          .hashtags.length >
-                                                      0))
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                ThreadsMoreWidget(
-                                                              hashtags: functions
-                                                                  .listToString(widget
-                                                                      .thread!
-                                                                      .thread
-                                                                      .hashtags
-                                                                      .toList()),
-                                                              link: widget
-                                                                  .thread!
-                                                                  .thread
-                                                                  .link,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      'g6zoo1sh' /* More */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 110.0,
-                                                      height: 37.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                              ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                        if (widget
-                                                .thread?.thread?.isPolitical ==
-                                            true)
-                                          Stack(
-                                            children: [
-                                              if (widget.thread?.thread
-                                                      ?.politicalPosition ==
-                                                  -1)
-                                                FlutterFlowIconButton(
-                                                  borderRadius: 20.0,
-                                                  buttonSize: 37.0,
-                                                  fillColor: Color(0xFF284EFB),
-                                                  icon: FaIcon(
-                                                    FontAwesomeIcons.dove,
-                                                    color: Colors.white,
-                                                    size: 17.0,
-                                                  ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'Liberal pressed ...');
-                                                  },
-                                                ),
-                                              if (widget.thread?.thread
-                                                      ?.politicalPosition ==
-                                                  0)
-                                                FlutterFlowIconButton(
-                                                  borderRadius: 20.0,
-                                                  buttonSize: 37.0,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      text: FFLocalizations.of(
                                                               context)
-                                                          .primaryText,
-                                                  icon: Icon(
-                                                    Icons.center_focus_strong,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    size: 17.0,
+                                                          .getText(
+                                                        'syqe9c88' /* Link */,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 110.0,
+                                                        height: 37.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            Color(0xFFDA721A),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(25.0),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'Centrist pressed ...');
-                                                  },
-                                                ),
-                                              if (widget.thread?.thread
-                                                      ?.politicalPosition ==
-                                                  1)
-                                                FlutterFlowIconButton(
-                                                  borderRadius: 20.0,
-                                                  borderWidth: 0.0,
-                                                  buttonSize: 37.0,
-                                                  fillColor: Color(0xFFE5200B),
-                                                  icon: Icon(
-                                                    Icons
-                                                        .local_fire_department_outlined,
-                                                    color: Colors.white,
-                                                    size: 17.0,
+                                                if (widget.thread!.thread
+                                                        .hashtags.length >
+                                                    0)
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.00, 0.00),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  ThreadsHashtagsWidget(
+                                                                hashtags: functions
+                                                                    .listToString(widget
+                                                                        .thread!
+                                                                        .thread
+                                                                        .hashtags
+                                                                        .toList()),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      text: FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        '82dxbpkx' /* Hashtags */,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 110.0,
+                                                        height: 37.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            Color(0xFF284EFB),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(25.0),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'Conservative pressed ...');
+                                                if ((widget.thread?.thread
+                                                                ?.link !=
+                                                            null &&
+                                                        widget.thread?.thread
+                                                                ?.link !=
+                                                            '') &&
+                                                    (widget.thread!.thread
+                                                            .hashtags.length >
+                                                        0))
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.00, 0.00),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  ThreadsMoreWidget(
+                                                                hashtags: functions
+                                                                    .listToString(widget
+                                                                        .thread!
+                                                                        .thread
+                                                                        .hashtags
+                                                                        .toList()),
+                                                                link: widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link,
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      text: FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'g6zoo1sh' /* More */,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 110.0,
+                                                        height: 37.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(25.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await launchURL(widget
+                                                        .thread!.thread.link);
                                                   },
+                                                  child: Stack(
+                                                    children: [
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          10)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .twitter,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          1)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .instagram,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 20.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          2)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .facebook,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 20.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          3)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: Icon(
+                                                            Icons.play_arrow,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          4)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: Icon(
+                                                            Icons.tiktok,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          5)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .fire,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          7)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .linkedinIn,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                      if (functions
+                                                              .identifySocialMediaPlatform(
+                                                                  widget
+                                                                      .thread!
+                                                                      .thread
+                                                                      .link) ==
+                                                          8)
+                                                        FlutterFlowIconButton(
+                                                          borderColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 2.0,
+                                                          buttonSize: 35.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .video_collection_sharp,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 18.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await launchURL(
+                                                                widget
+                                                                    .thread!
+                                                                    .thread
+                                                                    .link);
+                                                          },
+                                                        ),
+                                                    ],
+                                                  ),
                                                 ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                      ],
+                                          if (widget.thread?.thread
+                                                  ?.isPolitical ==
+                                              true)
+                                            Stack(
+                                              children: [
+                                                if (widget.thread?.thread
+                                                        ?.politicalPosition ==
+                                                    -1)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    buttonSize: 37.0,
+                                                    fillColor:
+                                                        Color(0xFF284EFB),
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.dove,
+                                                      color: Colors.white,
+                                                      size: 17.0,
+                                                    ),
+                                                    onPressed: () {
+                                                      print(
+                                                          'Liberal pressed ...');
+                                                    },
+                                                  ),
+                                                if (widget.thread?.thread
+                                                        ?.politicalPosition ==
+                                                    0)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    buttonSize: 37.0,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    icon: Icon(
+                                                      Icons.center_focus_strong,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      size: 17.0,
+                                                    ),
+                                                    onPressed: () {
+                                                      print(
+                                                          'Centrist pressed ...');
+                                                    },
+                                                  ),
+                                                if (widget.thread?.thread
+                                                        ?.politicalPosition ==
+                                                    1)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 0.0,
+                                                    buttonSize: 37.0,
+                                                    fillColor:
+                                                        Color(0xFFE5200B),
+                                                    icon: Icon(
+                                                      Icons
+                                                          .local_fire_department_outlined,
+                                                      color: Colors.white,
+                                                      size: 17.0,
+                                                    ),
+                                                    onPressed: () {
+                                                      print(
+                                                          'Conservative pressed ...');
+                                                    },
+                                                  ),
+                                              ],
+                                            ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Container(

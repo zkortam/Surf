@@ -77,6 +77,20 @@ class _PostWidgetState extends State<PostWidget> {
             focusColor: Colors.transparent,
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
+            onTap: () async {
+              context.pushNamed(
+                'singlePost',
+                queryParameters: {
+                  'posts': serializeParam(
+                    widget.post,
+                    ParamType.Document,
+                  ),
+                }.withoutNulls,
+                extra: <String, dynamic>{
+                  'posts': widget.post,
+                },
+              );
+            },
             onLongPress: () async {
               await showModalBottomSheet(
                 isScrollControlled: true,
@@ -152,7 +166,7 @@ class _PostWidgetState extends State<PostWidget> {
                         width: double.infinity,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xF914181B),
+                          color: Color(0xFD14181B),
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         child: Column(
@@ -731,6 +745,20 @@ class _PostWidgetState extends State<PostWidget> {
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.goNamed(
+                      'singlePost',
+                      queryParameters: {
+                        'posts': serializeParam(
+                          widget.post,
+                          ParamType.Document,
+                        ),
+                      }.withoutNulls,
+                      extra: <String, dynamic>{
+                        'posts': widget.post,
+                      },
+                    );
+                  },
                   onLongPress: () async {
                     await showModalBottomSheet(
                       isScrollControlled: true,
@@ -808,7 +836,7 @@ class _PostWidgetState extends State<PostWidget> {
                               width: double.infinity,
                               height: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xFC14181B),
+                                color: Color(0xFD14181B),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Column(
