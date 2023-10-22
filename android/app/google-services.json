@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "577071998373",
+    "firebase_url": "https://surfappofficial-default-rtdb.firebaseio.com",
+    "project_id": "surfappofficial",
+    "storage_bucket": "surfappofficial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577071998373:android:7400031a872905d85f344c",
+        "android_client_info": {
+          "package_name": "com.surfsocial.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577071998373-2auahf10iitvv2j8rt6rauoqfeak8c29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.surfsocial.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "577071998373-eikubt6l8bu28iojb9d3oia5jjv5e12n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp156pAcZz8i3f4XuXJPER79evhansbxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577071998373-eikubt6l8bu28iojb9d3oia5jjv5e12n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "577071998373-1s364od4p35m3497nk1tfm7h035gsr6h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.surfsocial.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
