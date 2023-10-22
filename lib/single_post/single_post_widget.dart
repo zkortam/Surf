@@ -4,7 +4,7 @@ import '/backend/firebase_storage/storage.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/comment_widget.dart';
-import '/components/p_c_comment_widget.dart';
+import '/components/p_c_comment_light_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -93,6 +93,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
     });
 
     _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -105,6 +106,15 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Builder(
@@ -616,6 +626,8 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                       child: TextFormField(
                                                         controller: _model
                                                             .textController,
+                                                        focusNode: _model
+                                                            .textFieldFocusNode,
                                                         autofocus: true,
                                                         obscureText: false,
                                                         decoration:
@@ -1248,18 +1260,28 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                               comment:
                                                                   columnCommentsRecord
                                                                       .comment,
+                                                              authorIDreplyto:
+                                                                  widget
+                                                                      .posts!
+                                                                      .post
+                                                                      .author,
                                                             ),
                                                           ),
                                                         if (responsiveVisibility(
                                                           context: context,
                                                           phone: false,
                                                         ))
-                                                          PCCommentWidget(
+                                                          PCCommentLightWidget(
                                                             key: Key(
                                                                 'Keykq9_${columnIndex}_of_${columnCommentsRecordList.length}'),
                                                             comment:
                                                                 columnCommentsRecord
                                                                     .comment,
+                                                            authorIDreplyto:
+                                                                widget
+                                                                    .posts!
+                                                                    .post
+                                                                    .author,
                                                           ),
                                                       ],
                                                     ),

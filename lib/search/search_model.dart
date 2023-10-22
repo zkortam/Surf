@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'search_widget.dart' show SearchWidget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -29,16 +30,19 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   // Model for PCNavBar component.
   late PCNavBarModel pCNavBarModel;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
   // Algolia Search Results from action on TextField
   List<UsersRecord>? algoliaSearchResults1 = [];
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
   // Algolia Search Results from action on TextField
   List<PostsRecord>? algoliaSearchResults2 = [];
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
   // Algolia Search Results from action on TextField
@@ -53,8 +57,13 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   void dispose() {
     unfocusNode.dispose();
     pCNavBarModel.dispose();
+    textFieldFocusNode1?.dispose();
     textController1?.dispose();
+
+    textFieldFocusNode2?.dispose();
     textController2?.dispose();
+
+    textFieldFocusNode3?.dispose();
     textController3?.dispose();
   }
 

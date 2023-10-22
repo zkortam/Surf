@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/pcomment_widget.dart';
+import '/components/p_c_comment_dark_widget.dart';
 import '/components/thread_poll_widget.dart';
 import '/components/threads_comp_widget.dart';
 import '/components/threads_hashtags_widget.dart';
@@ -11,10 +11,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -644,7 +646,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 final columnCommentsRecord =
                                                     columnCommentsRecordList[
                                                         columnIndex];
-                                                return PcommentWidget(
+                                                return PCCommentDarkWidget(
                                                   key: Key(
                                                       'Keyeuz_${columnIndex}_of_${columnCommentsRecordList.length}'),
                                                   comment: columnCommentsRecord
@@ -1012,7 +1014,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   children: [
                                     if (functions.getStringLength(
                                             widget.thread!.thread.text) <=
-                                        750)
+                                        999)
                                       Align(
                                         alignment:
                                             AlignmentDirectional(-1.00, 0.00),
@@ -1037,7 +1039,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     if (valueOrDefault<bool>(
                                       functions.getStringLength(
                                               widget.thread!.thread.text) >
-                                          750,
+                                          999,
                                       true,
                                     ))
                                       Padding(
@@ -1082,13 +1084,14 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
+                                                        SelectionArea(
+                                                            child: Text(
                                                           widget.thread!.thread
                                                               .text,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium,
-                                                        ),
+                                                        )),
                                                       ],
                                                     ),
                                                   ),
@@ -1822,63 +1825,205 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                               children: [
                                                 if (widget.thread?.thread
                                                         ?.politicalPosition ==
-                                                    -1)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 20.0,
-                                                    buttonSize: 37.0,
-                                                    fillColor:
-                                                        Color(0xFF284EFB),
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.dove,
-                                                      color: Colors.white,
-                                                      size: 17.0,
+                                                    1)
+                                                  AlignedTooltip(
+                                                    content: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            '38cn2ppn' /* Conservative Leaning */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge,
+                                                        )),
+                                                    offset: 4.0,
+                                                    preferredDirection:
+                                                        AxisDirection.down,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryBackground,
+                                                    elevation: 4.0,
+                                                    tailBaseWidth: 24.0,
+                                                    tailLength: 12.0,
+                                                    waitDuration: Duration(
+                                                        milliseconds: 50),
+                                                    showDuration: Duration(
+                                                        milliseconds: 100),
+                                                    triggerMode:
+                                                        TooltipTriggerMode.tap,
+                                                    child: Visibility(
+                                                      visible: widget
+                                                              .thread
+                                                              ?.thread
+                                                              ?.politicalPosition ==
+                                                          1,
+                                                      child:
+                                                          FlutterFlowIconButton(
+                                                        borderRadius: 20.0,
+                                                        borderWidth: 0.0,
+                                                        buttonSize: 37.0,
+                                                        fillColor:
+                                                            Color(0xFFE5200B),
+                                                        icon: Icon(
+                                                          Icons
+                                                              .local_fire_department_outlined,
+                                                          color: Colors.white,
+                                                          size: 17.0,
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              'Conservative pressed ...');
+                                                        },
+                                                      ),
                                                     ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'Liberal pressed ...');
-                                                    },
                                                   ),
                                                 if (widget.thread?.thread
                                                         ?.politicalPosition ==
                                                     0)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 20.0,
-                                                    buttonSize: 37.0,
-                                                    fillColor:
+                                                  AlignedTooltip(
+                                                    content: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'sjaun6jv' /* Neutral */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge,
+                                                        )),
+                                                    offset: 4.0,
+                                                    preferredDirection:
+                                                        AxisDirection.down,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .primaryText,
-                                                    icon: Icon(
-                                                      Icons.center_focus_strong,
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      size: 17.0,
+                                                            .secondaryBackground,
+                                                    elevation: 4.0,
+                                                    tailBaseWidth: 24.0,
+                                                    tailLength: 12.0,
+                                                    waitDuration: Duration(
+                                                        milliseconds: 50),
+                                                    showDuration: Duration(
+                                                        milliseconds: 100),
+                                                    triggerMode:
+                                                        TooltipTriggerMode.tap,
+                                                    child: Visibility(
+                                                      visible: widget
+                                                              .thread
+                                                              ?.thread
+                                                              ?.politicalPosition ==
+                                                          0,
+                                                      child:
+                                                          FlutterFlowIconButton(
+                                                        borderRadius: 20.0,
+                                                        buttonSize: 37.0,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        icon: Icon(
+                                                          Icons
+                                                              .center_focus_strong,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          size: 17.0,
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              'Centrist pressed ...');
+                                                        },
+                                                      ),
                                                     ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'Centrist pressed ...');
-                                                    },
                                                   ),
                                                 if (widget.thread?.thread
                                                         ?.politicalPosition ==
-                                                    1)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 20.0,
-                                                    borderWidth: 0.0,
-                                                    buttonSize: 37.0,
-                                                    fillColor:
-                                                        Color(0xFFE5200B),
-                                                    icon: Icon(
-                                                      Icons
-                                                          .local_fire_department_outlined,
-                                                      color: Colors.white,
-                                                      size: 17.0,
+                                                    -1)
+                                                  AlignedTooltip(
+                                                    content: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0,
+                                                                    4.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'hlf597wy' /* Liberal Leaning */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge,
+                                                        )),
+                                                    offset: 4.0,
+                                                    preferredDirection:
+                                                        AxisDirection.down,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryBackground,
+                                                    elevation: 4.0,
+                                                    tailBaseWidth: 24.0,
+                                                    tailLength: 12.0,
+                                                    waitDuration: Duration(
+                                                        milliseconds: 50),
+                                                    showDuration: Duration(
+                                                        milliseconds: 100),
+                                                    triggerMode:
+                                                        TooltipTriggerMode.tap,
+                                                    child: Visibility(
+                                                      visible: widget
+                                                              .thread
+                                                              ?.thread
+                                                              ?.politicalPosition ==
+                                                          -1,
+                                                      child:
+                                                          FlutterFlowIconButton(
+                                                        borderRadius: 20.0,
+                                                        buttonSize: 37.0,
+                                                        fillColor:
+                                                            Color(0xFF284EFB),
+                                                        icon: FaIcon(
+                                                          FontAwesomeIcons.dove,
+                                                          color: Colors.white,
+                                                          size: 17.0,
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              'Liberal pressed ...');
+                                                        },
+                                                      ),
                                                     ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'Conservative pressed ...');
-                                                    },
                                                   ),
                                               ],
                                             ),
@@ -2187,7 +2332,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                   final columnCommentsRecord =
                                                       columnCommentsRecordList[
                                                           columnIndex];
-                                                  return PcommentWidget(
+                                                  return PCCommentDarkWidget(
                                                     key: Key(
                                                         'Keyt4v_${columnIndex}_of_${columnCommentsRecordList.length}'),
                                                     comment:

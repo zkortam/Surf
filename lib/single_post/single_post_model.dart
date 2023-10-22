@@ -4,7 +4,7 @@ import '/backend/firebase_storage/storage.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/comment_widget.dart';
-import '/components/p_c_comment_widget.dart';
+import '/components/p_c_comment_light_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -34,6 +34,7 @@ class SinglePostModel extends FlutterFlowModel<SinglePostWidget> {
   // Model for post component.
   late PostModel postModel;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   bool isDataUploading = false;
@@ -52,6 +53,7 @@ class SinglePostModel extends FlutterFlowModel<SinglePostWidget> {
     unfocusNode.dispose();
     pCNavBarModel.dispose();
     postModel.dispose();
+    textFieldFocusNode?.dispose();
     textController?.dispose();
   }
 

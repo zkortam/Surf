@@ -55,9 +55,13 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
     _model = createModel(context, () => CreateProfileModel());
 
     _model.nameController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
     _model.usernameController ??= TextEditingController();
+    _model.usernameFocusNode ??= FocusNode();
     _model.phoneNumberController ??= TextEditingController();
+    _model.phoneNumberFocusNode ??= FocusNode();
     _model.bioController ??= TextEditingController();
+    _model.bioFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -71,6 +75,15 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Title(
@@ -511,6 +524,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               child: TextFormField(
                                                 controller:
                                                     _model.nameController,
+                                                focusNode: _model.nameFocusNode,
                                                 onFieldSubmitted: (_) async {
                                                   if (functions.getStringLength(
                                                           _model.nameController
@@ -674,6 +688,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   child: TextFormField(
                                                     controller: _model
                                                         .usernameController,
+                                                    focusNode: _model
+                                                        .usernameFocusNode,
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.usernameController',
@@ -941,6 +957,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               child: TextFormField(
                                                 controller: _model
                                                     .phoneNumberController,
+                                                focusNode:
+                                                    _model.phoneNumberFocusNode,
                                                 autofocus: true,
                                                 obscureText: false,
                                                 decoration: InputDecoration(
@@ -1034,6 +1052,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               child: TextFormField(
                                                 controller:
                                                     _model.bioController,
+                                                focusNode: _model.bioFocusNode,
                                                 onFieldSubmitted: (_) async {
                                                   if (functions.getStringLength(
                                                           _model.bioController

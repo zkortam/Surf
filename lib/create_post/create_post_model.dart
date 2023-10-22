@@ -61,6 +61,8 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
 
   String postID = 'a';
 
+  String apiKey = '0';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -74,6 +76,7 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   PostsRecord? post;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
   bool isDataUploading = false;
@@ -83,22 +86,32 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
 
   // Stores action output result for [Custom Action - chatGPT] action in Button widget.
   String? threadSummary;
+  // Stores action output result for [Custom Action - chatGPT] action in Button widget.
+  String? isPolitical;
+  // Stores action output result for [Custom Action - chatGPT] action in Button widget.
+  String? threadPolitical;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode4;
   TextEditingController? textController4;
   String? Function(BuildContext, String?)? textController4Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode5;
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode6;
   TextEditingController? textController6;
   String? Function(BuildContext, String?)? textController6Validator;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode7;
   TextEditingController? textController7;
   String? Function(BuildContext, String?)? textController7Validator;
   // Stores action output result for [Custom Action - chatGPT] action in IconButton widget.
@@ -114,12 +127,25 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
     unfocusNode.dispose();
     pCNavBarModel.dispose();
     tabBarController?.dispose();
+    textFieldFocusNode1?.dispose();
     textController1?.dispose();
+
+    textFieldFocusNode2?.dispose();
     textController2?.dispose();
+
+    textFieldFocusNode3?.dispose();
     textController3?.dispose();
+
+    textFieldFocusNode4?.dispose();
     textController4?.dispose();
+
+    textFieldFocusNode5?.dispose();
     textController5?.dispose();
+
+    textFieldFocusNode6?.dispose();
     textController6?.dispose();
+
+    textFieldFocusNode7?.dispose();
     textController7?.dispose();
   }
 

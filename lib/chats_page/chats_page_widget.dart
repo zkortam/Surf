@@ -11,6 +11,7 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,6 +54,7 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
     _model = createModel(context, () => ChatsPageModel());
 
     _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -65,6 +67,15 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return StreamBuilder<List<ChatsRecord>>(
@@ -107,7 +118,7 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
             ? chatsPageChatsRecordList.first
             : null;
         return Title(
-            title: 'chats_page',
+            title: 'chatsPage',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
               onTap: () => _model.unfocusNode.canRequestFocus
@@ -1571,6 +1582,8 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                                           TextFormField(
                                                                         controller:
                                                                             _model.textController,
+                                                                        focusNode:
+                                                                            _model.textFieldFocusNode,
                                                                         autofocus:
                                                                             true,
                                                                         obscureText:

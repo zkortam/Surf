@@ -39,15 +39,19 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   String uploadedFileUrl2 = '';
 
   // State field(s) for name widget.
+  FocusNode? nameFocusNode;
   TextEditingController? nameController;
   String? Function(BuildContext, String?)? nameControllerValidator;
   // State field(s) for username widget.
+  FocusNode? usernameFocusNode;
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
   // State field(s) for phoneNumber widget.
+  FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberController;
   String? Function(BuildContext, String?)? phoneNumberControllerValidator;
   // State field(s) for bio widget.
+  FocusNode? bioFocusNode;
   TextEditingController? bioController;
   String? Function(BuildContext, String?)? bioControllerValidator;
 
@@ -57,9 +61,16 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    nameFocusNode?.dispose();
     nameController?.dispose();
+
+    usernameFocusNode?.dispose();
     usernameController?.dispose();
+
+    phoneNumberFocusNode?.dispose();
     phoneNumberController?.dispose();
+
+    bioFocusNode?.dispose();
     bioController?.dispose();
   }
 

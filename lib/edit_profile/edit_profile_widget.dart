@@ -14,6 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,10 +57,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
 
     _model.nameController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.realName, ''));
+    _model.nameFocusNode ??= FocusNode();
     _model.usernameController ??=
         TextEditingController(text: currentUserDisplayName);
+    _model.usernameFocusNode ??= FocusNode();
     _model.bioController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.bio, ''));
+    _model.bioFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -73,6 +77,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Title(
@@ -541,6 +554,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                             width: double.infinity,
                                             child: TextFormField(
                                               controller: _model.nameController,
+                                              focusNode: _model.nameFocusNode,
                                               onFieldSubmitted: (_) async {
                                                 if (functions.getStringLength(
                                                         _model.nameController
@@ -694,6 +708,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                                 child: TextFormField(
                                                   controller:
                                                       _model.usernameController,
+                                                  focusNode:
+                                                      _model.usernameFocusNode,
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.usernameController',
@@ -1120,6 +1136,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                             width: double.infinity,
                                             child: TextFormField(
                                               controller: _model.bioController,
+                                              focusNode: _model.bioFocusNode,
                                               onFieldSubmitted: (_) async {
                                                 if (functions.getStringLength(
                                                         _model.bioController

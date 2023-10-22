@@ -14,6 +14,7 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -51,6 +52,7 @@ class _PostWidgetState extends State<PostWidget> {
     _model = createModel(context, () => PostModel());
 
     _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -1235,7 +1237,8 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       2.0,
                                                                       0.0,
                                                                       0.0),
-                                                          child: Text(
+                                                          child: SelectionArea(
+                                                              child: Text(
                                                             widget.post!.post
                                                                 .caption
                                                                 .maybeHandleOverflow(
@@ -1255,7 +1258,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       FontWeight
                                                                           .normal,
                                                                 ),
-                                                          ),
+                                                          )),
                                                         ),
                                                     ],
                                                   ),
@@ -1569,54 +1572,85 @@ class _PostWidgetState extends State<PostWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: StreamBuilder<List<CommentsRecord>>(
-                              stream: queryCommentsRecord(
-                                queryBuilder: (commentsRecord) =>
-                                    commentsRecord.where(
-                                  'comment.idReplyTo',
-                                  isEqualTo: widget.post?.post?.id,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 10.0, 10.0),
+                                child: StreamBuilder<List<CommentsRecord>>(
+                                  stream: queryCommentsRecord(
+                                    queryBuilder: (commentsRecord) =>
+                                        commentsRecord.where(
+                                      'comment.idReplyTo',
+                                      isEqualTo: widget.post?.post?.id,
+                                    ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: SpinKitRipple(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 50.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<CommentsRecord>
+                                        columnCommentsRecordList =
+                                        snapshot.data!;
+                                    return SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: List.generate(
+                                                columnCommentsRecordList.length,
+                                                (columnIndex) {
+                                          final columnCommentsRecord =
+                                              columnCommentsRecordList[
+                                                  columnIndex];
+                                          return CommentWidget(
+                                            key: Key(
+                                                'Key6jq_${columnIndex}_of_${columnCommentsRecordList.length}'),
+                                            comment:
+                                                columnCommentsRecord.comment,
+                                            authorIDreplyto:
+                                                widget.post!.post.author,
+                                          );
+                                        })
+                                            .divide(SizedBox(height: 10.0))
+                                            .addToEnd(SizedBox(height: 50.0)),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 50.0,
+                              if (!widget.post!.post.hasComments())
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 0.00),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'irblc1ry' /* No comments */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 17.0,
+                                            ),
                                       ),
                                     ),
-                                  );
-                                }
-                                List<CommentsRecord> columnCommentsRecordList =
-                                    snapshot.data!;
-                                return SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: List.generate(
-                                            columnCommentsRecordList.length,
-                                            (columnIndex) {
-                                      final columnCommentsRecord =
-                                          columnCommentsRecordList[columnIndex];
-                                      return CommentWidget(
-                                        key: Key(
-                                            'Key6jq_${columnIndex}_of_${columnCommentsRecordList.length}'),
-                                        comment: columnCommentsRecord.comment,
-                                      );
-                                    })
-                                        .divide(SizedBox(height: 10.0))
-                                        .addToEnd(SizedBox(height: 50.0)),
-                                  ),
-                                );
-                              },
-                            ),
+                                  ],
+                                ),
+                            ],
                           ),
                         ),
                         Column(
@@ -1714,6 +1748,7 @@ class _PostWidgetState extends State<PostWidget> {
                                         5.0, 10.0, 5.0, 5.0),
                                     child: TextFormField(
                                       controller: _model.textController,
+                                      focusNode: _model.textFieldFocusNode,
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
@@ -2013,11 +2048,11 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       currentUserDocument
                                                                           ?.isStealth,
                                                                       false),
-                                                                  isAuthorStealth: valueOrDefault<
-                                                                          bool>(
-                                                                      currentUserDocument
+                                                                  isAuthorStealth:
+                                                                      widget
+                                                                          .post
+                                                                          ?.post
                                                                           ?.isStealth,
-                                                                      false),
                                                                   clearUnsetFields:
                                                                       false,
                                                                 ),
@@ -2064,11 +2099,8 @@ class _PostWidgetState extends State<PostWidget> {
                                                                   ?.isStealth,
                                                               false),
                                                           isAuthorStealth:
-                                                              valueOrDefault<
-                                                                      bool>(
-                                                                  currentUserDocument
-                                                                      ?.isStealth,
-                                                                  false),
+                                                              widget.post?.post
+                                                                  ?.isStealth,
                                                           clearUnsetFields:
                                                               false,
                                                           create: true,

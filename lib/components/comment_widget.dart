@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
@@ -16,9 +17,11 @@ class CommentWidget extends StatefulWidget {
   const CommentWidget({
     Key? key,
     required this.comment,
+    required this.authorIDreplyto,
   }) : super(key: key);
 
   final CommentStruct? comment;
+  final String? authorIDreplyto;
 
   @override
   _CommentWidgetState createState() => _CommentWidgetState();
@@ -87,9 +90,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         stream: queryUsersRecord(
                           queryBuilder: (usersRecord) => usersRecord.where(
                             'uid',
-                            isEqualTo: widget.comment!.isStealth
-                                ? 'anon'
-                                : widget.comment?.authorid,
+                            isEqualTo: widget.comment?.authorid,
                           ),
                           singleRecord: true,
                         ),
@@ -116,65 +117,60 @@ class _CommentWidgetState extends State<CommentWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 35.0,
-                                      height: 35.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          rowUsersRecord?.photoUrl,
-                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (!widget.comment!.isStealth) {
+                                    context.pushNamed(
+                                      'Profile',
+                                      queryParameters: {
+                                        'userID': serializeParam(
+                                          rowUsersRecord?.uid,
+                                          ParamType.String,
                                         ),
-                                        fit: BoxFit.cover,
+                                      }.withoutNulls,
+                                    );
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          widget.comment!.isStealth
+                                              ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png'
+                                              : rowUsersRecord!.photoUrl,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Profile',
-                                              queryParameters: {
-                                                'userID': serializeParam(
-                                                  widget.comment?.authorid,
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Text(
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
                                             valueOrDefault<String>(
-                                              rowUsersRecord?.realName,
+                                              widget.comment?.isStealth == true
+                                                  ? 'Anonymous'
+                                                  : rowUsersRecord?.realName,
                                               'Anonymous',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -185,32 +181,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Profile',
-                                              queryParameters: {
-                                                'userID': serializeParam(
-                                                  widget.comment?.authorid,
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Text(
+                                          Text(
                                             valueOrDefault<String>(
                                               '@${widget.comment!.isStealth ? 'Anonymous' : rowUsersRecord?.displayName}',
                                               '@anonymous',
@@ -222,19 +193,11 @@ class _CommentWidgetState extends State<CommentWidget> {
                                                   fontSize: 12.0,
                                                 ),
                                           ),
-                                        ),
-                                        Text(
-                                          valueOrDefault<String>(
-                                            widget.comment?.authorid,
-                                            '0',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -244,7 +207,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                                     queryBuilder: (usersRecord) =>
                                         usersRecord.where(
                                       'uid',
-                                      isEqualTo: widget.comment?.idReplyTo,
+                                      isEqualTo: widget.authorIDreplyto,
                                     ),
                                     singleRecord: true,
                                   ),
@@ -283,7 +246,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                                           'Profile',
                                           queryParameters: {
                                             'userID': serializeParam(
-                                              widget.comment?.authorid,
+                                              widget.authorIDreplyto,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -310,7 +273,10 @@ class _CommentWidgetState extends State<CommentWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Outfit',
-                                              fontSize: 14.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 12.0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -70,7 +71,9 @@ class _EntryWidgetState extends State<EntryWidget>
     _model = createModel(context, () => EntryModel());
 
     _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressFocusNode ??= FocusNode();
     _model.passwordController ??= TextEditingController();
+    _model.passwordFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -84,6 +87,15 @@ class _EntryWidgetState extends State<EntryWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Title(
@@ -178,6 +190,8 @@ class _EntryWidgetState extends State<EntryWidget>
                                         child: TextFormField(
                                           controller:
                                               _model.emailAddressController,
+                                          focusNode:
+                                              _model.emailAddressFocusNode,
                                           autofocus: true,
                                           autofillHints: [AutofillHints.email],
                                           obscureText: false,
@@ -257,6 +271,7 @@ class _EntryWidgetState extends State<EntryWidget>
                                         width: double.infinity,
                                         child: TextFormField(
                                           controller: _model.passwordController,
+                                          focusNode: _model.passwordFocusNode,
                                           autofocus: true,
                                           autofillHints: [
                                             AutofillHints.password
