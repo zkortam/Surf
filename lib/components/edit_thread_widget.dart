@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,6 +41,7 @@ class _EditThreadWidgetState extends State<EditThreadWidget> {
 
     _model.textController ??=
         TextEditingController(text: widget.thread?.thread?.text);
+    _model.textFieldFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -163,6 +165,7 @@ class _EditThreadWidgetState extends State<EditThreadWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
               child: TextFormField(
                 controller: _model.textController,
+                focusNode: _model.textFieldFocusNode,
                 autofocus: true,
                 obscureText: false,
                 decoration: InputDecoration(

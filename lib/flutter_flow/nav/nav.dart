@@ -9,8 +9,9 @@ import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
-import '../../auth/base_auth_user_provider.dart';
-import '../../backend/push_notifications/push_notifications_handler.dart'
+import '/auth/base_auth_user_provider.dart';
+
+import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
@@ -339,7 +340,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             ),
             FFRoute(
               name: 'chat_main',
-              path: 'chatMain',
+              path: 'chat',
               requireAuth: true,
               builder: (context, params) => ChatMainWidget(),
             ),

@@ -11,6 +11,7 @@ import 'chat_search_widget.dart' show ChatSearchWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class ChatSearchModel extends FlutterFlowModel<ChatSearchWidget> {
   // Model for PCNavBar component.
   late PCNavBarModel pCNavBarModel;
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // Algolia Search Results from action on TextField
@@ -36,6 +38,7 @@ class ChatSearchModel extends FlutterFlowModel<ChatSearchWidget> {
   void dispose() {
     unfocusNode.dispose();
     pCNavBarModel.dispose();
+    textFieldFocusNode?.dispose();
     textController?.dispose();
   }
 

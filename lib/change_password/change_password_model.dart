@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'change_password_widget.dart' show ChangePasswordWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +17,7 @@ class ChangePasswordModel extends FlutterFlowModel<ChangePasswordWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for emailAddress widget.
+  FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressController;
   String? Function(BuildContext, String?)? emailAddressControllerValidator;
 
@@ -25,6 +27,7 @@ class ChangePasswordModel extends FlutterFlowModel<ChangePasswordWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    emailAddressFocusNode?.dispose();
     emailAddressController?.dispose();
   }
 

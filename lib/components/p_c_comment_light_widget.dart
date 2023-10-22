@@ -5,27 +5,30 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'p_c_comment_model.dart';
-export 'p_c_comment_model.dart';
+import 'p_c_comment_light_model.dart';
+export 'p_c_comment_light_model.dart';
 
-class PCCommentWidget extends StatefulWidget {
-  const PCCommentWidget({
+class PCCommentLightWidget extends StatefulWidget {
+  const PCCommentLightWidget({
     Key? key,
     required this.comment,
+    required this.authorIDreplyto,
   }) : super(key: key);
 
   final CommentStruct? comment;
+  final String? authorIDreplyto;
 
   @override
-  _PCCommentWidgetState createState() => _PCCommentWidgetState();
+  _PCCommentLightWidgetState createState() => _PCCommentLightWidgetState();
 }
 
-class _PCCommentWidgetState extends State<PCCommentWidget> {
-  late PCCommentModel _model;
+class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
+  late PCCommentLightModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -36,7 +39,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PCCommentModel());
+    _model = createModel(context, () => PCCommentLightModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -58,7 +61,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
         width: double.infinity,
         constraints: BoxConstraints(
           minHeight: 105.0,
-          maxHeight: 450.0,
+          maxHeight: 550.0,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -85,9 +88,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                         stream: queryUsersRecord(
                           queryBuilder: (usersRecord) => usersRecord.where(
                             'uid',
-                            isEqualTo: widget.comment!.isStealth
-                                ? 'anon'
-                                : widget.comment?.authorid,
+                            isEqualTo: widget.comment?.authorid,
                           ),
                           singleRecord: true,
                         ),
@@ -114,63 +115,57 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 35.0,
-                                      height: 35.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          rowUsersRecord?.photoUrl,
-                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (!widget.comment!.isStealth) {
+                                    context.pushNamed(
+                                      'Profile',
+                                      queryParameters: {
+                                        'userID': serializeParam(
+                                          rowUsersRecord?.uid,
+                                          ParamType.String,
                                         ),
-                                        fit: BoxFit.cover,
+                                      }.withoutNulls,
+                                    );
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          valueOrDefault<String>(
+                                            rowUsersRecord?.photoUrl,
+                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/9cs0t43k77pp/agents.png',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Profile',
-                                              queryParameters: {
-                                                'userID': serializeParam(
-                                                  widget.comment?.authorid,
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Text(
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
                                             valueOrDefault<String>(
                                               rowUsersRecord?.realName,
                                               'Anonymous',
@@ -183,32 +178,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Profile',
-                                              queryParameters: {
-                                                'userID': serializeParam(
-                                                  widget.comment?.authorid,
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Text(
+                                          Text(
                                             valueOrDefault<String>(
                                               '@${widget.comment!.isStealth ? 'Anonymous' : rowUsersRecord?.displayName}',
                                               '@anonymous',
@@ -220,11 +190,11 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                                                   fontSize: 12.0,
                                                 ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -273,7 +243,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                                           'Profile',
                                           queryParameters: {
                                             'userID': serializeParam(
-                                              widget.comment?.authorid,
+                                              widget.authorIDreplyto,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -300,7 +270,10 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Outfit',
-                                              fontSize: 14.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 12.0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -340,10 +313,7 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
                           EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
                       child: SelectionArea(
                           child: AutoSizeText(
-                        valueOrDefault<String>(
-                          widget.comment?.text,
-                          'text',
-                        ).maybeHandleOverflow(maxChars: 400),
+                        widget.comment!.text.maybeHandleOverflow(maxChars: 400),
                         maxLines: 5,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',
@@ -356,50 +326,54 @@ class _PCCommentWidgetState extends State<PCCommentWidget> {
               ),
               if (widget.comment?.imageHash?.image != null &&
                   widget.comment?.imageHash?.image != '')
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 240.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Visibility(
-                      visible: widget.comment?.imageHash?.image != null &&
-                          widget.comment?.imageHash?.image != '',
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: ViewImageWidget(
-                                  image: widget.comment!.imageHash.image,
-                                ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: OctoImage(
-                            placeholderBuilder: OctoPlaceholder.blurHash(
-                              widget.comment!.imageHash.blurHash,
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 340.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Visibility(
+                        visible: widget.comment?.imageHash?.image != null &&
+                            widget.comment?.imageHash?.image != '',
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: ViewImageWidget(
+                                    image: widget.comment!.imageHash.image,
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: OctoImage(
+                              placeholderBuilder: OctoPlaceholder.blurHash(
+                                widget.comment!.imageHash.blurHash,
+                              ),
+                              image: NetworkImage(
+                                widget.comment!.imageHash.image,
+                              ),
+                              width: 300.0,
+                              height: 300.0,
+                              fit: BoxFit.cover,
                             ),
-                            image: NetworkImage(
-                              widget.comment!.imageHash.image,
-                            ),
-                            width: 300.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

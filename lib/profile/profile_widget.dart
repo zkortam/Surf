@@ -60,6 +60,15 @@ class _ProfileWidgetState extends State<ProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return FutureBuilder<List<UsersRecord>>(
@@ -168,12 +177,6 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    widget.userID,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
                                                   Material(
                                                     color: Colors.transparent,
                                                     elevation: 2.0,
@@ -1738,8 +1741,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               queryBuilder: (postsRecord) => postsRecord
                                                                   .whereIn(
                                                                       'post.id',
-                                                                      profileUsersRecord
-                                                                          ?.saved)
+                                                                      profileUsersRecord?.saved !=
+                                                                              ''
+                                                                          ? profileUsersRecord
+                                                                              ?.saved
+                                                                          : null)
                                                                   .orderBy(
                                                                       'post.timestamp',
                                                                       descending:

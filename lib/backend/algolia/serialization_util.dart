@@ -41,7 +41,7 @@ dynamic convertAlgoliaParam<T>(
             ? (data as Iterable).map((d) => (d as num).toDouble())
             : data?.toDouble();
       case ParamType.DateTime:
-        isList
+        return isList
             ? (data as Iterable)
                 .map((s) => DateTime.fromMillisecondsSinceEpoch(s))
             : safeGet(() => DateTime.fromMillisecondsSinceEpoch(data));
@@ -56,10 +56,9 @@ dynamic convertAlgoliaParam<T>(
             ? (data as Iterable).map((s) => fromCssColor(s))
             : safeGet(() => fromCssColor(data));
       case ParamType.DocumentReference:
-        isList
+        return isList
             ? (data as Iterable).map((s) => toRef(s))
             : safeGet(() => toRef(data));
-        break;
       case ParamType.DataStruct:
         if (structBuilder == null) {
           return null;

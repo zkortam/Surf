@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -480,70 +481,6 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
                                       context.pushNamed(
-                                        'Profile',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.face,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 30.0,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '0b1g8gtq' /* Profile */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 20.0,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 12.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 40.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
                                         'enterPin',
                                         extra: <String, dynamic>{
                                           kTransitionInfoKey: TransitionInfo(
@@ -661,19 +598,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: LogoutCompWidget(),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
+                                  context.pushNamed('Profile');
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -1339,91 +1264,6 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'jmkbbxbr' /* Profile */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                      ),
-                                            )),
-                                        offset: 7.0,
-                                        preferredDirection: AxisDirection.right,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                        elevation: 4.0,
-                                        tailBaseWidth: 24.0,
-                                        tailLength: 12.0,
-                                        waitDuration:
-                                            Duration(milliseconds: 50),
-                                        showDuration:
-                                            Duration(milliseconds: 100),
-                                        triggerMode: TooltipTriggerMode.tap,
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Profile',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Icon(
-                                            Icons.face,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 12.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 40.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      AlignedTooltip(
-                                        content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
                                                 '1pgzm9j3' /* Settings */,
                                               ),
                                               style:
@@ -1569,18 +1409,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: LogoutCompWidget(),
-                                  );
-                                },
-                              ).then((value) => safeSetState(() {}));
+                              context.pushNamed('Profile');
                             },
                             child: Container(
                               width: 50.0,

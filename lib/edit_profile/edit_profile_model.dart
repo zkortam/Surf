@@ -15,6 +15,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,14 +40,17 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   String uploadedFileUrl2 = '';
 
   // State field(s) for name widget.
+  FocusNode? nameFocusNode;
   TextEditingController? nameController;
   String? Function(BuildContext, String?)? nameControllerValidator;
   // State field(s) for username widget.
+  FocusNode? usernameFocusNode;
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
   // Algolia Search Results from action on username
   List<UsersRecord>? algoliaSearchResults = [];
   // State field(s) for bio widget.
+  FocusNode? bioFocusNode;
   TextEditingController? bioController;
   String? Function(BuildContext, String?)? bioControllerValidator;
 
@@ -56,8 +60,13 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    nameFocusNode?.dispose();
     nameController?.dispose();
+
+    usernameFocusNode?.dispose();
     usernameController?.dispose();
+
+    bioFocusNode?.dispose();
     bioController?.dispose();
   }
 
