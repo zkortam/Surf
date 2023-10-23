@@ -1,3 +1,3 @@
 # Surf
 
-The next genration of Social Media
+The next generation of Social Media
