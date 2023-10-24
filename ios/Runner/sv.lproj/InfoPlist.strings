@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometriska behörigheter krävs för åtkomst till biometriska inställningar";
+PermissionGroupNotification = "Aktivera aviseringar för inlägg, trådar och meddelanden";

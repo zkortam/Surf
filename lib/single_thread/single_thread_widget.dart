@@ -1068,7 +1068,22 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                         .thread,
                                                                   },
                                                                 );
-                                                                return;
+                                                                setState(() {
+                                                                  _model.isDataUploading =
+                                                                      false;
+                                                                  _model.uploadedLocalFile =
+                                                                      FFUploadedFile(
+                                                                          bytes:
+                                                                              Uint8List.fromList([]));
+                                                                  _model.uploadedFileUrl =
+                                                                      '';
+                                                                });
+
+                                                                setState(() {
+                                                                  _model
+                                                                      .textController
+                                                                      ?.clear();
+                                                                });
                                                               } finally {
                                                                 await firestoreBatch
                                                                     .commit();

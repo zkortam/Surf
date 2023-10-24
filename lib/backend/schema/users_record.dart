@@ -149,6 +149,11 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get dob => _dob;
   bool hasDob() => _dob != null;
 
+  // "isSwipeable" field.
+  bool? _isSwipeable;
+  bool get isSwipeable => _isSwipeable ?? false;
+  bool hasIsSwipeable() => _isSwipeable != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -185,6 +190,7 @@ class UsersRecord extends FirestoreRecord {
     _complete = snapshotData['complete'] as bool?;
     _isCompressed = snapshotData['isCompressed'] as bool?;
     _dob = snapshotData['dob'] as DateTime?;
+    _isSwipeable = snapshotData['isSwipeable'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -264,6 +270,7 @@ class UsersRecord extends FirestoreRecord {
             ParamType.DateTime,
             false,
           ),
+          'isSwipeable': snapshot.data['isSwipeable'],
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -319,6 +326,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? complete,
   bool? isCompressed,
   DateTime? dob,
+  bool? isSwipeable,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -341,6 +349,7 @@ Map<String, dynamic> createUsersRecordData({
       'complete': complete,
       'isCompressed': isCompressed,
       'dob': dob,
+      'isSwipeable': isSwipeable,
     }.withoutNulls,
   );
 
@@ -378,7 +387,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isStealth == e2?.isStealth &&
         e1?.complete == e2?.complete &&
         e1?.isCompressed == e2?.isCompressed &&
-        e1?.dob == e2?.dob;
+        e1?.dob == e2?.dob &&
+        e1?.isSwipeable == e2?.isSwipeable;
   }
 
   @override
@@ -408,7 +418,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isStealth,
         e?.complete,
         e?.isCompressed,
-        e?.dob
+        e?.dob,
+        e?.isSwipeable
       ]);
 
   @override

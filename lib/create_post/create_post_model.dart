@@ -61,7 +61,7 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
 
   String postID = 'a';
 
-  String apiKey = '0';
+  String apiKey = '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';
 
   ///  State fields for stateful widgets in this page.
 

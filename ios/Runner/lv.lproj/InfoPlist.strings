@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Lai piekļūtu biometriskajiem iestatījumiem, ir nepieciešamas biometriskās atļaujas";
+PermissionGroupNotification = "Iespējot paziņojumus par ziņām, pavedieniem un ziņojumiem";

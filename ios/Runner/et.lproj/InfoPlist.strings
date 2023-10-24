@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biomeetrilistele seadetele juurdepääsuks on vaja biomeetrilisi õigusi";
+PermissionGroupNotification = "Luba postituste, lõimede ja sõnumite märguanded";

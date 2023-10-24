@@ -737,6 +737,57 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                           _model.usernameValid =
                                                               true;
                                                         });
+                                                        if (functions.getStringLength(
+                                                                functions.usernameStripper(
+                                                                    _model
+                                                                        .usernameController
+                                                                        .text)) <
+                                                            4) {
+                                                          setState(() {
+                                                            _model.usernameValid =
+                                                                false;
+                                                          });
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            enableDrag: false,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return GestureDetector(
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
+                                                                            context)
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
+                                                                            context)
+                                                                        .unfocus(),
+                                                                child: Padding(
+                                                                  padding: MediaQuery
+                                                                      .viewInsetsOf(
+                                                                          context),
+                                                                  child:
+                                                                      BottomBarErrorWidget(
+                                                                    text:
+                                                                        'Username must be longer than 3 characters',
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              safeSetState(
+                                                                  () {}));
+                                                        } else {
+                                                          setState(() {
+                                                            _model.usernameValid =
+                                                                true;
+                                                          });
+                                                        }
                                                       } else {
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
@@ -778,59 +829,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                         setState(() {
                                                           _model.usernameValid =
                                                               false;
-                                                        });
-                                                      }
-
-                                                      if (functions.getStringLength(
-                                                              functions.usernameStripper(
-                                                                  _model
-                                                                      .usernameController
-                                                                      .text)) <
-                                                          4) {
-                                                        setState(() {
-                                                          _model.usernameValid =
-                                                              false;
-                                                        });
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GestureDetector(
-                                                              onTap: () => _model
-                                                                      .unfocusNode
-                                                                      .canRequestFocus
-                                                                  ? FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode)
-                                                                  : FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    BottomBarErrorWidget(
-                                                                  text:
-                                                                      'Username must be longer than 3 characters',
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
-                                                      } else {
-                                                        setState(() {
-                                                          _model.usernameValid =
-                                                              true;
                                                         });
                                                       }
                                                     },

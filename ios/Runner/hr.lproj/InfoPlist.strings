@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Za pristup biometrijskim postavkama potrebne su biometrijske dozvole";
+PermissionGroupNotification = "Omogućite obavijesti za postove, niti i poruke";

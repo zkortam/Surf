@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "生物识别设置访问需要生物识别权限";
+PermissionGroupNotification = "启用帖子、话题和消息的通知";

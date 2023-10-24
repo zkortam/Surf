@@ -208,6 +208,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                 .primary,
                                         obscureText: false,
                                         hintCharacter: '●',
+                                        keyboardType: TextInputType.number,
                                         pinTheme: PinTheme(
                                           fieldHeight: 60.0,
                                           fieldWidth: 60.0,

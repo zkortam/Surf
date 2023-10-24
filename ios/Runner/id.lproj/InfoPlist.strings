@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Izin biometrik diperlukan untuk akses pengaturan biometrik";
+PermissionGroupNotification = "Aktifkan Notifikasi untuk Postingan, Thread, & Pesan";

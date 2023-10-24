@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Cần có quyền sinh trắc học để truy cập cài đặt sinh trắc học";
+PermissionGroupNotification = "Bật thông báo cho bài viết, chủ đề và tin nhắn";

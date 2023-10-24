@@ -268,11 +268,18 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                               final columnUsersRecord =
                                                   columnUsersRecordList[
                                                       columnIndex];
-                                              return FollowerCardWidget(
-                                                key: Key(
-                                                    'Key1t6_${columnIndex}_of_${columnUsersRecordList.length}'),
-                                                user: columnUsersRecord,
-                                                id: widget.uid!,
+                                              return Visibility(
+                                                visible: columnUsersRecord
+                                                    .following
+                                                    .contains(
+                                                        followersUsersRecord
+                                                            ?.uid),
+                                                child: FollowerCardWidget(
+                                                  key: Key(
+                                                      'Key1t6_${columnIndex}_of_${columnUsersRecordList.length}'),
+                                                  user: columnUsersRecord,
+                                                  id: widget.uid!,
+                                                ),
                                               );
                                             }).divide(SizedBox(height: 5.0)),
                                           );

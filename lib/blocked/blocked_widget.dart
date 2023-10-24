@@ -217,9 +217,15 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                   .whereIn(
                                                       'uid',
                                                       (currentUserDocument
-                                                              ?.blocked
-                                                              ?.toList() ??
-                                                          []))
+                                                                      ?.blocked
+                                                                      ?.toList() ??
+                                                                  []) !=
+                                                              ''
+                                                          ? (currentUserDocument
+                                                                  ?.blocked
+                                                                  ?.toList() ??
+                                                              [])
+                                                          : null)
                                                   .orderBy('realName',
                                                       descending: true),
                                         ),

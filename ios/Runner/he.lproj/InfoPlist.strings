@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "יש צורך בהרשאות ביומטריות עבור גישה להגדרות ביומטריות";
+PermissionGroupNotification = "אפשר התראות עבור פוסטים, שרשורים והודעות";

@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Kebenaran biometrik diperlukan untuk akses tetapan biometrik";
+PermissionGroupNotification = "Dayakan Pemberitahuan untuk Siaran, Thread & Mesej";

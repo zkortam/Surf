@@ -652,6 +652,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                     _model.uploadedFileUrl =
                                                                         '';
                                                                   });
+
+                                                                  context
+                                                                      .pushNamed(
+                                                                          'Home');
                                                                 } else {
                                                                   await showModalBottomSheet(
                                                                     isScrollControlled:
@@ -687,10 +691,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                       safeSetState(
                                                                           () {}));
                                                                 }
-
-                                                                context
-                                                                    .pushNamed(
-                                                                        'Home');
                                                               } finally {
                                                                 await firestoreBatch
                                                                     .commit();
@@ -1104,6 +1104,44 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            BottomNotifWidget(
+                                                                          text:
+                                                                              FFLocalizations.of(context).getText(
+                                                                            '8jnqxade' /* Uploading */,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
+
                                                                 final selectedMedia =
                                                                     await selectMediaWithSourceBottomSheet(
                                                                   context:
@@ -1191,44 +1229,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                     return;
                                                                   }
                                                                 }
-
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  enableDrag:
-                                                                      false,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
-                                                                              .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            BottomNotifWidget(
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            '8jnqxade' /* Uploading */,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    safeSetState(
-                                                                        () {}));
 
                                                                 setState(() {
                                                                   _model.addToImages(

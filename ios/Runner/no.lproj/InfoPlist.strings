@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometriske tillatelser er nødvendig for tilgang til biometriske innstillinger";
+PermissionGroupNotification = "Aktiver varsler for innlegg, tråder og meldinger";

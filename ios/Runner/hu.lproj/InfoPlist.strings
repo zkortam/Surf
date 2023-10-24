@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "A biometrikus beállításokhoz való hozzáféréshez biometrikus engedélyekre van szükség";
+PermissionGroupNotification = "Értesítések engedélyezése bejegyzésekre, szálakra és üzenetekre";

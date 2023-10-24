@@ -2177,7 +2177,20 @@ class _PostWidgetState extends State<PostWidget> {
                                                       'posts': widget.post,
                                                     },
                                                   );
-                                                  return;
+                                                  setState(() {
+                                                    _model.isDataUploading =
+                                                        false;
+                                                    _model.uploadedLocalFile =
+                                                        FFUploadedFile(
+                                                            bytes: Uint8List
+                                                                .fromList([]));
+                                                    _model.uploadedFileUrl = '';
+                                                  });
+
+                                                  setState(() {
+                                                    _model.textController
+                                                        ?.clear();
+                                                  });
                                                 } finally {
                                                   await firestoreBatch.commit();
                                                 }

@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Permissões biométricas são necessárias para acesso às configurações biométricas";
+PermissionGroupNotification = "Habilite notificações para postagens, tópicos e mensagens";

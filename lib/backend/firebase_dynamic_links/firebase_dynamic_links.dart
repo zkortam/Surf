@@ -4,7 +4,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 
-const _kDynamicLinksUrl = 'https://surfllc.org';
+const _kDynamicLinksUrl = 'https://surfsocial.org';
 const _kAppBundleId = 'com.surfsocial.app';
 const _kIosAppId = '1663568857';
 

@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometristen asetusten käyttö edellyttää biometrisiä käyttöoikeuksia";
+PermissionGroupNotification = "Ota ilmoitukset käyttöön viesteistä, ketjuista ja viesteistä";

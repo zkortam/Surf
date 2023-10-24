@@ -131,7 +131,7 @@ class _EntryWidgetState extends State<EntryWidget>
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                              20.0, 20.0, 20.0, 20.0),
                           child: Container(
                             width: double.infinity,
                             constraints: BoxConstraints(
