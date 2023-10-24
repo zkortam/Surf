@@ -114,22 +114,22 @@ class ParameterData {
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
   'entry': ParameterData.none(),
-  'dateOfBirth': ParameterData.none(),
   'signUp': (data) async => ParameterData(
         allParams: {
           'email': getParameter<String>(data, 'email'),
         },
       ),
+  'dateOfBirth': ParameterData.none(),
   'welcome': ParameterData.none(),
   'emailVerification': ParameterData.none(),
   'createProfile': ParameterData.none(),
   'Notifications': ParameterData.none(),
+  'forgotPassword': ParameterData.none(),
   'Profile': (data) async => ParameterData(
         allParams: {
           'userID': getParameter<String>(data, 'userID'),
         },
       ),
-  'forgotPassword': ParameterData.none(),
   'Threads': ParameterData.none(),
   'createPost': ParameterData.none(),
   'singlePost': (data) async => ParameterData(
@@ -222,6 +222,7 @@ final parametersBuilderMap =
   'muluploadtest': ParameterData.none(),
   'Home': ParameterData.none(),
   'LoggingIn': ParameterData.none(),
+  'swipestackCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

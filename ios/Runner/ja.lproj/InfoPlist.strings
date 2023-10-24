@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "生体認証設定にアクセスするには生体認証権限が必要です";
+PermissionGroupNotification = "投稿、スレッド、メッセージの通知を有効にする";

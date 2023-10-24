@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometrik parametrlərə giriş üçün biometrik icazələr tələb olunur";
+PermissionGroupNotification = "Yazılar, Mövzular və Mesajlar üçün Bildirişləri Aktivləşdirin";

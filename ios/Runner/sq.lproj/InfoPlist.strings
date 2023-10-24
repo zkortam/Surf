@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Lejet biometrike nevojiten për aksesin e cilësimeve biometrike";
+PermissionGroupNotification = "Aktivizo njoftimet për postimet, temat dhe mesazhet";

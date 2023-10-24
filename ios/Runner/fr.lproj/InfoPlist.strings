@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Des autorisations biométriques sont nécessaires pour accéder aux paramètres biométriques";
+PermissionGroupNotification = "Activer les notifications pour les publications, les fils de discussion et les messages";

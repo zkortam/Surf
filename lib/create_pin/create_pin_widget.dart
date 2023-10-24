@@ -205,6 +205,7 @@ class _CreatePinWidgetState extends State<CreatePinWidget>
                                           FlutterFlowTheme.of(context).primary,
                                       obscureText: false,
                                       hintCharacter: '●',
+                                      keyboardType: TextInputType.number,
                                       pinTheme: PinTheme(
                                         fieldHeight: 60.0,
                                         fieldWidth: 60.0,

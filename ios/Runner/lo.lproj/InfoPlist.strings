@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "ການອະນຸຍາດ biometric ແມ່ນຈໍາເປັນສໍາລັບການເຂົ້າເຖິງການຕັ້ງຄ່າ biometric";
+PermissionGroupNotification = "ເປີດໃຊ້ການແຈ້ງເຕືອນສຳລັບໂພສ, ກະທູ້, ແລະຂໍ້ຄວາມ";

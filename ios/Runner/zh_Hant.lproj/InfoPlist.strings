@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "生物識別設定存取需要生物識別權限";
+PermissionGroupNotification = "啟用貼文、主題和訊息的通知";

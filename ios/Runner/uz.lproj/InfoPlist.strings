@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometrik sozlamalarga kirish uchun biometrik ruxsatlar kerak";
+PermissionGroupNotification = "Xabarlar, mavzular va xabarlar uchun bildirishnomalarni yoqing";

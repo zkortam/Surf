@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Permisiunile biometrice sunt necesare pentru accesul la setările biometrice";
+PermissionGroupNotification = "Activați notificările pentru postări, fire și mesaje";

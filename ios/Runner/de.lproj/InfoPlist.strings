@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Für den Zugriff auf biometrische Einstellungen sind biometrische Berechtigungen erforderlich";
+PermissionGroupNotification = "Aktivieren Sie Benachrichtigungen für Beiträge, Threads und Nachrichten";

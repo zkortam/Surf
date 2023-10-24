@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Aby uzyskać dostęp do ustawień biometrycznych, potrzebne są uprawnienia biometryczne";
+PermissionGroupNotification = "Włącz powiadomienia o postach, wątkach i wiadomościach";

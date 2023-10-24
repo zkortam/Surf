@@ -108,6 +108,7 @@ dependencies:
   sign_in_with_apple_web: 1.0.1
   sqflite: 2.2.6
   stream_transform: 2.1.0
+  swipeable_card_stack: 0.0.5
   timeago: 3.2.2
   universal_io: 2.2.2
   url_launcher: 6.1.10

@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Na prístup k biometrickým nastaveniam sú potrebné biometrické povolenia";
+PermissionGroupNotification = "Povoliť upozornenia na príspevky, vlákna a správy";

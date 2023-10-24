@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Biometriese toestemmings word benodig vir toegang tot biometriese instellings";
+PermissionGroupNotification = "Aktiveer kennisgewings vir plasings, drade en boodskappe";

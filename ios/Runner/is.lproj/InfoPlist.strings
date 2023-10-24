@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Líffræðileg tölfræðiheimildir eru nauðsynlegar fyrir aðgang að líffræðilegum tölfræðistillingum";
+PermissionGroupNotification = "Virkjaðu tilkynningar fyrir færslur, þræði og skilaboð";

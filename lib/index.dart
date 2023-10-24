@@ -1,14 +1,14 @@
 // Export pages
 export '/entry/entry_widget.dart' show EntryWidget;
-export '/date_of_birth/date_of_birth_widget.dart' show DateOfBirthWidget;
 export '/sign_up/sign_up_widget.dart' show SignUpWidget;
+export '/date_of_birth/date_of_birth_widget.dart' show DateOfBirthWidget;
 export '/welcome/welcome_widget.dart' show WelcomeWidget;
 export '/email_verification/email_verification_widget.dart'
     show EmailVerificationWidget;
 export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
 export '/notifications/notifications_widget.dart' show NotificationsWidget;
-export '/profile/profile_widget.dart' show ProfileWidget;
 export '/forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
+export '/profile/profile_widget.dart' show ProfileWidget;
 export '/threads/threads_widget.dart' show ThreadsWidget;
 export '/create_post/create_post_widget.dart' show CreatePostWidget;
 export '/single_post/single_post_widget.dart' show SinglePostWidget;
@@ -40,3 +40,4 @@ export '/chats_page/chats_page_widget.dart' show ChatsPageWidget;
 export '/muluploadtest/muluploadtest_widget.dart' show MuluploadtestWidget;
 export '/home/home_widget.dart' show HomeWidget;
 export '/logging_in/logging_in_widget.dart' show LoggingInWidget;
+export '/swipestack_copy/swipestack_copy_widget.dart' show SwipestackCopyWidget;

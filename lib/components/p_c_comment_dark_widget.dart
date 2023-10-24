@@ -132,8 +132,8 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Container(
-                                        width: 30.0,
-                                        height: 30.0,
+                                        width: 25.0,
+                                        height: 25.0,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
@@ -228,7 +228,7 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                               alignment: AlignmentDirectional(-1.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    7.0, 0.0, 0.0, 0.0),
+                                    7.0, 2.0, 0.0, 0.0),
                                 child: SelectionArea(
                                     child: AutoSizeText(
                                   widget.comment!.text

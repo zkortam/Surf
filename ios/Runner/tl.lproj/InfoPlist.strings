@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Kinakailangan ang mga biometric na pahintulot para sa pag-access sa mga setting ng biometric";
+PermissionGroupNotification = "Paganahin ang Mga Notification para sa Mga Post, Thread, at Mensahe";

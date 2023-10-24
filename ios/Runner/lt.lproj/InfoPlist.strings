@@ -1,1 +1,2 @@
-
+NSFaceIDUsageDescription = "Norint pasiekti biometrinius nustatymus, reikalingi biometriniai leidimai";
+PermissionGroupNotification = "Įgalinti pranešimų, gijų ir pranešimų pranešimus";

@@ -102,17 +102,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EntryWidget(),
             ),
             FFRoute(
-              name: 'dateOfBirth',
-              path: 'dateOfBirth',
-              requireAuth: true,
-              builder: (context, params) => DateOfBirthWidget(),
-            ),
-            FFRoute(
               name: 'signUp',
               path: 'signUp',
               builder: (context, params) => SignUpWidget(
                 email: params.getParam('email', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'dateOfBirth',
+              path: 'dateOfBirth',
+              requireAuth: true,
+              builder: (context, params) => DateOfBirthWidget(),
             ),
             FFRoute(
               name: 'welcome',
@@ -143,6 +143,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
+              name: 'forgotPassword',
+              path: 'forgotPassword',
+              builder: (context, params) => ForgotPasswordWidget(),
+            ),
+            FFRoute(
               name: 'Profile',
               path: 'profile',
               requireAuth: true,
@@ -154,11 +159,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                         userID: params.getParam('userID', ParamType.String),
                       ),
                     ),
-            ),
-            FFRoute(
-              name: 'forgotPassword',
-              path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
               name: 'Threads',
@@ -402,6 +402,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'loggingIn',
               requireAuth: true,
               builder: (context, params) => LoggingInWidget(),
+            ),
+            FFRoute(
+              name: 'swipestackCopy',
+              path: 'swipestackCopy',
+              requireAuth: true,
+              builder: (context, params) => SwipestackCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
