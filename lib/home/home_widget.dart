@@ -569,92 +569,100 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Container(
-                                    width: 50.0,
-                                    height: 100.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius:
-                                          BorderRadius.circular(200.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          FlutterFlowIconButton(
-                                            borderColor: valueOrDefault<Color>(
-                                              _model.isComment
-                                                  ? Color(0xFF168323)
-                                                  : Color(0xFFC91212),
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                            ),
-                                            borderRadius: 20.0,
-                                            borderWidth: 3.0,
-                                            buttonSize: 40.0,
-                                            hoverIconColor:
+                                if (responsiveVisibility(
+                                  context: context,
+                                  phone: false,
+                                  tablet: false,
+                                ))
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Container(
+                                      width: 50.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(200.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 5.0, 0.0, 5.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            FlutterFlowIconButton(
+                                              borderColor:
+                                                  valueOrDefault<Color>(
+                                                _model.isComment
+                                                    ? Color(0xFF168323)
+                                                    : Color(0xFFC91212),
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            icon: Icon(
-                                              Icons.insert_comment_rounded,
-                                              color:
+                                              ),
+                                              borderRadius: 20.0,
+                                              borderWidth: 3.0,
+                                              buttonSize: 40.0,
+                                              hoverIconColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              size: 20.0,
+                                              icon: Icon(
+                                                Icons.insert_comment_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 20.0,
+                                              ),
+                                              onPressed: () async {
+                                                if (_model.isComment) {
+                                                  setState(() {
+                                                    _model.isComment = false;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _model.isComment = true;
+                                                  });
+                                                }
+                                              },
                                             ),
-                                            onPressed: () async {
-                                              if (_model.isComment) {
-                                                setState(() {
-                                                  _model.isComment = false;
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  _model.isComment = true;
-                                                });
-                                              }
-                                            },
-                                          ),
-                                          FlutterFlowIconButton(
-                                            borderColor: _model.isFollowersOnly
-                                                ? Color(0xFFF5C338)
-                                                : FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            borderRadius: 20.0,
-                                            borderWidth: 3.0,
-                                            buttonSize: 40.0,
-                                            icon: Icon(
-                                              Icons.auto_awesome_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                            FlutterFlowIconButton(
+                                              borderColor: _model
+                                                      .isFollowersOnly
+                                                  ? Color(0xFFF5C338)
+                                                  : FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              size: 22.0,
+                                              borderRadius: 20.0,
+                                              borderWidth: 3.0,
+                                              buttonSize: 40.0,
+                                              icon: Icon(
+                                                Icons.auto_awesome_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 22.0,
+                                              ),
+                                              onPressed: () async {
+                                                if (_model.isFollowersOnly) {
+                                                  setState(() {
+                                                    _model.isFollowersOnly =
+                                                        false;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    _model.isFollowersOnly =
+                                                        true;
+                                                  });
+                                                }
+                                              },
                                             ),
-                                            onPressed: () async {
-                                              if (_model.isFollowersOnly) {
-                                                setState(() {
-                                                  _model.isFollowersOnly =
-                                                      false;
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  _model.isFollowersOnly = true;
-                                                });
-                                              }
-                                            },
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -669,11 +677,10 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         tabletLandscape: false,
                         desktop: false,
                       ))
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 55.0, 0.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => Stack(
+                    AuthUserStreamWidget(
+                      builder: (context) => Container(
+                        width: 500.0,
+                        child: Stack(
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -863,11 +870,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       final swipeableStackPostsRecord =
                                           swipeableStackPostsRecordList[
                                               swipeableStackIndex];
-                                      return PostWidget(
-                                        key: Key(
-                                            'Key1wd_${swipeableStackIndex}_of_${swipeableStackPostsRecordList.length}'),
-                                        isComment: false,
-                                        post: swipeableStackPostsRecord,
+                                      return Align(
+                                        alignment:
+                                            AlignmentDirectional(0.00, -1.00),
+                                        child: PostWidget(
+                                          key: Key(
+                                              'Keylt6_${swipeableStackIndex}_of_${swipeableStackPostsRecordList.length}'),
+                                          isComment: false,
+                                          post: swipeableStackPostsRecord,
+                                        ),
                                       );
                                     },
                                     itemCount:
@@ -883,7 +894,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               alignment: AlignmentDirectional(-1.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 130.0),
+                                    0.0, 60.0, 0.0, 130.0),
                                 child: Container(
                                   width: 20.0,
                                   height: double.infinity,
@@ -906,7 +917,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               alignment: AlignmentDirectional(1.00, 0.00),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 130.0),
+                                    0.0, 60.0, 0.0, 130.0),
                                 child: Container(
                                   width: 20.0,
                                   height: double.infinity,
