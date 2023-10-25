@@ -519,141 +519,25 @@ class _PostWidgetState extends State<PostWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        FlutterFlowIconButton(
-                                          borderRadius: 20.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          icon: Icon(
-                                            Icons.thumb_up,
-                                            color: Colors.white,
-                                            size: 30.0,
-                                          ),
-                                          onPressed: () async {
-                                            final firestoreBatch =
-                                                FirebaseFirestore.instance
-                                                    .batch();
-                                            try {
-                                              if (functions.stringInArr(
-                                                  currentUserUid,
-                                                  widget.post!.post.upVoters
-                                                      .toList())) {
-                                                firestoreBatch.update(
-                                                    widget.post!.reference,
-                                                    createPostsRecordData(
-                                                      post: createPostStruct(
-                                                        fieldValues: {
-                                                          'upVoters': FieldValue
-                                                              .arrayRemove([
-                                                            currentUserUid
-                                                          ]),
-                                                          'netVotes': FieldValue
-                                                              .increment(-(1)),
-                                                        },
-                                                        clearUnsetFields: false,
-                                                      ),
-                                                    ));
-                                                return;
-                                              } else {
-                                                if (functions.stringInArr(
-                                                    currentUserUid,
-                                                    widget.post!.post.downVoters
-                                                        .toList())) {
-                                                  firestoreBatch.update(
-                                                      widget.post!.reference,
-                                                      createPostsRecordData(
-                                                        post: createPostStruct(
-                                                          fieldValues: {
-                                                            'upVoters':
-                                                                FieldValue
-                                                                    .arrayUnion([
-                                                              currentUserUid
-                                                            ]),
-                                                            'netVotes':
-                                                                FieldValue
-                                                                    .increment(
-                                                                        2),
-                                                            'downVoters':
-                                                                FieldValue
-                                                                    .arrayRemove([
-                                                              currentUserUid
-                                                            ]),
-                                                          },
-                                                          clearUnsetFields:
-                                                              false,
-                                                        ),
-                                                      ));
-                                                } else {
-                                                  firestoreBatch.update(
-                                                      widget.post!.reference,
-                                                      createPostsRecordData(
-                                                        post: createPostStruct(
-                                                          fieldValues: {
-                                                            'upVoters':
-                                                                FieldValue
-                                                                    .arrayUnion([
-                                                              currentUserUid
-                                                            ]),
-                                                            'netVotes':
-                                                                FieldValue
-                                                                    .increment(
-                                                                        1),
-                                                          },
-                                                          clearUnsetFields:
-                                                              false,
-                                                        ),
-                                                      ));
-                                                }
-
-                                                return;
-                                              }
-                                            } finally {
-                                              await firestoreBatch.commit();
-                                            }
-                                          },
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 0.0, 0.0),
-                                          child: FlutterFlowIconButton(
-                                            borderRadius: 20.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 40.0,
-                                            icon: Icon(
-                                              Icons.thumb_down,
-                                              color: Colors.white,
-                                              size: 30.0,
-                                            ),
-                                            onPressed: () async {
-                                              final firestoreBatch =
-                                                  FirebaseFirestore.instance
-                                                      .batch();
-                                              try {
-                                                if (functions.stringInArr(
-                                                    currentUserUid,
-                                                    widget.post!.post.downVoters
-                                                        .toList())) {
-                                                  firestoreBatch.update(
-                                                      widget.post!.reference,
-                                                      createPostsRecordData(
-                                                        post: createPostStruct(
-                                                          fieldValues: {
-                                                            'netVotes':
-                                                                FieldValue
-                                                                    .increment(
-                                                                        1),
-                                                            'downVoters':
-                                                                FieldValue
-                                                                    .arrayRemove([
-                                                              currentUserUid
-                                                            ]),
-                                                          },
-                                                          clearUnsetFields:
-                                                              false,
-                                                        ),
-                                                      ));
-                                                  return;
-                                                } else {
+                                        if (!valueOrDefault<bool>(
+                                            currentUserDocument?.isSwipeable,
+                                            false))
+                                          AuthUserStreamWidget(
+                                            builder: (context) =>
+                                                FlutterFlowIconButton(
+                                              borderRadius: 20.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              icon: Icon(
+                                                Icons.thumb_up,
+                                                color: Colors.white,
+                                                size: 30.0,
+                                              ),
+                                              onPressed: () async {
+                                                final firestoreBatch =
+                                                    FirebaseFirestore.instance
+                                                        .batch();
+                                                try {
                                                   if (functions.stringInArr(
                                                       currentUserUid,
                                                       widget.post!.post.upVoters
@@ -671,48 +555,191 @@ class _PostWidgetState extends State<PostWidget> {
                                                               'netVotes':
                                                                   FieldValue
                                                                       .increment(
-                                                                          -(2)),
-                                                              'downVoters':
-                                                                  FieldValue
-                                                                      .arrayUnion([
-                                                                currentUserUid
-                                                              ]),
+                                                                          -(1)),
                                                             },
                                                             clearUnsetFields:
                                                                 false,
                                                           ),
                                                         ));
+                                                    return;
                                                   } else {
-                                                    firestoreBatch.update(
-                                                        widget.post!.reference,
-                                                        createPostsRecordData(
-                                                          post:
-                                                              createPostStruct(
-                                                            fieldValues: {
-                                                              'netVotes':
-                                                                  FieldValue
+                                                    if (functions.stringInArr(
+                                                        currentUserUid,
+                                                        widget.post!.post
+                                                            .downVoters
+                                                            .toList())) {
+                                                      firestoreBatch.update(
+                                                          widget
+                                                              .post!.reference,
+                                                          createPostsRecordData(
+                                                            post:
+                                                                createPostStruct(
+                                                              fieldValues: {
+                                                                'upVoters':
+                                                                    FieldValue
+                                                                        .arrayUnion([
+                                                                  currentUserUid
+                                                                ]),
+                                                                'netVotes':
+                                                                    FieldValue
+                                                                        .increment(
+                                                                            2),
+                                                                'downVoters':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  currentUserUid
+                                                                ]),
+                                                              },
+                                                              clearUnsetFields:
+                                                                  false,
+                                                            ),
+                                                          ));
+                                                    } else {
+                                                      firestoreBatch.update(
+                                                          widget
+                                                              .post!.reference,
+                                                          createPostsRecordData(
+                                                            post:
+                                                                createPostStruct(
+                                                              fieldValues: {
+                                                                'upVoters':
+                                                                    FieldValue
+                                                                        .arrayUnion([
+                                                                  currentUserUid
+                                                                ]),
+                                                                'netVotes':
+                                                                    FieldValue
+                                                                        .increment(
+                                                                            1),
+                                                              },
+                                                              clearUnsetFields:
+                                                                  false,
+                                                            ),
+                                                          ));
+                                                    }
+
+                                                    return;
+                                                  }
+                                                } finally {
+                                                  await firestoreBatch.commit();
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        if (!valueOrDefault<bool>(
+                                            currentUserDocument?.isSwipeable,
+                                            false))
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 0.0, 0.0, 0.0),
+                                            child: AuthUserStreamWidget(
+                                              builder: (context) =>
+                                                  FlutterFlowIconButton(
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                icon: Icon(
+                                                  Icons.thumb_down,
+                                                  color: Colors.white,
+                                                  size: 30.0,
+                                                ),
+                                                onPressed: () async {
+                                                  final firestoreBatch =
+                                                      FirebaseFirestore.instance
+                                                          .batch();
+                                                  try {
+                                                    if (functions.stringInArr(
+                                                        currentUserUid,
+                                                        widget.post!.post
+                                                            .downVoters
+                                                            .toList())) {
+                                                      firestoreBatch.update(
+                                                          widget
+                                                              .post!.reference,
+                                                          createPostsRecordData(
+                                                            post:
+                                                                createPostStruct(
+                                                              fieldValues: {
+                                                                'netVotes':
+                                                                    FieldValue
+                                                                        .increment(
+                                                                            1),
+                                                                'downVoters':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  currentUserUid
+                                                                ]),
+                                                              },
+                                                              clearUnsetFields:
+                                                                  false,
+                                                            ),
+                                                          ));
+                                                      return;
+                                                    } else {
+                                                      if (functions.stringInArr(
+                                                          currentUserUid,
+                                                          widget.post!.post
+                                                              .upVoters
+                                                              .toList())) {
+                                                        firestoreBatch.update(
+                                                            widget.post!
+                                                                .reference,
+                                                            createPostsRecordData(
+                                                              post:
+                                                                  createPostStruct(
+                                                                fieldValues: {
+                                                                  'upVoters':
+                                                                      FieldValue
+                                                                          .arrayRemove([
+                                                                    currentUserUid
+                                                                  ]),
+                                                                  'netVotes': FieldValue
+                                                                      .increment(
+                                                                          -(2)),
+                                                                  'downVoters':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    currentUserUid
+                                                                  ]),
+                                                                },
+                                                                clearUnsetFields:
+                                                                    false,
+                                                              ),
+                                                            ));
+                                                      } else {
+                                                        firestoreBatch.update(
+                                                            widget.post!
+                                                                .reference,
+                                                            createPostsRecordData(
+                                                              post:
+                                                                  createPostStruct(
+                                                                fieldValues: {
+                                                                  'netVotes': FieldValue
                                                                       .increment(
                                                                           -(1)),
-                                                              'downVoters':
-                                                                  FieldValue
-                                                                      .arrayUnion([
-                                                                currentUserUid
-                                                              ]),
-                                                            },
-                                                            clearUnsetFields:
-                                                                false,
-                                                          ),
-                                                        ));
-                                                  }
+                                                                  'downVoters':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    currentUserUid
+                                                                  ]),
+                                                                },
+                                                                clearUnsetFields:
+                                                                    false,
+                                                              ),
+                                                            ));
+                                                      }
 
-                                                  return;
-                                                }
-                                              } finally {
-                                                await firestoreBatch.commit();
-                                              }
-                                            },
+                                                      return;
+                                                    }
+                                                  } finally {
+                                                    await firestoreBatch
+                                                        .commit();
+                                                  }
+                                                },
+                                              ),
+                                            ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -1557,7 +1584,12 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                   ),
                 ),
-              if (widget.isComment)
+              if (widget.isComment &&
+                  responsiveVisibility(
+                    context: context,
+                    phone: false,
+                    tablet: false,
+                  ))
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                   child: Container(

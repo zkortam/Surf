@@ -154,6 +154,11 @@ class UsersRecord extends FirestoreRecord {
   bool get isSwipeable => _isSwipeable ?? false;
   bool hasIsSwipeable() => _isSwipeable != null;
 
+  // "isSilentMode" field.
+  bool? _isSilentMode;
+  bool get isSilentMode => _isSilentMode ?? false;
+  bool hasIsSilentMode() => _isSilentMode != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -191,6 +196,7 @@ class UsersRecord extends FirestoreRecord {
     _isCompressed = snapshotData['isCompressed'] as bool?;
     _dob = snapshotData['dob'] as DateTime?;
     _isSwipeable = snapshotData['isSwipeable'] as bool?;
+    _isSilentMode = snapshotData['isSilentMode'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -271,6 +277,7 @@ class UsersRecord extends FirestoreRecord {
             false,
           ),
           'isSwipeable': snapshot.data['isSwipeable'],
+          'isSilentMode': snapshot.data['isSilentMode'],
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -327,6 +334,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? isCompressed,
   DateTime? dob,
   bool? isSwipeable,
+  bool? isSilentMode,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -350,6 +358,7 @@ Map<String, dynamic> createUsersRecordData({
       'isCompressed': isCompressed,
       'dob': dob,
       'isSwipeable': isSwipeable,
+      'isSilentMode': isSilentMode,
     }.withoutNulls,
   );
 
@@ -388,7 +397,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.complete == e2?.complete &&
         e1?.isCompressed == e2?.isCompressed &&
         e1?.dob == e2?.dob &&
-        e1?.isSwipeable == e2?.isSwipeable;
+        e1?.isSwipeable == e2?.isSwipeable &&
+        e1?.isSilentMode == e2?.isSilentMode;
   }
 
   @override
@@ -419,7 +429,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.complete,
         e?.isCompressed,
         e?.dob,
-        e?.isSwipeable
+        e?.isSwipeable,
+        e?.isSilentMode
       ]);
 
   @override
