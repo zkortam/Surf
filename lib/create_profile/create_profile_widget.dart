@@ -1231,6 +1231,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                           .usernameStripper(_model
                                                               .usernameController
                                                               .text),
+                                                      uid: '',
                                                     ),
                                                     ...mapToFirestore(
                                                       {

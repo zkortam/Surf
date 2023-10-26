@@ -25,8 +25,8 @@ export '/privacy/privacy_widget.dart' show PrivacyWidget;
 export '/notifications_settings/notifications_settings_widget.dart'
     show NotificationsSettingsWidget;
 export '/security/security_widget.dart' show SecurityWidget;
-export '/blocked/blocked_widget.dart' show BlockedWidget;
 export '/following/following_widget.dart' show FollowingWidget;
+export '/blocked/blocked_widget.dart' show BlockedWidget;
 export '/followers/followers_widget.dart' show FollowersWidget;
 export '/change_password/change_password_widget.dart' show ChangePasswordWidget;
 export '/change_pin/change_pin_widget.dart' show ChangePinWidget;
