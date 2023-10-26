@@ -289,19 +289,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'blocked',
-              path: 'blocked',
-              requireAuth: true,
-              builder: (context, params) => BlockedWidget(
-                settingsKey: params.getParam('settingsKey', ParamType.bool),
-              ),
-            ),
-            FFRoute(
               name: 'following',
               path: 'following',
               requireAuth: true,
               builder: (context, params) => FollowingWidget(
                 uid: params.getParam('uid', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'blocked',
+              path: 'blocked',
+              requireAuth: true,
+              builder: (context, params) => BlockedWidget(
+                settingsKey: params.getParam('settingsKey', ParamType.bool),
               ),
             ),
             FFRoute(

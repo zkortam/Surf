@@ -710,13 +710,27 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
-                                                        context.pushNamed(
-                                                            'notificationsSettings');
+                                                        if (valueOrDefault<
+                                                                bool>(
+                                                            currentUserDocument
+                                                                ?.isBiometric,
+                                                            false)) {
+                                                          if (isWeb) {
+                                                            context.goNamed(
+                                                                'enterPin');
+                                                          } else {
+                                                            context.goNamed(
+                                                                'BiometricTest');
+                                                          }
+                                                        } else {
+                                                          context.goNamed(
+                                                              'enterPin');
+                                                        }
                                                       },
                                                       text: FFLocalizations.of(
                                                               context)
                                                           .getText(
-                                                        'tjy4lw8b' /* Deactivate */,
+                                                        'dhbau7i5' /* Deactivate */,
                                                       ),
                                                       options: FFButtonOptions(
                                                         height: 44.0,

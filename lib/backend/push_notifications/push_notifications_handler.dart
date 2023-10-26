@@ -181,14 +181,14 @@ final parametersBuilderMap =
           'settingsKey': getParameter<bool>(data, 'settingsKey'),
         },
       ),
-  'blocked': (data) async => ParameterData(
-        allParams: {
-          'settingsKey': getParameter<bool>(data, 'settingsKey'),
-        },
-      ),
   'following': (data) async => ParameterData(
         allParams: {
           'uid': getParameter<String>(data, 'uid'),
+        },
+      ),
+  'blocked': (data) async => ParameterData(
+        allParams: {
+          'settingsKey': getParameter<bool>(data, 'settingsKey'),
         },
       ),
   'followers': (data) async => ParameterData(
