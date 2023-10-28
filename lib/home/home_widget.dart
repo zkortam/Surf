@@ -85,39 +85,75 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((currentUserPhoto != null && currentUserPhoto != '') &&
-          (valueOrDefault(currentUserDocument?.banner, '') != null &&
-              valueOrDefault(currentUserDocument?.banner, '') != '') &&
-          (valueOrDefault(currentUserDocument?.pincode, '') != null &&
-              valueOrDefault(currentUserDocument?.pincode, '') != '') &&
-          (valueOrDefault(currentUserDocument?.realName, '') != null &&
-              valueOrDefault(currentUserDocument?.realName, '') != '') &&
-          (valueOrDefault(currentUserDocument?.bio, '') != null &&
-              valueOrDefault(currentUserDocument?.bio, '') != '')) {
-        if (currentUserPhoto == null || currentUserPhoto == '') {
-          await currentUserReference!.update(createUsersRecordData(
-            photoUrl: functions.randomImage(
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/4coc7ha1oyzf/Untitled_design_(46).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/inwpdvg4chrm/Untitled_design_(48).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/gyjh91gyd9vb/Untitled_design_(47).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/s85og6bt0q1h/Untitled_design_(49).png'),
-          ));
-        }
-        if (valueOrDefault(currentUserDocument?.banner, '') == null ||
-            valueOrDefault(currentUserDocument?.banner, '') == '') {
-          await currentUserReference!.update(createUsersRecordData(
-            banner: functions.randomImage(
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/w1q2kw6q4kjy/Untitled_design_(50).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/sdc47u7s4wpf/Untitled_design_(51).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/itqvapymq9ia/Untitled_design_(52).png',
-                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/61zbp5495jvv/Untitled_design_(53).png'),
-          ));
-        }
-        return;
-      } else {
-        // Bad Profile
+      final firestoreBatch = FirebaseFirestore.instance.batch();
+      try {
+        if ((currentUserPhoto != null && currentUserPhoto != '') &&
+            (valueOrDefault(currentUserDocument?.banner, '') != null &&
+                valueOrDefault(currentUserDocument?.banner, '') != '') &&
+            (valueOrDefault(currentUserDocument?.pincode, '') != null &&
+                valueOrDefault(currentUserDocument?.pincode, '') != '') &&
+            (valueOrDefault(currentUserDocument?.realName, '') != null &&
+                valueOrDefault(currentUserDocument?.realName, '') != '') &&
+            (valueOrDefault(currentUserDocument?.bio, '') != null &&
+                valueOrDefault(currentUserDocument?.bio, '') != '')) {
+          if (currentUserPhoto == null || currentUserPhoto == '') {
+            firestoreBatch.update(
+                currentUserReference!,
+                createUsersRecordData(
+                  photoUrl: functions.randomImage(
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/4coc7ha1oyzf/Untitled_design_(46).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/inwpdvg4chrm/Untitled_design_(48).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/gyjh91gyd9vb/Untitled_design_(47).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/s85og6bt0q1h/Untitled_design_(49).png'),
+                ));
+          }
+          if (valueOrDefault(currentUserDocument?.banner, '') == null ||
+              valueOrDefault(currentUserDocument?.banner, '') == '') {
+            firestoreBatch.update(
+                currentUserReference!,
+                createUsersRecordData(
+                  banner: functions.randomImage(
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/w1q2kw6q4kjy/Untitled_design_(50).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/sdc47u7s4wpf/Untitled_design_(51).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/itqvapymq9ia/Untitled_design_(52).png',
+                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/61zbp5495jvv/Untitled_design_(53).png'),
+                ));
+          }
+        } else {
+          // Bad Profile
 
-        context.pushNamed('createProfile');
+          context.pushNamed('createProfile');
+        }
+
+        if ((currentUserDocument?.blocked?.toList() ?? []).length == 0) {
+          firestoreBatch.update(currentUserReference!, {
+            ...mapToFirestore(
+              {
+                'blocked': FieldValue.arrayUnion(['']),
+              },
+            ),
+          });
+        }
+        if ((currentUserDocument?.following?.toList() ?? []).length == 0) {
+          firestoreBatch.update(currentUserReference!, {
+            ...mapToFirestore(
+              {
+                'following': FieldValue.arrayUnion(['']),
+              },
+            ),
+          });
+        }
+        if ((currentUserDocument?.followers?.toList() ?? []).length == 0) {
+          firestoreBatch.update(currentUserReference!, {
+            ...mapToFirestore(
+              {
+                'followers': FieldValue.arrayUnion(['']),
+              },
+            ),
+          });
+        }
+      } finally {
+        await firestoreBatch.commit();
       }
     });
 
@@ -338,7 +374,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             wrapWithModel(
                               model: _model.pCNavBarModel,
                               updateCallback: () => setState(() {}),
-                              child: PCNavBarWidget(),
+                              child: PCNavBarWidget(
+                                currentPage: 0,
+                              ),
                             ),
                           Flexible(
                             child: Row(
@@ -720,147 +758,170 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     onLeftSwipe: (index) async {
                                       final swipeableStackPostsRecord =
                                           swipeableStackPostsRecordList[index];
-                                      if (animationsMap[
-                                              'containerOnActionTriggerAnimation1'] !=
-                                          null) {
-                                        await animationsMap[
-                                                'containerOnActionTriggerAnimation1']!
-                                            .controller
-                                            .forward(from: 0.0);
-                                      }
-                                      if (functions.stringInArr(
-                                          currentUserUid,
-                                          swipeableStackPostsRecord
-                                              .post.downVoters
-                                              .toList())) {
-                                        await swipeableStackPostsRecord
-                                            .reference
-                                            .update(createPostsRecordData(
-                                          post: createPostStruct(
-                                            fieldValues: {
-                                              'upVoters':
-                                                  FieldValue.arrayRemove(
-                                                      [currentUserUid]),
-                                              'netVotes':
-                                                  FieldValue.increment(-(1)),
-                                            },
-                                            clearUnsetFields: false,
-                                          ),
-                                        ));
-                                      } else {
-                                        if (functions.stringInArr(
-                                            currentUserUid,
-                                            swipeableStackPostsRecord
-                                                .post.upVoters
-                                                .toList())) {
-                                          await swipeableStackPostsRecord
-                                              .reference
-                                              .update(createPostsRecordData(
-                                            post: createPostStruct(
-                                              fieldValues: {
-                                                'upVoters':
-                                                    FieldValue.arrayUnion(
-                                                        [currentUserUid]),
-                                                'netVotes':
-                                                    FieldValue.increment(2),
-                                                'downVoters':
-                                                    FieldValue.arrayRemove(
-                                                        [currentUserUid]),
-                                              },
-                                              clearUnsetFields: false,
-                                            ),
-                                          ));
-                                        } else {
-                                          await swipeableStackPostsRecord
-                                              .reference
-                                              .update(createPostsRecordData(
-                                            post: createPostStruct(
-                                              fieldValues: {
-                                                'upVoters':
-                                                    FieldValue.arrayUnion(
-                                                        [currentUserUid]),
-                                                'netVotes':
-                                                    FieldValue.increment(1),
-                                              },
-                                              clearUnsetFields: false,
-                                            ),
-                                          ));
+                                      final firestoreBatch =
+                                          FirebaseFirestore.instance.batch();
+                                      try {
+                                        if (animationsMap[
+                                                'containerOnActionTriggerAnimation1'] !=
+                                            null) {
+                                          await animationsMap[
+                                                  'containerOnActionTriggerAnimation1']!
+                                              .controller
+                                              .forward(from: 0.0);
                                         }
-
-                                        return;
-                                      }
-                                    },
-                                    onRightSwipe: (index) async {
-                                      final swipeableStackPostsRecord =
-                                          swipeableStackPostsRecordList[index];
-                                      if (animationsMap[
-                                              'containerOnActionTriggerAnimation2'] !=
-                                          null) {
-                                        await animationsMap[
-                                                'containerOnActionTriggerAnimation2']!
-                                            .controller
-                                            .forward(from: 0.0);
-                                      }
-                                      if (functions.stringInArr(
-                                          currentUserUid,
-                                          swipeableStackPostsRecord
-                                              .post.downVoters
-                                              .toList())) {
-                                        await swipeableStackPostsRecord
-                                            .reference
-                                            .update(createPostsRecordData(
-                                          post: createPostStruct(
-                                            fieldValues: {
-                                              'netVotes':
-                                                  FieldValue.increment(1),
-                                              'downVoters':
-                                                  FieldValue.arrayRemove(
-                                                      [currentUserUid]),
-                                            },
-                                            clearUnsetFields: false,
-                                          ),
-                                        ));
-                                      } else {
                                         if (functions.stringInArr(
                                             currentUserUid,
                                             swipeableStackPostsRecord
                                                 .post.downVoters
                                                 .toList())) {
-                                          await swipeableStackPostsRecord
-                                              .reference
-                                              .update(createPostsRecordData(
-                                            post: createPostStruct(
-                                              fieldValues: {
-                                                'upVoters':
-                                                    FieldValue.arrayRemove(
-                                                        [currentUserUid]),
-                                                'netVotes':
-                                                    FieldValue.increment(-(2)),
-                                                'downVoters':
-                                                    FieldValue.arrayUnion(
-                                                        [currentUserUid]),
-                                              },
-                                              clearUnsetFields: false,
-                                            ),
-                                          ));
+                                          firestoreBatch.update(
+                                              swipeableStackPostsRecord
+                                                  .reference,
+                                              createPostsRecordData(
+                                                post: createPostStruct(
+                                                  fieldValues: {
+                                                    'netVotes':
+                                                        FieldValue.increment(1),
+                                                    'downVoters':
+                                                        FieldValue.arrayRemove(
+                                                            [currentUserUid]),
+                                                  },
+                                                  clearUnsetFields: false,
+                                                ),
+                                              ));
                                         } else {
-                                          await swipeableStackPostsRecord
-                                              .reference
-                                              .update(createPostsRecordData(
-                                            post: createPostStruct(
-                                              fieldValues: {
-                                                'netVotes':
-                                                    FieldValue.increment(-(1)),
-                                                'downVoters':
-                                                    FieldValue.arrayUnion(
-                                                        [currentUserUid]),
-                                              },
-                                              clearUnsetFields: false,
-                                            ),
-                                          ));
-                                        }
+                                          if (functions.stringInArr(
+                                              currentUserUid,
+                                              swipeableStackPostsRecord
+                                                  .post.upVoters
+                                                  .toList())) {
+                                            firestoreBatch.update(
+                                                swipeableStackPostsRecord
+                                                    .reference,
+                                                createPostsRecordData(
+                                                  post: createPostStruct(
+                                                    fieldValues: {
+                                                      'upVoters': FieldValue
+                                                          .arrayRemove(
+                                                              [currentUserUid]),
+                                                      'netVotes':
+                                                          FieldValue.increment(
+                                                              -(2)),
+                                                      'downVoters':
+                                                          FieldValue.arrayUnion(
+                                                              [currentUserUid]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ));
+                                          } else {
+                                            firestoreBatch.update(
+                                                swipeableStackPostsRecord
+                                                    .reference,
+                                                createPostsRecordData(
+                                                  post: createPostStruct(
+                                                    fieldValues: {
+                                                      'netVotes':
+                                                          FieldValue.increment(
+                                                              -(1)),
+                                                      'downVoters':
+                                                          FieldValue.arrayUnion(
+                                                              [currentUserUid]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ));
+                                          }
 
-                                        return;
+                                          return;
+                                        }
+                                      } finally {
+                                        await firestoreBatch.commit();
+                                      }
+                                    },
+                                    onRightSwipe: (index) async {
+                                      final swipeableStackPostsRecord =
+                                          swipeableStackPostsRecordList[index];
+                                      final firestoreBatch =
+                                          FirebaseFirestore.instance.batch();
+                                      try {
+                                        if (animationsMap[
+                                                'containerOnActionTriggerAnimation2'] !=
+                                            null) {
+                                          await animationsMap[
+                                                  'containerOnActionTriggerAnimation2']!
+                                              .controller
+                                              .forward(from: 0.0);
+                                        }
+                                        if (functions.stringInArr(
+                                            currentUserUid,
+                                            swipeableStackPostsRecord
+                                                .post.upVoters
+                                                .toList())) {
+                                          firestoreBatch.update(
+                                              swipeableStackPostsRecord
+                                                  .reference,
+                                              createPostsRecordData(
+                                                post: createPostStruct(
+                                                  fieldValues: {
+                                                    'netVotes':
+                                                        FieldValue.increment(
+                                                            -(1)),
+                                                    'upVoters':
+                                                        FieldValue.arrayRemove(
+                                                            [currentUserUid]),
+                                                  },
+                                                  clearUnsetFields: false,
+                                                ),
+                                              ));
+                                        } else {
+                                          if (functions.stringInArr(
+                                              currentUserUid,
+                                              swipeableStackPostsRecord
+                                                  .post.downVoters
+                                                  .toList())) {
+                                            firestoreBatch.update(
+                                                swipeableStackPostsRecord
+                                                    .reference,
+                                                createPostsRecordData(
+                                                  post: createPostStruct(
+                                                    fieldValues: {
+                                                      'upVoters':
+                                                          FieldValue.arrayUnion(
+                                                              [currentUserUid]),
+                                                      'netVotes':
+                                                          FieldValue.increment(
+                                                              2),
+                                                      'downVoters': FieldValue
+                                                          .arrayRemove(
+                                                              [currentUserUid]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ));
+                                          } else {
+                                            firestoreBatch.update(
+                                                swipeableStackPostsRecord
+                                                    .reference,
+                                                createPostsRecordData(
+                                                  post: createPostStruct(
+                                                    fieldValues: {
+                                                      'netVotes':
+                                                          FieldValue.increment(
+                                                              1),
+                                                      'upVoters':
+                                                          FieldValue.arrayUnion(
+                                                              [currentUserUid]),
+                                                    },
+                                                    clearUnsetFields: false,
+                                                  ),
+                                                ));
+                                          }
+
+                                          return;
+                                        }
+                                      } finally {
+                                        await firestoreBatch.commit();
                                       }
                                     },
                                     onUpSwipe: (index) {},

@@ -80,10 +80,6 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                           EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
                       child: Container(
                         width: 600.0,
-                        constraints: BoxConstraints(
-                          minHeight: 90.0,
-                          maxHeight: 370.0,
-                        ),
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -574,41 +570,118 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                     ),
                                   ),
                                 ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 10.0, 5.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFE1343E),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.00, 0.00),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '87btfu13' /* Report */,
+                              if (currentUserUid !=
+                                  widget.thread?.thread?.author)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 10.0, 5.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFE1343E),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.00, 0.00),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              '87btfu13' /* Report */,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: Colors.white,
+                                                  fontSize: 17.0,
+                                                ),
                                           ),
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Outfit',
-                                                color: Colors.white,
-                                                fontSize: 17.0,
-                                              ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
+                              if (currentUserUid ==
+                                  widget.thread?.thread?.author)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 10.0, 5.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFE1343E),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        final firestoreBatch =
+                                            FirebaseFirestore.instance.batch();
+                                        try {
+                                          firestoreBatch
+                                              .delete(widget.thread!.reference);
+
+                                          firestoreBatch
+                                              .update(currentUserReference!, {
+                                            ...mapToFirestore(
+                                              {
+                                                'threads':
+                                                    FieldValue.arrayRemove([
+                                                  getThreadFirestoreData(
+                                                    updateThreadStruct(
+                                                      widget.thread?.thread,
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                    true,
+                                                  )
+                                                ]),
+                                              },
+                                            ),
+                                          });
+                                        } finally {
+                                          await firestoreBatch.commit();
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'cssy63la' /* Delete */,
+                                              ),
+                                              textAlign: TextAlign.start,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color: Colors.white,
+                                                        fontSize: 17.0,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               if (valueOrDefault<bool>(
                                   currentUserDocument?.admin, false))
                                 Padding(

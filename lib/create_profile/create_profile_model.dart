@@ -11,7 +11,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'create_profile_widget.dart' show CreateProfileWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +24,8 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   ///  Local state fields for this page.
 
   bool usernameValid = false;
+
+  bool firstTime = true;
 
   ///  State fields for stateful widgets in this page.
 
@@ -46,6 +48,8 @@ class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   FocusNode? usernameFocusNode;
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
+  // Stores action output result for [Firestore Query - Query a collection] action in username widget.
+  UsersRecord? query;
   // State field(s) for phoneNumber widget.
   FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberController;

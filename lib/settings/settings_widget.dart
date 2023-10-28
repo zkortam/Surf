@@ -88,7 +88,9 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(),
+                      child: PCNavBarWidget(
+                        currentPage: 5,
+                      ),
                     ),
                   Flexible(
                     child: Row(

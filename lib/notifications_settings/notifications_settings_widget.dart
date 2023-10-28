@@ -37,7 +37,12 @@ class _NotificationsSettingsWidgetState
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().paramholder != 'pintosettapp') {
+      if (FFAppState().paramholder == 'pintosettapp') {
+        setState(() {
+          _model.isSilent =
+              valueOrDefault<bool>(currentUserDocument?.isSilentMode, false);
+        });
+      } else {
         context.pushNamed('enterPin');
       }
     });
@@ -83,7 +88,9 @@ class _NotificationsSettingsWidgetState
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(),
+                    child: PCNavBarWidget(
+                      currentPage: 5,
+                    ),
                   ),
                   Flexible(
                     child: Row(
@@ -310,6 +317,9 @@ class _NotificationsSettingsWidgetState
                                                       currentUserDocument
                                                           ?.isSilentMode,
                                                       false)) {
+                                                    setState(() {
+                                                      _model.isSilent = false;
+                                                    });
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -352,6 +362,9 @@ class _NotificationsSettingsWidgetState
                                                       isSilentMode: false,
                                                     ));
                                                   } else {
+                                                    setState(() {
+                                                      _model.isSilent = true;
+                                                    });
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -423,6 +436,9 @@ class _NotificationsSettingsWidgetState
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Text(
                                                           FFLocalizations.of(
@@ -443,6 +459,104 @@ class _NotificationsSettingsWidgetState
                                                                     FontWeight
                                                                         .normal,
                                                               ),
+                                                        ),
+                                                        Stack(
+                                                          children: [
+                                                            if (_model.isSilent)
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: 70.0,
+                                                                  height: 40.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Color(
+                                                                        0xFF43A514),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            50.0),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'b556oe6l' /* on */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              fontSize: 18.0,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            if (!_model
+                                                                .isSilent)
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: 70.0,
+                                                                  height: 40.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Color(
+                                                                        0xFFE72B36),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            50.0),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'e8qngzjf' /* off */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              fontSize: 18.0,
+                                                                              letterSpacing: 0.3,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),

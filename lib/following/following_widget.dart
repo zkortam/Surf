@@ -244,64 +244,66 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 0.0),
-                                            child: StreamBuilder<
-                                                List<UsersRecord>>(
-                                              stream: queryUsersRecord(
-                                                queryBuilder: (usersRecord) =>
-                                                    usersRecord.whereIn(
-                                                        'uid',
-                                                        followingUsersRecord
-                                                                    ?.following !=
-                                                                ''
-                                                            ? followingUsersRecord
-                                                                ?.following
-                                                            : null),
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child: SpinKitRipple(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 50.0,
+                                          if (followingUsersRecord!
+                                                  .following.length >
+                                              0)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 10.0, 10.0, 0.0),
+                                              child: StreamBuilder<
+                                                  List<UsersRecord>>(
+                                                stream: queryUsersRecord(
+                                                  queryBuilder: (usersRecord) =>
+                                                      usersRecord.whereIn(
+                                                          'uid',
+                                                          followingUsersRecord
+                                                                      ?.following !=
+                                                                  ''
+                                                              ? followingUsersRecord
+                                                                  ?.following
+                                                              : null),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child: SpinKitRipple(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 50.0,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<UsersRecord>
-                                                    columnUsersRecordList =
-                                                    snapshot.data!;
-                                                return Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: List.generate(
-                                                      columnUsersRecordList
-                                                          .length,
-                                                      (columnIndex) {
-                                                    final columnUsersRecord =
-                                                        columnUsersRecordList[
-                                                            columnIndex];
-                                                    return FollowingCardWidget(
-                                                      key: Key(
-                                                          'Key96t_${columnIndex}_of_${columnUsersRecordList.length}'),
-                                                      user: columnUsersRecord,
                                                     );
-                                                  }).divide(
-                                                      SizedBox(height: 5.0)),
-                                                );
-                                              },
+                                                  }
+                                                  List<UsersRecord>
+                                                      columnUsersRecordList =
+                                                      snapshot.data!;
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: List.generate(
+                                                        columnUsersRecordList
+                                                            .length,
+                                                        (columnIndex) {
+                                                      final columnUsersRecord =
+                                                          columnUsersRecordList[
+                                                              columnIndex];
+                                                      return FollowingCardWidget(
+                                                        key: Key(
+                                                            'Key96t_${columnIndex}_of_${columnUsersRecordList.length}'),
+                                                        user: columnUsersRecord,
+                                                      );
+                                                    }).divide(
+                                                        SizedBox(height: 5.0)),
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ],

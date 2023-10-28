@@ -88,7 +88,9 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(),
+                    child: PCNavBarWidget(
+                      currentPage: 5,
+                    ),
                   ),
                   Flexible(
                     child: Row(

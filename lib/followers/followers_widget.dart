@@ -235,66 +235,68 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 10.0, 10.0, 0.0),
-                                      child: StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord.whereIn(
-                                                  'uid',
-                                                  followersUsersRecord
-                                                              ?.followers !=
-                                                          ''
-                                                      ? followersUsersRecord
-                                                          ?.followers
-                                                      : null),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitRipple(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              columnUsersRecordList =
-                                              snapshot.data!;
-                                          return Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                columnUsersRecordList.length,
-                                                (columnIndex) {
-                                              final columnUsersRecord =
-                                                  columnUsersRecordList[
-                                                      columnIndex];
-                                              return Visibility(
-                                                visible: columnUsersRecord
-                                                    .following
-                                                    .contains(
-                                                        followersUsersRecord
-                                                            ?.uid),
-                                                child: FollowerCardWidget(
-                                                  key: Key(
-                                                      'Key1t6_${columnIndex}_of_${columnUsersRecordList.length}'),
-                                                  user: columnUsersRecord,
-                                                  id: widget.uid!,
+                                    if (followersUsersRecord!.followers.length >
+                                        0)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 0.0),
+                                        child: StreamBuilder<List<UsersRecord>>(
+                                          stream: queryUsersRecord(
+                                            queryBuilder: (usersRecord) =>
+                                                usersRecord.whereIn(
+                                                    'uid',
+                                                    followersUsersRecord
+                                                                ?.followers !=
+                                                            ''
+                                                        ? followersUsersRecord
+                                                            ?.followers
+                                                        : null),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitRipple(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 50.0,
+                                                  ),
                                                 ),
                                               );
-                                            }).divide(SizedBox(height: 5.0)),
-                                          );
-                                        },
+                                            }
+                                            List<UsersRecord>
+                                                columnUsersRecordList =
+                                                snapshot.data!;
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  columnUsersRecordList.length,
+                                                  (columnIndex) {
+                                                final columnUsersRecord =
+                                                    columnUsersRecordList[
+                                                        columnIndex];
+                                                return Visibility(
+                                                  visible: columnUsersRecord
+                                                      .following
+                                                      .contains(
+                                                          followersUsersRecord
+                                                              ?.uid),
+                                                  child: FollowerCardWidget(
+                                                    key: Key(
+                                                        'Key1t6_${columnIndex}_of_${columnUsersRecordList.length}'),
+                                                    user: columnUsersRecord,
+                                                    id: widget.uid!,
+                                                  ),
+                                                );
+                                              }).divide(SizedBox(height: 5.0)),
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),

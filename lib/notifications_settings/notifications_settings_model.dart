@@ -17,6 +17,10 @@ import 'package:provider/provider.dart';
 
 class NotificationsSettingsModel
     extends FlutterFlowModel<NotificationsSettingsWidget> {
+  ///  Local state fields for this page.
+
+  bool isSilent = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

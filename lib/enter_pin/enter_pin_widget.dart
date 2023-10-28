@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -378,6 +379,42 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                               ),
                             ).animateOnPageLoad(
                                 animationsMap['containerOnPageLoadAnimation']!),
+                          ),
+                          RichText(
+                            textScaleFactor:
+                                MediaQuery.of(context).textScaleFactor,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: FFLocalizations.of(context).getText(
+                                    'xorsnirq' /* Forgot pin? */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: Colors.white,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: FFLocalizations.of(context).getText(
+                                    'p9thrkfb' /*  Contact Support */,
+                                  ),
+                                  style: TextStyle(
+                                    color: Color(0xFF867FF1),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 15.0,
+                                  ),
+                            ),
                           ),
                         ],
                       ),

@@ -148,7 +148,9 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                           wrapWithModel(
                             model: _model.pCNavBarModel,
                             updateCallback: () => setState(() {}),
-                            child: PCNavBarWidget(),
+                            child: PCNavBarWidget(
+                              currentPage: 1,
+                            ),
                           ),
                         Flexible(
                           child: Row(

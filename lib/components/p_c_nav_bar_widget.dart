@@ -16,7 +16,12 @@ import 'p_c_nav_bar_model.dart';
 export 'p_c_nav_bar_model.dart';
 
 class PCNavBarWidget extends StatefulWidget {
-  const PCNavBarWidget({Key? key}) : super(key: key);
+  const PCNavBarWidget({
+    Key? key,
+    this.currentPage,
+  }) : super(key: key);
+
+  final int? currentPage;
 
   @override
   _PCNavBarWidgetState createState() => _PCNavBarWidgetState();
@@ -887,8 +892,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: Icon(
                                             Icons.home_sharp,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 0
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 30.0,
                                           ),
                                         ),
@@ -972,8 +980,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: FaIcon(
                                             FontAwesomeIcons.bullseye,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 1
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 26.0,
                                           ),
                                         ),
@@ -1057,8 +1068,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: Icon(
                                             Icons.notifications,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 2
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 30.0,
                                           ),
                                         ),
@@ -1142,8 +1156,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: Icon(
                                             Icons.message,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 3
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 30.0,
                                           ),
                                         ),
@@ -1227,8 +1244,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: Icon(
                                             Icons.search_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 4
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 30.0,
                                           ),
                                         ),
@@ -1312,8 +1332,11 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           },
                                           child: Icon(
                                             Icons.settings,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: widget.currentPage == 5
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
                                             size: 30.0,
                                           ),
                                         ),

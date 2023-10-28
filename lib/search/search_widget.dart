@@ -85,7 +85,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(),
+                      child: PCNavBarWidget(
+                        currentPage: 4,
+                      ),
                     ),
                   Flexible(
                     child: Row(
