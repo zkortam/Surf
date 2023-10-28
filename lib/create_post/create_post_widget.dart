@@ -161,7 +161,9 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(),
+                      child: PCNavBarWidget(
+                        currentPage: 6,
+                      ),
                     ),
                   Flexible(
                     child: Row(

@@ -122,14 +122,15 @@ final parametersBuilderMap =
   'dateOfBirth': ParameterData.none(),
   'welcome': ParameterData.none(),
   'emailVerification': ParameterData.none(),
-  'createProfile': ParameterData.none(),
   'Notifications': ParameterData.none(),
+  'createProfile': ParameterData.none(),
   'forgotPassword': ParameterData.none(),
   'Profile': (data) async => ParameterData(
         allParams: {
           'userID': getParameter<String>(data, 'userID'),
         },
       ),
+  'Home': ParameterData.none(),
   'Threads': ParameterData.none(),
   'createPost': ParameterData.none(),
   'singlePost': (data) async => ParameterData(
@@ -220,9 +221,7 @@ final parametersBuilderMap =
         },
       ),
   'muluploadtest': ParameterData.none(),
-  'Home': ParameterData.none(),
   'LoggingIn': ParameterData.none(),
-  'swipestackCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -96,7 +96,9 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                       wrapWithModel(
                         model: _model.pCNavBarModel,
                         updateCallback: () => setState(() {}),
-                        child: PCNavBarWidget(),
+                        child: PCNavBarWidget(
+                          currentPage: 3,
+                        ),
                       ),
                       Flexible(
                         child: Row(

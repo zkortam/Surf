@@ -3,16 +3,16 @@ import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/bottom_bar_error_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'edit_profile_widget.dart' show EditProfileWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +25,8 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   ///  Local state fields for this page.
 
   bool isUsernameValid = true;
+
+  bool firstTime = true;
 
   ///  State fields for stateful widgets in this page.
 
@@ -47,8 +49,8 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   FocusNode? usernameFocusNode;
   TextEditingController? usernameController;
   String? Function(BuildContext, String?)? usernameControllerValidator;
-  // Algolia Search Results from action on username
-  List<UsersRecord>? algoliaSearchResults = [];
+  // Stores action output result for [Firestore Query - Query a collection] action in username widget.
+  UsersRecord? query;
   // State field(s) for bio widget.
   FocusNode? bioFocusNode;
   TextEditingController? bioController;

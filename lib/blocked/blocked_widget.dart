@@ -86,7 +86,9 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(),
+                    child: PCNavBarWidget(
+                      currentPage: 5,
+                    ),
                   ),
                   Flexible(
                     child: Row(
@@ -216,76 +218,79 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 10.0, 10.0, 0.0),
-                                    child: AuthUserStreamWidget(
-                                      builder: (context) =>
-                                          StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord
-                                                  .whereIn(
-                                                      'uid',
-                                                      (currentUserDocument
-                                                                      ?.blocked
-                                                                      ?.toList() ??
-                                                                  []) !=
-                                                              ''
-                                                          ? (currentUserDocument
-                                                                  ?.blocked
-                                                                  ?.toList() ??
-                                                              [])
-                                                          : null)
-                                                  .orderBy('realName',
-                                                      descending: true),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitRipple(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 50.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              columnUsersRecordList = snapshot
-                                                  .data!
-                                                  .where((u) =>
-                                                      u.uid != currentUserUid)
-                                                  .toList();
-                                          return Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                columnUsersRecordList.length,
-                                                (columnIndex) {
-                                              final columnUsersRecord =
-                                                  columnUsersRecordList[
-                                                      columnIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 5.0),
-                                                child: BlockedCardWidget(
-                                                  key: Key(
-                                                      'Keymfo_${columnIndex}_of_${columnUsersRecordList.length}'),
-                                                  user: columnUsersRecord,
+                                  if ((currentUserDocument?.blocked?.toList() ??
+                                              [])
+                                          .length >
+                                      0)
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 0.0),
+                                      child: AuthUserStreamWidget(
+                                        builder: (context) =>
+                                            StreamBuilder<List<UsersRecord>>(
+                                          stream: queryUsersRecord(
+                                            queryBuilder: (usersRecord) => usersRecord
+                                                .whereIn(
+                                                    'uid',
+                                                    (currentUserDocument
+                                                                    ?.blocked
+                                                                    ?.toList() ??
+                                                                []) !=
+                                                            ''
+                                                        ? (currentUserDocument
+                                                                ?.blocked
+                                                                ?.toList() ??
+                                                            [])
+                                                        : null)
+                                                .orderBy('realName',
+                                                    descending: true),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child: SpinKitRipple(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 50.0,
+                                                  ),
                                                 ),
                                               );
-                                            }),
-                                          );
-                                        },
+                                            }
+                                            List<UsersRecord>
+                                                columnUsersRecordList = snapshot
+                                                    .data!
+                                                    .where((u) =>
+                                                        u.uid != currentUserUid)
+                                                    .toList();
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  columnUsersRecordList.length,
+                                                  (columnIndex) {
+                                                final columnUsersRecord =
+                                                    columnUsersRecordList[
+                                                        columnIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 5.0),
+                                                  child: BlockedCardWidget(
+                                                    key: Key(
+                                                        'Keymfo_${columnIndex}_of_${columnUsersRecordList.length}'),
+                                                    user: columnUsersRecord,
+                                                  ),
+                                                );
+                                              }),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),

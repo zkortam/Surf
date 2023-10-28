@@ -126,12 +126,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EmailVerificationWidget(),
             ),
             FFRoute(
-              name: 'createProfile',
-              path: 'createProfile',
-              requireAuth: true,
-              builder: (context, params) => CreateProfileWidget(),
-            ),
-            FFRoute(
               name: 'Notifications',
               path: 'Notifications',
               requireAuth: true,
@@ -141,6 +135,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       initialPage: 'Notifications',
                       page: NotificationsWidget(),
                     ),
+            ),
+            FFRoute(
+              name: 'createProfile',
+              path: 'createProfile',
+              requireAuth: true,
+              builder: (context, params) => CreateProfileWidget(),
             ),
             FFRoute(
               name: 'forgotPassword',
@@ -158,6 +158,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       page: ProfileWidget(
                         userID: params.getParam('userID', ParamType.String),
                       ),
+                    ),
+            ),
+            FFRoute(
+              name: 'Home',
+              path: 'home',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Home')
+                  : NavBarPage(
+                      initialPage: 'Home',
+                      page: HomeWidget(),
                     ),
             ),
             FFRoute(
@@ -387,27 +398,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => MuluploadtestWidget(),
             ),
             FFRoute(
-              name: 'Home',
-              path: 'home',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Home')
-                  : NavBarPage(
-                      initialPage: 'Home',
-                      page: HomeWidget(),
-                    ),
-            ),
-            FFRoute(
               name: 'LoggingIn',
               path: 'loggingIn',
               requireAuth: true,
               builder: (context, params) => LoggingInWidget(),
-            ),
-            FFRoute(
-              name: 'swipestackCopy',
-              path: 'swipestackCopy',
-              requireAuth: true,
-              builder: (context, params) => SwipestackCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -104,7 +104,9 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(),
+                      child: PCNavBarWidget(
+                        currentPage: 2,
+                      ),
                     ),
                   Flexible(
                     child: Row(

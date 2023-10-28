@@ -10,7 +10,7 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -654,296 +654,247 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: FutureBuilder<
-                                                List<UsersRecord>>(
-                                              future: UsersRecord.search(
-                                                term: functions
-                                                    .usernameStripper(_model
-                                                        .usernameController
-                                                        .text),
-                                                maxResults: 5,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child: SpinKitRipple(
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: TextFormField(
+                                                controller:
+                                                    _model.usernameController,
+                                                focusNode:
+                                                    _model.usernameFocusNode,
+                                                onFieldSubmitted: (_) async {
+                                                  _model.query =
+                                                      await queryUsersRecordOnce(
+                                                    queryBuilder:
+                                                        (usersRecord) =>
+                                                            usersRecord.where(
+                                                      'display_name',
+                                                      isEqualTo: functions
+                                                          .usernameStripper(_model
+                                                              .usernameController
+                                                              .text),
+                                                    ),
+                                                    singleRecord: true,
+                                                  ).then((s) => s.firstOrNull);
+                                                  if ((_model.query != null) ==
+                                                      false) {
+                                                    if (functions
+                                                            .getStringLength(functions
+                                                                .usernameStripper(
+                                                                    _model
+                                                                        .usernameController
+                                                                        .text))
+                                                            .toString() ==
+                                                        '4') {
+                                                      setState(() {
+                                                        _model.usernameValid =
+                                                            false;
+                                                      });
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () => _model
+                                                                    .unfocusNode
+                                                                    .canRequestFocus
+                                                                ? FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode)
+                                                                : FocusScope.of(
+                                                                        context)
+                                                                    .unfocus(),
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  BottomBarErrorWidget(
+                                                                text:
+                                                                    'Username must be longer than 3 characters',
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          safeSetState(() {}));
+                                                    } else {
+                                                      setState(() {
+                                                        _model.usernameValid =
+                                                            true;
+                                                      });
+                                                    }
+                                                  } else {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                BottomBarErrorWidget(
+                                                              text:
+                                                                  'Username must be unique',
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+
+                                                    setState(() {
+                                                      _model.usernameValid =
+                                                          false;
+                                                    });
+                                                  }
+
+                                                  setState(() {
+                                                    _model.firstTime = false;
+                                                  });
+
+                                                  setState(() {});
+                                                },
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge,
+                                                  hintText: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    '05ugf1so' /* Username */,
+                                                  ),
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Outfit',
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
-                                                        size: 50.0,
                                                       ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<UsersRecord>
-                                                    usernameUsersRecordList =
-                                                    snapshot.data!;
-                                                return Container(
-                                                  width: double.infinity,
-                                                  child: TextFormField(
-                                                    controller: _model
-                                                        .usernameController,
-                                                    focusNode: _model
-                                                        .usernameFocusNode,
-                                                    onChanged: (_) =>
-                                                        EasyDebounce.debounce(
-                                                      '_model.usernameController',
-                                                      Duration(
-                                                          milliseconds: 2000),
-                                                      () async {
-                                                        if (usernameUsersRecordList
-                                                                .length ==
-                                                            0) {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                true;
-                                                          });
-                                                        } else {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                false;
-                                                          });
-                                                        }
-
-                                                        if (functions.getStringLength(
-                                                                functions.usernameStripper(
-                                                                    _model
-                                                                        .usernameController
-                                                                        .text)) <
-                                                            4) {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                false;
-                                                          });
-                                                        } else {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                true;
-                                                          });
-                                                        }
-                                                      },
-                                                    ),
-                                                    onFieldSubmitted:
-                                                        (_) async {
-                                                      if (usernameUsersRecordList
-                                                              .length ==
-                                                          0) {
-                                                        setState(() {
-                                                          _model.usernameValid =
-                                                              true;
-                                                        });
-                                                        if (functions.getStringLength(
-                                                                functions.usernameStripper(
-                                                                    _model
-                                                                        .usernameController
-                                                                        .text)) <
-                                                            4) {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                false;
-                                                          });
-                                                          await showModalBottomSheet(
-                                                            isScrollControlled:
-                                                                true,
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            enableDrag: false,
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return GestureDetector(
-                                                                onTap: () => _model
-                                                                        .unfocusNode
-                                                                        .canRequestFocus
-                                                                    ? FocusScope.of(
-                                                                            context)
-                                                                        .requestFocus(_model
-                                                                            .unfocusNode)
-                                                                    : FocusScope.of(
-                                                                            context)
-                                                                        .unfocus(),
-                                                                child: Padding(
-                                                                  padding: MediaQuery
-                                                                      .viewInsetsOf(
-                                                                          context),
-                                                                  child:
-                                                                      BottomBarErrorWidget(
-                                                                    text:
-                                                                        'Username must be longer than 3 characters',
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ).then((value) =>
-                                                              safeSetState(
-                                                                  () {}));
-                                                        } else {
-                                                          setState(() {
-                                                            _model.usernameValid =
-                                                                true;
-                                                          });
-                                                        }
-                                                      } else {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GestureDetector(
-                                                              onTap: () => _model
-                                                                      .unfocusNode
-                                                                      .canRequestFocus
-                                                                  ? FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode)
-                                                                  : FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    BottomBarErrorWidget(
-                                                                  text:
-                                                                      'Username must be unique',
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
-
-                                                        setState(() {
-                                                          _model.usernameValid =
-                                                              false;
-                                                        });
-                                                      }
-                                                    },
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelLarge,
-                                                      hintText:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                        '05ugf1so' /* Username (Press enter to confi... */,
-                                                      ),
-                                                      hintStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                              ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: _model
-                                                                  .usernameValid
-                                                              ? Color(
-                                                                  0xFF17A617)
-                                                              : FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryBackground,
-                                                          width: 1.5,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: () {
+                                                        if (_model
+                                                            .usernameValid) {
+                                                          return Color(
+                                                              0xFF17A617);
+                                                        } else if (!_model
+                                                                .usernameValid &&
+                                                            !_model.firstTime) {
+                                                          return FlutterFlowTheme
                                                                   .of(context)
-                                                              .primary,
-                                                          width: 1.5,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
+                                                              .error;
+                                                        } else {
+                                                          return FlutterFlowTheme
                                                                   .of(context)
-                                                              .error,
-                                                          width: 1.5,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .error,
-                                                          width: 1.5,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                      ),
-                                                      filled: true,
-                                                      fillColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryBackground,
-                                                      suffixIcon: Icon(
-                                                        Icons.check_circle,
-                                                        color: valueOrDefault<
-                                                            Color>(
-                                                          _model.usernameValid
-                                                              ? Color(
-                                                                  0xFF39C727)
-                                                              : Color(
-                                                                  0xFF757575),
-                                                          Color(0xFF757575),
-                                                        ),
-                                                        size: 22.0,
-                                                      ),
+                                                              .primaryBackground;
+                                                        }
+                                                      }(),
+                                                      width: 1.5,
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyLarge,
-                                                    maxLength: 15,
-                                                    maxLengthEnforcement:
-                                                        MaxLengthEnforcement
-                                                            .enforced,
-                                                    validator: _model
-                                                        .usernameControllerValidator
-                                                        .asValidator(context),
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .allow(RegExp(
-                                                              '^[A-Za-z0-9_.]*\$'))
-                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
                                                   ),
-                                                );
-                                              },
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      width: 1.5,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.5,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.5,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  suffixIcon: Icon(
+                                                    Icons.check_circle,
+                                                    color:
+                                                        valueOrDefault<Color>(
+                                                      _model.usernameValid
+                                                          ? Color(0xFF39C727)
+                                                          : Color(0xFF757575),
+                                                      Color(0xFF757575),
+                                                    ),
+                                                    size: 22.0,
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge,
+                                                maxLength: 15,
+                                                maxLengthEnforcement:
+                                                    MaxLengthEnforcement
+                                                        .enforced,
+                                                validator: _model
+                                                    .usernameControllerValidator
+                                                    .asValidator(context),
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(
+                                                          '^[A-Za-z0-9_.]*\$'))
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           Padding(

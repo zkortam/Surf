@@ -342,3 +342,10 @@ int identifySocialMediaPlatform(String link) {
     return -1; // Unrecognized or other platform
   }
 }
+
+String errorFixer(
+  String errorstr,
+  UsersRecord user,
+) {
+  return " ";
+}

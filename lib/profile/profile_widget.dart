@@ -126,7 +126,9 @@ class _ProfileWidgetState extends State<ProfileWidget>
                         wrapWithModel(
                           model: _model.pCNavBarModel,
                           updateCallback: () => setState(() {}),
-                          child: PCNavBarWidget(),
+                          child: PCNavBarWidget(
+                            currentPage: 7,
+                          ),
                         ),
                       Flexible(
                         child: Row(

@@ -166,7 +166,9 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                           wrapWithModel(
                             model: _model.pCNavBarModel,
                             updateCallback: () => setState(() {}),
-                            child: PCNavBarWidget(),
+                            child: PCNavBarWidget(
+                              currentPage: 3,
+                            ),
                           ),
                           if (responsiveVisibility(
                             context: context,
