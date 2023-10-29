@@ -6,6 +6,7 @@ import '/components/beautified_text_widget.dart';
 import '/components/bottom_bar_error_widget.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
+import '/components/select_space_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -19,6 +20,7 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import 'create_post_widget.dart' show CreatePostWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -61,7 +63,7 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
 
   String postID = 'a';
 
-  String apiKey = '000';
+  String apiKey = 'ddd';
 
   ///  State fields for stateful widgets in this page.
 
@@ -90,6 +92,8 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   String? isPolitical;
   // Stores action output result for [Custom Action - chatGPT] action in Button widget.
   String? threadPolitical;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  SpacesRecord? query;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;

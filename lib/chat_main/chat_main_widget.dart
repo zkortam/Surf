@@ -305,6 +305,11 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                         : userschatsItem
                                                                             .userA
                                                                             ?.id,
+                                                                    isNull: (functions.detwhichchatuser(currentUserReference!, userschatsItem).toString() ==
+                                                                                '1'
+                                                                            ? userschatsItem.userB?.id
+                                                                            : userschatsItem.userA?.id) ==
+                                                                        null,
                                                                   ),
                                                                   singleRecord:
                                                                       true,
@@ -335,6 +340,12 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                       rowUsersRecordList =
                                                                       snapshot
                                                                           .data!;
+                                                                  // Return an empty Container when the item does not exist.
+                                                                  if (snapshot
+                                                                      .data!
+                                                                      .isEmpty) {
+                                                                    return Container();
+                                                                  }
                                                                   final rowUsersRecord = rowUsersRecordList
                                                                           .isNotEmpty
                                                                       ? rowUsersRecordList

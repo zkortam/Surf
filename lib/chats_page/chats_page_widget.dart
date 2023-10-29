@@ -265,11 +265,11 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                                         10.0,
                                                                         0.0,
                                                                         0.0),
-                                                            child: StreamBuilder<
+                                                            child: FutureBuilder<
                                                                 List<
                                                                     UsersRecord>>(
-                                                              stream:
-                                                                  queryUsersRecord(
+                                                              future:
+                                                                  queryUsersRecordOnce(
                                                                 queryBuilder:
                                                                     (usersRecord) =>
                                                                         usersRecord
@@ -283,9 +283,23 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                                       ? userschatsItem
                                                                           .userB
                                                                           ?.id
-                                                                      : userschatsItem
-                                                                          .userA
-                                                                          ?.id,
+                                                                      : userschatsItem.userA?.id !=
+                                                                              ''
+                                                                          ? functions.detwhichchatuser(currentUserReference!, userschatsItem).toString() == '1'
+                                                                              ? userschatsItem.userB?.id
+                                                                              : userschatsItem.userA?.id
+                                                                          : null,
+                                                                  isNull: (functions.detwhichchatuser(currentUserReference!, userschatsItem).toString() ==
+                                                                              '1'
+                                                                          ? userschatsItem
+                                                                              .userB
+                                                                              ?.id
+                                                                          : userschatsItem.userA?.id != ''
+                                                                              ? functions.detwhichchatuser(currentUserReference!, userschatsItem).toString() == '1'
+                                                                                  ? userschatsItem.userB?.id
+                                                                                  : userschatsItem.userA?.id
+                                                                              : null) ==
+                                                                      null,
                                                                 ),
                                                                 singleRecord:
                                                                     true,
@@ -316,6 +330,12 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                                     rowUsersRecordList =
                                                                     snapshot
                                                                         .data!;
+                                                                // Return an empty Container when the item does not exist.
+                                                                if (snapshot
+                                                                    .data!
+                                                                    .isEmpty) {
+                                                                  return Container();
+                                                                }
                                                                 final rowUsersRecord =
                                                                     rowUsersRecordList
                                                                             .isNotEmpty
@@ -1567,6 +1587,28 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                                             _model.textController,
                                                                         focusNode:
                                                                             _model.textFieldFocusNode,
+                                                                        onFieldSubmitted:
+                                                                            (_) async {
+                                                                          if (_model.textController.text != null &&
+                                                                              _model.textController.text != '') {
+                                                                            await ChatMessagesRecord.collection.doc().set(createChatMessagesRecordData(
+                                                                                  user: currentUserReference,
+                                                                                  chatUser: widget.chatUser,
+                                                                                  text: _model.textController.text,
+                                                                                  timestamp: getCurrentTimestamp,
+                                                                                  image: _model.uploadedFileUrl,
+                                                                                ));
+
+                                                                            await chatsPageChatsRecord!.reference.update(createChatsRecordData(
+                                                                              lastMessage: _model.textController.text,
+                                                                              lastMessageTime: getCurrentTimestamp,
+                                                                              lastMessageSenderId: currentUserUid,
+                                                                            ));
+                                                                            setState(() {
+                                                                              _model.textController?.clear();
+                                                                            });
+                                                                          }
+                                                                        },
                                                                         autofocus:
                                                                             true,
                                                                         obscureText:

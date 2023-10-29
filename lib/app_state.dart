@@ -17,12 +17,19 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _selectedSpace = prefs.getString('ff_selectedSpace') ?? _selectedSpace;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   List<String> _mulmediauploadarray = [];
   List<String> get mulmediauploadarray => _mulmediauploadarray;
@@ -57,6 +64,13 @@ class FFAppState extends ChangeNotifier {
   String get paramholder => _paramholder;
   set paramholder(String _value) {
     _paramholder = _value;
+  }
+
+  String _selectedSpace = '';
+  String get selectedSpace => _selectedSpace;
+  set selectedSpace(String _value) {
+    _selectedSpace = _value;
+    prefs.setString('ff_selectedSpace', _value);
   }
 }
 

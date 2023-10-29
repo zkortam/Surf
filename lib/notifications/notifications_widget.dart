@@ -39,7 +39,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(-48.0, 0.0),
+          begin: Offset(0.0, 48.0),
           end: Offset(0.0, 0.0),
         ),
         FadeEffect(
