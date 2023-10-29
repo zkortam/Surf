@@ -222,6 +222,11 @@ final parametersBuilderMap =
       ),
   'muluploadtest': ParameterData.none(),
   'LoggingIn': ParameterData.none(),
+  'spaces': (data) async => ParameterData(
+        allParams: {
+          'name': getParameter<String>(data, 'name'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

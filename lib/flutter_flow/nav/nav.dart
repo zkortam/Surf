@@ -402,6 +402,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'loggingIn',
               requireAuth: true,
               builder: (context, params) => LoggingInWidget(),
+            ),
+            FFRoute(
+              name: 'spaces',
+              path: 'spaces',
+              requireAuth: true,
+              builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: SpacesWidget(
+                  name: params.getParam('name', ParamType.String),
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

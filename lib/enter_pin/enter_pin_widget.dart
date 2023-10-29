@@ -387,7 +387,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                               children: [
                                 TextSpan(
                                   text: FFLocalizations.of(context).getText(
-                                    'xorsnirq' /* Forgot pin? */,
+                                    'woc6h6u1' /* Forgot pin? */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -400,7 +400,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                 ),
                                 TextSpan(
                                   text: FFLocalizations.of(context).getText(
-                                    'p9thrkfb' /*  Contact Support */,
+                                    'zify633k' /*  Contact Support */,
                                   ),
                                   style: TextStyle(
                                     color: Color(0xFF867FF1),

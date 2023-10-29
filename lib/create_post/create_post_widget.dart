@@ -6,6 +6,7 @@ import '/components/beautified_text_widget.dart';
 import '/components/bottom_bar_error_widget.dart';
 import '/components/bottom_notif_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
+import '/components/select_space_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -18,6 +19,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -1512,6 +1514,67 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                 },
                                                               ),
                                                             ),
+                                                          if (!_model.isPoll)
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FlutterFlowIconButton(
+                                                                borderColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                borderRadius:
+                                                                    20.0,
+                                                                borderWidth:
+                                                                    2.0,
+                                                                buttonSize:
+                                                                    40.0,
+                                                                icon: Icon(
+                                                                  Icons.grain,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  size: 20.0,
+                                                                ),
+                                                                onPressed:
+                                                                    () async {
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled:
+                                                                        true,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    enableDrag:
+                                                                        false,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return GestureDetector(
+                                                                        onTap: () => _model.unfocusNode.canRequestFocus
+                                                                            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                            : FocusScope.of(context).unfocus(),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              MediaQuery.viewInsetsOf(context),
+                                                                          child:
+                                                                              SelectSpaceWidget(),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ).then((value) =>
+                                                                      safeSetState(
+                                                                          () {}));
+                                                                },
+                                                              ),
+                                                            ),
                                                           FFButtonWidget(
                                                             onPressed:
                                                                 () async {
@@ -1564,6 +1627,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                     _model.addToOptions(_model
                                                                         .textController3
                                                                         .text);
+                                                                  });
+                                                                  setState(() {
+                                                                    _model.postID =
+                                                                        'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}';
                                                                   });
                                                                   setState(() {
                                                                     _model.addToOptions(_model
@@ -1648,6 +1715,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                             ),
                                                                           ));
                                                                 } else {
+                                                                  setState(() {
+                                                                    _model.postID =
+                                                                        'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}';
+                                                                  });
                                                                   if (functions.getStringLength(_model
                                                                           .textController7
                                                                           .text) >
@@ -1697,7 +1768,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                                       title: _model.textController2.text,
                                                                                       text: functions.threadTextStripper(_model.textController7.text),
                                                                                       netVotes: 0,
-                                                                                      id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                                      id: _model.postID,
                                                                                       isPoll: _model.isPoll,
                                                                                       poll: createPollStruct(
                                                                                         fieldValues: {
@@ -1731,7 +1802,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                               author: currentUserUid,
                                                                               title: _model.textController2.text,
                                                                               text: functions.threadTextStripper(_model.textController7.text),
-                                                                              id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
+                                                                              id: _model.postID,
                                                                               netVotes: 0,
                                                                               isPoll: false,
                                                                               link: functions.cutURL(_model.textController7.text),
@@ -1877,6 +1948,51 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                         ));
                                                                   }
                                                                 }
+
+                                                                _model.query =
+                                                                    await querySpacesRecordOnce(
+                                                                  queryBuilder:
+                                                                      (spacesRecord) =>
+                                                                          spacesRecord
+                                                                              .where(
+                                                                    'name',
+                                                                    isEqualTo:
+                                                                        FFAppState()
+                                                                            .selectedSpace,
+                                                                  ),
+                                                                  singleRecord:
+                                                                      true,
+                                                                ).then((s) => s
+                                                                        .firstOrNull);
+                                                                if (_model.query
+                                                                            ?.name !=
+                                                                        null &&
+                                                                    _model.query
+                                                                            ?.name !=
+                                                                        '') {
+                                                                  firestoreBatch.update(
+                                                                      _model
+                                                                          .query!
+                                                                          .reference,
+                                                                      {
+                                                                        ...mapToFirestore(
+                                                                          {
+                                                                            'threads':
+                                                                                FieldValue.arrayUnion([
+                                                                              _model.postID
+                                                                            ]),
+                                                                          },
+                                                                        ),
+                                                                      });
+                                                                }
+                                                                setState(() {
+                                                                  FFAppState()
+                                                                      .selectedSpace = '';
+                                                                });
+                                                                setState(() {
+                                                                  _model.postID =
+                                                                      'a';
+                                                                });
 
                                                                 context.goNamed(
                                                                   'Threads',
@@ -2424,11 +2540,6 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                           child: Container(
                                                             width:
                                                                 double.infinity,
-                                                            height: MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .height *
-                                                                0.4,
                                                             decoration:
                                                                 BoxDecoration(
                                                               borderRadius:
@@ -2576,7 +2687,8 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                   buttonSize:
                                                                       40.0,
                                                                   icon: Icon(
-                                                                    Icons.grain,
+                                                                    Icons
+                                                                        .stacked_bar_chart_rounded,
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryText,

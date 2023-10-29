@@ -155,6 +155,20 @@
           "order": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "thread",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "thread.id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "thread.timestamp",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [
