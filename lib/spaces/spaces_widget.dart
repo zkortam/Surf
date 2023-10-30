@@ -35,16 +35,9 @@ class _SpacesWidgetState extends State<SpacesWidget>
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = {
-    'threadOnPageLoadAnimation1': AnimationInfo(
+    'columnOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(-48.0, 0.0),
-          end: Offset(0.0, 0.0),
-        ),
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -54,7 +47,7 @@ class _SpacesWidgetState extends State<SpacesWidget>
         ),
       ],
     ),
-    'threadOnPageLoadAnimation2': AnimationInfo(
+    'threadOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         MoveEffect(
@@ -133,7 +126,7 @@ class _SpacesWidgetState extends State<SpacesWidget>
             ? spacesSpacesRecordList.first
             : null;
         return Title(
-            title: 'spaces',
+            title: 'Spaces',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
               onTap: () => _model.unfocusNode.canRequestFocus
@@ -144,234 +137,313 @@ class _SpacesWidgetState extends State<SpacesWidget>
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                 body: SafeArea(
                   top: true,
-                  child: Column(
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 0.0, 10.0, 0.0),
-                        child: wrapWithModel(
-                          model: _model.threadsBarCopyModel,
+                      if (responsiveVisibility(
+                        context: context,
+                        phone: false,
+                        tablet: false,
+                      ))
+                        wrapWithModel(
+                          model: _model.pCNavBarModel,
                           updateCallback: () => setState(() {}),
-                          child: Hero(
-                            tag: 'spaces',
-                            transitionOnUserGestures: true,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: ThreadsBarCopyWidget(
-                                name: widget.name!,
-                              ),
-                            ),
-                          ),
+                          child: PCNavBarWidget(),
                         ),
-                      ),
-                      Stack(
-                        children: [
-                          if (responsiveVisibility(
-                            context: context,
-                            phone: false,
-                          ))
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                      if (responsiveVisibility(
+                        context: context,
+                        phone: false,
+                        tablet: false,
+                      ))
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 20.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
                               children: [
-                                if (responsiveVisibility(
-                                  context: context,
-                                  phone: false,
-                                ))
-                                  wrapWithModel(
-                                    model: _model.pCNavBarModel,
-                                    updateCallback: () => setState(() {}),
-                                    child: PCNavBarWidget(
-                                      currentPage: 1,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 20.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '754fqeav' /* More Spaces */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          fontSize: 16.0,
+                                        ),
                                   ),
-                                Flexible(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              width: 200.0,
-                                              decoration: BoxDecoration(),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 10.0, 10.0, 10.0),
+                                  child: StreamBuilder<List<SpacesRecord>>(
+                                    stream: querySpacesRecord(
+                                      queryBuilder: (spacesRecord) =>
+                                          spacesRecord.where(
+                                        'name',
+                                        isNotEqualTo: widget.name,
+                                      ),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: SpinKitRipple(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 50.0,
                                             ),
-                                            Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: StreamBuilder<
-                                                      List<ThreadRecord>>(
-                                                    stream: queryThreadRecord(
-                                                      queryBuilder: (threadRecord) =>
-                                                          threadRecord
-                                                              .whereIn(
-                                                                  'thread.id',
-                                                                  spacesSpacesRecord
-                                                                      ?.threads)
-                                                              .orderBy(
-                                                                  'thread.timestamp',
-                                                                  descending:
-                                                                      true),
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            child:
-                                                                SpinKitRipple(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 50.0,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<ThreadRecord>
-                                                          columnThreadRecordList =
-                                                          snapshot.data!;
-                                                      return Column(
+                                          ),
+                                        );
+                                      }
+                                      List<SpacesRecord>
+                                          columnSpacesRecordList =
+                                          snapshot.data!;
+                                      return SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: List.generate(
+                                                  columnSpacesRecordList.length,
+                                                  (columnIndex) {
+                                            final columnSpacesRecord =
+                                                columnSpacesRecordList[
+                                                    columnIndex];
+                                            return Container(
+                                              width: 200.0,
+                                              child: Stack(
+                                                children: [
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      setState(() {
+                                                        FFAppState()
+                                                                .selectedSpace =
+                                                            columnSpacesRecord
+                                                                .name;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      height: 100.0,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        image: DecorationImage(
+                                                          fit: BoxFit.cover,
+                                                          image: Image.network(
+                                                            columnSpacesRecord
+                                                                .banner,
+                                                          ).image,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
-                                                        children: List.generate(
-                                                                columnThreadRecordList
-                                                                    .length,
-                                                                (columnIndex) {
-                                                          final columnThreadRecord =
-                                                              columnThreadRecordList[
-                                                                  columnIndex];
-                                                          return Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5.0,
-                                                                        0.0,
-                                                                        5.0,
-                                                                        0.0),
-                                                            child: ThreadWidget(
-                                                              key: Key(
-                                                                  'Keymnw_${columnIndex}_of_${columnThreadRecordList.length}'),
-                                                              thread:
-                                                                  columnThreadRecord,
-                                                              isComment: columnThreadRecord
-                                                                      .thread
-                                                                      .comments
-                                                                      .length >
-                                                                  2,
-                                                              isCommentAllowed:
-                                                                  false,
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'threadOnPageLoadAnimation1']!),
-                                                          );
-                                                        })
-                                                            .divide(SizedBox(
-                                                                height: 10.0))
-                                                            .around(SizedBox(
-                                                                height: 10.0)),
-                                                      );
-                                                    },
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            columnSpacesRecord
+                                                                .name,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  fontSize:
+                                                                      18.0,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      setState(() {
+                                                        FFAppState()
+                                                                .selectedSpace =
+                                                            columnSpacesRecord
+                                                                .name;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      height: 100.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xA814181B),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            columnSpacesRecord
+                                                                .name,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      18.0,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          })
+                                              .divide(SizedBox(height: 10.0))
+                                              .addToStart(
+                                                  SizedBox(height: 10.0)),
                                         ),
-                                      ),
-                                    ],
+                                      ).animateOnPageLoad(animationsMap[
+                                          'columnOnPageLoadAnimation']!);
+                                    },
                                   ),
                                 ),
                               ],
                             ),
-                          if (responsiveVisibility(
-                            context: context,
-                            tabletLandscape: false,
-                            desktop: false,
-                          ))
-                            SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 5.0, 0.0),
-                                    child: StreamBuilder<List<ThreadRecord>>(
-                                      stream: queryThreadRecord(
-                                        queryBuilder: (threadRecord) =>
-                                            threadRecord
-                                                .whereIn(
-                                                    'thread.id',
-                                                    spacesSpacesRecord
-                                                                ?.threads !=
-                                                            ''
-                                                        ? spacesSpacesRecord
-                                                            ?.threads
-                                                        : null)
-                                                .orderBy('thread.timestamp',
-                                                    descending: true),
+                          ),
+                        ),
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: wrapWithModel(
+                                  model: _model.threadsBarCopyModel,
+                                  updateCallback: () => setState(() {}),
+                                  child: Hero(
+                                    tag: 'spaces',
+                                    transitionOnUserGestures: true,
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: ThreadsBarCopyWidget(
+                                        name: widget.name!,
                                       ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: SpinKitRipple(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 50.0,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<ThreadRecord>
-                                            columnThreadRecordList =
-                                            snapshot.data!;
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: List.generate(
-                                                  columnThreadRecordList.length,
-                                                  (columnIndex) {
-                                            final columnThreadRecord =
-                                                columnThreadRecordList[
-                                                    columnIndex];
-                                            return Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                              child: ThreadWidget(
-                                                key: Key(
-                                                    'Keys74_${columnIndex}_of_${columnThreadRecordList.length}'),
-                                                thread: columnThreadRecord,
-                                                isComment: false,
-                                                isCommentAllowed: false,
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'threadOnPageLoadAnimation2']!),
-                                            );
-                                          })
-                                              .divide(SizedBox(height: 10.0))
-                                              .around(SizedBox(height: 10.0)),
-                                        );
-                                      },
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                        ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 5.0, 0.0),
+                                child: StreamBuilder<List<ThreadRecord>>(
+                                  stream: queryThreadRecord(
+                                    queryBuilder: (threadRecord) => threadRecord
+                                        .whereIn(
+                                            'thread.id',
+                                            spacesSpacesRecord?.threads != ''
+                                                ? spacesSpacesRecord?.threads
+                                                : null)
+                                        .orderBy('thread.timestamp',
+                                            descending: true),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: SpinKitRipple(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 50.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<ThreadRecord> columnThreadRecordList =
+                                        snapshot.data!;
+                                    return SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: List.generate(
+                                                columnThreadRecordList.length,
+                                                (columnIndex) {
+                                          final columnThreadRecord =
+                                              columnThreadRecordList[
+                                                  columnIndex];
+                                          return Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 10.0, 0.0),
+                                            child: ThreadWidget(
+                                              key: Key(
+                                                  'Keys74_${columnIndex}_of_${columnThreadRecordList.length}'),
+                                              thread: columnThreadRecord,
+                                              isComment: false,
+                                              isCommentAllowed: false,
+                                            ).animateOnPageLoad(animationsMap[
+                                                'threadOnPageLoadAnimation']!),
+                                          );
+                                        })
+                                            .divide(SizedBox(height: 10.0))
+                                            .around(SizedBox(height: 10.0)),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ].divide(SizedBox(height: 10.0)),
+                          ),
+                        ),
                       ),
                     ],
                   ),

@@ -19,22 +19,22 @@ class SpacesModel extends FlutterFlowModel<SpacesWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for ThreadsBarCopy component.
-  late ThreadsBarCopyModel threadsBarCopyModel;
   // Model for PCNavBar component.
   late PCNavBarModel pCNavBarModel;
+  // Model for ThreadsBarCopy component.
+  late ThreadsBarCopyModel threadsBarCopyModel;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    threadsBarCopyModel = createModel(context, () => ThreadsBarCopyModel());
     pCNavBarModel = createModel(context, () => PCNavBarModel());
+    threadsBarCopyModel = createModel(context, () => ThreadsBarCopyModel());
   }
 
   void dispose() {
     unfocusNode.dispose();
-    threadsBarCopyModel.dispose();
     pCNavBarModel.dispose();
+    threadsBarCopyModel.dispose();
   }
 
   /// Action blocks are added here.

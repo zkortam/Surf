@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
+import '/components/space_threads_nav_widget.dart';
 import '/components/thread_widget.dart';
 import '/components/threads_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

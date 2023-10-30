@@ -72,6 +72,35 @@ class FFAppState extends ChangeNotifier {
     _selectedSpace = _value;
     prefs.setString('ff_selectedSpace', _value);
   }
+
+  List<DocumentReference> _messagecache = [];
+  List<DocumentReference> get messagecache => _messagecache;
+  set messagecache(List<DocumentReference> _value) {
+    _messagecache = _value;
+  }
+
+  void addToMessagecache(DocumentReference _value) {
+    _messagecache.add(_value);
+  }
+
+  void removeFromMessagecache(DocumentReference _value) {
+    _messagecache.remove(_value);
+  }
+
+  void removeAtIndexFromMessagecache(int _index) {
+    _messagecache.removeAt(_index);
+  }
+
+  void updateMessagecacheAtIndex(
+    int _index,
+    DocumentReference Function(DocumentReference) updateFn,
+  ) {
+    _messagecache[_index] = updateFn(_messagecache[_index]);
+  }
+
+  void insertAtIndexInMessagecache(int _index, DocumentReference _value) {
+    _messagecache.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

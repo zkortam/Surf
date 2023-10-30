@@ -157,12 +157,12 @@ final parametersBuilderMap =
         },
       ),
   'enterPin': ParameterData.none(),
+  'createPin': ParameterData.none(),
   'settings': (data) async => ParameterData(
         allParams: {
           'settingsKey': getParameter<bool>(data, 'settingsKey'),
         },
       ),
-  'createPin': ParameterData.none(),
   'BiometricTest': ParameterData.none(),
   'accountDeleted': ParameterData.none(),
   'BiometricPin': ParameterData.none(),

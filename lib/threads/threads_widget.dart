@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
+import '/components/space_threads_nav_widget.dart';
 import '/components/thread_widget.dart';
 import '/components/threads_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -429,7 +430,6 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Container(
                                   width: 50.0,
-                                  height: 100.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -439,7 +439,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 5.0),
                                     child: Column(
-                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -501,7 +501,50 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                             }
                                           },
                                         ),
-                                      ],
+                                        FlutterFlowIconButton(
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          borderRadius: 20.0,
+                                          borderWidth: 3.0,
+                                          buttonSize: 40.0,
+                                          icon: Icon(
+                                            Icons.grain,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 22.0,
+                                          ),
+                                          onPressed: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        SpaceThreadsNavWidget(),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                        ),
+                                      ].divide(SizedBox(height: 5.0)),
                                     ),
                                   ),
                                 ),
