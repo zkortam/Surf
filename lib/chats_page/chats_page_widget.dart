@@ -815,17 +815,20 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                                           StreamBuilder<
                                                               List<
                                                                   ChatMessagesRecord>>(
-                                                            stream:
-                                                                queryChatMessagesRecord(
-                                                              queryBuilder: (chatMessagesRecord) =>
-                                                                  chatMessagesRecord
-                                                                      .where(
-                                                                        'chat_user',
-                                                                        isEqualTo:
-                                                                            widget.chatUser,
-                                                                      )
-                                                                      .orderBy(
-                                                                          'timestamp'),
+                                                            stream: _model
+                                                                .loadmessages(
+                                                              requestFn: () =>
+                                                                  queryChatMessagesRecord(
+                                                                queryBuilder: (chatMessagesRecord) =>
+                                                                    chatMessagesRecord
+                                                                        .where(
+                                                                          'chat_user',
+                                                                          isEqualTo:
+                                                                              widget.chatUser,
+                                                                        )
+                                                                        .orderBy(
+                                                                            'timestamp'),
+                                                              ),
                                                             ),
                                                             builder: (context,
                                                                 snapshot) {

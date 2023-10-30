@@ -106,7 +106,7 @@ class _ThreadsBarWidgetState extends State<ThreadsBarWidget> {
                     children: [
                       Text(
                         FFLocalizations.of(context).getText(
-                          'wz8mr5pb' /* Threads */,
+                          'ag25auc1' /* Threads */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Outfit',

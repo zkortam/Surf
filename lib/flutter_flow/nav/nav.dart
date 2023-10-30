@@ -238,18 +238,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EnterPinWidget(),
             ),
             FFRoute(
+              name: 'createPin',
+              path: 'createPin',
+              requireAuth: true,
+              builder: (context, params) => CreatePinWidget(),
+            ),
+            FFRoute(
               name: 'settings',
               path: 'settings',
               requireAuth: true,
               builder: (context, params) => SettingsWidget(
                 settingsKey: params.getParam('settingsKey', ParamType.bool),
               ),
-            ),
-            FFRoute(
-              name: 'createPin',
-              path: 'createPin',
-              requireAuth: true,
-              builder: (context, params) => CreatePinWidget(),
             ),
             FFRoute(
               name: 'BiometricTest',
@@ -405,7 +405,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             ),
             FFRoute(
               name: 'spaces',
-              path: 'spaces',
+              path: 'space',
               requireAuth: true,
               builder: (context, params) => NavBarPage(
                 initialPage: '',
