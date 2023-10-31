@@ -57,7 +57,8 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
 
     return StreamBuilder<List<ChatsRecord>>(
       stream: queryChatsRecord(
-        queryBuilder: (chatsRecord) => chatsRecord.orderBy('last_message_time'),
+        queryBuilder: (chatsRecord) =>
+            chatsRecord.orderBy('last_message_time', descending: true),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
