@@ -167,7 +167,7 @@ class _SpacesWidgetState extends State<SpacesWidget>
                                       0.0, 20.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      '754fqeav' /* More Spaces */,
+                                      '7855vx0o' /* More Spaces */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
