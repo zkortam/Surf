@@ -58,9 +58,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
     _model.nameController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.realName, ''));
     _model.nameFocusNode ??= FocusNode();
+
     _model.usernameController ??=
         TextEditingController(text: currentUserDisplayName);
     _model.usernameFocusNode ??= FocusNode();
+
     _model.bioController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.bio, ''));
     _model.bioFocusNode ??= FocusNode();

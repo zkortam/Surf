@@ -93,10 +93,10 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    width: 500.0,
+                    width: 600.0,
                     height: 400.0,
                     constraints: BoxConstraints(
-                      maxWidth: 500.0,
+                      maxWidth: 600.0,
                     ),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -116,11 +116,8 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 5.0, 5.0, 0.0),
                           child: Container(
-                            width: 500.0,
+                            width: double.infinity,
                             height: 50.0,
-                            constraints: BoxConstraints(
-                              maxWidth: 500.0,
-                            ),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
@@ -221,8 +218,10 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                       final columnSpacesRecord =
                                           columnSpacesRecordList[columnIndex];
                                       return Container(
-                                        width: 500.0,
+                                        width: 600.0,
                                         child: Stack(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
                                           children: [
                                             InkWell(
                                               splashColor: Colors.transparent,
@@ -253,10 +252,10 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                 );
                                               },
                                               child: Container(
-                                                width: 500.0,
+                                                width: 600.0,
                                                 height: 100.0,
                                                 constraints: BoxConstraints(
-                                                  maxWidth: 500.0,
+                                                  maxWidth: 600.0,
                                                 ),
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
@@ -303,10 +302,10 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                 );
                                               },
                                               child: Container(
-                                                width: 500.0,
+                                                width: 600.0,
                                                 height: 100.0,
                                                 constraints: BoxConstraints(
-                                                  maxWidth: 500.0,
+                                                  maxWidth: 600.0,
                                                 ),
                                                 decoration: BoxDecoration(
                                                   color: Color(0x9614181B),

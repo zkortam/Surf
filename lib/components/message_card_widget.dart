@@ -182,7 +182,7 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
                 children: [
                   Text(
                     FFLocalizations.of(context).getText(
-                      '14o02fyo' /* Message */,
+                      '14o02fyo' /* Add */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Outfit',

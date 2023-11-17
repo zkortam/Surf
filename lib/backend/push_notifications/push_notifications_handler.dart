@@ -211,13 +211,8 @@ final parametersBuilderMap =
   'EditProfile': ParameterData.none(),
   'chats_page': (data) async => ParameterData(
         allParams: {
-          'userName': getParameter<String>(data, 'userName'),
-          'email': getParameter<String>(data, 'email'),
-          'chatUser': getParameter<DocumentReference>(data, 'chatUser'),
-          'userRef': getParameter<DocumentReference>(data, 'userRef'),
-          'userProfile': getParameter<String>(data, 'userProfile'),
-          'userb': getParameter<DocumentReference>(data, 'userb'),
-          'usera': getParameter<DocumentReference>(data, 'usera'),
+          'chat': await getDocumentParameter<ChatsRecord>(
+              data, 'chat', ChatsRecord.fromSnapshot),
         },
       ),
   'muluploadtest': ParameterData.none(),
@@ -227,6 +222,7 @@ final parametersBuilderMap =
           'name': getParameter<String>(data, 'name'),
         },
       ),
+  'Bob': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

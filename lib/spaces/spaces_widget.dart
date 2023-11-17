@@ -220,29 +220,28 @@ class _SpacesWidgetState extends State<SpacesWidget>
                                             final columnSpacesRecord =
                                                 columnSpacesRecordList[
                                                     columnIndex];
-                                            return Container(
-                                              width: 200.0,
-                                              child: Stack(
-                                                children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        FFAppState()
-                                                                .selectedSpace =
-                                                            columnSpacesRecord
-                                                                .name;
-                                                      });
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Container(
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'spaces',
+                                                  queryParameters: {
+                                                    'name': serializeParam(
+                                                      columnSpacesRecord.name,
+                                                      ParamType.String,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Container(
+                                                width: 200.0,
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
                                                       width: double.infinity,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
@@ -283,26 +282,7 @@ class _SpacesWidgetState extends State<SpacesWidget>
                                                         ],
                                                       ),
                                                     ),
-                                                  ),
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        FFAppState()
-                                                                .selectedSpace =
-                                                            columnSpacesRecord
-                                                                .name;
-                                                      });
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Container(
+                                                    Container(
                                                       width: double.infinity,
                                                       height: 100.0,
                                                       decoration: BoxDecoration(
@@ -337,8 +317,8 @@ class _SpacesWidgetState extends State<SpacesWidget>
                                                         ],
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             );
                                           })
@@ -359,89 +339,100 @@ class _SpacesWidgetState extends State<SpacesWidget>
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: wrapWithModel(
-                                  model: _model.threadsBarCopyModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: Hero(
-                                    tag: 'spaces',
-                                    transitionOnUserGestures: true,
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: ThreadsBarCopyWidget(
-                                        name: widget.name!,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 10.0, 0.0),
+                                  child: wrapWithModel(
+                                    model: _model.threadsBarCopyModel,
+                                    updateCallback: () => setState(() {}),
+                                    child: Hero(
+                                      tag: 'spaces',
+                                      transitionOnUserGestures: true,
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: ThreadsBarCopyWidget(
+                                          name: widget.name!,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 0.0, 5.0, 0.0),
-                                child: StreamBuilder<List<ThreadRecord>>(
-                                  stream: queryThreadRecord(
-                                    queryBuilder: (threadRecord) => threadRecord
-                                        .whereIn(
-                                            'thread.id',
-                                            spacesSpacesRecord?.threads != ''
-                                                ? spacesSpacesRecord?.threads
-                                                : null)
-                                        .orderBy('thread.timestamp',
-                                            descending: true),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: SpinKitRipple(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 50.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<ThreadRecord> columnThreadRecordList =
-                                        snapshot.data!;
-                                    return SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: List.generate(
-                                                columnThreadRecordList.length,
-                                                (columnIndex) {
-                                          final columnThreadRecord =
-                                              columnThreadRecordList[
-                                                  columnIndex];
-                                          return Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 10.0, 0.0),
-                                            child: ThreadWidget(
-                                              key: Key(
-                                                  'Keys74_${columnIndex}_of_${columnThreadRecordList.length}'),
-                                              thread: columnThreadRecord,
-                                              isComment: false,
-                                              isCommentAllowed: false,
-                                            ).animateOnPageLoad(animationsMap[
-                                                'threadOnPageLoadAnimation']!),
-                                          );
-                                        })
-                                            .divide(SizedBox(height: 10.0))
-                                            .around(SizedBox(height: 10.0)),
+                                if (spacesSpacesRecord?.threads?.first !=
+                                        null &&
+                                    spacesSpacesRecord?.threads?.first != '')
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    child: StreamBuilder<List<ThreadRecord>>(
+                                      stream: queryThreadRecord(
+                                        queryBuilder: (threadRecord) =>
+                                            threadRecord
+                                                .whereIn(
+                                                    'thread.id',
+                                                    spacesSpacesRecord
+                                                                ?.threads !=
+                                                            ''
+                                                        ? spacesSpacesRecord
+                                                            ?.threads
+                                                        : null)
+                                                .orderBy('thread.timestamp',
+                                                    descending: true),
                                       ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ].divide(SizedBox(height: 10.0)),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: SpinKitRipple(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 50.0,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ThreadRecord>
+                                            columnThreadRecordList =
+                                            snapshot.data!;
+                                        return SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: List.generate(
+                                                    columnThreadRecordList
+                                                        .length, (columnIndex) {
+                                              final columnThreadRecord =
+                                                  columnThreadRecordList[
+                                                      columnIndex];
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 0.0, 10.0, 0.0),
+                                                child: ThreadWidget(
+                                                  key: Key(
+                                                      'Keys74_${columnIndex}_of_${columnThreadRecordList.length}'),
+                                                  thread: columnThreadRecord,
+                                                  isComment: false,
+                                                  isCommentAllowed: false,
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'threadOnPageLoadAnimation']!),
+                                              );
+                                            })
+                                                .divide(SizedBox(height: 10.0))
+                                                .around(SizedBox(height: 10.0)),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                              ].divide(SizedBox(height: 10.0)),
+                            ),
                           ),
                         ),
                       ),

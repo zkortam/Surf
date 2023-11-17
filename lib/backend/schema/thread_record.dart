@@ -51,7 +51,8 @@ class ThreadRecord extends FirestoreRecord {
   static ThreadRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       ThreadRecord.getDocumentFromData(
         {
-          'thread': ThreadStruct.fromAlgoliaData(snapshot.data['thread'] ?? {}),
+          'thread': ThreadStruct.fromAlgoliaData(snapshot.data['thread'] ?? {})
+              .toMap(),
         },
         ThreadRecord.collection.doc(snapshot.objectID),
       );

@@ -10,7 +10,6 @@ import 'schema/posts_record.dart';
 import 'schema/thread_record.dart';
 import 'schema/comments_record.dart';
 import 'schema/chats_record.dart';
-import 'schema/chat_messages_record.dart';
 import 'schema/spaces_record.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -24,7 +23,6 @@ export 'schema/posts_record.dart';
 export 'schema/thread_record.dart';
 export 'schema/comments_record.dart';
 export 'schema/chats_record.dart';
-export 'schema/chat_messages_record.dart';
 export 'schema/spaces_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
@@ -207,43 +205,6 @@ Future<List<ChatsRecord>> queryChatsRecordOnce({
     queryCollectionOnce(
       ChatsRecord.collection,
       ChatsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query ChatMessagesRecords (as a Stream and as a Future).
-Future<int> queryChatMessagesRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ChatMessagesRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ChatMessagesRecord>> queryChatMessagesRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      ChatMessagesRecord.collection,
-      ChatMessagesRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<ChatMessagesRecord>> queryChatMessagesRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      ChatMessagesRecord.collection,
-      ChatMessagesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

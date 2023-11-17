@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/components/view_image_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,8 +9,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/request_manager.dart';
-
 import 'chats_page_widget.dart' show ChatsPageWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -34,23 +33,6 @@ class ChatsPageModel extends FlutterFlowModel<ChatsPageWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  /// Query cache managers for this widget.
-
-  final _loadmessagesManager = StreamRequestManager<List<ChatMessagesRecord>>();
-  Stream<List<ChatMessagesRecord>> loadmessages({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Stream<List<ChatMessagesRecord>> Function() requestFn,
-  }) =>
-      _loadmessagesManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearLoadmessagesCache() => _loadmessagesManager.clear();
-  void clearLoadmessagesCacheKey(String? uniqueKey) =>
-      _loadmessagesManager.clearRequest(uniqueKey);
-
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
@@ -62,10 +44,6 @@ class ChatsPageModel extends FlutterFlowModel<ChatsPageWidget> {
     pCNavBarModel.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
-
-    /// Dispose query cache managers for this widget.
-
-    clearLoadmessagesCache();
   }
 
   /// Action blocks are added here.

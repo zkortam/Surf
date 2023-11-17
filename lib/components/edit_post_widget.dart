@@ -42,6 +42,7 @@ class _EditPostWidgetState extends State<EditPostWidget> {
     _model.textController ??=
         TextEditingController(text: widget.post?.post?.caption);
     _model.textFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

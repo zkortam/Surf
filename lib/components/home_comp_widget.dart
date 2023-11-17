@@ -639,7 +639,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                       ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 10.0, 5.0, 0.0),
+                                          5.0, 10.0, 5.0, 10.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
@@ -712,7 +712,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         widget.post?.post?.author)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 10.0, 5.0, 0.0),
+                                            5.0, 0.0, 5.0, 10.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
@@ -764,7 +764,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         widget.post?.post?.author)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 10.0, 5.0, 0.0),
+                                            5.0, 0.0, 5.0, 10.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
