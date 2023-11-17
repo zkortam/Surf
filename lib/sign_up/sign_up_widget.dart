@@ -79,8 +79,10 @@ class _SignUpWidgetState extends State<SignUpWidget>
     _model.emailAddressController ??= TextEditingController(
         text: widget.email != null && widget.email != '' ? widget.email : '');
     _model.emailAddressFocusNode ??= FocusNode();
+
     _model.passwordController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
+
     _model.confirmPasswordController ??= TextEditingController();
     _model.confirmPasswordFocusNode ??= FocusNode();
 

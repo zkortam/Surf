@@ -69,10 +69,10 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          width: 500.0,
+          width: 600.0,
           height: 400.0,
           constraints: BoxConstraints(
-            maxWidth: 500.0,
+            maxWidth: 600.0,
           ),
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,

@@ -957,228 +957,60 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         0.0,
                                                                         5.0,
                                                                         0.0),
-                                                            child: FutureBuilder<
-                                                                List<
-                                                                    ChatsRecord>>(
-                                                              future:
-                                                                  queryChatsRecordOnce(
-                                                                queryBuilder:
-                                                                    (chatsRecord) =>
-                                                                        chatsRecord
-                                                                            .where(
-                                                                              'user_a',
-                                                                              isEqualTo: currentUserReference,
-                                                                            )
-                                                                            .where(
-                                                                              'user_b',
-                                                                              isEqualTo: profileUsersRecord?.reference,
-                                                                            ),
-                                                                singleRecord:
-                                                                    true,
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed: () {
+                                                                print(
+                                                                    'Button pressed ...');
+                                                              },
+                                                              text: FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'rjnpdmjr' /* Message */,
                                                               ),
-                                                              builder: (context,
-                                                                  snapshot) {
-                                                                // Customize what your widget looks like when it's loading.
-                                                                if (!snapshot
-                                                                    .hasData) {
-                                                                  return Center(
-                                                                    child:
-                                                                        SizedBox(
-                                                                      width:
-                                                                          50.0,
-                                                                      height:
-                                                                          50.0,
-                                                                      child:
-                                                                          SpinKitRipple(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        size:
-                                                                            50.0,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }
-                                                                List<ChatsRecord>
-                                                                    buttonChatsRecordList =
-                                                                    snapshot
-                                                                        .data!;
-                                                                final buttonChatsRecord =
-                                                                    buttonChatsRecordList
-                                                                            .isNotEmpty
-                                                                        ? buttonChatsRecordList
-                                                                            .first
-                                                                        : null;
-                                                                return FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    if (buttonChatsRecord !=
-                                                                        null) {
-                                                                      context
-                                                                          .pushNamed(
-                                                                        'chats_page',
-                                                                        queryParameters:
-                                                                            {
-                                                                          'userName':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.displayName,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'email':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.email,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'chatUser':
-                                                                              serializeParam(
-                                                                            buttonChatsRecord?.reference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'userRef':
-                                                                              serializeParam(
-                                                                            currentUserReference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'userProfile':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.photoUrl,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'userb':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.reference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'usera':
-                                                                              serializeParam(
-                                                                            currentUserReference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                        }.withoutNulls,
-                                                                      );
-
-                                                                      await buttonChatsRecord!
-                                                                          .reference
-                                                                          .update(
-                                                                              createChatsRecordData(
-                                                                        messageSeen:
-                                                                            true,
-                                                                      ));
-                                                                    } else {
-                                                                      await ChatsRecord
-                                                                          .collection
-                                                                          .doc()
-                                                                          .set(
-                                                                              createChatsRecordData(
-                                                                            user:
-                                                                                currentUserReference,
-                                                                            userA:
-                                                                                currentUserReference,
-                                                                            userB:
-                                                                                profileUsersRecord?.reference,
-                                                                            lastMessage:
-                                                                                'NA',
-                                                                            lastMessageTime:
-                                                                                getCurrentTimestamp,
-                                                                            image:
-                                                                                profileUsersRecord?.photoUrl,
-                                                                            messageSeen:
-                                                                                false,
-                                                                          ));
-
-                                                                      context
-                                                                          .pushNamed(
-                                                                        'chats_page',
-                                                                        queryParameters:
-                                                                            {
-                                                                          'userName':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.displayName,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'email':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.email,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'chatUser':
-                                                                              serializeParam(
-                                                                            buttonChatsRecord?.reference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'userRef':
-                                                                              serializeParam(
-                                                                            currentUserReference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'userProfile':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.photoUrl,
-                                                                            ParamType.String,
-                                                                          ),
-                                                                          'userb':
-                                                                              serializeParam(
-                                                                            profileUsersRecord?.reference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                          'usera':
-                                                                              serializeParam(
-                                                                            currentUserReference,
-                                                                            ParamType.DocumentReference,
-                                                                          ),
-                                                                        }.withoutNulls,
-                                                                      );
-                                                                    }
-                                                                  },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'rjnpdmjr' /* Message */,
-                                                                  ),
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    width:
-                                                                        140.0,
-                                                                    height:
-                                                                        45.0,
-                                                                    padding: EdgeInsetsDirectional
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 140.0,
+                                                                height: 45.0,
+                                                                padding:
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    iconPadding:
-                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                iconPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Outfit',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                        ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      width:
-                                                                          1.0,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Outfit',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
                                                                     ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
+                                                                elevation: 3.0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  width: 1.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
                                                                             150.0),
-                                                                  ),
-                                                                );
-                                                              },
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -1727,134 +1559,133 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                       ),
                                                       KeepAliveWidgetWrapper(
                                                         builder: (context) =>
-                                                            Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0),
-                                                          child: StreamBuilder<
-                                                              List<
-                                                                  PostsRecord>>(
-                                                            stream:
-                                                                queryPostsRecord(
-                                                              queryBuilder: (postsRecord) => postsRecord
-                                                                  .whereIn(
-                                                                      'post.id',
-                                                                      profileUsersRecord?.saved !=
-                                                                              ''
-                                                                          ? profileUsersRecord
-                                                                              ?.saved
-                                                                          : null)
-                                                                  .orderBy(
-                                                                      'post.timestamp',
-                                                                      descending:
-                                                                          true),
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50.0,
-                                                                    height:
-                                                                        50.0,
+                                                            Visibility(
+                                                          visible: profileUsersRecord
+                                                                      ?.saved
+                                                                      ?.first !=
+                                                                  null &&
+                                                              profileUsersRecord
+                                                                      ?.saved
+                                                                      ?.first !=
+                                                                  '',
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        5.0,
+                                                                        5.0,
+                                                                        5.0),
+                                                            child: StreamBuilder<
+                                                                List<
+                                                                    PostsRecord>>(
+                                                              stream:
+                                                                  queryPostsRecord(
+                                                                queryBuilder: (postsRecord) => postsRecord
+                                                                    .whereIn(
+                                                                        'post.id',
+                                                                        profileUsersRecord?.saved !=
+                                                                                ''
+                                                                            ? profileUsersRecord
+                                                                                ?.saved
+                                                                            : null)
+                                                                    .orderBy(
+                                                                        'post.timestamp',
+                                                                        descending:
+                                                                            true),
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
                                                                     child:
-                                                                        SpinKitRipple(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      size:
+                                                                        SizedBox(
+                                                                      width:
                                                                           50.0,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<PostsRecord>
-                                                                  gridViewPostsRecordList =
-                                                                  snapshot
-                                                                      .data!;
-                                                              return GridView
-                                                                  .builder(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                gridDelegate:
-                                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                                  crossAxisCount:
-                                                                      3,
-                                                                  crossAxisSpacing:
-                                                                      10.0,
-                                                                  mainAxisSpacing:
-                                                                      10.0,
-                                                                  childAspectRatio:
-                                                                      1.0,
-                                                                ),
-                                                                scrollDirection:
-                                                                    Axis.vertical,
-                                                                itemCount:
-                                                                    gridViewPostsRecordList
-                                                                        .length,
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        gridViewIndex) {
-                                                                  final gridViewPostsRecord =
-                                                                      gridViewPostsRecordList[
-                                                                          gridViewIndex];
-                                                                  return Container(
-                                                                    width:
-                                                                        100.0,
-                                                                    height:
-                                                                        100.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              15.0),
-                                                                    ),
-                                                                    child:
-                                                                        ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
+                                                                      height:
+                                                                          50.0,
                                                                       child:
-                                                                          OctoImage(
-                                                                        placeholderBuilder:
-                                                                            OctoPlaceholder.blurHash(
-                                                                          gridViewPostsRecord
-                                                                              .post
-                                                                              .images
-                                                                              .first
-                                                                              .blurHash,
-                                                                        ),
-                                                                        image:
-                                                                            NetworkImage(
-                                                                          gridViewPostsRecord
-                                                                              .post
-                                                                              .images
-                                                                              .first
-                                                                              .image,
-                                                                        ),
-                                                                        width:
-                                                                            300.0,
-                                                                        height:
-                                                                            200.0,
-                                                                        fit: BoxFit
-                                                                            .cover,
+                                                                          SpinKitRipple(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            50.0,
                                                                       ),
                                                                     ),
                                                                   );
-                                                                },
-                                                              );
-                                                            },
+                                                                }
+                                                                List<PostsRecord>
+                                                                    gridViewPostsRecordList =
+                                                                    snapshot
+                                                                        .data!;
+                                                                return GridView
+                                                                    .builder(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  gridDelegate:
+                                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                                    crossAxisCount:
+                                                                        3,
+                                                                    crossAxisSpacing:
+                                                                        10.0,
+                                                                    mainAxisSpacing:
+                                                                        10.0,
+                                                                    childAspectRatio:
+                                                                        1.0,
+                                                                  ),
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  itemCount:
+                                                                      gridViewPostsRecordList
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          gridViewIndex) {
+                                                                    final gridViewPostsRecord =
+                                                                        gridViewPostsRecordList[
+                                                                            gridViewIndex];
+                                                                    return Container(
+                                                                      width:
+                                                                          100.0,
+                                                                      height:
+                                                                          100.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(15.0),
+                                                                      ),
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(8.0),
+                                                                        child:
+                                                                            OctoImage(
+                                                                          placeholderBuilder:
+                                                                              OctoPlaceholder.blurHash(
+                                                                            gridViewPostsRecord.post.images.first.blurHash,
+                                                                          ),
+                                                                          image:
+                                                                              NetworkImage(
+                                                                            gridViewPostsRecord.post.images.first.image,
+                                                                          ),
+                                                                          width:
+                                                                              300.0,
+                                                                          height:
+                                                                              200.0,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

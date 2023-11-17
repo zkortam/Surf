@@ -159,6 +159,17 @@ class UsersRecord extends FirestoreRecord {
   bool get isSilentMode => _isSilentMode ?? false;
   bool hasIsSilentMode() => _isSilentMode != null;
 
+  // "messagesetting" field.
+  bool? _messagesetting;
+  bool get messagesetting => _messagesetting ?? false;
+  bool hasMessagesetting() => _messagesetting != null;
+
+  // "threadSettings" field.
+  ThreadSettingsStruct? _threadSettings;
+  ThreadSettingsStruct get threadSettings =>
+      _threadSettings ?? ThreadSettingsStruct();
+  bool hasThreadSettings() => _threadSettings != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -197,6 +208,9 @@ class UsersRecord extends FirestoreRecord {
     _dob = snapshotData['dob'] as DateTime?;
     _isSwipeable = snapshotData['isSwipeable'] as bool?;
     _isSilentMode = snapshotData['isSilentMode'] as bool?;
+    _messagesetting = snapshotData['messagesetting'] as bool?;
+    _threadSettings =
+        ThreadSettingsStruct.maybeFromMap(snapshotData['threadSettings']);
   }
 
   static CollectionReference get collection =>
@@ -241,12 +255,12 @@ class UsersRecord extends FirestoreRecord {
           'emailNotifStatus': snapshot.data['emailNotifStatus'],
           'threads': safeGet(
             () => (snapshot.data['threads'] as Iterable)
-                .map((d) => ThreadStruct.fromAlgoliaData(d))
+                .map((d) => ThreadStruct.fromAlgoliaData(d).toMap())
                 .toList(),
           ),
           'Posts': safeGet(
             () => (snapshot.data['Posts'] as Iterable)
-                .map((d) => PostStruct.fromAlgoliaData(d))
+                .map((d) => PostStruct.fromAlgoliaData(d).toMap())
                 .toList(),
           ),
           'banner': snapshot.data['banner'],
@@ -261,7 +275,7 @@ class UsersRecord extends FirestoreRecord {
           ),
           'notifications': safeGet(
             () => (snapshot.data['notifications'] as Iterable)
-                .map((d) => NotificationStruct.fromAlgoliaData(d))
+                .map((d) => NotificationStruct.fromAlgoliaData(d).toMap())
                 .toList(),
           ),
           'isBiometric': snapshot.data['isBiometric'],
@@ -278,6 +292,10 @@ class UsersRecord extends FirestoreRecord {
           ),
           'isSwipeable': snapshot.data['isSwipeable'],
           'isSilentMode': snapshot.data['isSilentMode'],
+          'messagesetting': snapshot.data['messagesetting'],
+          'threadSettings': ThreadSettingsStruct.fromAlgoliaData(
+                  snapshot.data['threadSettings'] ?? {})
+              .toMap(),
         },
         UsersRecord.collection.doc(snapshot.objectID),
       );
@@ -335,6 +353,8 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? dob,
   bool? isSwipeable,
   bool? isSilentMode,
+  bool? messagesetting,
+  ThreadSettingsStruct? threadSettings,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -359,8 +379,13 @@ Map<String, dynamic> createUsersRecordData({
       'dob': dob,
       'isSwipeable': isSwipeable,
       'isSilentMode': isSilentMode,
+      'messagesetting': messagesetting,
+      'threadSettings': ThreadSettingsStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "threadSettings" field.
+  addThreadSettingsStructData(firestoreData, threadSettings, 'threadSettings');
 
   return firestoreData;
 }
@@ -398,7 +423,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isCompressed == e2?.isCompressed &&
         e1?.dob == e2?.dob &&
         e1?.isSwipeable == e2?.isSwipeable &&
-        e1?.isSilentMode == e2?.isSilentMode;
+        e1?.isSilentMode == e2?.isSilentMode &&
+        e1?.messagesetting == e2?.messagesetting &&
+        e1?.threadSettings == e2?.threadSettings;
   }
 
   @override
@@ -430,7 +457,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isCompressed,
         e?.dob,
         e?.isSwipeable,
-        e?.isSilentMode
+        e?.isSilentMode,
+        e?.messagesetting,
+        e?.threadSettings
       ]);
 
   @override

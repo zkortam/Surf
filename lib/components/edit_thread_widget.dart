@@ -42,6 +42,7 @@ class _EditThreadWidgetState extends State<EditThreadWidget> {
     _model.textController ??=
         TextEditingController(text: widget.thread?.thread?.text);
     _model.textFieldFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

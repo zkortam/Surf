@@ -51,7 +51,8 @@ class PostsRecord extends FirestoreRecord {
   static PostsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       PostsRecord.getDocumentFromData(
         {
-          'post': PostStruct.fromAlgoliaData(snapshot.data['post'] ?? {}),
+          'post':
+              PostStruct.fromAlgoliaData(snapshot.data['post'] ?? {}).toMap(),
         },
         PostsRecord.collection.doc(snapshot.objectID),
       );

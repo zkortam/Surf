@@ -16,67 +16,40 @@ class ChatsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "user" field.
-  DocumentReference? _user;
-  DocumentReference? get user => _user;
-  bool hasUser() => _user != null;
+  // "chat_messages" field.
+  List<ChatMessageStruct>? _chatMessages;
+  List<ChatMessageStruct> get chatMessages => _chatMessages ?? const [];
+  bool hasChatMessages() => _chatMessages != null;
 
-  // "user_a" field.
-  DocumentReference? _userA;
-  DocumentReference? get userA => _userA;
-  bool hasUserA() => _userA != null;
-
-  // "user_b" field.
-  DocumentReference? _userB;
-  DocumentReference? get userB => _userB;
-  bool hasUserB() => _userB != null;
-
-  // "last_message" field.
-  String? _lastMessage;
-  String get lastMessage => _lastMessage ?? '';
-  bool hasLastMessage() => _lastMessage != null;
-
-  // "last_message_time" field.
-  DateTime? _lastMessageTime;
-  DateTime? get lastMessageTime => _lastMessageTime;
-  bool hasLastMessageTime() => _lastMessageTime != null;
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
 
   // "image" field.
   String? _image;
   String get image => _image ?? '';
   bool hasImage() => _image != null;
 
-  // "message_seen" field.
-  bool? _messageSeen;
-  bool get messageSeen => _messageSeen ?? false;
-  bool hasMessageSeen() => _messageSeen != null;
+  // "last_message" field.
+  ChatMessageStruct? _lastMessage;
+  ChatMessageStruct get lastMessage => _lastMessage ?? ChatMessageStruct();
+  bool hasLastMessage() => _lastMessage != null;
 
-  // "user_a_id" field.
-  String? _userAId;
-  String get userAId => _userAId ?? '';
-  bool hasUserAId() => _userAId != null;
-
-  // "user_b_id" field.
-  String? _userBId;
-  String get userBId => _userBId ?? '';
-  bool hasUserBId() => _userBId != null;
-
-  // "last_message_sender_id" field.
-  String? _lastMessageSenderId;
-  String get lastMessageSenderId => _lastMessageSenderId ?? '';
-  bool hasLastMessageSenderId() => _lastMessageSenderId != null;
+  // "users" field.
+  List<String>? _users;
+  List<String> get users => _users ?? const [];
+  bool hasUsers() => _users != null;
 
   void _initializeFields() {
-    _user = snapshotData['user'] as DocumentReference?;
-    _userA = snapshotData['user_a'] as DocumentReference?;
-    _userB = snapshotData['user_b'] as DocumentReference?;
-    _lastMessage = snapshotData['last_message'] as String?;
-    _lastMessageTime = snapshotData['last_message_time'] as DateTime?;
+    _chatMessages = getStructList(
+      snapshotData['chat_messages'],
+      ChatMessageStruct.fromMap,
+    );
+    _title = snapshotData['title'] as String?;
     _image = snapshotData['image'] as String?;
-    _messageSeen = snapshotData['message_seen'] as bool?;
-    _userAId = snapshotData['user_a_id'] as String?;
-    _userBId = snapshotData['user_b_id'] as String?;
-    _lastMessageSenderId = snapshotData['last_message_sender_id'] as String?;
+    _lastMessage = ChatMessageStruct.maybeFromMap(snapshotData['last_message']);
+    _users = getDataList(snapshotData['users']);
   }
 
   static CollectionReference get collection =>
@@ -113,31 +86,20 @@ class ChatsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createChatsRecordData({
-  DocumentReference? user,
-  DocumentReference? userA,
-  DocumentReference? userB,
-  String? lastMessage,
-  DateTime? lastMessageTime,
+  String? title,
   String? image,
-  bool? messageSeen,
-  String? userAId,
-  String? userBId,
-  String? lastMessageSenderId,
+  ChatMessageStruct? lastMessage,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'user': user,
-      'user_a': userA,
-      'user_b': userB,
-      'last_message': lastMessage,
-      'last_message_time': lastMessageTime,
+      'title': title,
       'image': image,
-      'message_seen': messageSeen,
-      'user_a_id': userAId,
-      'user_b_id': userBId,
-      'last_message_sender_id': lastMessageSenderId,
+      'last_message': ChatMessageStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "last_message" field.
+  addChatMessageStructData(firestoreData, lastMessage, 'last_message');
 
   return firestoreData;
 }
@@ -147,31 +109,17 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
 
   @override
   bool equals(ChatsRecord? e1, ChatsRecord? e2) {
-    return e1?.user == e2?.user &&
-        e1?.userA == e2?.userA &&
-        e1?.userB == e2?.userB &&
-        e1?.lastMessage == e2?.lastMessage &&
-        e1?.lastMessageTime == e2?.lastMessageTime &&
+    const listEquality = ListEquality();
+    return listEquality.equals(e1?.chatMessages, e2?.chatMessages) &&
+        e1?.title == e2?.title &&
         e1?.image == e2?.image &&
-        e1?.messageSeen == e2?.messageSeen &&
-        e1?.userAId == e2?.userAId &&
-        e1?.userBId == e2?.userBId &&
-        e1?.lastMessageSenderId == e2?.lastMessageSenderId;
+        e1?.lastMessage == e2?.lastMessage &&
+        listEquality.equals(e1?.users, e2?.users);
   }
 
   @override
-  int hash(ChatsRecord? e) => const ListEquality().hash([
-        e?.user,
-        e?.userA,
-        e?.userB,
-        e?.lastMessage,
-        e?.lastMessageTime,
-        e?.image,
-        e?.messageSeen,
-        e?.userAId,
-        e?.userBId,
-        e?.lastMessageSenderId
-      ]);
+  int hash(ChatsRecord? e) => const ListEquality()
+      .hash([e?.chatMessages, e?.title, e?.image, e?.lastMessage, e?.users]);
 
   @override
   bool isValidKey(Object? o) => o is ChatsRecord;

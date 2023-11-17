@@ -9,10 +9,12 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/components/select_space_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -63,7 +65,17 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
 
   String postID = 'a';
 
-  String apiKey = '00000';
+  String apiKey = '0000';
+
+  bool isSettings = false;
+
+  bool isStealthBypass = false;
+
+  bool isCommentAllowed = true;
+
+  bool isPrivate = false;
+
+  bool isAiEnabled = false;
 
   ///  State fields for stateful widgets in this page.
 
@@ -120,6 +132,42 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   String? Function(BuildContext, String?)? textController7Validator;
   // Stores action output result for [Custom Action - chatGPT] action in IconButton widget.
   String? gptOut;
+  // State field(s) for ABPC widget.
+  String? abpcValue;
+  FormFieldController<List<String>>? abpcValueController;
+  // State field(s) for AHPC widget.
+  String? ahpcValue;
+  FormFieldController<List<String>>? ahpcValueController;
+  // State field(s) for SMPC widget.
+  String? smpcValue;
+  FormFieldController<List<String>>? smpcValueController;
+  // State field(s) for ECPC widget.
+  String? ecpcValue;
+  FormFieldController<List<String>>? ecpcValueController;
+  // State field(s) for PPC widget.
+  String? ppcValue;
+  FormFieldController<List<String>>? ppcValueController;
+  // State field(s) for EAIFPC widget.
+  String? eaifpcValue;
+  FormFieldController<List<String>>? eaifpcValueController;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue1;
+  FormFieldController<List<String>>? choiceChipsValueController1;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue2;
+  FormFieldController<List<String>>? choiceChipsValueController2;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue3;
+  FormFieldController<List<String>>? choiceChipsValueController3;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue4;
+  FormFieldController<List<String>>? choiceChipsValueController4;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue5;
+  FormFieldController<List<String>>? choiceChipsValueController5;
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue6;
+  FormFieldController<List<String>>? choiceChipsValueController6;
 
   /// Initialization and disposal methods.
 

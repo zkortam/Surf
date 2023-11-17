@@ -56,10 +56,13 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
 
     _model.nameController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
+
     _model.usernameController ??= TextEditingController();
     _model.usernameFocusNode ??= FocusNode();
+
     _model.phoneNumberController ??= TextEditingController();
     _model.phoneNumberFocusNode ??= FocusNode();
+
     _model.bioController ??= TextEditingController();
     _model.bioFocusNode ??= FocusNode();
 

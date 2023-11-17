@@ -254,32 +254,22 @@ List<ChatsRecord> decideChatstoLoad(
   List<ChatsRecord> rtrn = [];
 
   for (ChatsRecord chat in allchats) {
-    if (chat.userA == userloggedin || chat.userB == userloggedin) {
+    if (chat.users.contains(userloggedin)) {
       rtrn.add(chat);
     }
   }
   return rtrn;
 }
 
-int detwhichchatuser(
-  DocumentReference userloggedin,
-  ChatsRecord chat,
-) {
-  if (chat.userA == userloggedin) {
-    return 1;
-  } else {
-    return 2;
-  }
-}
-
 ChatsRecord? findpreexistingchatifpossible(
   List<ChatsRecord> allchats,
   DocumentReference userloggedin,
-  DocumentReference usertobemsged,
+  List<DocumentReference> usertobemsged,
 ) {
   for (ChatsRecord chat in allchats) {
-    if ((chat.userA == userloggedin && chat.userB == usertobemsged) ||
-        (chat.userA == usertobemsged && chat.userB == usertobemsged)) {
+    bool containsAll =
+        usertobemsged.every((element) => chat.users.contains(element));
+    if (chat.users.contains(userloggedin) && containsAll) {
       return chat;
     }
   }
@@ -348,4 +338,97 @@ String errorFixer(
   UsersRecord user,
 ) {
   return " ";
+}
+
+String chattitle(
+  List<UsersRecord> chatusers,
+  String authuserid,
+  String? customtitle,
+) {
+  //chattitle
+  // INPUT chatusers Users from chat document array  authuserid Authorized User ID customtitle customtitle Custom Title if any
+  // RTRN String   title of the chat to display
+  //GF
+
+  //Form title by appending chat user names together
+  String title = "";
+//DEFAULT TITLE
+
+  if (customtitle == null) {
+    for (UsersRecord user in chatusers) {
+      if (user.uid != authuserid) {
+        title += user.displayName + ', ';
+      }
+    }
+
+// Remove the trailing comma and space if the title is not empty
+    if (title.isNotEmpty) {
+      title = title.substring(0, title.length - 2);
+    }
+  } else {
+    title = customtitle;
+  }
+  return title;
+}
+
+List<DocumentReference> makeuserarray(
+  List<DocumentReference>? array,
+  DocumentReference elementtoadd,
+) {
+  if (array == null) {
+    array = [];
+  }
+  array.add(elementtoadd);
+  return array;
+}
+
+List<bool> loadChatSearch(
+  List<UsersRecord> searchresults,
+  UsersRecord authuser,
+) {
+  List<bool> allowedchats = [];
+
+  for (UsersRecord user in searchresults) {
+    if (user.following.contains(authuser) || user.messagesetting == true) {
+      allowedchats.add(true);
+    } else {
+      allowedchats.add(false);
+    }
+  }
+
+  return allowedchats;
+}
+
+String test(List<String> testinginput) {
+  return "bob";
+}
+
+String? returnOtherUser(
+  String userID,
+  String string1,
+  String string2,
+) {
+  if (string1 != userID) {
+    return string1;
+  } else {
+    return string2;
+  }
+}
+
+int subtracter(
+  int integer,
+  int subtractAmount,
+) {
+  return integer - subtractAmount;
+}
+
+bool strToBoolean(String str) {
+  String lowerStr = str.toLowerCase();
+
+  // Check if the lowercase string is equal to "yes"
+  if (lowerStr == "yes") {
+    return true;
+  } else {
+    return false;
+  }
 }

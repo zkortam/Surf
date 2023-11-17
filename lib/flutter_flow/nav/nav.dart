@@ -184,7 +184,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             ),
             FFRoute(
               name: 'createPost',
-              path: 'createPost',
+              path: 'createpost',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'createPost')
@@ -377,18 +377,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'chats_page',
               path: 'chatsPage',
               requireAuth: true,
+              asyncParams: {
+                'chat': getDoc(['chats'], ChatsRecord.fromSnapshot),
+              },
               builder: (context, params) => ChatsPageWidget(
-                userName: params.getParam('userName', ParamType.String),
-                email: params.getParam('email', ParamType.String),
-                chatUser: params.getParam(
-                    'chatUser', ParamType.DocumentReference, false, ['chats']),
-                userRef: params.getParam(
-                    'userRef', ParamType.DocumentReference, false, ['users']),
-                userProfile: params.getParam('userProfile', ParamType.String),
-                userb: params.getParam(
-                    'userb', ParamType.DocumentReference, false, ['users']),
-                usera: params.getParam(
-                    'usera', ParamType.DocumentReference, false, ['users']),
+                chat: params.getParam('chat', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -413,6 +406,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   name: params.getParam('name', ParamType.String),
                 ),
               ),
+            ),
+            FFRoute(
+              name: 'Bob',
+              path: 'bob',
+              requireAuth: true,
+              builder: (context, params) => BobWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
