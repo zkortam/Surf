@@ -4,6 +4,10 @@ import 'privacy_widget.dart' show PrivacyWidget;
 import 'package:flutter/material.dart';
 
 class PrivacyModel extends FlutterFlowModel<PrivacyWidget> {
+  ///  Local state fields for this page.
+
+  bool messageSetting = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
