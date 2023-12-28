@@ -1,19 +1,8 @@
-import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
-import '/components/thread_widget.dart';
 import '/components/threads_bar_copy_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'spaces_widget.dart' show SpacesWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class SpacesModel extends FlutterFlowModel<SpacesWidget> {
   ///  State fields for stateful widgets in this page.
@@ -26,11 +15,13 @@ class SpacesModel extends FlutterFlowModel<SpacesWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pCNavBarModel = createModel(context, () => PCNavBarModel());
     threadsBarCopyModel = createModel(context, () => ThreadsBarCopyModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pCNavBarModel.dispose();

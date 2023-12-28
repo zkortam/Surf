@@ -129,7 +129,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "thread.id",
+          "fieldPath": "thread.space",
           "order": "ASCENDING"
         },
         {

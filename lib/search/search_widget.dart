@@ -11,13 +11,12 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'search_model.dart';
 export 'search_model.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key}) : super(key: key);
+  const SearchWidget({super.key});
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -88,7 +87,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(
+                      child: const PCNavBarWidget(
                         currentPage: 4,
                       ),
                     ),
@@ -101,7 +100,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         Flexible(
                           child: Container(
                             width: 700.0,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -113,13 +112,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     desktop: false,
                                   ))
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 5.0, 5.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -135,7 +134,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -147,7 +146,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -162,7 +161,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                             .width *
                                                         0.75,
                                                 height: 50.0,
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -196,7 +195,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                       ),
                                     ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 20.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -211,7 +210,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         children: [
                                           if (_model.isUsers)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 8.0, 0.0),
                                               child: TextFormField(
                                                 controller:
@@ -221,7 +220,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                 onChanged: (_) =>
                                                     EasyDebounce.debounce(
                                                   '_model.textController1',
-                                                  Duration(milliseconds: 2000),
+                                                  const Duration(milliseconds: 2000),
                                                   () async {
                                                     safeSetState(() => _model
                                                             .algoliaSearchResults1 =
@@ -264,9 +263,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   focusedErrorBorder:
                                                       InputBorder.none,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(5.0, 5.0,
-                                                              5.0, 5.0),
+                                                      const EdgeInsets.all(5.0),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -278,7 +275,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             ),
                                           if (_model.isPost)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 8.0, 0.0),
                                               child: TextFormField(
                                                 controller:
@@ -288,7 +285,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                 onChanged: (_) =>
                                                     EasyDebounce.debounce(
                                                   '_model.textController2',
-                                                  Duration(milliseconds: 2000),
+                                                  const Duration(milliseconds: 2000),
                                                   () async {
                                                     safeSetState(() => _model
                                                             .algoliaSearchResults2 =
@@ -331,9 +328,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   focusedErrorBorder:
                                                       InputBorder.none,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(5.0, 5.0,
-                                                              5.0, 5.0),
+                                                      const EdgeInsets.all(5.0),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -345,7 +340,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             ),
                                           if (_model.isThreads)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 8.0, 0.0),
                                               child: TextFormField(
                                                 controller:
@@ -355,7 +350,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                 onChanged: (_) =>
                                                     EasyDebounce.debounce(
                                                   '_model.textController3',
-                                                  Duration(milliseconds: 2000),
+                                                  const Duration(milliseconds: 2000),
                                                   () async {
                                                     safeSetState(() => _model
                                                             .algoliaSearchResults3 =
@@ -398,9 +393,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   focusedErrorBorder:
                                                       InputBorder.none,
                                                   contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(5.0, 5.0,
-                                                              5.0, 5.0),
+                                                      const EdgeInsets.all(5.0),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -415,7 +408,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -442,13 +435,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                                           options: FFButtonOptions(
                                             height: 30.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     15.0, 0.0, 15.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: _model.isUsers
-                                                ? Color(0xFF5310C9)
+                                                ? const Color(0xFF5310C9)
                                                 : FlutterFlowTheme.of(context)
                                                     .alternate,
                                             textStyle:
@@ -466,7 +459,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                           FontWeight.normal,
                                                     ),
                                             elevation: 0.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -476,7 +469,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -498,13 +491,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             ),
                                             options: FFButtonOptions(
                                               height: 30.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       15.0, 0.0, 15.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: _model.isThreads
-                                                  ? Color(0xFF5310C9)
+                                                  ? const Color(0xFF5310C9)
                                                   : FlutterFlowTheme.of(context)
                                                       .alternate,
                                               textStyle:
@@ -522,7 +515,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                             FontWeight.normal,
                                                       ),
                                               elevation: 0.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -533,7 +526,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -555,13 +548,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             ),
                                             options: FFButtonOptions(
                                               height: 30.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       15.0, 0.0, 15.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: _model.isPost
-                                                  ? Color(0xFF5310C9)
+                                                  ? const Color(0xFF5310C9)
                                                   : FlutterFlowTheme.of(context)
                                                       .alternate,
                                               textStyle:
@@ -579,7 +572,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                             FontWeight.normal,
                                                       ),
                                               elevation: 0.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -592,7 +585,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Stack(
                                       children: [
@@ -623,7 +616,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   snapshot.data!;
                                               // Customize what your widget looks like with no search results.
                                               if (snapshot.data!.isEmpty) {
-                                                return Container(
+                                                return const SizedBox(
                                                   height: 100,
                                                   child: Center(
                                                     child: Text('No results.'),
@@ -644,14 +637,14 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                     user: columnUsersRecord,
                                                   );
                                                 }).divide(
-                                                    SizedBox(height: 10.0)),
+                                                    const SizedBox(height: 10.0)),
                                               );
                                             },
                                           ),
                                         if (_model.isThreads)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 0.0, 0.0),
                                             child: FutureBuilder<
                                                 List<ThreadRecord>>(
@@ -681,7 +674,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                     snapshot.data!;
                                                 // Customize what your widget looks like with no search results.
                                                 if (snapshot.data!.isEmpty) {
-                                                  return Container(
+                                                  return const SizedBox(
                                                     height: 100,
                                                     child: Center(
                                                       child:
@@ -707,7 +700,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                           columnThreadRecord,
                                                     );
                                                   }).divide(
-                                                      SizedBox(height: 10.0)),
+                                                      const SizedBox(height: 10.0)),
                                                 );
                                               },
                                             ),
@@ -739,7 +732,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                   snapshot.data!;
                                               // Customize what your widget looks like with no search results.
                                               if (snapshot.data!.isEmpty) {
-                                                return Container(
+                                                return const SizedBox(
                                                   height: 100,
                                                   child: Center(
                                                     child: Text('No results.'),
@@ -760,7 +753,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                     post: columnPostsRecord,
                                                   );
                                                 }).divide(
-                                                    SizedBox(height: 10.0)),
+                                                    const SizedBox(height: 10.0)),
                                               );
                                             },
                                           ),

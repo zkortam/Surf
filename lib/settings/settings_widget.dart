@@ -7,18 +7,15 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'settings_model.dart';
 export 'settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({
-    Key? key,
+    super.key,
     bool? settingsKey,
-  })  : this.settingsKey = settingsKey ?? false,
-        super(key: key);
+  })  : settingsKey = settingsKey ?? false;
 
   final bool settingsKey;
 
@@ -88,7 +85,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(
+                      child: const PCNavBarWidget(
                         currentPage: 5,
                       ),
                     ),
@@ -101,13 +98,13 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Material(
                                       color: Colors.transparent,
@@ -120,7 +117,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -136,7 +133,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -148,7 +145,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -168,7 +165,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -205,7 +202,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 50.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -220,7 +217,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 20.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -232,7 +229,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                     height: 80.0,
                                                     clipBehavior:
                                                         Clip.antiAlias,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Image.network(
@@ -242,7 +239,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -275,7 +272,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                       AuthUserStreamWidget(
                                                         builder: (context) =>
                                                             Text(
-                                                          '@${currentUserDisplayName}',
+                                                          '@$currentUserDisplayName',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -294,12 +291,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: Container(
                                               width: double.infinity,
                                               height: 55.0,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 gradient: LinearGradient(
                                                   colors: [
                                                     Color(0xFF963AB7),
@@ -353,7 +350,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 20.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -364,15 +361,14 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                             BorderRadius.circular(15.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
+                                        padding: const EdgeInsets.all(10.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -394,7 +390,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -421,7 +417,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 2.0,
                                                                 0.0, 1.0),
                                                     child: InkWell(
@@ -467,7 +463,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -488,7 +484,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -510,7 +506,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -542,7 +538,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -556,7 +552,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                     'notificationsSettings',
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -578,7 +574,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -610,7 +606,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -631,7 +627,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -653,7 +649,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -685,7 +681,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -706,7 +702,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -728,7 +724,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -765,7 +761,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 30.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
@@ -775,7 +771,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                             .clearRedirectLocation();
 
                                         context.goNamedAuth(
-                                            'entry', context.mounted);
+                                            'preentry', context.mounted);
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         'pq9san40' /* Log out */,
@@ -783,12 +779,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                       options: FFButtonOptions(
                                         width: 200.0,
                                         height: 50.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
+                                        padding: const EdgeInsets.all(0.0),
                                         iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
-                                        color: Color(0xFFE1343E),
+                                        color: const Color(0xFFE1343E),
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
@@ -796,7 +791,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),

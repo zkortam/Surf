@@ -2,18 +2,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'bottom_notif_model.dart';
 export 'bottom_notif_model.dart';
 
 class BottomNotifWidget extends StatefulWidget {
   const BottomNotifWidget({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String? text;
 
@@ -56,14 +53,14 @@ class _BottomNotifWidgetState extends State<BottomNotifWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 1.00),
+      alignment: const AlignmentDirectional(0.0, 1.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
         child: Container(
           width: double.infinity,
           height: 50.0,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
               stops: [0.0, 1.0],
               begin: AlignmentDirectional(1.0, 0.0),

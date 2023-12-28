@@ -2,19 +2,16 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'account_deleted_model.dart';
 export 'account_deleted_model.dart';
 
 class AccountDeletedWidget extends StatefulWidget {
-  const AccountDeletedWidget({Key? key}) : super(key: key);
+  const AccountDeletedWidget({super.key});
 
   @override
   _AccountDeletedWidgetState createState() => _AccountDeletedWidgetState();
@@ -42,22 +39,22 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 140.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 140.0),
+          end: const Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.9, 0.9),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.9, 0.9),
+          end: const Offset(1.0, 1.0),
         ),
         TiltEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(-0.349, 0),
-          end: Offset(0, 0),
+          begin: const Offset(-0.349, 0),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -118,7 +115,7 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF6E09B3), Color(0xFF040F46)],
                           stops: [0.0, 1.0],
@@ -126,23 +123,22 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
                           end: AlignmentDirectional(-0.87, 1.0),
                         ),
                       ),
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               height: 200.0,
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 maxWidth: 570.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Color(0xFF161A1D),
-                                boxShadow: [
+                                color: const Color(0xFF161A1D),
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4.0,
                                     color: Color(0x33000000),
@@ -152,7 +148,7 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, -0.30),
+                                alignment: const AlignmentDirectional(0.0, -0.3),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +166,7 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
                                           ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           30.0, 0.0, 30.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -187,7 +183,7 @@ class _AccountDeletedWidgetState extends State<AccountDeletedWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.delete,

@@ -2,18 +2,16 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'message_card_model.dart';
 export 'message_card_model.dart';
 
 class MessageCardWidget extends StatefulWidget {
   const MessageCardWidget({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final UsersRecord? user;
 
@@ -105,7 +103,7 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
                       ),
                     }.withoutNulls,
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                       ),
@@ -117,12 +115,12 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                       child: Container(
                         width: 45.0,
                         height: 45.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
@@ -133,7 +131,7 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +166,7 @@ class _MessageCardWidgetState extends State<MessageCardWidget> {
             },
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
             child: Container(
               width: 110.0,
               height: 40.0,

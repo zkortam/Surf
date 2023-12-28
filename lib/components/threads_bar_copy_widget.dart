@@ -2,18 +2,16 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'threads_bar_copy_model.dart';
 export 'threads_bar_copy_model.dart';
 
 class ThreadsBarCopyWidget extends StatefulWidget {
   const ThreadsBarCopyWidget({
-    Key? key,
+    super.key,
     required this.name,
-  }) : super(key: key);
+  });
 
   final String? name;
 
@@ -84,7 +82,7 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
           children: [
             Container(
               width: 500.0,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minHeight: 150.0,
                 maxHeight: 200.0,
               ),
@@ -98,7 +96,7 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
                 ),
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: Container(
+              child: SizedBox(
                 width: 500.0,
                 child: Stack(
                   children: [
@@ -108,7 +106,7 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
                         Container(
                           width: double.infinity,
                           height: 115.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xB1000000),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(0.0),
@@ -122,10 +120,13 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Text(
-                                  widget.name!,
+                                  valueOrDefault<String>(
+                                    widget.name,
+                                    'Name',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -141,10 +142,10 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
                         ),
                         Container(
                           width: 500.0,
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             maxHeight: 150.0,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xDC000000),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(15.0),
@@ -154,10 +155,12 @@ class _ThreadsBarCopyWidgetState extends State<ThreadsBarCopyWidget> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              columnSpacesRecord!.rules,
+                              valueOrDefault<String>(
+                                columnSpacesRecord.rules,
+                                'rules',
+                              ),
                               maxLines: 3,
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),

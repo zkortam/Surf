@@ -8,6 +8,7 @@ export '../base_auth_user_provider.dart';
 class SurfFirebaseUser extends BaseAuthUser {
   SurfFirebaseUser(this.user);
   User? user;
+  @override
   bool get loggedIn => user != null;
 
   @override

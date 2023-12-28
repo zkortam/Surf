@@ -5,22 +5,19 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'blocked_model.dart';
 export 'blocked_model.dart';
 
 class BlockedWidget extends StatefulWidget {
   const BlockedWidget({
-    Key? key,
+    super.key,
     bool? settingsKey,
-  })  : this.settingsKey = settingsKey ?? false,
-        super(key: key);
+  })  : settingsKey = settingsKey ?? false;
 
   final bool settingsKey;
 
@@ -86,7 +83,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(
+                    child: const PCNavBarWidget(
                       currentPage: 5,
                     ),
                   ),
@@ -99,13 +96,13 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Material(
                                       color: Colors.transparent,
@@ -118,7 +115,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -134,7 +131,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -146,7 +143,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -163,7 +160,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -182,7 +179,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -218,12 +215,10 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                       ),
                                     ),
                                   ),
-                                  if ((currentUserDocument?.blocked?.toList() ??
-                                              [])
-                                          .length >
-                                      0)
+                                  if ((currentUserDocument?.blocked.toList() ??
+                                              []).isNotEmpty)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 10.0, 0.0),
                                       child: AuthUserStreamWidget(
                                         builder: (context) =>
@@ -234,12 +229,12 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                     'uid',
                                                     (currentUserDocument
                                                                     ?.blocked
-                                                                    ?.toList() ??
+                                                                    .toList() ??
                                                                 []) !=
                                                             ''
                                                         ? (currentUserDocument
                                                                 ?.blocked
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         : null)
                                                 .orderBy('realName',
@@ -276,7 +271,7 @@ class _BlockedWidgetState extends State<BlockedWidget> {
                                                     columnUsersRecordList[
                                                         columnIndex];
                                                 return Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 5.0),
                                                   child: BlockedCardWidget(

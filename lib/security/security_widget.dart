@@ -4,22 +4,18 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'security_model.dart';
 export 'security_model.dart';
 
 class SecurityWidget extends StatefulWidget {
   const SecurityWidget({
-    Key? key,
+    super.key,
     bool? settingsKey,
-  })  : this.settingsKey = settingsKey ?? false,
-        super(key: key);
+  })  : settingsKey = settingsKey ?? false;
 
   final bool settingsKey;
 
@@ -85,7 +81,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(),
+                    child: const PCNavBarWidget(),
                   ),
                   Flexible(
                     child: Row(
@@ -96,13 +92,13 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Material(
                                       color: Colors.transparent,
@@ -115,7 +111,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -131,7 +127,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -143,7 +139,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -160,7 +156,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -179,7 +175,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -216,7 +212,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -228,9 +224,9 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                             BorderRadius.circular(15.0),
                                       ),
                                       alignment:
-                                          AlignmentDirectional(-1.00, 0.00),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -239,7 +235,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                           children: [
                                             Flexible(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 child: Text(
@@ -266,7 +262,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -277,7 +273,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                             BorderRadius.circular(15.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -285,7 +281,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 0.0, 0.0),
                                               child: Row(
@@ -304,7 +300,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -321,14 +317,14 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF5310C9),
+                                                    color: const Color(0xFF5310C9),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -362,7 +358,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 30.0),
                                               child: InkWell(
@@ -379,14 +375,14 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF5310C9),
+                                                    color: const Color(0xFF5310C9),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15.0),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -420,7 +416,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 0.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -438,7 +434,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: InkWell(
@@ -471,7 +467,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                               .viewInsetsOf(
                                                                   context),
                                                           child:
-                                                              BottomNotifWidget(
+                                                              const BottomNotifWidget(
                                                             text: 'Coming soon',
                                                           ),
                                                         ),
@@ -493,7 +489,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -525,7 +521,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 10.0),
                                               child: InkWell(
@@ -558,7 +554,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                               .viewInsetsOf(
                                                                   context),
                                                           child:
-                                                              AccountDeleteWidget(),
+                                                              const AccountDeleteWidget(),
                                                         ),
                                                       );
                                                     },
@@ -578,7 +574,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -597,7 +593,7 @@ class _SecurityWidgetState extends State<SecurityWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Outfit',
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0xFFE1343E),
                                                                 fontSize: 16.0,
                                                                 fontWeight:

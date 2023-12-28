@@ -1,20 +1,17 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 import 'biometric_test_model.dart';
 export 'biometric_test_model.dart';
 
 class BiometricTestWidget extends StatefulWidget {
-  const BiometricTestWidget({Key? key}) : super(key: key);
+  const BiometricTestWidget({super.key});
 
   @override
   _BiometricTestWidgetState createState() => _BiometricTestWidgetState();
@@ -42,22 +39,22 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 140.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 140.0),
+          end: const Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.9, 0.9),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.9, 0.9),
+          end: const Offset(1.0, 1.0),
         ),
         TiltEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(-0.349, 0),
-          end: Offset(0, 0),
+          begin: const Offset(-0.349, 0),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -70,24 +67,24 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final _localAuth = LocalAuthentication();
-      bool _isBiometricSupported = await _localAuth.isDeviceSupported();
+      final localAuth = LocalAuthentication();
+      bool isBiometricSupported = await localAuth.isDeviceSupported();
 
-      if (_isBiometricSupported) {
-        _model.isVerifiedBio = await _localAuth.authenticate(
+      if (isBiometricSupported) {
+        _model.isVerifiedBio = await localAuth.authenticate(
             localizedReason: FFLocalizations.of(context).getText(
           '4rorhtqe' /* Verify your identity. */,
         ));
         setState(() {});
       }
 
-      if (_model.isVerifiedBio!) {
+      if (_model.isVerifiedBio) {
         FFAppState().paramholder = 'pintosettapp';
 
         context.goNamed(
           'settings',
           extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
+            kTransitionInfoKey: const TransitionInfo(
               hasTransition: true,
               transitionType: PageTransitionType.fade,
             ),
@@ -97,7 +94,7 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
         context.goNamed(
           'Profile',
           extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
+            kTransitionInfoKey: const TransitionInfo(
               hasTransition: true,
               transitionType: PageTransitionType.fade,
             ),
@@ -149,7 +146,7 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF6E09B3), Color(0xFF040F46)],
                           stops: [0.0, 1.0],
@@ -157,23 +154,22 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
                           end: AlignmentDirectional(-0.87, 1.0),
                         ),
                       ),
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               height: 200.0,
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 maxWidth: 570.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Color(0xFF161A1D),
-                                boxShadow: [
+                                color: const Color(0xFF161A1D),
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4.0,
                                     color: Color(0x33000000),
@@ -183,7 +179,7 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, -0.30),
+                                alignment: const AlignmentDirectional(0.0, -0.3),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -201,7 +197,7 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
                                           ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           30.0, 0.0, 30.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -218,7 +214,7 @@ class _BiometricTestWidgetState extends State<BiometricTestWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.face,

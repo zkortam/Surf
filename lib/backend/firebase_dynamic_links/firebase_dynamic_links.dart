@@ -30,7 +30,7 @@ Future<String> generateCurrentPageLink(
       imageUrl: imageUrl != null ? Uri.tryParse(imageUrl) : null,
     ),
     navigationInfoParameters: forceRedirect
-        ? NavigationInfoParameters(forcedRedirectEnabled: true)
+        ? const NavigationInfoParameters(forcedRedirectEnabled: true)
         : null,
   );
   return isShortLink
@@ -44,10 +44,10 @@ Future<String> generateCurrentPageLink(
 
 class DynamicLinksHandler extends StatefulWidget {
   const DynamicLinksHandler({
-    Key? key,
+    super.key,
     required this.router,
     required this.child,
-  }) : super(key: key);
+  });
 
   final GoRouter router;
   final Widget child;
@@ -77,7 +77,9 @@ class _DynamicLinksHandlerState extends State<DynamicLinksHandler> {
     final link = linkData.link.toString();
     final host = linkData.link.host;
     final location = link.split(host).last;
-    widget.router.push(location);
+    if (widget.router.location != location) {
+      widget.router.push(location);
+    }
   }
 
   @override

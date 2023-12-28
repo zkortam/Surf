@@ -3,15 +3,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'account_delete_model.dart';
 export 'account_delete_model.dart';
 
 class AccountDeleteWidget extends StatefulWidget {
-  const AccountDeleteWidget({Key? key}) : super(key: key);
+  const AccountDeleteWidget({super.key});
 
   @override
   _AccountDeleteWidgetState createState() => _AccountDeleteWidgetState();
@@ -56,7 +53,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 20.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 20.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -68,13 +65,13 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
               child: Container(
                 width: double.infinity,
                 height: 190.0,
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: 350.0,
                   maxHeight: 275.0,
                 ),
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 5.0,
                       color: Color(0x44111417),
@@ -89,15 +86,15 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(-0.05, 0.00),
+                      alignment: const AlignmentDirectional(-0.05, 0.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 40.0,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [Color(0xFFF93333), Color(0xFFDA940A)],
                               stops: [0.0, 1.0],
                               begin: AlignmentDirectional(1.0, 0.0),
@@ -105,13 +102,13 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                             ),
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.transparent,
                                   borderRadius: 0.0,
@@ -146,7 +143,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                       child: Container(
                         width: double.infinity,
                         height: 80.0,
@@ -155,7 +152,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
@@ -174,7 +171,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -192,9 +189,9 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                             options: FFButtonOptions(
                               width: 150.0,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primaryText,
                               textStyle: FlutterFlowTheme.of(context)
@@ -205,7 +202,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                                         .secondaryBackground,
                                   ),
                               elevation: 2.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -213,7 +210,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -225,9 +222,9 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                               options: FFButtonOptions(
                                 width: 150.0,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
@@ -238,7 +235,7 @@ class _AccountDeleteWidgetState extends State<AccountDeleteWidget> {
                                       color: Colors.white,
                                     ),
                                 elevation: 2.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),

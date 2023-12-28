@@ -9,20 +9,16 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'create_profile_model.dart';
 export 'create_profile_model.dart';
 
 class CreateProfileWidget extends StatefulWidget {
-  const CreateProfileWidget({Key? key}) : super(key: key);
+  const CreateProfileWidget({super.key});
 
   @override
   _CreateProfileWidgetState createState() => _CreateProfileWidgetState();
@@ -109,7 +105,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF9F1CFA), Color(0xFF0D28A2)],
                           stops: [0.0, 1.0],
@@ -117,26 +113,25 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                           end: AlignmentDirectional(-0.87, 1.0),
                         ),
                       ),
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Align(
-                        alignment: AlignmentDirectional(0.00, 0.00),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxWidth: 570.0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
@@ -146,9 +141,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           20.0, 32.0, 20.0, 32.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -165,7 +160,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 24.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -279,15 +274,15 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                     BorderRadius.circular(12.0),
                                               ),
                                               child: Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: Container(
                                                   width: 120.0,
                                                   height: 120.0,
-                                                  decoration: BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: InkWell(
@@ -392,18 +387,18 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                         clipBehavior:
                                                             Clip.antiAlias,
                                                         decoration:
-                                                            BoxDecoration(
+                                                            const BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                         ),
                                                         child:
                                                             CachedNetworkImage(
                                                           fadeInDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       500),
                                                           fadeOutDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       500),
                                                           imageUrl:
@@ -424,7 +419,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -432,24 +427,20 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 5.0, 0.0),
                                                   child: Stack(
                                                     children: [
                                                       if (_model.uploadedFileUrl2 !=
-                                                              null &&
-                                                          _model.uploadedFileUrl2 !=
                                                               '')
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.check_circle,
                                                           color:
                                                               Color(0xFF39C727),
                                                           size: 24.0,
                                                         ),
                                                       if (_model.uploadedFileUrl2 ==
-                                                              null ||
-                                                          _model.uploadedFileUrl2 ==
                                                               '')
                                                         Icon(
                                                           Icons.not_interested,
@@ -462,7 +453,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 10.0, 0.0),
                                                   child: Text(
@@ -478,18 +469,14 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                 Stack(
                                                   children: [
                                                     if (_model.uploadedFileUrl1 !=
-                                                            null &&
-                                                        _model.uploadedFileUrl1 !=
                                                             '')
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.check_circle,
                                                         color:
                                                             Color(0xFF39C727),
                                                         size: 24.0,
                                                       ),
                                                     if (_model.uploadedFileUrl1 ==
-                                                            null ||
-                                                        _model.uploadedFileUrl1 ==
                                                             '')
                                                       Icon(
                                                         Icons.not_interested,
@@ -502,7 +489,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   ],
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 10.0, 0.0),
                                                   child: Text(
@@ -520,9 +507,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 15.0, 0.0, 16.0),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: double.infinity,
                                               child: TextFormField(
                                                 controller:
@@ -557,7 +544,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomBarErrorWidget(
+                                                                const BottomBarErrorWidget(
                                                               text:
                                                                   'Name may only be up to 30 characters.',
                                                             ),
@@ -569,7 +556,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   }
                                                 },
                                                 autofocus: true,
-                                                autofillHints: [
+                                                autofillHints: const [
                                                   AutofillHints.email
                                                 ],
                                                 textCapitalization:
@@ -655,9 +642,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: double.infinity,
                                               child: TextFormField(
                                                 controller:
@@ -717,7 +704,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                                   .viewInsetsOf(
                                                                       context),
                                                               child:
-                                                                  BottomBarErrorWidget(
+                                                                  const BottomBarErrorWidget(
                                                                 text:
                                                                     'Username must be longer than 3 characters',
                                                               ),
@@ -757,7 +744,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomBarErrorWidget(
+                                                                const BottomBarErrorWidget(
                                                               text:
                                                                   'Username must be unique',
                                                             ),
@@ -806,7 +793,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                       color: () {
                                                         if (_model
                                                             .usernameValid) {
-                                                          return Color(
+                                                          return const Color(
                                                               0xFF17A617);
                                                         } else if (!_model
                                                                 .usernameValid &&
@@ -875,9 +862,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                     color:
                                                         valueOrDefault<Color>(
                                                       _model.usernameValid
-                                                          ? Color(0xFF39C727)
-                                                          : Color(0xFF757575),
-                                                      Color(0xFF757575),
+                                                          ? const Color(0xFF39C727)
+                                                          : const Color(0xFF757575),
+                                                      const Color(0xFF757575),
                                                     ),
                                                     size: 22.0,
                                                   ),
@@ -902,9 +889,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: double.infinity,
                                               child: TextFormField(
                                                 controller: _model
@@ -997,9 +984,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
-                                            child: Container(
+                                            child: SizedBox(
                                               width: double.infinity,
                                               child: TextFormField(
                                                 controller:
@@ -1034,7 +1021,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomBarErrorWidget(
+                                                                const BottomBarErrorWidget(
                                                               text:
                                                                   'Bio may only be up to 200 characters.',
                                                             ),
@@ -1046,7 +1033,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                   }
                                                 },
                                                 autofocus: true,
-                                                autofillHints: [
+                                                autofillHints: const [
                                                   AutofillHints.email
                                                 ],
                                                 obscureText: false,
@@ -1129,25 +1116,17 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 16.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                if ((_model.uploadedFileUrl2 != null && _model.uploadedFileUrl2 != '') &&
+                                                if ((_model.uploadedFileUrl2 != '') &&
                                                     (_model.uploadedFileUrl1 !=
-                                                            null &&
-                                                        _model.uploadedFileUrl1 !=
                                                             '') &&
                                                     (_model.nameController
                                                                 .text !=
-                                                            null &&
-                                                        _model.nameController
-                                                                .text !=
                                                             '') &&
                                                     (_model.phoneNumberController
-                                                                .text !=
-                                                            null &&
-                                                        _model.phoneNumberController
                                                                 .text !=
                                                             '') &&
                                                     _model.usernameValid) {
@@ -1160,11 +1139,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                               .text),
                                                       email: '',
                                                       bio: valueOrDefault(
-                                                                      currentUserDocument
-                                                                          ?.bio,
-                                                                      '') !=
-                                                                  null &&
-                                                              valueOrDefault(
                                                                       currentUserDocument
                                                                           ?.bio,
                                                                       '') !=
@@ -1222,7 +1196,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                               .viewInsetsOf(
                                                                   context),
                                                           child:
-                                                              BottomBarErrorWidget(
+                                                              const BottomBarErrorWidget(
                                                             text:
                                                                 'Please fill all fields',
                                                           ),
@@ -1240,11 +1214,11 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                               options: FFButtonOptions(
                                                 width: double.infinity,
                                                 height: 44.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -1258,7 +1232,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                                           color: Colors.white,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),

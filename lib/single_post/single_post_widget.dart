@@ -14,12 +14,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'single_post_model.dart';
@@ -27,11 +25,11 @@ export 'single_post_model.dart';
 
 class SinglePostWidget extends StatefulWidget {
   const SinglePostWidget({
-    Key? key,
+    super.key,
     required this.posts,
     this.action,
     this.username,
-  }) : super(key: key);
+  });
 
   final PostsRecord? posts;
   final int? action;
@@ -56,7 +54,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
       _model.currentPageLink = await generateCurrentPageLink(
         context,
         title: '@${widget.username}\'s Post',
-        imageUrl: widget.posts?.post?.images?.first?.image,
+        imageUrl: widget.posts?.post.images.first.image,
         description: 'View on Surf',
         forceRedirect: true,
       );
@@ -81,7 +79,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                     : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
-                  child: BottomNotifWidget(
+                  child: const BottomNotifWidget(
                     text: 'Copied to clipboard',
                   ),
                 ),
@@ -123,7 +121,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
         stream: queryUsersRecord(
           queryBuilder: (usersRecord) => usersRecord.where(
             'uid',
-            isEqualTo: widget.posts?.post?.author,
+            isEqualTo: widget.posts?.post.author,
           ),
           singleRecord: true,
         ),
@@ -171,22 +169,21 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                         wrapWithModel(
                           model: _model.pCNavBarModel,
                           updateCallback: () => setState(() {}),
-                          child: PCNavBarWidget(),
+                          child: const PCNavBarWidget(),
                         ),
                         Flexible(
                           child: Align(
-                            alignment: AlignmentDirectional(0.00, 0.00),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Flexible(
                                   child: Align(
-                                    alignment:
-                                        AlignmentDirectional(0.00, -1.00),
+                                    alignment: const AlignmentDirectional(0.0, -1.0),
                                     child: Container(
                                       width: 600.0,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: SingleChildScrollView(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -196,14 +193,14 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                               desktop: false,
                                             ))
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 5.0, 5.0, 10.0),
                                                 child: Container(
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
+                                                    gradient: const LinearGradient(
                                                       colors: [
                                                         Color(0xFF9F1CFA),
                                                         Color(0xFF0D28A2)
@@ -229,7 +226,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   5.0,
                                                                   0.0,
@@ -248,7 +245,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                             borderRadius: 25.0,
                                                             borderWidth: 3.0,
                                                             buttonSize: 40.0,
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons
                                                                   .arrow_back_rounded,
                                                               color:
@@ -268,7 +265,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                 0.75,
                                                             height: 50.0,
                                                             decoration:
-                                                                BoxDecoration(),
+                                                                const BoxDecoration(),
                                                             child: Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
@@ -313,14 +310,14 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                         .where(
                                                           'post.id',
                                                           isEqualTo: widget
-                                                              .posts?.post?.id,
+                                                              .posts?.post.id,
                                                         )
                                                         .where(
                                                           'post.timestamp',
                                                           isEqualTo: widget
                                                               .posts
                                                               ?.post
-                                                              ?.timestamp,
+                                                              .timestamp,
                                                         ),
                                                 singleRecord: true,
                                               ),
@@ -360,7 +357,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -383,14 +380,14 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                               },
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
                                                 child: Container(
                                                   width: 600.0,
-                                                  constraints: BoxConstraints(
+                                                  constraints: const BoxConstraints(
                                                     minHeight: 150.0,
                                                     maxHeight: 500.0,
                                                   ),
@@ -404,7 +401,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 5.0),
                                                     child: Column(
@@ -423,7 +420,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           3.0,
                                                                           3.0,
@@ -457,7 +454,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                               .max,
                                                                       children: [
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               5.0,
                                                                               0.0,
                                                                               0.0,
@@ -469,7 +466,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                               width: 35.0,
                                                                               height: 35.0,
                                                                               clipBehavior: Clip.antiAlias,
-                                                                              decoration: BoxDecoration(
+                                                                              decoration: const BoxDecoration(
                                                                                 shape: BoxShape.circle,
                                                                               ),
                                                                               child: Image.network(
@@ -483,7 +480,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               5.0,
                                                                               0.0,
                                                                               0.0,
@@ -509,7 +506,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                               ),
                                                                               AuthUserStreamWidget(
                                                                                 builder: (context) => Text(
-                                                                                  '@${currentUserDisplayName}',
+                                                                                  '@$currentUserDisplayName',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Outfit',
                                                                                         fontSize: 12.0,
@@ -522,7 +519,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                       ],
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           10.0,
@@ -536,7 +533,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                               usersRecord.where(
                                                                             'uid',
                                                                             isEqualTo:
-                                                                                widget.posts?.post?.author,
+                                                                                widget.posts?.post.author,
                                                                           ),
                                                                           singleRecord:
                                                                               true,
@@ -595,7 +592,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                 Text(
                                                                               valueOrDefault<String>(
                                                                                 'replying to @${valueOrDefault<String>(
-                                                                                  widget.posts?.post?.isStealth == true ? 'Anonymous' : textUsersRecord?.displayName,
+                                                                                  widget.posts?.post.isStealth == true ? 'Anonymous' : textUsersRecord?.displayName,
                                                                                   'Anonymous',
                                                                                 )}',
                                                                                 'Replying to @Anonymous',
@@ -618,7 +615,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       10.0,
@@ -705,11 +702,8 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                             10.0),
                                                               ),
                                                               contentPadding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0,
+                                                                  const EdgeInsets
+                                                                      .all(
                                                                           10.0),
                                                             ),
                                                             style: FlutterFlowTheme
@@ -730,12 +724,10 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                           ),
                                                         ),
                                                         if (_model.uploadedFileUrl !=
-                                                                null &&
-                                                            _model.uploadedFileUrl !=
                                                                 '')
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -756,13 +748,10 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                             20.0),
                                                               ),
                                                               child: Visibility(
-                                                                visible: _model
-                                                                            .uploadedFileUrl !=
-                                                                        null &&
-                                                                    _model.uploadedFileUrl !=
+                                                                visible: _model.uploadedFileUrl !=
                                                                         '',
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           5.0,
@@ -816,12 +805,8 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                           ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0),
+                                                              const EdgeInsets.all(
+                                                                  5.0),
                                                           child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -832,7 +817,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                             children: [
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -944,7 +929,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                     isEqualTo: widget
                                                                         .posts
                                                                         ?.post
-                                                                        ?.author,
+                                                                        .author,
                                                                   ),
                                                                   singleRecord:
                                                                       true,
@@ -1002,10 +987,10 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                     getCommentFirestoreData(
                                                                                       createCommentStruct(
                                                                                         isPostComment: true,
-                                                                                        idReplyTo: widget.posts?.post?.id,
+                                                                                        idReplyTo: widget.posts?.post.id,
                                                                                         text: _model.textController.text,
                                                                                         authorid: currentUserUid,
-                                                                                        id: 'C${currentUserUid}RT${widget.posts?.post?.author}${widget.posts?.post?.comments?.length?.toString()}',
+                                                                                        id: 'C${currentUserUid}RT${widget.posts?.post.author}${widget.posts?.post.comments.length.toString()}',
                                                                                         timestamp: getCurrentTimestamp,
                                                                                         imageHash: createImageHashStruct(
                                                                                           image: _model.uploadedFileUrl,
@@ -1013,7 +998,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                           clearUnsetFields: false,
                                                                                         ),
                                                                                         isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                                        isAuthorStealth: widget.posts?.post?.isStealth,
+                                                                                        isAuthorStealth: widget.posts?.post.isStealth,
                                                                                         clearUnsetFields: false,
                                                                                       ),
                                                                                       true,
@@ -1029,11 +1014,11 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                             createCommentsRecordData(
                                                                               comment: createCommentStruct(
                                                                                 isPostComment: true,
-                                                                                idReplyTo: widget.posts?.post?.id,
+                                                                                idReplyTo: widget.posts?.post.id,
                                                                                 text: _model.textController.text,
                                                                                 authorid: currentUserUid,
                                                                                 timestamp: getCurrentTimestamp,
-                                                                                id: 'C${currentUserUid}RT${widget.posts?.post?.author}${widget.posts?.post?.comments?.length?.toString()}',
+                                                                                id: 'C${currentUserUid}RT${widget.posts?.post.author}${widget.posts?.post.comments.length.toString()}',
                                                                                 imageHash: createImageHashStruct(
                                                                                   image: _model.uploadedFileUrl,
                                                                                   blurHash: _model.uploadedLocalFile.blurHash,
@@ -1041,12 +1026,12 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                   create: true,
                                                                                 ),
                                                                                 isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                                isAuthorStealth: widget.posts?.post?.isStealth,
+                                                                                isAuthorStealth: widget.posts?.post.isStealth,
                                                                                 clearUnsetFields: false,
                                                                                 create: true,
                                                                               ),
                                                                             ));
-                                                                        if (widget.posts?.post?.author ==
+                                                                        if (widget.posts?.post.author ==
                                                                             currentUserUid) {
                                                                           return;
                                                                         }
@@ -1066,11 +1051,11 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                                     getNotificationFirestoreData(
                                                                                       createNotificationStruct(
                                                                                         category: 1,
-                                                                                        itemID: widget.posts?.post?.id,
+                                                                                        itemID: widget.posts?.post.id,
                                                                                         time: getCurrentTimestamp,
                                                                                         userID: currentUserUid,
                                                                                         isMarkedAsRead: false,
-                                                                                        notifID: 'NP${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                                        notifID: 'NP${buttonUsersRecord.notifications.length.toString()}',
                                                                                         iDUserFrom: currentUserUid,
                                                                                         clearUnsetFields: false,
                                                                                       ),
@@ -1086,11 +1071,11 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                           notificationText: _model
                                                                               .textController
                                                                               .text,
-                                                                          notificationImageUrl: _model.uploadedFileUrl != null && _model.uploadedFileUrl != ''
+                                                                          notificationImageUrl: _model.uploadedFileUrl != ''
                                                                               ? _model.uploadedFileUrl
                                                                               : 'null',
                                                                           userRefs: [
-                                                                            buttonUsersRecord!.reference
+                                                                            buttonUsersRecord.reference
                                                                           ],
                                                                           initialPageName:
                                                                               'singlePost',
@@ -1129,12 +1114,12 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                         FFButtonOptions(
                                                                       height:
                                                                           35.0,
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           24.0,
                                                                           0.0,
                                                                           24.0,
                                                                           0.0),
-                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
@@ -1154,7 +1139,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                       elevation:
                                                                           3.0,
                                                                       borderSide:
-                                                                          BorderSide(
+                                                                          const BorderSide(
                                                                         color: Colors
                                                                             .transparent,
                                                                         width:
@@ -1177,7 +1162,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: StreamBuilder<
                                                   List<CommentsRecord>>(
@@ -1189,7 +1174,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                             isEqualTo: widget
                                                                 .posts
                                                                 ?.post
-                                                                ?.id,
+                                                                .id,
                                                           )
                                                           .orderBy(
                                                               'comment.timestamp',
@@ -1227,7 +1212,7 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                       return Container(
                                                         width: 600.0,
                                                         decoration:
-                                                            BoxDecoration(),
+                                                            const BoxDecoration(),
                                                         child: Stack(
                                                           children: [
                                                             if (responsiveVisibility(
@@ -1239,11 +1224,8 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                             ))
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.0,
-                                                                            5.0,
-                                                                            5.0,
+                                                                    const EdgeInsets
+                                                                        .all(
                                                                             5.0),
                                                                 child:
                                                                     CommentWidget(

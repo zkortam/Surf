@@ -53,8 +53,9 @@ class ChatMessageStruct extends FFFirebaseStruct {
         image: data['Image'] as String?,
       );
 
-  static ChatMessageStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ChatMessageStruct.fromMap(data) : null;
+  static ChatMessageStruct? maybeFromMap(dynamic data) => data is Map
+      ? ChatMessageStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'text': _text,
@@ -129,7 +130,7 @@ class ChatMessageStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),

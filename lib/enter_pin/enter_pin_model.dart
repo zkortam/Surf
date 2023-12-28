@@ -1,19 +1,6 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/components/bottom_bar_error_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'enter_pin_widget.dart' show EnterPinWidget;
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class EnterPinModel extends FlutterFlowModel<EnterPinWidget> {
   ///  State fields for stateful widgets in this page.
@@ -25,10 +12,12 @@ class EnterPinModel extends FlutterFlowModel<EnterPinWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pinCodeController = TextEditingController();
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pinCodeController?.dispose();

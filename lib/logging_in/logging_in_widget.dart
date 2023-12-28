@@ -2,19 +2,16 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'logging_in_model.dart';
 export 'logging_in_model.dart';
 
 class LoggingInWidget extends StatefulWidget {
-  const LoggingInWidget({Key? key}) : super(key: key);
+  const LoggingInWidget({super.key});
 
   @override
   _LoggingInWidgetState createState() => _LoggingInWidgetState();
@@ -34,8 +31,8 @@ class _LoggingInWidgetState extends State<LoggingInWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, -32.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, -32.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -48,13 +45,12 @@ class _LoggingInWidgetState extends State<LoggingInWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((valueOrDefault(currentUserDocument?.realName, '') != null &&
-              valueOrDefault(currentUserDocument?.realName, '') != '') &&
-          (currentUserPhoto != null && currentUserPhoto != '')) {
+      if ((valueOrDefault(currentUserDocument?.realName, '') != '') &&
+          (currentUserPhoto != '')) {
         context.goNamed(
           'Home',
           extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
+            kTransitionInfoKey: const TransitionInfo(
               hasTransition: true,
               transitionType: PageTransitionType.fade,
             ),
@@ -64,7 +60,7 @@ class _LoggingInWidgetState extends State<LoggingInWidget>
         context.goNamed(
           'dateOfBirth',
           extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
+            kTransitionInfoKey: const TransitionInfo(
               hasTransition: true,
               transitionType: PageTransitionType.fade,
             ),
@@ -111,7 +107,7 @@ class _LoggingInWidgetState extends State<LoggingInWidget>
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF9F1CFA), Color(0xFF0D28A2)],
                     stops: [0.0, 1.0],
@@ -119,7 +115,7 @@ class _LoggingInWidgetState extends State<LoggingInWidget>
                     end: AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

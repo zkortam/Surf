@@ -1,30 +1,25 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
-import '/components/select_space_widget.dart';
 import '/components/space_threads_nav_widget.dart';
+import '/components/thread_create_widget.dart';
 import '/components/thread_widget.dart';
 import '/components/threads_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'threads_model.dart';
 export 'threads_model.dart';
 
 class ThreadsWidget extends StatefulWidget {
-  const ThreadsWidget({Key? key}) : super(key: key);
+  const ThreadsWidget({super.key});
 
   @override
   _ThreadsWidgetState createState() => _ThreadsWidgetState();
@@ -44,8 +39,8 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(-48.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(-48.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -63,8 +58,8 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(-48.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(-48.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -82,8 +77,8 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(-48.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(-48.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -100,12 +95,6 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => ThreadsModel());
-
-    _model.titleController ??= TextEditingController();
-    _model.titleFocusNode ??= FocusNode();
-
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -159,7 +148,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                           wrapWithModel(
                             model: _model.pCNavBarModel,
                             updateCallback: () => setState(() {}),
-                            child: PCNavBarWidget(
+                            child: const PCNavBarWidget(
                               currentPage: 1,
                             ),
                           ),
@@ -174,461 +163,16 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 10.0, 0.0, 0.0),
-                                      child: Container(
-                                        width: 500.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 10.0, 10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  AuthUserStreamWidget(
-                                                    builder: (context) =>
-                                                        Container(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.network(
-                                                        currentUserPhoto,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      15.0,
-                                                                      0.0,
-                                                                      8.0,
-                                                                      0.0),
-                                                          child: TextFormField(
-                                                            controller: _model
-                                                                .titleController,
-                                                            focusNode: _model
-                                                                .titleFocusNode,
-                                                            autofocus: true,
-                                                            obscureText: false,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              isDense: true,
-                                                              labelStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Outfit',
-                                                                        fontSize:
-                                                                            16.0,
-                                                                      ),
-                                                              hintText:
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                '3xo5f4de' /* Title */,
-                                                              ),
-                                                              hintStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Outfit',
-                                                                        fontSize:
-                                                                            18.0,
-                                                                      ),
-                                                              enabledBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              focusedBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              errorBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              focusedErrorBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              contentPadding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          15.0,
-                                                                          0.0,
-                                                                          15.0),
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  fontSize:
-                                                                      18.0,
-                                                                ),
-                                                            minLines: 1,
-                                                            maxLength: 50,
-                                                            maxLengthEnforcement:
-                                                                MaxLengthEnforcement
-                                                                    .enforced,
-                                                            buildCounter: (context,
-                                                                    {required currentLength,
-                                                                    required isFocused,
-                                                                    maxLength}) =>
-                                                                null,
-                                                            validator: _model
-                                                                .titleControllerValidator
-                                                                .asValidator(
-                                                                    context),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        15.0,
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0),
-                                                            child:
-                                                                TextFormField(
-                                                              controller: _model
-                                                                  .textController2,
-                                                              focusNode: _model
-                                                                  .textFieldFocusNode,
-                                                              autofocus: true,
-                                                              obscureText:
-                                                                  false,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                isDense: true,
-                                                                labelStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          15.0,
-                                                                    ),
-                                                                hintText:
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                  '181571g6' /* What's happening? */,
-                                                                ),
-                                                                hintStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium,
-                                                                enabledBorder:
-                                                                    InputBorder
-                                                                        .none,
-                                                                focusedBorder:
-                                                                    InputBorder
-                                                                        .none,
-                                                                errorBorder:
-                                                                    InputBorder
-                                                                        .none,
-                                                                focusedErrorBorder:
-                                                                    InputBorder
-                                                                        .none,
-                                                                contentPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0),
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                              maxLines: 5,
-                                                              minLines: 1,
-                                                              maxLength: 2000,
-                                                              maxLengthEnforcement:
-                                                                  MaxLengthEnforcement
-                                                                      .enforced,
-                                                              buildCounter: (context,
-                                                                      {required currentLength,
-                                                                      required isFocused,
-                                                                      maxLength}) =>
-                                                                  null,
-                                                              validator: _model
-                                                                  .textController2Validator
-                                                                  .asValidator(
-                                                                      context),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 5.0, 0.0, 10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(10.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child:
-                                                        FlutterFlowIconButton(
-                                                      borderColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      borderRadius: 20.0,
-                                                      borderWidth: 2.0,
-                                                      buttonSize: 40.0,
-                                                      icon: Icon(
-                                                        Icons.grain,
-                                                        color: FFAppState()
-                                                                        .selectedSpace !=
-                                                                    null &&
-                                                                FFAppState()
-                                                                        .selectedSpace !=
-                                                                    ''
-                                                            ? FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary
-                                                            : FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                        size: 20.0,
-                                                      ),
-                                                      onPressed: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GestureDetector(
-                                                              onTap: () => _model
-                                                                      .unfocusNode
-                                                                      .canRequestFocus
-                                                                  ? FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode)
-                                                                  : FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    SelectSpaceWidget(),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            1.00, 0.00),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () async {
-                                                          await currentUserReference!
-                                                              .update({
-                                                            ...mapToFirestore(
-                                                              {
-                                                                'threads':
-                                                                    FieldValue
-                                                                        .arrayUnion([
-                                                                  getThreadFirestoreData(
-                                                                    createThreadStruct(
-                                                                      timestamp:
-                                                                          getCurrentTimestamp,
-                                                                      author:
-                                                                          currentUserUid,
-                                                                      title: _model
-                                                                          .titleController
-                                                                          .text,
-                                                                      text: functions.threadTextStripper(_model
-                                                                          .textController2
-                                                                          .text),
-                                                                      id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
-                                                                      isPoll:
-                                                                          false,
-                                                                      link: functions.cutURL(_model.titleController.text) != null &&
-                                                                              functions.cutURL(_model.titleController.text) !=
-                                                                                  ''
-                                                                          ? functions.cutURL(_model
-                                                                              .titleController
-                                                                              .text)
-                                                                          : null,
-                                                                      isStealth: valueOrDefault<
-                                                                              bool>(
-                                                                          currentUserDocument
-                                                                              ?.isStealth,
-                                                                          false),
-                                                                      fieldValues: {
-                                                                        'hashtags': functions.extractHashtags(_model
-                                                                            .textController2
-                                                                            .text),
-                                                                      },
-                                                                      clearUnsetFields:
-                                                                          false,
-                                                                    ),
-                                                                    true,
-                                                                  )
-                                                                ]),
-                                                              },
-                                                            ),
-                                                          });
-
-                                                          await ThreadRecord
-                                                              .collection
-                                                              .doc()
-                                                              .set(
-                                                                  createThreadRecordData(
-                                                                thread:
-                                                                    createThreadStruct(
-                                                                  timestamp:
-                                                                      getCurrentTimestamp,
-                                                                  author:
-                                                                      currentUserUid,
-                                                                  title: _model
-                                                                      .titleController
-                                                                      .text,
-                                                                  text: functions
-                                                                      .threadTextStripper(_model
-                                                                          .textController2
-                                                                          .text),
-                                                                  id: 'T${currentUserUid}${(currentUserDocument?.threads?.toList() ?? []).length.toString()}',
-                                                                  isPoll: false,
-                                                                  link: functions
-                                                                      .cutURL(_model
-                                                                          .textController2
-                                                                          .text),
-                                                                  isStealth: valueOrDefault<
-                                                                          bool>(
-                                                                      currentUserDocument
-                                                                          ?.isStealth,
-                                                                      false),
-                                                                  fieldValues: {
-                                                                    'hashtags':
-                                                                        functions.extractHashtags(_model
-                                                                            .textController2
-                                                                            .text),
-                                                                  },
-                                                                  clearUnsetFields:
-                                                                      false,
-                                                                  create: true,
-                                                                ),
-                                                              ));
-                                                        },
-                                                        text:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                          '4nuktvih' /* Post */,
-                                                        ),
-                                                        options:
-                                                            FFButtonOptions(
-                                                          height: 40.0,
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      24.0,
-                                                                      0.0,
-                                                                      24.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Outfit',
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                          elevation: 3.0,
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      30.0),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 0.0),
+                                      child: wrapWithModel(
+                                        model: _model.threadCreateModel1,
+                                        updateCallback: () => setState(() {}),
+                                        child: const ThreadCreateWidget(
+                                          isPostingPage: false,
+                                          isPrivate: false,
+                                          isCommentAllowed: false,
+                                          isStealthSetting: false,
                                         ),
                                       ),
                                     ),
@@ -638,13 +182,13 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                       desktop: false,
                                     ))
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xFF9F1CFA),
                                                 Color(0xFF0D28A2)
@@ -660,7 +204,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -673,7 +217,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                               .width *
                                                           0.75,
                                                   height: 50.0,
-                                                  decoration: BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -709,7 +253,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                   borderRadius: 25.0,
                                                   borderWidth: 3.0,
                                                   buttonSize: 40.0,
-                                                  icon: FaIcon(
+                                                  icon: const FaIcon(
                                                     FontAwesomeIcons.search,
                                                     color: Colors.white,
                                                     size: 15.0,
@@ -728,7 +272,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                         if (!_model.isFollowersOnly)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: StreamBuilder<
                                                 List<ThreadRecord>>(
@@ -770,7 +314,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                             columnIndex];
                                                     return Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   5.0,
                                                                   0.0,
@@ -794,9 +338,9 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                               'threadOnPageLoadAnimation1']!),
                                                     );
                                                   })
-                                                      .divide(SizedBox(
+                                                      .divide(const SizedBox(
                                                           height: 10.0))
-                                                      .around(SizedBox(
+                                                      .around(const SizedBox(
                                                           height: 10.0)),
                                                 );
                                               },
@@ -805,7 +349,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                         if (_model.isFollowersOnly)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: AuthUserStreamWidget(
                                               builder: (context) =>
@@ -818,7 +362,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                               'thread.author',
                                                               (currentUserDocument
                                                                       ?.following
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   []))
                                                           .orderBy(
                                                               'thread.timestamp',
@@ -855,7 +399,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                               columnIndex];
                                                       return Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     5.0,
                                                                     0.0,
@@ -879,9 +423,9 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                                 'threadOnPageLoadAnimation2']!),
                                                       );
                                                     })
-                                                        .divide(SizedBox(
+                                                        .divide(const SizedBox(
                                                             height: 10.0))
-                                                        .around(SizedBox(
+                                                        .around(const SizedBox(
                                                             height: 10.0)),
                                                   );
                                                 },
@@ -894,7 +438,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Container(
                                   width: 50.0,
@@ -904,7 +448,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                     borderRadius: BorderRadius.circular(200.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 5.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -914,8 +458,8 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                         FlutterFlowIconButton(
                                           borderColor: valueOrDefault<Color>(
                                             _model.isCommentAllowed
-                                                ? Color(0xFF168323)
-                                                : Color(0xFFC91212),
+                                                ? const Color(0xFF168323)
+                                                : const Color(0xFFC91212),
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
                                           ),
@@ -945,7 +489,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                         ),
                                         FlutterFlowIconButton(
                                           borderColor: _model.isFollowersOnly
-                                              ? Color(0xFFF5C338)
+                                              ? const Color(0xFFF5C338)
                                               : FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           borderRadius: 20.0,
@@ -1004,7 +548,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                         MediaQuery.viewInsetsOf(
                                                             context),
                                                     child:
-                                                        SpaceThreadsNavWidget(),
+                                                        const SpaceThreadsNavWidget(),
                                                   ),
                                                 );
                                               },
@@ -1012,7 +556,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                                 (value) => safeSetState(() {}));
                                           },
                                         ),
-                                      ].divide(SizedBox(height: 5.0)),
+                                      ].divide(const SizedBox(height: 5.0)),
                                     ),
                                   ),
                                 ),
@@ -1031,18 +575,10 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                          ),
                           wrapWithModel(
                             model: _model.threadsBarModel,
                             updateCallback: () => setState(() {}),
-                            child: Hero(
+                            child: const Hero(
                               tag: 'spaces',
                               transitionOnUserGestures: true,
                               child: Material(
@@ -1052,7 +588,16 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 0.0),
+                            child: wrapWithModel(
+                              model: _model.threadCreateModel2,
+                              updateCallback: () => setState(() {}),
+                              child: const ThreadCreateWidget(),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 5.0, 0.0),
                             child: StreamBuilder<List<ThreadRecord>>(
                               stream: queryThreadRecord(
@@ -1085,7 +630,7 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                     final columnThreadRecord =
                                         columnThreadRecordList[columnIndex];
                                     return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       child: ThreadWidget(
                                         key: Key(
@@ -1097,8 +642,8 @@ class _ThreadsWidgetState extends State<ThreadsWidget>
                                           'threadOnPageLoadAnimation3']!),
                                     );
                                   })
-                                      .divide(SizedBox(height: 10.0))
-                                      .around(SizedBox(height: 10.0)),
+                                      .divide(const SizedBox(height: 10.0))
+                                      .around(const SizedBox(height: 10.0)),
                                 );
                               },
                             ),

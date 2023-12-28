@@ -9,11 +9,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'profile_model.dart';
@@ -21,10 +19,9 @@ export 'profile_model.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({
-    Key? key,
+    super.key,
     String? userID,
-  })  : this.userID = userID ?? '0',
-        super(key: key);
+  })  : userID = userID ?? '0';
 
   final String userID;
 
@@ -126,7 +123,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                         wrapWithModel(
                           model: _model.pCNavBarModel,
                           updateCallback: () => setState(() {}),
-                          child: PCNavBarWidget(
+                          child: const PCNavBarWidget(
                             currentPage: 7,
                           ),
                         ),
@@ -139,7 +136,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                               child: Container(
                                 width: 800.0,
                                 height: double.infinity,
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -148,7 +145,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 10.0, 0.0),
                                             child: Container(
                                               width: double.infinity,
@@ -163,7 +160,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                     profileUsersRecord!.banner,
                                                   ).image,
                                                 ),
-                                                borderRadius: BorderRadius.only(
+                                                borderRadius: const BorderRadius.only(
                                                   bottomLeft:
                                                       Radius.circular(0.0),
                                                   bottomRight:
@@ -203,13 +200,12 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         clipBehavior:
                                                             Clip.antiAlias,
                                                         decoration:
-                                                            BoxDecoration(
+                                                            const BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                         ),
                                                         child: Image.network(
-                                                          profileUsersRecord!
-                                                              .photoUrl,
+                                                          profileUsersRecord.photoUrl,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
@@ -219,23 +215,23 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                               ),
                                             ),
                                           ),
-                                          if (profileUsersRecord?.uid !=
+                                          if (profileUsersRecord.uid !=
                                               widget.userID)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       20.0, 20.0, 10.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  if (profileUsersRecord?.uid !=
+                                                  if (profileUsersRecord.uid !=
                                                       currentUserUid)
                                                     FlutterFlowIconButton(
                                                       borderColor: Colors.white,
                                                       borderRadius: 25.0,
                                                       borderWidth: 3.0,
                                                       buttonSize: 35.0,
-                                                      icon: Icon(
+                                                      icon: const Icon(
                                                         Icons
                                                             .arrow_back_rounded,
                                                         color: Colors.white,
@@ -251,18 +247,18 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                         ],
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             minHeight: 150.0,
                                             maxHeight: 170.0,
                                           ),
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
-                                            borderRadius: BorderRadius.only(
+                                            borderRadius: const BorderRadius.only(
                                               bottomLeft: Radius.circular(15.0),
                                               bottomRight:
                                                   Radius.circular(15.0),
@@ -274,9 +270,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 5.0, 5.0, 5.0),
+                                                padding: const EdgeInsets.all(5.0),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -286,7 +280,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   5.0,
                                                                   0.0,
@@ -307,12 +301,12 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                             context,
                                                             title:
                                                                 profileUsersRecord
-                                                                    ?.realName,
+                                                                    .realName,
                                                             imageUrl:
                                                                 profileUsersRecord
-                                                                    ?.photoUrl,
+                                                                    .photoUrl,
                                                             description:
-                                                                '@${profileUsersRecord?.displayName}',
+                                                                '@${profileUsersRecord.displayName}',
                                                           );
 
                                                           await Clipboard.setData(
@@ -344,7 +338,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       .viewInsetsOf(
                                                                           context),
                                                                   child:
-                                                                      BottomNotifWidget(
+                                                                      const BottomNotifWidget(
                                                                     text:
                                                                         'Copied to clipboard',
                                                                   ),
@@ -366,8 +360,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              profileUsersRecord!
-                                                                  .realName,
+                                                              profileUsersRecord.realName,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -382,7 +375,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                   ),
                                                             ),
                                                             Text(
-                                                              '@${profileUsersRecord?.displayName}',
+                                                              '@${profileUsersRecord.displayName}',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -406,7 +399,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -436,11 +429,9 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 Text(
                                                                   functions
                                                                       .sum(
-                                                                          profileUsersRecord!
-                                                                              .threads
+                                                                          profileUsersRecord.threads
                                                                               .length,
-                                                                          profileUsersRecord!
-                                                                              .posts
+                                                                          profileUsersRecord.posts
                                                                               .length)
                                                                       .toString(),
                                                                   style: FlutterFlowTheme.of(
@@ -475,7 +466,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -499,7 +490,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                   'uid':
                                                                       serializeParam(
                                                                     profileUsersRecord
-                                                                        ?.uid,
+                                                                        .uid,
                                                                     ParamType
                                                                         .String,
                                                                   ),
@@ -528,8 +519,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    profileUsersRecord!
-                                                                        .following
+                                                                    profileUsersRecord.following
                                                                         .length
                                                                         .toString(),
                                                                     style: FlutterFlowTheme.of(
@@ -565,7 +555,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -589,7 +579,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                   'uid':
                                                                       serializeParam(
                                                                     profileUsersRecord
-                                                                        ?.uid,
+                                                                        .uid,
                                                                     ParamType
                                                                         .String,
                                                                   ),
@@ -618,8 +608,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    profileUsersRecord!
-                                                                        .followers
+                                                                    profileUsersRecord.followers
                                                                         .length
                                                                         .toString(),
                                                                     style: FlutterFlowTheme.of(
@@ -659,7 +648,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 5.0, 15.0, 0.0),
                                                 child: Row(
@@ -667,7 +656,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      profileUsersRecord!.bio
+                                                      profileUsersRecord.bio
                                                           .maybeHandleOverflow(
                                                               maxChars: 100),
                                                       style:
@@ -685,11 +674,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                               ),
                                               Stack(
                                                 children: [
-                                                  if (profileUsersRecord?.uid !=
+                                                  if (profileUsersRecord.uid !=
                                                       currentUserUid)
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -706,12 +695,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                             children: [
                                                               if (functions.stringInArr(
                                                                       currentUserUid,
-                                                                      profileUsersRecord!
-                                                                          .followers
+                                                                      profileUsersRecord.followers
                                                                           .toList()) ==
                                                                   false)
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -733,8 +721,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         ),
                                                                       });
 
-                                                                      await profileUsersRecord!
-                                                                          .reference
+                                                                      await profileUsersRecord.reference
                                                                           .update({
                                                                         ...mapToFirestore(
                                                                           {
@@ -759,8 +746,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         }.withoutNulls,
                                                                       );
 
-                                                                      await profileUsersRecord!
-                                                                          .reference
+                                                                      await profileUsersRecord.reference
                                                                           .update({
                                                                         ...mapToFirestore(
                                                                           {
@@ -772,8 +758,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                                   itemID: currentUserUid,
                                                                                   time: getCurrentTimestamp,
                                                                                   isMarkedAsRead: false,
-                                                                                  notifID: 'NF${profileUsersRecord?.notifications?.length?.toString()}',
-                                                                                  userID: profileUsersRecord?.uid,
+                                                                                  notifID: 'NF${profileUsersRecord.notifications.length.toString()}',
+                                                                                  userID: profileUsersRecord.uid,
                                                                                   iDUserFrom: currentUserUid,
                                                                                   clearUnsetFields: false,
                                                                                 ),
@@ -787,10 +773,9 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         notificationTitle:
                                                                             'New Follower',
                                                                         notificationText:
-                                                                            '@${currentUserDisplayName} followed you',
+                                                                            '@$currentUserDisplayName followed you',
                                                                         userRefs: [
-                                                                          profileUsersRecord!
-                                                                              .reference
+                                                                          profileUsersRecord.reference
                                                                         ],
                                                                         initialPageName:
                                                                             'Profile',
@@ -808,12 +793,10 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                           180.0,
                                                                       height:
                                                                           45.0,
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              0.0),
+                                                                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
@@ -833,7 +816,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       elevation:
                                                                           3.0,
                                                                       borderSide:
-                                                                          BorderSide(
+                                                                          const BorderSide(
                                                                         color: Colors
                                                                             .transparent,
                                                                         width:
@@ -847,12 +830,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 ),
                                                               if (functions.stringInArr(
                                                                       currentUserUid,
-                                                                      profileUsersRecord!
-                                                                          .followers
+                                                                      profileUsersRecord.followers
                                                                           .toList()) ==
                                                                   true)
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -862,8 +844,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       FFButtonWidget(
                                                                     onPressed:
                                                                         () async {
-                                                                      await profileUsersRecord!
-                                                                          .reference
+                                                                      await profileUsersRecord.reference
                                                                           .update({
                                                                         ...mapToFirestore(
                                                                           {
@@ -911,17 +892,15 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                           180.0,
                                                                       height:
                                                                           45.0,
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              0.0),
+                                                                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      color: Color(
+                                                                      color: const Color(
                                                                           0xFFD82E2E),
                                                                       textStyle: FlutterFlowTheme.of(
                                                                               context)
@@ -935,7 +914,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       elevation:
                                                                           3.0,
                                                                       borderSide:
-                                                                          BorderSide(
+                                                                          const BorderSide(
                                                                         color: Colors
                                                                             .transparent,
                                                                         width:
@@ -951,7 +930,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         0.0,
@@ -973,14 +952,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 width: 140.0,
                                                                 height: 45.0,
                                                                 padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
+                                                                    const EdgeInsets
+                                                                        .all(
                                                                             0.0),
                                                                 iconPadding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -1001,7 +977,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     ),
                                                                 elevation: 3.0,
                                                                 borderSide:
-                                                                    BorderSide(
+                                                                    const BorderSide(
                                                                   color: Colors
                                                                       .transparent,
                                                                   width: 1.0,
@@ -1016,11 +992,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         ],
                                                       ),
                                                     ),
-                                                  if (profileUsersRecord?.uid ==
+                                                  if (profileUsersRecord.uid ==
                                                       currentUserUid)
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -1035,7 +1011,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1058,14 +1034,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 width: 200.0,
                                                                 height: 45.0,
                                                                 padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
+                                                                    const EdgeInsets
+                                                                        .all(
                                                                             0.0),
                                                                 iconPadding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -1086,7 +1059,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     ),
                                                                 elevation: 3.0,
                                                                 borderSide:
-                                                                    BorderSide(
+                                                                    const BorderSide(
                                                                   color: Colors
                                                                       .transparent,
                                                                   width: 1.0,
@@ -1100,7 +1073,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1137,14 +1110,11 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 width: 140.0,
                                                                 height: 45.0,
                                                                 padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
+                                                                    const EdgeInsets
+                                                                        .all(
                                                                             0.0),
                                                                 iconPadding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -1164,7 +1134,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     ),
                                                                 elevation: 3.0,
                                                                 borderSide:
-                                                                    BorderSide(
+                                                                    const BorderSide(
                                                                   color: Colors
                                                                       .transparent,
                                                                   width: 1.0,
@@ -1186,7 +1156,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 10.0, 10.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
@@ -1194,7 +1164,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
-                                            borderRadius: BorderRadius.only(
+                                            borderRadius: const BorderRadius.only(
                                               bottomLeft: Radius.circular(0.0),
                                               bottomRight: Radius.circular(0.0),
                                               topLeft: Radius.circular(15.0),
@@ -1203,12 +1173,12 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 5.0, 5.0, 0.0),
                                             child: Column(
                                               children: [
                                                 Align(
-                                                  alignment: Alignment(0.0, 0),
+                                                  alignment: const Alignment(0.0, 0),
                                                   child: TabBar(
                                                     labelColor:
                                                         FlutterFlowTheme.of(
@@ -1223,16 +1193,14 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 context)
                                                             .titleMedium,
                                                     unselectedLabelStyle:
-                                                        TextStyle(),
+                                                        const TextStyle(),
                                                     indicatorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     indicatorWeight: 3.0,
                                                     padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 4.0,
-                                                                4.0, 4.0),
+                                                        const EdgeInsets.all(4.0),
                                                     tabs: [
                                                       Tab(
                                                         text:
@@ -1274,12 +1242,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         builder: (context) =>
                                                             Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0,
-                                                                      5.0),
+                                                              const EdgeInsets.all(
+                                                                  5.0),
                                                           child: StreamBuilder<
                                                               List<
                                                                   PostsRecord>>(
@@ -1290,7 +1254,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       .where(
                                                                         'post.author',
                                                                         isEqualTo:
-                                                                            profileUsersRecord?.uid,
+                                                                            profileUsersRecord.uid,
                                                                       )
                                                                       .where(
                                                                         'post.isStealth',
@@ -1334,7 +1298,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     EdgeInsets
                                                                         .zero,
                                                                 gridDelegate:
-                                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                                                   crossAxisCount:
                                                                       3,
                                                                   crossAxisSpacing:
@@ -1450,7 +1414,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     .of(context)
                                                                 .primaryBackground,
                                                             borderRadius:
-                                                                BorderRadius
+                                                                const BorderRadius
                                                                     .only(
                                                               bottomLeft: Radius
                                                                   .circular(
@@ -1469,7 +1433,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -1485,7 +1449,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         .where(
                                                                           'thread.author',
                                                                           isEqualTo:
-                                                                              profileUsersRecord?.uid,
+                                                                              profileUsersRecord.uid,
                                                                         )
                                                                         .where(
                                                                           'thread.isStealth',
@@ -1535,7 +1499,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                         columnThreadRecordList[
                                                                             columnIndex];
                                                                     return Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
                                                                           10.0,
                                                                           10.0,
@@ -1561,21 +1525,13 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                         builder: (context) =>
                                                             Visibility(
                                                           visible: profileUsersRecord
-                                                                      ?.saved
-                                                                      ?.first !=
-                                                                  null &&
-                                                              profileUsersRecord
-                                                                      ?.saved
-                                                                      ?.first !=
+                                                                      .saved
+                                                                      .first !=
                                                                   '',
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5.0,
-                                                                        5.0,
-                                                                        5.0,
-                                                                        5.0),
+                                                                const EdgeInsets.all(
+                                                                    5.0),
                                                             child: StreamBuilder<
                                                                 List<
                                                                     PostsRecord>>(
@@ -1584,10 +1540,10 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 queryBuilder: (postsRecord) => postsRecord
                                                                     .whereIn(
                                                                         'post.id',
-                                                                        profileUsersRecord?.saved !=
+                                                                        profileUsersRecord.saved !=
                                                                                 ''
                                                                             ? profileUsersRecord
-                                                                                ?.saved
+                                                                                .saved
                                                                             : null)
                                                                     .orderBy(
                                                                         'post.timestamp',
@@ -1626,7 +1582,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                       EdgeInsets
                                                                           .zero,
                                                                   gridDelegate:
-                                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                                      const SliverGridDelegateWithFixedCrossAxisCount(
                                                                     crossAxisCount:
                                                                         3,
                                                                     crossAxisSpacing:

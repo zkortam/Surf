@@ -3,9 +3,7 @@ import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ImageHashStruct extends FFFirebaseStruct {
@@ -34,8 +32,9 @@ class ImageHashStruct extends FFFirebaseStruct {
         blurHash: data['blurHash'] as String?,
       );
 
-  static ImageHashStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ImageHashStruct.fromMap(data) : null;
+  static ImageHashStruct? maybeFromMap(dynamic data) => data is Map
+      ? ImageHashStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'image': _image,
@@ -80,7 +79,7 @@ class ImageHashStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),

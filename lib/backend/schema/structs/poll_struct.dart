@@ -82,7 +82,7 @@ class PollStruct extends FFFirebaseStruct {
       );
 
   static PollStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? PollStruct.fromMap(data) : null;
+      data is Map ? PollStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'options': _options,
@@ -191,7 +191,7 @@ class PollStruct extends FFFirebaseStruct {
           ParamType.String,
           true,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),

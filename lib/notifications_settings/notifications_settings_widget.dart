@@ -5,19 +5,15 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notifications_settings_model.dart';
 export 'notifications_settings_model.dart';
 
 class NotificationsSettingsWidget extends StatefulWidget {
-  const NotificationsSettingsWidget({Key? key}) : super(key: key);
+  const NotificationsSettingsWidget({super.key});
 
   @override
   _NotificationsSettingsWidgetState createState() =>
@@ -88,7 +84,7 @@ class _NotificationsSettingsWidgetState
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(
+                    child: const PCNavBarWidget(
                       currentPage: 5,
                     ),
                   ),
@@ -101,13 +97,13 @@ class _NotificationsSettingsWidgetState
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Material(
                                       color: Colors.transparent,
@@ -120,7 +116,7 @@ class _NotificationsSettingsWidgetState
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -136,7 +132,7 @@ class _NotificationsSettingsWidgetState
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -148,7 +144,7 @@ class _NotificationsSettingsWidgetState
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -158,7 +154,7 @@ class _NotificationsSettingsWidgetState
                                                     'settings',
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -177,7 +173,7 @@ class _NotificationsSettingsWidgetState
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -214,7 +210,7 @@ class _NotificationsSettingsWidgetState
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -226,9 +222,9 @@ class _NotificationsSettingsWidgetState
                                             BorderRadius.circular(15.0),
                                       ),
                                       alignment:
-                                          AlignmentDirectional(-1.00, 0.00),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -237,7 +233,7 @@ class _NotificationsSettingsWidgetState
                                           children: [
                                             Flexible(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 child: Text(
@@ -264,7 +260,7 @@ class _NotificationsSettingsWidgetState
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -276,7 +272,7 @@ class _NotificationsSettingsWidgetState
                                             BorderRadius.circular(15.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -284,7 +280,7 @@ class _NotificationsSettingsWidgetState
                                               MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 20.0, 0.0, 0.0),
                                               child: Row(
@@ -303,7 +299,7 @@ class _NotificationsSettingsWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 10.0),
                                               child: InkWell(
@@ -344,7 +340,7 @@ class _NotificationsSettingsWidgetState
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomNotifWidget(
+                                                                const BottomNotifWidget(
                                                               text:
                                                                   'Silent Mode Deactivated',
                                                             ),
@@ -389,7 +385,7 @@ class _NotificationsSettingsWidgetState
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomNotifWidget(
+                                                                const BottomNotifWidget(
                                                               text:
                                                                   'Silent Mode activated',
                                                             ),
@@ -412,7 +408,7 @@ class _NotificationsSettingsWidgetState
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
+                                                    gradient: const LinearGradient(
                                                       colors: [
                                                         Color(0xFFD2B41B),
                                                         Color(0xFFC95012)
@@ -430,7 +426,7 @@ class _NotificationsSettingsWidgetState
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -465,7 +461,7 @@ class _NotificationsSettingsWidgetState
                                                             if (_model.isSilent)
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -477,7 +473,7 @@ class _NotificationsSettingsWidgetState
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xFF43A514),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -512,7 +508,7 @@ class _NotificationsSettingsWidgetState
                                                                 .isSilent)
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -524,7 +520,7 @@ class _NotificationsSettingsWidgetState
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xFFE72B36),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -565,7 +561,7 @@ class _NotificationsSettingsWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Row(
@@ -573,7 +569,7 @@ class _NotificationsSettingsWidgetState
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(4.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -598,8 +594,8 @@ class _NotificationsSettingsWidgetState
                                               onChanged: (newValue) async {
                                                 setState(() => _model
                                                         .switchListTileValue1 =
-                                                    newValue!);
-                                                if (newValue!) {
+                                                    newValue);
+                                                if (newValue) {
                                                   await currentUserReference!
                                                       .update(
                                                           createUsersRecordData(
@@ -648,13 +644,13 @@ class _NotificationsSettingsWidgetState
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
                                               activeTrackColor:
-                                                  Color(0x8A4B39EF),
+                                                  const Color(0x8A4B39EF),
                                               dense: false,
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .trailing,
                                               contentPadding:
-                                                  EdgeInsetsDirectional
+                                                  const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           4.0, 5.0, 24.0, 5.0),
                                             ),
@@ -665,8 +661,8 @@ class _NotificationsSettingsWidgetState
                                               onChanged: (newValue) async {
                                                 setState(() => _model
                                                         .switchListTileValue2 =
-                                                    newValue!);
-                                                if (newValue!) {
+                                                    newValue);
+                                                if (newValue) {
                                                   await currentUserReference!
                                                       .update(
                                                           createUsersRecordData(
@@ -709,15 +705,15 @@ class _NotificationsSettingsWidgetState
                                                               .secondaryText,
                                                         ),
                                               ),
-                                              activeColor: Color(0xFF4B39EF),
+                                              activeColor: const Color(0xFF4B39EF),
                                               activeTrackColor:
-                                                  Color(0x8A4B39EF),
+                                                  const Color(0x8A4B39EF),
                                               dense: false,
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .trailing,
                                               contentPadding:
-                                                  EdgeInsetsDirectional
+                                                  const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           4.0, 5.0, 24.0, 5.0),
                                             ),

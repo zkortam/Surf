@@ -4,17 +4,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'space_threads_nav_model.dart';
 export 'space_threads_nav_model.dart';
 
 class SpaceThreadsNavWidget extends StatefulWidget {
-  const SpaceThreadsNavWidget({Key? key}) : super(key: key);
+  const SpaceThreadsNavWidget({super.key});
 
   @override
   _SpaceThreadsNavWidgetState createState() => _SpaceThreadsNavWidgetState();
@@ -77,9 +74,9 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Stack(
-        alignment: AlignmentDirectional(0.0, 0.0),
+        alignment: const AlignmentDirectional(0.0, 0.0),
         children: [
           if (responsiveVisibility(
             context: context,
@@ -87,7 +84,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
             tablet: false,
           ))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -95,12 +92,12 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                   Container(
                     width: 600.0,
                     height: 400.0,
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       maxWidth: 600.0,
                     ),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(0.0),
                         topLeft: Radius.circular(30.0),
@@ -113,13 +110,13 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               5.0, 5.0, 5.0, 0.0),
                           child: Container(
                             width: double.infinity,
                             height: 50.0,
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
                                 stops: [0.0, 1.0],
                                 begin: AlignmentDirectional(1.0, 0.0),
@@ -132,14 +129,14 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       6.0, 0.0, 5.0, 0.0),
                                   child: FlutterFlowIconButton(
                                     borderColor: Colors.white,
                                     borderRadius: 30.0,
                                     borderWidth: 3.0,
                                     buttonSize: 40.0,
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.arrow_back_rounded,
                                       color: Colors.white,
                                       size: 20.0,
@@ -156,10 +153,10 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.00),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 25.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -185,8 +182,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                         ),
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: StreamBuilder<List<SpacesRecord>>(
                               stream: querySpacesRecord(),
                               builder: (context, snapshot) {
@@ -217,11 +213,11 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                             (columnIndex) {
                                       final columnSpacesRecord =
                                           columnSpacesRecordList[columnIndex];
-                                      return Container(
+                                      return SizedBox(
                                         width: 600.0,
                                         child: Stack(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           children: [
                                             InkWell(
                                               splashColor: Colors.transparent,
@@ -240,7 +236,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:
-                                                        TransitionInfo(
+                                                        const TransitionInfo(
                                                       hasTransition: true,
                                                       transitionType:
                                                           PageTransitionType
@@ -254,7 +250,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                               child: Container(
                                                 width: 600.0,
                                                 height: 100.0,
-                                                constraints: BoxConstraints(
+                                                constraints: const BoxConstraints(
                                                   maxWidth: 600.0,
                                                 ),
                                                 decoration: BoxDecoration(
@@ -290,7 +286,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                   }.withoutNulls,
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:
-                                                        TransitionInfo(
+                                                        const TransitionInfo(
                                                       hasTransition: true,
                                                       transitionType:
                                                           PageTransitionType
@@ -304,11 +300,11 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                               child: Container(
                                                 width: 600.0,
                                                 height: 100.0,
-                                                constraints: BoxConstraints(
+                                                constraints: const BoxConstraints(
                                                   maxWidth: 600.0,
                                                 ),
                                                 decoration: BoxDecoration(
-                                                  color: Color(0x9614181B),
+                                                  color: const Color(0x9614181B),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15.0),
@@ -339,8 +335,8 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                         ),
                                       );
                                     })
-                                        .divide(SizedBox(height: 10.0))
-                                        .addToStart(SizedBox(height: 10.0)),
+                                        .divide(const SizedBox(height: 10.0))
+                                        .addToStart(const SizedBox(height: 10.0)),
                                   ),
                                 ).animateOnPageLoad(animationsMap[
                                     'columnOnPageLoadAnimation1']!);
@@ -366,12 +362,12 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                 Container(
                   width: 500.0,
                   height: 400.0,
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 500.0,
                   ),
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                       topLeft: Radius.circular(30.0),
@@ -385,15 +381,15 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                         child: Container(
                           width: 500.0,
                           height: 50.0,
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             maxWidth: 500.0,
                           ),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
                               stops: [0.0, 1.0],
                               begin: AlignmentDirectional(1.0, 0.0),
@@ -406,14 +402,14 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     6.0, 0.0, 5.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.white,
                                   borderRadius: 30.0,
                                   borderWidth: 3.0,
                                   buttonSize: 40.0,
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_back_rounded,
                                     color: Colors.white,
                                     size: 20.0,
@@ -429,10 +425,9 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 25.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -458,8 +453,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                       ),
                       Flexible(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: StreamBuilder<List<SpacesRecord>>(
                             stream: querySpacesRecord(),
                             builder: (context, snapshot) {
@@ -489,7 +483,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                           (columnIndex) {
                                     final columnSpacesRecord =
                                         columnSpacesRecordList[columnIndex];
-                                    return Container(
+                                    return SizedBox(
                                       width: 500.0,
                                       child: Stack(
                                         children: [
@@ -509,7 +503,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                 }.withoutNulls,
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
-                                                      TransitionInfo(
+                                                      const TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
                                                         PageTransitionType.fade,
@@ -522,7 +516,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                             child: Container(
                                               width: 500.0,
                                               height: 100.0,
-                                              constraints: BoxConstraints(
+                                              constraints: const BoxConstraints(
                                                 maxWidth: 500.0,
                                               ),
                                               decoration: BoxDecoration(
@@ -556,7 +550,7 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                                 }.withoutNulls,
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
-                                                      TransitionInfo(
+                                                      const TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
                                                         PageTransitionType.fade,
@@ -569,11 +563,11 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                             child: Container(
                                               width: 500.0,
                                               height: 100.0,
-                                              constraints: BoxConstraints(
+                                              constraints: const BoxConstraints(
                                                 maxWidth: 500.0,
                                               ),
                                               decoration: BoxDecoration(
-                                                color: Color(0x9614181B),
+                                                color: const Color(0x9614181B),
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
                                               ),
@@ -601,8 +595,8 @@ class _SpaceThreadsNavWidgetState extends State<SpaceThreadsNavWidget>
                                       ),
                                     );
                                   })
-                                      .divide(SizedBox(height: 10.0))
-                                      .addToStart(SizedBox(height: 10.0)),
+                                      .divide(const SizedBox(height: 10.0))
+                                      .addToStart(const SizedBox(height: 10.0)),
                                 ),
                               ).animateOnPageLoad(
                                   animationsMap['columnOnPageLoadAnimation2']!);

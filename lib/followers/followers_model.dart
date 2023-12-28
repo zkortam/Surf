@@ -1,16 +1,7 @@
-import '/backend/backend.dart';
-import '/components/follower_card_widget.dart';
 import '/components/p_c_nav_bar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'followers_widget.dart' show FollowersWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class FollowersModel extends FlutterFlowModel<FollowersWidget> {
   ///  State fields for stateful widgets in this page.
@@ -21,10 +12,12 @@ class FollowersModel extends FlutterFlowModel<FollowersWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     pCNavBarModel = createModel(context, () => PCNavBarModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     pCNavBarModel.dispose();

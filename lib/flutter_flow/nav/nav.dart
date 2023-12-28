@@ -2,12 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -16,10 +12,7 @@ import '/backend/push_notifications/push_notifications_handler.dart'
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -87,19 +80,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => _RouteErrorBuilder(
         state: state,
-        child: appStateNotifier.loggedIn ? NavBarPage() : EntryWidget(),
+        child: appStateNotifier.loggedIn ? const NavBarPage() : const PreentryWidget(),
       ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : EntryWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const PreentryWidget(),
           routes: [
             FFRoute(
               name: 'entry',
               path: 'entry',
-              builder: (context, params) => EntryWidget(),
+              builder: (context, params) => const EntryWidget(),
             ),
             FFRoute(
               name: 'signUp',
@@ -112,26 +105,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'dateOfBirth',
               path: 'dateOfBirth',
               requireAuth: true,
-              builder: (context, params) => DateOfBirthWidget(),
+              builder: (context, params) => const DateOfBirthWidget(),
             ),
             FFRoute(
               name: 'welcome',
               path: 'welcome',
               requireAuth: true,
-              builder: (context, params) => WelcomeWidget(),
+              builder: (context, params) => const WelcomeWidget(),
             ),
             FFRoute(
               name: 'emailVerification',
               path: 'emailVerification',
-              builder: (context, params) => EmailVerificationWidget(),
+              builder: (context, params) => const EmailVerificationWidget(),
             ),
             FFRoute(
               name: 'Notifications',
               path: 'Notifications',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Notifications')
-                  : NavBarPage(
+                  ? const NavBarPage(initialPage: 'Notifications')
+                  : const NavBarPage(
                       initialPage: 'Notifications',
                       page: NotificationsWidget(),
                     ),
@@ -140,19 +133,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'createProfile',
               path: 'createProfile',
               requireAuth: true,
-              builder: (context, params) => CreateProfileWidget(),
+              builder: (context, params) => const CreateProfileWidget(),
             ),
             FFRoute(
               name: 'forgotPassword',
               path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
+              builder: (context, params) => const ForgotPasswordWidget(),
             ),
             FFRoute(
               name: 'Profile',
               path: 'profile',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Profile')
+                  ? const NavBarPage(initialPage: 'Profile')
                   : NavBarPage(
                       initialPage: 'Profile',
                       page: ProfileWidget(
@@ -165,8 +158,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'home',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Home')
-                  : NavBarPage(
+                  ? const NavBarPage(initialPage: 'Home')
+                  : const NavBarPage(
                       initialPage: 'Home',
                       page: HomeWidget(),
                     ),
@@ -176,8 +169,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'threads',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Threads')
-                  : NavBarPage(
+                  ? const NavBarPage(initialPage: 'Threads')
+                  : const NavBarPage(
                       initialPage: 'Threads',
                       page: ThreadsWidget(),
                     ),
@@ -187,8 +180,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'createpost',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'createPost')
-                  : NavBarPage(
+                  ? const NavBarPage(initialPage: 'createPost')
+                  : const NavBarPage(
                       initialPage: 'createPost',
                       page: CreatePostWidget(),
                     ),
@@ -235,13 +228,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'enterPin',
               path: 'enterPin',
               requireAuth: true,
-              builder: (context, params) => EnterPinWidget(),
+              builder: (context, params) => const EnterPinWidget(),
             ),
             FFRoute(
               name: 'createPin',
               path: 'createPin',
               requireAuth: true,
-              builder: (context, params) => CreatePinWidget(),
+              builder: (context, params) => const CreatePinWidget(),
             ),
             FFRoute(
               name: 'settings',
@@ -255,19 +248,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'BiometricTest',
               path: 'biometricTest',
               requireAuth: true,
-              builder: (context, params) => BiometricTestWidget(),
+              builder: (context, params) => const BiometricTestWidget(),
             ),
             FFRoute(
               name: 'accountDeleted',
               path: 'accountDeleted',
               requireAuth: true,
-              builder: (context, params) => AccountDeletedWidget(),
+              builder: (context, params) => const AccountDeletedWidget(),
             ),
             FFRoute(
               name: 'BiometricPin',
               path: 'biometricPin',
               requireAuth: true,
-              builder: (context, params) => BiometricPinWidget(),
+              builder: (context, params) => const BiometricPinWidget(),
             ),
             FFRoute(
               name: 'userInterface',
@@ -289,7 +282,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'notificationsSettings',
               path: 'notificationsSettings',
               requireAuth: true,
-              builder: (context, params) => NotificationsSettingsWidget(),
+              builder: (context, params) => const NotificationsSettingsWidget(),
             ),
             FFRoute(
               name: 'security',
@@ -327,13 +320,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'changePassword',
               path: 'changePassword',
               requireAuth: true,
-              builder: (context, params) => ChangePasswordWidget(),
+              builder: (context, params) => const ChangePasswordWidget(),
             ),
             FFRoute(
               name: 'changePin',
               path: 'changePin',
               requireAuth: true,
-              builder: (context, params) => ChangePinWidget(),
+              builder: (context, params) => const ChangePinWidget(),
             ),
             FFRoute(
               name: 'viewData',
@@ -347,31 +340,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Search',
               path: 'search',
               requireAuth: true,
-              builder: (context, params) => SearchWidget(),
+              builder: (context, params) => const SearchWidget(),
             ),
             FFRoute(
               name: 'chat_main',
               path: 'chat',
               requireAuth: true,
-              builder: (context, params) => ChatMainWidget(),
+              builder: (context, params) => const ChatMainWidget(),
             ),
             FFRoute(
               name: 'chatSearch',
               path: 'chatSearch',
               requireAuth: true,
-              builder: (context, params) => ChatSearchWidget(),
+              builder: (context, params) => const ChatSearchWidget(),
             ),
             FFRoute(
               name: 'CheckProfile',
               path: 'checkProfile',
               requireAuth: true,
-              builder: (context, params) => CheckProfileWidget(),
+              builder: (context, params) => const CheckProfileWidget(),
             ),
             FFRoute(
               name: 'EditProfile',
               path: 'editProfile',
               requireAuth: true,
-              builder: (context, params) => EditProfileWidget(),
+              builder: (context, params) => const EditProfileWidget(),
             ),
             FFRoute(
               name: 'chats_page',
@@ -388,13 +381,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'muluploadtest',
               path: 'muluploadtest',
               requireAuth: true,
-              builder: (context, params) => MuluploadtestWidget(),
+              builder: (context, params) => const MuluploadtestWidget(),
             ),
             FFRoute(
               name: 'LoggingIn',
               path: 'loggingIn',
               requireAuth: true,
-              builder: (context, params) => LoggingInWidget(),
+              builder: (context, params) => const LoggingInWidget(),
             ),
             FFRoute(
               name: 'spaces',
@@ -408,10 +401,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Bob',
-              path: 'bob',
-              requireAuth: true,
-              builder: (context, params) => BobWidget(),
+              name: 'preentry',
+              path: 'preentry',
+              builder: (context, params) => const PreentryWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -581,7 +573,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/entry';
+            return '/preentry';
           }
           return null;
         },
@@ -613,13 +605,20 @@ class FFRoute {
                   key: state.pageKey,
                   child: child,
                   transitionDuration: transitionInfo.duration,
-                  transitionsBuilder: PageTransition(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          PageTransition(
                     type: transitionInfo.transitionType,
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
                     child: child,
-                  ).transitionsBuilder,
+                  ).buildTransitions(
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ),
                 )
               : MaterialPage(key: state.pageKey, child: child);
         },
@@ -640,7 +639,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(
+  static TransitionInfo appDefault() => const TransitionInfo(
         hasTransition: true,
         transitionType: PageTransitionType.fade,
         duration: Duration(milliseconds: 300),
@@ -649,10 +648,9 @@ class TransitionInfo {
 
 class _RouteErrorBuilder extends StatefulWidget {
   const _RouteErrorBuilder({
-    Key? key,
     required this.state,
     required this.child,
-  }) : super(key: key);
+  });
 
   final GoRouterState state;
   final Widget child;
@@ -666,7 +664,8 @@ class _RouteErrorBuilderState extends State<_RouteErrorBuilder> {
   void initState() {
     super.initState();
     // Handle erroneous links from Firebase Dynamic Links.
-    if (widget.state.location.startsWith('/link?request_ip_version')) {
+    if (widget.state.location.startsWith('/link') &&
+        widget.state.location.contains('request_ip_version')) {
       SchedulerBinding.instance.addPostFrameCallback((_) => context.go('/'));
     }
   }

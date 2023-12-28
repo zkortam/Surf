@@ -7,22 +7,18 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_swipeable_stack.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:swipeable_card_stack/swipeable_card_stack.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  const HomeWidget({super.key});
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -43,15 +39,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(-68.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(-68.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 1000.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(-68.0, 0.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(-68.0, 0.0),
         ),
       ],
     ),
@@ -64,15 +60,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(68.0, 0.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(68.0, 0.0),
+          end: const Offset(0.0, 0.0),
         ),
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 1000.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 0.0),
-          end: Offset(68.0, 0.0),
+          begin: const Offset(0.0, 0.0),
+          end: const Offset(68.0, 0.0),
         ),
       ],
     ),
@@ -87,16 +83,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final firestoreBatch = FirebaseFirestore.instance.batch();
       try {
-        if ((currentUserPhoto != null && currentUserPhoto != '') &&
-            (valueOrDefault(currentUserDocument?.banner, '') != null &&
-                valueOrDefault(currentUserDocument?.banner, '') != '') &&
-            (valueOrDefault(currentUserDocument?.pincode, '') != null &&
-                valueOrDefault(currentUserDocument?.pincode, '') != '') &&
-            (valueOrDefault(currentUserDocument?.realName, '') != null &&
-                valueOrDefault(currentUserDocument?.realName, '') != '') &&
-            (valueOrDefault(currentUserDocument?.bio, '') != null &&
-                valueOrDefault(currentUserDocument?.bio, '') != '')) {
-          if (currentUserPhoto == null || currentUserPhoto == '') {
+        if ((currentUserPhoto != '') &&
+            (valueOrDefault(currentUserDocument?.banner, '') != '') &&
+            (valueOrDefault(currentUserDocument?.pincode, '') != '') &&
+            (valueOrDefault(currentUserDocument?.realName, '') != '') &&
+            (valueOrDefault(currentUserDocument?.bio, '') != '')) {
+          if (currentUserPhoto == '') {
             firestoreBatch.update(
                 currentUserReference!,
                 createUsersRecordData(
@@ -107,8 +99,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/surf-1-0-7-65fnd5/assets/s85og6bt0q1h/Untitled_design_(49).png'),
                 ));
           }
-          if (valueOrDefault(currentUserDocument?.banner, '') == null ||
-              valueOrDefault(currentUserDocument?.banner, '') == '') {
+          if (valueOrDefault(currentUserDocument?.banner, '') == '') {
             firestoreBatch.update(
                 currentUserReference!,
                 createUsersRecordData(
@@ -125,7 +116,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
           context.pushNamed('createProfile');
         }
 
-        if ((currentUserDocument?.blocked?.toList() ?? []).length == 0) {
+        if ((currentUserDocument?.blocked.toList() ?? []).isEmpty) {
           firestoreBatch.update(currentUserReference!, {
             ...mapToFirestore(
               {
@@ -134,7 +125,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ),
           });
         }
-        if ((currentUserDocument?.following?.toList() ?? []).length == 0) {
+        if ((currentUserDocument?.following.toList() ?? []).isEmpty) {
           firestoreBatch.update(currentUserReference!, {
             ...mapToFirestore(
               {
@@ -143,7 +134,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             ),
           });
         }
-        if ((currentUserDocument?.followers?.toList() ?? []).length == 0) {
+        if ((currentUserDocument?.followers.toList() ?? []).isEmpty) {
           firestoreBatch.update(currentUserReference!, {
             ...mapToFirestore(
               {
@@ -200,7 +191,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             body: SafeArea(
               top: true,
               child: Stack(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 children: [
                   if (responsiveVisibility(
                     context: context,
@@ -208,7 +199,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     desktop: false,
                   ))
                     Align(
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -219,15 +210,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               desktop: false,
                             ))
                               Align(
-                                alignment: AlignmentDirectional(0.00, -1.00),
+                                alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 0.0),
                                   child: Container(
                                     width: double.infinity,
                                     height: 50.0,
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(
+                                      gradient: const LinearGradient(
                                         colors: [
                                           Color(0xFF9F1CFA),
                                           Color(0xFF0D28A2)
@@ -240,7 +231,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           BorderRadius.circular(200.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -252,7 +243,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     .width *
                                                 0.75,
                                             height: 50.0,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -261,7 +252,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    '3ayzpskj' /* Home */,
+                                                    'ek7h8tr4' /* Home */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -282,7 +273,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             borderRadius: 25.0,
                                             borderWidth: 3.0,
                                             buttonSize: 40.0,
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.near_me,
                                               color: Colors.white,
                                               size: 15.0,
@@ -303,7 +294,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 builder: (context) => Stack(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 10.0, 0.0),
                                       child: StreamBuilder<List<PostsRecord>>(
                                         stream: queryPostsRecord(
@@ -341,11 +332,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                       columnIndex];
                                               return PostWidget(
                                                 key: Key(
-                                                    'Keyz7d_${columnIndex}_of_${columnPostsRecordList.length}'),
+                                                    'Keyvnm_${columnIndex}_of_${columnPostsRecordList.length}'),
                                                 post: columnPostsRecord,
                                                 isComment: false,
                                               );
-                                            }).divide(SizedBox(height: 10.0)),
+                                            }).divide(const SizedBox(height: 10.0)),
                                           );
                                         },
                                       ),
@@ -362,7 +353,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     phone: false,
                   ))
                     Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -374,7 +365,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             wrapWithModel(
                               model: _model.pCNavBarModel,
                               updateCallback: () => setState(() {}),
-                              child: PCNavBarWidget(
+                              child: const PCNavBarWidget(
                                 currentPage: 0,
                               ),
                             ),
@@ -395,13 +386,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       ))
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 5.0, 5.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: 50.0,
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xFF9F1CFA),
                                                   Color(0xFF0D28A2)
@@ -416,7 +407,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   BorderRadius.circular(200.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -429,7 +420,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             .width *
                                                         0.75,
                                                     height: 50.0,
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -441,7 +432,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            '0oepkaiw' /* Home */,
+                                                            'c3be2gwp' /* Home */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -465,7 +456,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     borderRadius: 25.0,
                                                     borderWidth: 3.0,
                                                     buttonSize: 40.0,
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.near_me,
                                                       color: Colors.white,
                                                       size: 15.0,
@@ -484,7 +475,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         children: [
                                           if (!_model.isFollowersOnly)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 0.0),
                                               child: StreamBuilder<
@@ -526,20 +517,20 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                               columnIndex];
                                                       return PostWidget(
                                                         key: Key(
-                                                            'Key07v_${columnIndex}_of_${columnPostsRecordList.length}'),
+                                                            'Keylxe_${columnIndex}_of_${columnPostsRecordList.length}'),
                                                         post: columnPostsRecord,
                                                         isComment:
                                                             _model.isComment,
                                                       );
                                                     }).divide(
-                                                        SizedBox(height: 10.0)),
+                                                        const SizedBox(height: 10.0)),
                                                   );
                                                 },
                                               ),
                                             ),
                                           if (_model.isFollowersOnly)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 0.0),
                                               child: AuthUserStreamWidget(
@@ -552,7 +543,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             'post.author',
                                                             (currentUserDocument
                                                                     ?.following
-                                                                    ?.toList() ??
+                                                                    .toList() ??
                                                                 []))
                                                         .orderBy(
                                                             'post.timestamp',
@@ -589,13 +580,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                 columnIndex];
                                                         return PostWidget(
                                                           key: Key(
-                                                              'Key80e_${columnIndex}_of_${columnPostsRecordList.length}'),
+                                                              'Keyvte_${columnIndex}_of_${columnPostsRecordList.length}'),
                                                           post:
                                                               columnPostsRecord,
                                                           isComment:
                                                               _model.isComment,
                                                         );
-                                                      }).divide(SizedBox(
+                                                      }).divide(const SizedBox(
                                                           height: 10.0)),
                                                     );
                                                   },
@@ -613,7 +604,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   tablet: false,
                                 ))
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Container(
                                       width: 50.0,
@@ -625,7 +616,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             BorderRadius.circular(200.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 5.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -636,8 +627,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               borderColor:
                                                   valueOrDefault<Color>(
                                                 _model.isComment
-                                                    ? Color(0xFF168323)
-                                                    : Color(0xFFC91212),
+                                                    ? const Color(0xFF168323)
+                                                    : const Color(0xFFC91212),
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
                                               ),
@@ -669,7 +660,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             FlutterFlowIconButton(
                                               borderColor: _model
                                                       .isFollowersOnly
-                                                  ? Color(0xFFF5C338)
+                                                  ? const Color(0xFFF5C338)
                                                   : FlutterFlowTheme.of(context)
                                                       .primaryText,
                                               borderRadius: 20.0,
@@ -715,166 +706,58 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         tabletLandscape: false,
                         desktop: false,
                       ))
-                    AuthUserStreamWidget(
-                      builder: (context) => Container(
-                        width: 500.0,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 0.0, 10.0, 0.0),
-                              child: StreamBuilder<List<PostsRecord>>(
-                                stream: queryPostsRecord(
-                                  queryBuilder: (postsRecord) =>
-                                      postsRecord.orderBy('post.timestamp',
-                                          descending: true),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: SpinKitRipple(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 50.0,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => SizedBox(
+                          width: 500.0,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 100.0, 10.0, 0.0),
+                                child: StreamBuilder<List<PostsRecord>>(
+                                  stream: queryPostsRecord(
+                                    queryBuilder: (postsRecord) =>
+                                        postsRecord.orderBy('post.timestamp',
+                                            descending: true),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: SpinKitRipple(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 50.0,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  List<PostsRecord>
-                                      swipeableStackPostsRecordList =
-                                      snapshot.data!;
-                                  return FlutterFlowSwipeableStack(
-                                    topCardHeightFraction: 0.72,
-                                    middleCardHeightFraction: 0.68,
-                                    bottomCardHeightFraction: 0.75,
-                                    topCardWidthFraction: 0.9,
-                                    middleCardWidthFraction: 0.85,
-                                    bottomCardWidthFraction: 0.8,
-                                    onSwipeFn: (index) {},
-                                    onLeftSwipe: (index) async {
-                                      final swipeableStackPostsRecord =
-                                          swipeableStackPostsRecordList[index];
-                                      final firestoreBatch =
-                                          FirebaseFirestore.instance.batch();
-                                      try {
-                                        if (animationsMap[
-                                                'containerOnActionTriggerAnimation1'] !=
-                                            null) {
-                                          await animationsMap[
-                                                  'containerOnActionTriggerAnimation1']!
-                                              .controller
-                                              .forward(from: 0.0);
-                                        }
-                                        if (functions.stringInArr(
-                                            currentUserUid,
-                                            swipeableStackPostsRecord
-                                                .post.downVoters
-                                                .toList())) {
-                                          firestoreBatch.update(
-                                              swipeableStackPostsRecord
-                                                  .reference,
-                                              createPostsRecordData(
-                                                post: createPostStruct(
-                                                  fieldValues: {
-                                                    'netVotes':
-                                                        FieldValue.increment(1),
-                                                    'downVoters':
-                                                        FieldValue.arrayRemove(
-                                                            [currentUserUid]),
-                                                  },
-                                                  clearUnsetFields: false,
-                                                ),
-                                              ));
-                                        } else {
-                                          if (functions.stringInArr(
-                                              currentUserUid,
-                                              swipeableStackPostsRecord
-                                                  .post.upVoters
-                                                  .toList())) {
-                                            firestoreBatch.update(
-                                                swipeableStackPostsRecord
-                                                    .reference,
-                                                createPostsRecordData(
-                                                  post: createPostStruct(
-                                                    fieldValues: {
-                                                      'upVoters': FieldValue
-                                                          .arrayRemove(
-                                                              [currentUserUid]),
-                                                      'netVotes':
-                                                          FieldValue.increment(
-                                                              -(2)),
-                                                      'downVoters':
-                                                          FieldValue.arrayUnion(
-                                                              [currentUserUid]),
-                                                    },
-                                                    clearUnsetFields: false,
-                                                  ),
-                                                ));
-                                          } else {
-                                            firestoreBatch.update(
-                                                swipeableStackPostsRecord
-                                                    .reference,
-                                                createPostsRecordData(
-                                                  post: createPostStruct(
-                                                    fieldValues: {
-                                                      'netVotes':
-                                                          FieldValue.increment(
-                                                              -(1)),
-                                                      'downVoters':
-                                                          FieldValue.arrayUnion(
-                                                              [currentUserUid]),
-                                                    },
-                                                    clearUnsetFields: false,
-                                                  ),
-                                                ));
+                                      );
+                                    }
+                                    List<PostsRecord>
+                                        swipeableStackPostsRecordList =
+                                        snapshot.data!;
+                                    return FlutterFlowSwipeableStack(
+                                      onSwipeFn: (index) {},
+                                      onLeftSwipe: (index) async {
+                                        final swipeableStackPostsRecord =
+                                            swipeableStackPostsRecordList[
+                                                index];
+                                        final firestoreBatch =
+                                            FirebaseFirestore.instance.batch();
+                                        try {
+                                          if (animationsMap[
+                                                  'containerOnActionTriggerAnimation1'] !=
+                                              null) {
+                                            await animationsMap[
+                                                    'containerOnActionTriggerAnimation1']!
+                                                .controller
+                                                .forward(from: 0.0);
                                           }
-
-                                          return;
-                                        }
-                                      } finally {
-                                        await firestoreBatch.commit();
-                                      }
-                                    },
-                                    onRightSwipe: (index) async {
-                                      final swipeableStackPostsRecord =
-                                          swipeableStackPostsRecordList[index];
-                                      final firestoreBatch =
-                                          FirebaseFirestore.instance.batch();
-                                      try {
-                                        if (animationsMap[
-                                                'containerOnActionTriggerAnimation2'] !=
-                                            null) {
-                                          await animationsMap[
-                                                  'containerOnActionTriggerAnimation2']!
-                                              .controller
-                                              .forward(from: 0.0);
-                                        }
-                                        if (functions.stringInArr(
-                                            currentUserUid,
-                                            swipeableStackPostsRecord
-                                                .post.upVoters
-                                                .toList())) {
-                                          firestoreBatch.update(
-                                              swipeableStackPostsRecord
-                                                  .reference,
-                                              createPostsRecordData(
-                                                post: createPostStruct(
-                                                  fieldValues: {
-                                                    'netVotes':
-                                                        FieldValue.increment(
-                                                            -(1)),
-                                                    'upVoters':
-                                                        FieldValue.arrayRemove(
-                                                            [currentUserUid]),
-                                                  },
-                                                  clearUnsetFields: false,
-                                                ),
-                                              ));
-                                        } else {
                                           if (functions.stringInArr(
                                               currentUserUid,
                                               swipeableStackPostsRecord
@@ -886,12 +769,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 createPostsRecordData(
                                                   post: createPostStruct(
                                                     fieldValues: {
-                                                      'upVoters':
-                                                          FieldValue.arrayUnion(
-                                                              [currentUserUid]),
                                                       'netVotes':
                                                           FieldValue.increment(
-                                                              2),
+                                                              1),
                                                       'downVoters': FieldValue
                                                           .arrayRemove(
                                                               [currentUserUid]),
@@ -900,6 +780,76 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ));
                                           } else {
+                                            if (functions.stringInArr(
+                                                currentUserUid,
+                                                swipeableStackPostsRecord
+                                                    .post.upVoters
+                                                    .toList())) {
+                                              firestoreBatch.update(
+                                                  swipeableStackPostsRecord
+                                                      .reference,
+                                                  createPostsRecordData(
+                                                    post: createPostStruct(
+                                                      fieldValues: {
+                                                        'upVoters': FieldValue
+                                                            .arrayRemove([
+                                                          currentUserUid
+                                                        ]),
+                                                        'netVotes': FieldValue
+                                                            .increment(-(2)),
+                                                        'downVoters': FieldValue
+                                                            .arrayUnion([
+                                                          currentUserUid
+                                                        ]),
+                                                      },
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                  ));
+                                            } else {
+                                              firestoreBatch.update(
+                                                  swipeableStackPostsRecord
+                                                      .reference,
+                                                  createPostsRecordData(
+                                                    post: createPostStruct(
+                                                      fieldValues: {
+                                                        'netVotes': FieldValue
+                                                            .increment(-(1)),
+                                                        'downVoters': FieldValue
+                                                            .arrayUnion([
+                                                          currentUserUid
+                                                        ]),
+                                                      },
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                  ));
+                                            }
+
+                                            return;
+                                          }
+                                        } finally {
+                                          await firestoreBatch.commit();
+                                        }
+                                      },
+                                      onRightSwipe: (index) async {
+                                        final swipeableStackPostsRecord =
+                                            swipeableStackPostsRecordList[
+                                                index];
+                                        final firestoreBatch =
+                                            FirebaseFirestore.instance.batch();
+                                        try {
+                                          if (animationsMap[
+                                                  'containerOnActionTriggerAnimation2'] !=
+                                              null) {
+                                            await animationsMap[
+                                                    'containerOnActionTriggerAnimation2']!
+                                                .controller
+                                                .forward(from: 0.0);
+                                          }
+                                          if (functions.stringInArr(
+                                              currentUserUid,
+                                              swipeableStackPostsRecord
+                                                  .post.upVoters
+                                                  .toList())) {
                                             firestoreBatch.update(
                                                 swipeableStackPostsRecord
                                                     .reference,
@@ -908,96 +858,142 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     fieldValues: {
                                                       'netVotes':
                                                           FieldValue.increment(
-                                                              1),
-                                                      'upVoters':
-                                                          FieldValue.arrayUnion(
+                                                              -(1)),
+                                                      'upVoters': FieldValue
+                                                          .arrayRemove(
                                                               [currentUserUid]),
                                                     },
                                                     clearUnsetFields: false,
                                                   ),
                                                 ));
-                                          }
+                                          } else {
+                                            if (functions.stringInArr(
+                                                currentUserUid,
+                                                swipeableStackPostsRecord
+                                                    .post.downVoters
+                                                    .toList())) {
+                                              firestoreBatch.update(
+                                                  swipeableStackPostsRecord
+                                                      .reference,
+                                                  createPostsRecordData(
+                                                    post: createPostStruct(
+                                                      fieldValues: {
+                                                        'upVoters': FieldValue
+                                                            .arrayUnion([
+                                                          currentUserUid
+                                                        ]),
+                                                        'netVotes': FieldValue
+                                                            .increment(2),
+                                                        'downVoters': FieldValue
+                                                            .arrayRemove([
+                                                          currentUserUid
+                                                        ]),
+                                                      },
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                  ));
+                                            } else {
+                                              firestoreBatch.update(
+                                                  swipeableStackPostsRecord
+                                                      .reference,
+                                                  createPostsRecordData(
+                                                    post: createPostStruct(
+                                                      fieldValues: {
+                                                        'netVotes': FieldValue
+                                                            .increment(1),
+                                                        'upVoters': FieldValue
+                                                            .arrayUnion([
+                                                          currentUserUid
+                                                        ]),
+                                                      },
+                                                      clearUnsetFields: false,
+                                                    ),
+                                                  ));
+                                            }
 
-                                          return;
+                                            return;
+                                          }
+                                        } finally {
+                                          await firestoreBatch.commit();
                                         }
-                                      } finally {
-                                        await firestoreBatch.commit();
-                                      }
-                                    },
-                                    onUpSwipe: (index) {},
-                                    onDownSwipe: (index) {},
-                                    itemBuilder:
-                                        (context, swipeableStackIndex) {
-                                      final swipeableStackPostsRecord =
-                                          swipeableStackPostsRecordList[
-                                              swipeableStackIndex];
-                                      return Align(
-                                        alignment:
-                                            AlignmentDirectional(0.00, -1.00),
-                                        child: PostWidget(
-                                          key: Key(
-                                              'Keylt6_${swipeableStackIndex}_of_${swipeableStackPostsRecordList.length}'),
-                                          isComment: false,
-                                          post: swipeableStackPostsRecord,
-                                        ),
-                                      );
-                                    },
-                                    itemCount:
-                                        swipeableStackPostsRecordList.length,
-                                    controller: _model.swipeableStackController,
-                                    enableSwipeUp: false,
-                                    enableSwipeDown: false,
-                                  );
-                                },
-                              ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 60.0, 0.0, 130.0),
-                                child: Container(
-                                  width: 20.0,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xA0D20F2C),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(0.0),
-                                      bottomRight: Radius.circular(50.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(50.0),
-                                    ),
-                                  ),
-                                ).animateOnActionTrigger(
-                                  animationsMap[
-                                      'containerOnActionTriggerAnimation1']!,
+                                      },
+                                      onUpSwipe: (index) {},
+                                      onDownSwipe: (index) {},
+                                      itemBuilder:
+                                          (context, swipeableStackIndex) {
+                                        final swipeableStackPostsRecord =
+                                            swipeableStackPostsRecordList[
+                                                swipeableStackIndex];
+                                        return Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, -1.0),
+                                          child: PostWidget(
+                                            key: Key(
+                                                'Keyswq_${swipeableStackIndex}_of_${swipeableStackPostsRecordList.length}'),
+                                            isComment: false,
+                                            post: swipeableStackPostsRecord,
+                                          ),
+                                        );
+                                      },
+                                      itemCount:
+                                          swipeableStackPostsRecordList.length,
+                                      controller:
+                                          _model.swipeableStackController,
+                                      loop: false,
+                                      cardDisplayCount: 3,
+                                      scale: 0.9,
+                                    );
+                                  },
                                 ),
                               ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(1.00, 0.00),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 60.0, 0.0, 130.0),
-                                child: Container(
-                                  width: 20.0,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xA00BA217),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(50.0),
-                                      topRight: Radius.circular(0.0),
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 60.0, 0.0, 130.0),
+                                  child: Container(
+                                    width: 20.0,
+                                    height: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xA0D20F2C),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(50.0),
+                                        topLeft: Radius.circular(0.0),
+                                        topRight: Radius.circular(50.0),
+                                      ),
                                     ),
+                                  ).animateOnActionTrigger(
+                                    animationsMap[
+                                        'containerOnActionTriggerAnimation1']!,
                                   ),
-                                ).animateOnActionTrigger(
-                                  animationsMap[
-                                      'containerOnActionTriggerAnimation2']!,
                                 ),
                               ),
-                            ),
-                          ],
+                              Align(
+                                alignment: const AlignmentDirectional(1.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 60.0, 0.0, 130.0),
+                                  child: Container(
+                                    width: 20.0,
+                                    height: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xA00BA217),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(50.0),
+                                        topRight: Radius.circular(0.0),
+                                      ),
+                                    ),
+                                  ).animateOnActionTrigger(
+                                    animationsMap[
+                                        'containerOnActionTriggerAnimation2']!,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

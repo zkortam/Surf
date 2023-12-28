@@ -5,18 +5,15 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'threads_link_model.dart';
 export 'threads_link_model.dart';
 
 class ThreadsLinkWidget extends StatefulWidget {
   const ThreadsLinkWidget({
-    Key? key,
+    super.key,
     this.link,
-  }) : super(key: key);
+  });
 
   final String? link;
 
@@ -53,17 +50,17 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 1.00),
+      alignment: const AlignmentDirectional(0.0, 1.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Flexible(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
               child: Container(
                 width: 400.0,
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   minHeight: 180.0,
                   maxHeight: 300.0,
                 ),
@@ -72,19 +69,19 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 10.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 40.0,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [Color(0xFFE5200B), Color(0xFFDA721A)],
                               stops: [0.0, 1.0],
                               begin: AlignmentDirectional(1.0, 0.0),
@@ -97,14 +94,14 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     6.0, 0.0, 0.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.white,
                                   borderRadius: 20.0,
                                   borderWidth: 3.0,
                                   buttonSize: 30.0,
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_back_rounded,
                                     color: Colors.white,
                                     size: 15.0,
@@ -120,10 +117,9 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             30.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -153,7 +149,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                           true)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 5.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () {
@@ -166,11 +162,10 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                             options: FFButtonOptions(
                                               width: 80.0,
                                               height: 30.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsets.all(0.0),
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color: Color(0xFF14A12D),
+                                              color: const Color(0xFF14A12D),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -180,7 +175,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                                         fontSize: 13.0,
                                                       ),
                                               elevation: 1.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -193,7 +188,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                           false)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 5.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () {
@@ -206,9 +201,8 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                             options: FFButtonOptions(
                                               width: 80.0,
                                               height: 30.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              padding: const EdgeInsets.all(0.0),
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: Colors.white,
                                               textStyle:
@@ -217,11 +211,11 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                                       .override(
                                                         fontFamily: 'Outfit',
                                                         color:
-                                                            Color(0xFFE5200B),
+                                                            const Color(0xFFE5200B),
                                                         fontSize: 13.0,
                                                       ),
                                               elevation: 1.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -239,7 +233,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             10.0, 5.0, 10.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
@@ -253,7 +247,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             10.0, 5.0, 10.0, 0.0),
                         child: AutoSizeText(
                           widget.link!.maybeHandleOverflow(
@@ -263,14 +257,14 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFFDA721A),
+                                    color: const Color(0xFFDA721A),
                                     fontSize: 18.0,
                                   ),
                         ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -285,9 +279,9 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                               options: FFButtonOptions(
                                 width: 158.0,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -298,7 +292,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                           .primaryBackground,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -306,7 +300,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -318,9 +312,9 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                 options: FFButtonOptions(
                                   width: 158.0,
                                   height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
@@ -331,7 +325,7 @@ class _ThreadsLinkWidgetState extends State<ThreadsLinkWidget> {
                                         color: Colors.white,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

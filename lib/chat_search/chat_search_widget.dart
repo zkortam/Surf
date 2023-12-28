@@ -1,25 +1,21 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'chat_search_model.dart';
 export 'chat_search_model.dart';
 
 class ChatSearchWidget extends StatefulWidget {
-  const ChatSearchWidget({Key? key}) : super(key: key);
+  const ChatSearchWidget({super.key});
 
   @override
   _ChatSearchWidgetState createState() => _ChatSearchWidgetState();
@@ -86,7 +82,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(
+                    child: const PCNavBarWidget(
                       currentPage: 3,
                     ),
                   ),
@@ -99,12 +95,12 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 24.0, 20.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -132,7 +128,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                     onTap: () async {
                                                       context.pop();
                                                     },
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.arrow_back,
                                                       color: Color(0xFFBDBDBD),
                                                       size: 24.0,
@@ -140,7 +136,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -173,7 +169,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 24.0, 20.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -183,7 +179,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                         focusNode: _model.textFieldFocusNode,
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.textController',
-                                          Duration(milliseconds: 2000),
+                                          const Duration(milliseconds: 2000),
                                           () async {
                                             safeSetState(() => _model
                                                 .algoliaSearchResults = null);
@@ -210,10 +206,10 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                   .bodyMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFFBDBDBD),
+                                                    color: const Color(0xFFBDBDBD),
                                                   ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0xFF828282),
                                               width: 1.0,
                                             ),
@@ -221,7 +217,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                 BorderRadius.circular(500.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -229,7 +225,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                 BorderRadius.circular(500.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -238,14 +234,14 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(500.0),
                                           ),
-                                          prefixIcon: Icon(
+                                          prefixIcon: const Icon(
                                             Icons.search_sharp,
                                           ),
                                           suffixIcon: _model.textController!
@@ -272,7 +268,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
 
                                                     setState(() {});
                                                   },
-                                                  child: Icon(
+                                                  child: const Icon(
                                                     Icons.clear,
                                                     color: Color(0xFF757575),
                                                     size: 22.0,
@@ -296,7 +292,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 10.0, 20.0, 0.0),
                                   child: AuthUserStreamWidget(
                                     builder: (context) =>
@@ -328,7 +324,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                             snapshot.data!;
                                         // Customize what your widget looks like with no search results.
                                         if (snapshot.data!.isEmpty) {
-                                          return Container(
+                                          return const SizedBox(
                                             height: 100,
                                             child: Center(
                                               child: Text('No results.'),
@@ -394,7 +390,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                           extra: <String,
                                                               dynamic>{
                                                             kTransitionInfoKey:
-                                                                TransitionInfo(
+                                                                const TransitionInfo(
                                                               hasTransition:
                                                                   true,
                                                               transitionType:
@@ -410,7 +406,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         4.0,
                                                                         0.0,
@@ -422,7 +418,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                               clipBehavior: Clip
                                                                   .antiAlias,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -437,7 +433,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -489,7 +485,7 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -514,12 +510,18 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                               _model.removeFromUsersList(
                                                                   columnUsersRecord
                                                                       .uid);
+                                                              _model.removeFromUsernamelist(
+                                                                  columnUsersRecord
+                                                                      .displayName);
                                                             });
                                                           } else {
                                                             setState(() {
                                                               _model.addToUsersList(
                                                                   columnUsersRecord
                                                                       .uid);
+                                                              _model.addToUsernamelist(
+                                                                  columnUsersRecord
+                                                                      .displayName);
                                                             });
                                                           }
                                                         },
@@ -580,14 +582,14 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                                 ),
                                               ),
                                             );
-                                          }).divide(SizedBox(height: 10.0)),
+                                          }).divide(const SizedBox(height: 10.0)),
                                         );
                                       },
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 10.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -625,7 +627,9 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                             ChatsRecord.collection.doc();
                                         await chatsRecordReference.set({
                                           ...createChatsRecordData(
-                                            title: 'New Chat',
+                                            title: functions.makechattitle(
+                                                _model.usernamelist.toList(),
+                                                currentUserDisplayName),
                                           ),
                                           ...mapToFirestore(
                                             {
@@ -652,7 +656,9 @@ class _ChatSearchWidgetState extends State<ChatSearchWidget> {
                                         _model.chat =
                                             ChatsRecord.getDocumentFromData({
                                           ...createChatsRecordData(
-                                            title: 'New Chat',
+                                            title: functions.makechattitle(
+                                                _model.usernamelist.toList(),
+                                                currentUserDisplayName),
                                           ),
                                           ...mapToFirestore(
                                             {

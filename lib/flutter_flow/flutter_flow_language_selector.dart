@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowLanguageSelector extends StatelessWidget {
   const FlutterFlowLanguageSelector({
-    Key? key,
+    super.key,
     required this.currentLanguage,
     required this.languages,
     required this.onChanged,
@@ -44,7 +44,7 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
     this.dropdownColor,
     this.dropdownIconColor = const Color(0xFF14181B),
     this.dropdownIcon,
-  }) : super(key: key);
+  });
 
   final double? width;
   final double? height;
@@ -63,7 +63,7 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
   final IconData? dropdownIcon;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         width: width,
         height: height,
         child: _LanguagePickerDropdown(
@@ -90,14 +90,13 @@ class FlutterFlowLanguageSelector extends StatelessWidget {
 
 class _LanguagePickerItem extends StatelessWidget {
   const _LanguagePickerItem({
-    Key? key,
     required this.language,
     required this.languages,
     this.textStyle,
     this.hideFlags = false,
     this.flagSize = 24.0,
     this.flagTextGap = 8.0,
-  }) : super(key: key);
+  });
 
   final String language;
   final List<String> languages;
@@ -129,7 +128,7 @@ class _LanguagePickerItem extends StatelessWidget {
     }
     flagWidget = Transform.scale(
       scale: flagSize / 24.0,
-      child: Container(
+      child: SizedBox(
         width: 24,
         child: flagWidget,
       ),

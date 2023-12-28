@@ -41,4 +41,4 @@ export '/chats_page/chats_page_widget.dart' show ChatsPageWidget;
 export '/muluploadtest/muluploadtest_widget.dart' show MuluploadtestWidget;
 export '/logging_in/logging_in_widget.dart' show LoggingInWidget;
 export '/spaces/spaces_widget.dart' show SpacesWidget;
-export '/bob/bob_widget.dart' show BobWidget;
+export '/preentry/preentry_widget.dart' show PreentryWidget;

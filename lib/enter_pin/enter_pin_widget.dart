@@ -5,19 +5,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'enter_pin_model.dart';
 export 'enter_pin_model.dart';
 
 class EnterPinWidget extends StatefulWidget {
-  const EnterPinWidget({Key? key}) : super(key: key);
+  const EnterPinWidget({super.key});
 
   @override
   _EnterPinWidgetState createState() => _EnterPinWidgetState();
@@ -45,22 +41,22 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 140.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 140.0),
+          end: const Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.9, 0.9),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.9, 0.9),
+          end: const Offset(1.0, 1.0),
         ),
         TiltEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(-0.349, 0),
-          end: Offset(0, 0),
+          begin: const Offset(-0.349, 0),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -114,7 +110,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                     child: Container(
                       width: double.infinity,
                       height: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF6E09B3), Color(0xFF040F46)],
                           stops: [0.0, 1.0],
@@ -122,23 +118,22 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                           end: AlignmentDirectional(-0.87, 1.0),
                         ),
                       ),
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Container(
                               width: double.infinity,
                               height: 450.0,
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 maxWidth: 570.0,
                               ),
                               decoration: BoxDecoration(
-                                color: Color(0xFF161A1D),
-                                boxShadow: [
+                                color: const Color(0xFF161A1D),
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 4.0,
                                     color: Color(0x33000000),
@@ -148,7 +143,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, -0.30),
+                                alignment: const AlignmentDirectional(0.0, -0.3),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +161,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                           ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           30.0, 8.0, 30.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -183,7 +178,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: PinCodeTextField(
                                         autoDisposeControllers: false,
@@ -214,20 +209,24 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                           fieldHeight: 60.0,
                                           fieldWidth: 60.0,
                                           borderWidth: 2.0,
-                                          borderRadius:
-                                              BorderRadius.circular(40.0),
+                                          borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(40.0),
+                                            bottomRight: Radius.circular(40.0),
+                                            topLeft: Radius.circular(40.0),
+                                            topRight: Radius.circular(40.0),
+                                          ),
                                           shape: PinCodeFieldShape.box,
                                           activeColor:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
-                                          inactiveColor: Color(0xFF1C2427),
+                                          inactiveColor: const Color(0xFF1C2427),
                                           selectedColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondaryText,
                                           activeFillColor:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
-                                          inactiveFillColor: Color(0xFF1C2427),
+                                          inactiveFillColor: const Color(0xFF1C2427),
                                           selectedFillColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondaryText,
@@ -248,7 +247,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                               }.withoutNulls,
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -270,9 +269,9 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                     Container(
                                       width: double.infinity,
                                       height: 150.0,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -296,7 +295,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                     'settings',
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -328,7 +327,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                               .viewInsetsOf(
                                                                   context),
                                                           child:
-                                                              BottomBarErrorWidget(
+                                                              const BottomBarErrorWidget(
                                                             text:
                                                                 'Incorrect pin, please try again.',
                                                           ),
@@ -346,14 +345,12 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                               options: FFButtonOptions(
                                                 width: 240.0,
                                                 height: 48.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 0.0),
+                                                padding: const EdgeInsets.all(0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
-                                                color: Color(0xFFD82E2E),
+                                                color: const Color(0xFFD82E2E),
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -362,7 +359,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                                           color: Colors.white,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -402,7 +399,7 @@ class _EnterPinWidgetState extends State<EnterPinWidget>
                                   text: FFLocalizations.of(context).getText(
                                     'zify633k' /*  Contact Support */,
                                   ),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF867FF1),
                                     fontWeight: FontWeight.w600,
                                   ),

@@ -153,12 +153,13 @@ String threadTextStripper(String input) {
   var arr = removedUrlsInput.split(" ");
   var result = "";
   for (String i in arr) {
-    if (!i.contains("#")) {
+    // Check if the element is a hashtag and not only followed by numbers
+    if (!RegExp(r'^#[0-9]+$').hasMatch(i)) {
       result = result + " " + i;
     }
   }
 
-  // Return the input string with URLs and hashtags removed
+  // Return the input string with URLs and non-numeric hashtags removed
   return result.trim();
 }
 
@@ -169,7 +170,10 @@ List<String> extractHashtags(String input) {
 
   for (Match match in matches) {
     String hashtag = match.group(0) as String;
-    hashtags.add(hashtag);
+    // Check if hashtag contains only numbers after #
+    if (!RegExp(r'^#[0-9]+$').hasMatch(hashtag)) {
+      hashtags.add(hashtag);
+    }
   }
 
   return hashtags;
@@ -190,10 +194,26 @@ int stringToInt(String inputString) {
 }
 
 String substringerGPT(String str) {
-  // Remove any occurrences of newline characters
-  str = str.replaceAll(r'\n\n', '').replaceAll(r'\n', '');
+  // Replace Markdown headers
+  str = str.replaceAll(RegExp(r'#+\s'), '');
 
-  // Remove first and last character if it is a quote
+  // Replace bold and italic notations
+  str = str.replaceAll(RegExp(r'\*{1,2}|_{1,2}'), '');
+
+  // Replace list items and blockquotes
+  str = str.replaceAll(RegExp(r'^\s*[-*] '), '');
+  str = str.replaceAll(RegExp(r'^\s*> '), '');
+
+  // Replace inline code and code blocks
+  str = str.replaceAll(RegExp(r'`{1,3}'), '');
+
+  // Replace any occurrences of newline characters with a space
+  str = str.replaceAll('\n', ' ');
+
+  // Remove extra spaces
+  str = str.replaceAll(RegExp(r'\s+'), ' ').trim();
+
+  // Remove first and last character if it is a quote (single or double)
   if (str.isNotEmpty) {
     if (str[0] == '"' || str[0] == "'") {
       str = str.substring(1);
@@ -340,48 +360,6 @@ String errorFixer(
   return " ";
 }
 
-String chattitle(
-  List<UsersRecord> chatusers,
-  String authuserid,
-  String? customtitle,
-) {
-  //chattitle
-  // INPUT chatusers Users from chat document array  authuserid Authorized User ID customtitle customtitle Custom Title if any
-  // RTRN String   title of the chat to display
-  //GF
-
-  //Form title by appending chat user names together
-  String title = "";
-//DEFAULT TITLE
-
-  if (customtitle == null) {
-    for (UsersRecord user in chatusers) {
-      if (user.uid != authuserid) {
-        title += user.displayName + ', ';
-      }
-    }
-
-// Remove the trailing comma and space if the title is not empty
-    if (title.isNotEmpty) {
-      title = title.substring(0, title.length - 2);
-    }
-  } else {
-    title = customtitle;
-  }
-  return title;
-}
-
-List<DocumentReference> makeuserarray(
-  List<DocumentReference>? array,
-  DocumentReference elementtoadd,
-) {
-  if (array == null) {
-    array = [];
-  }
-  array.add(elementtoadd);
-  return array;
-}
-
 List<bool> loadChatSearch(
   List<UsersRecord> searchresults,
   UsersRecord authuser,
@@ -431,4 +409,42 @@ bool strToBoolean(String str) {
   } else {
     return false;
   }
+}
+
+String makechattitle(
+  List<String> userslist,
+  String authusername,
+) {
+  userslist.remove(authusername);
+  return userslist.join(", ");
+}
+
+bool strlencheck(
+  String inputstring,
+  int lenlim,
+) {
+  return inputstring.length < lenlim;
+}
+
+dynamic convertToJSON(String prompt) {
+  // take the prompt and return a JSON with form [{"role": "user", "content": prompt}]
+  return json.decode('{"role": "user", "content": "$prompt"}');
+}
+
+List<String> stringsToList(
+  String str1,
+  String str2,
+  String? str3,
+  String? str4,
+) {
+  List<String> resultList = [str1, str2];
+
+  if (str3 != null) {
+    resultList.add(str3);
+  }
+  if (str4 != null) {
+    resultList.add(str4);
+  }
+
+  return resultList;
 }

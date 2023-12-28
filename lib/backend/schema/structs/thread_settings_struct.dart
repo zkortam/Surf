@@ -3,109 +3,108 @@ import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ThreadSettingsStruct extends FFFirebaseStruct {
   ThreadSettingsStruct({
-    bool? isAI,
-    bool? isAutoHashtag,
-    bool? isAutoBeautification,
+    String? autoBeautification,
+    String? autoHashtag,
+    String? aiFeatures,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
-  })  : _isAI = isAI,
-        _isAutoHashtag = isAutoHashtag,
-        _isAutoBeautification = isAutoBeautification,
+  })  : _autoBeautification = autoBeautification,
+        _autoHashtag = autoHashtag,
+        _aiFeatures = aiFeatures,
         super(firestoreUtilData);
 
-  // "isAI" field.
-  bool? _isAI;
-  bool get isAI => _isAI ?? false;
-  set isAI(bool? val) => _isAI = val;
-  bool hasIsAI() => _isAI != null;
+  // "autoBeautification" field.
+  String? _autoBeautification;
+  String get autoBeautification => _autoBeautification ?? '';
+  set autoBeautification(String? val) => _autoBeautification = val;
+  bool hasAutoBeautification() => _autoBeautification != null;
 
-  // "isAutoHashtag" field.
-  bool? _isAutoHashtag;
-  bool get isAutoHashtag => _isAutoHashtag ?? false;
-  set isAutoHashtag(bool? val) => _isAutoHashtag = val;
-  bool hasIsAutoHashtag() => _isAutoHashtag != null;
+  // "autoHashtag" field.
+  String? _autoHashtag;
+  String get autoHashtag => _autoHashtag ?? '';
+  set autoHashtag(String? val) => _autoHashtag = val;
+  bool hasAutoHashtag() => _autoHashtag != null;
 
-  // "isAutoBeautification" field.
-  bool? _isAutoBeautification;
-  bool get isAutoBeautification => _isAutoBeautification ?? false;
-  set isAutoBeautification(bool? val) => _isAutoBeautification = val;
-  bool hasIsAutoBeautification() => _isAutoBeautification != null;
+  // "AiFeatures" field.
+  String? _aiFeatures;
+  String get aiFeatures => _aiFeatures ?? '';
+  set aiFeatures(String? val) => _aiFeatures = val;
+  bool hasAiFeatures() => _aiFeatures != null;
 
   static ThreadSettingsStruct fromMap(Map<String, dynamic> data) =>
       ThreadSettingsStruct(
-        isAI: data['isAI'] as bool?,
-        isAutoHashtag: data['isAutoHashtag'] as bool?,
-        isAutoBeautification: data['isAutoBeautification'] as bool?,
+        autoBeautification: data['autoBeautification'] as String?,
+        autoHashtag: data['autoHashtag'] as String?,
+        aiFeatures: data['AiFeatures'] as String?,
       );
 
-  static ThreadSettingsStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ThreadSettingsStruct.fromMap(data) : null;
+  static ThreadSettingsStruct? maybeFromMap(dynamic data) => data is Map
+      ? ThreadSettingsStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
-        'isAI': _isAI,
-        'isAutoHashtag': _isAutoHashtag,
-        'isAutoBeautification': _isAutoBeautification,
+        'autoBeautification': _autoBeautification,
+        'autoHashtag': _autoHashtag,
+        'AiFeatures': _aiFeatures,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'isAI': serializeParam(
-          _isAI,
-          ParamType.bool,
+        'autoBeautification': serializeParam(
+          _autoBeautification,
+          ParamType.String,
         ),
-        'isAutoHashtag': serializeParam(
-          _isAutoHashtag,
-          ParamType.bool,
+        'autoHashtag': serializeParam(
+          _autoHashtag,
+          ParamType.String,
         ),
-        'isAutoBeautification': serializeParam(
-          _isAutoBeautification,
-          ParamType.bool,
+        'AiFeatures': serializeParam(
+          _aiFeatures,
+          ParamType.String,
         ),
       }.withoutNulls;
 
   static ThreadSettingsStruct fromSerializableMap(Map<String, dynamic> data) =>
       ThreadSettingsStruct(
-        isAI: deserializeParam(
-          data['isAI'],
-          ParamType.bool,
+        autoBeautification: deserializeParam(
+          data['autoBeautification'],
+          ParamType.String,
           false,
         ),
-        isAutoHashtag: deserializeParam(
-          data['isAutoHashtag'],
-          ParamType.bool,
+        autoHashtag: deserializeParam(
+          data['autoHashtag'],
+          ParamType.String,
           false,
         ),
-        isAutoBeautification: deserializeParam(
-          data['isAutoBeautification'],
-          ParamType.bool,
+        aiFeatures: deserializeParam(
+          data['AiFeatures'],
+          ParamType.String,
           false,
         ),
       );
 
   static ThreadSettingsStruct fromAlgoliaData(Map<String, dynamic> data) =>
       ThreadSettingsStruct(
-        isAI: convertAlgoliaParam(
-          data['isAI'],
-          ParamType.bool,
+        autoBeautification: convertAlgoliaParam(
+          data['autoBeautification'],
+          ParamType.String,
           false,
         ),
-        isAutoHashtag: convertAlgoliaParam(
-          data['isAutoHashtag'],
-          ParamType.bool,
+        autoHashtag: convertAlgoliaParam(
+          data['autoHashtag'],
+          ParamType.String,
           false,
         ),
-        isAutoBeautification: convertAlgoliaParam(
-          data['isAutoBeautification'],
-          ParamType.bool,
+        aiFeatures: convertAlgoliaParam(
+          data['AiFeatures'],
+          ParamType.String,
           false,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),
@@ -117,29 +116,29 @@ class ThreadSettingsStruct extends FFFirebaseStruct {
   @override
   bool operator ==(Object other) {
     return other is ThreadSettingsStruct &&
-        isAI == other.isAI &&
-        isAutoHashtag == other.isAutoHashtag &&
-        isAutoBeautification == other.isAutoBeautification;
+        autoBeautification == other.autoBeautification &&
+        autoHashtag == other.autoHashtag &&
+        aiFeatures == other.aiFeatures;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([isAI, isAutoHashtag, isAutoBeautification]);
+      const ListEquality().hash([autoBeautification, autoHashtag, aiFeatures]);
 }
 
 ThreadSettingsStruct createThreadSettingsStruct({
-  bool? isAI,
-  bool? isAutoHashtag,
-  bool? isAutoBeautification,
+  String? autoBeautification,
+  String? autoHashtag,
+  String? aiFeatures,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
   bool delete = false,
 }) =>
     ThreadSettingsStruct(
-      isAI: isAI,
-      isAutoHashtag: isAutoHashtag,
-      isAutoBeautification: isAutoBeautification,
+      autoBeautification: autoBeautification,
+      autoHashtag: autoHashtag,
+      aiFeatures: aiFeatures,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

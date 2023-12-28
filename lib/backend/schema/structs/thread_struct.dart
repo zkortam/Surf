@@ -3,7 +3,6 @@ import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -28,6 +27,9 @@ class ThreadStruct extends FFFirebaseStruct {
     String? summary,
     List<CommentStruct>? comments,
     bool? isStealth,
+    String? space,
+    bool? commentsAllowed,
+    bool? isPrivate,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _timestamp = timestamp,
         _author = author,
@@ -47,6 +49,9 @@ class ThreadStruct extends FFFirebaseStruct {
         _summary = summary,
         _comments = comments,
         _isStealth = isStealth,
+        _space = space,
+        _commentsAllowed = commentsAllowed,
+        _isPrivate = isPrivate,
         super(firestoreUtilData);
 
   // "timestamp" field.
@@ -171,6 +176,24 @@ class ThreadStruct extends FFFirebaseStruct {
   set isStealth(bool? val) => _isStealth = val;
   bool hasIsStealth() => _isStealth != null;
 
+  // "space" field.
+  String? _space;
+  String get space => _space ?? '';
+  set space(String? val) => _space = val;
+  bool hasSpace() => _space != null;
+
+  // "commentsAllowed" field.
+  bool? _commentsAllowed;
+  bool get commentsAllowed => _commentsAllowed ?? false;
+  set commentsAllowed(bool? val) => _commentsAllowed = val;
+  bool hasCommentsAllowed() => _commentsAllowed != null;
+
+  // "isPrivate" field.
+  bool? _isPrivate;
+  bool get isPrivate => _isPrivate ?? false;
+  set isPrivate(bool? val) => _isPrivate = val;
+  bool hasIsPrivate() => _isPrivate != null;
+
   static ThreadStruct fromMap(Map<String, dynamic> data) => ThreadStruct(
         timestamp: data['timestamp'] as DateTime?,
         author: data['author'] as String?,
@@ -193,10 +216,13 @@ class ThreadStruct extends FFFirebaseStruct {
           CommentStruct.fromMap,
         ),
         isStealth: data['isStealth'] as bool?,
+        space: data['space'] as String?,
+        commentsAllowed: data['commentsAllowed'] as bool?,
+        isPrivate: data['isPrivate'] as bool?,
       );
 
   static ThreadStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ThreadStruct.fromMap(data) : null;
+      data is Map ? ThreadStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'timestamp': _timestamp,
@@ -217,6 +243,9 @@ class ThreadStruct extends FFFirebaseStruct {
         'summary': _summary,
         'comments': _comments?.map((e) => e.toMap()).toList(),
         'isStealth': _isStealth,
+        'space': _space,
+        'commentsAllowed': _commentsAllowed,
+        'isPrivate': _isPrivate,
       }.withoutNulls;
 
   @override
@@ -295,6 +324,18 @@ class ThreadStruct extends FFFirebaseStruct {
         ),
         'isStealth': serializeParam(
           _isStealth,
+          ParamType.bool,
+        ),
+        'space': serializeParam(
+          _space,
+          ParamType.String,
+        ),
+        'commentsAllowed': serializeParam(
+          _commentsAllowed,
+          ParamType.bool,
+        ),
+        'isPrivate': serializeParam(
+          _isPrivate,
           ParamType.bool,
         ),
       }.withoutNulls;
@@ -390,6 +431,21 @@ class ThreadStruct extends FFFirebaseStruct {
         ),
         isStealth: deserializeParam(
           data['isStealth'],
+          ParamType.bool,
+          false,
+        ),
+        space: deserializeParam(
+          data['space'],
+          ParamType.String,
+          false,
+        ),
+        commentsAllowed: deserializeParam(
+          data['commentsAllowed'],
+          ParamType.bool,
+          false,
+        ),
+        isPrivate: deserializeParam(
+          data['isPrivate'],
           ParamType.bool,
           false,
         ),
@@ -489,7 +545,22 @@ class ThreadStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        space: convertAlgoliaParam(
+          data['space'],
+          ParamType.String,
+          false,
+        ),
+        commentsAllowed: convertAlgoliaParam(
+          data['commentsAllowed'],
+          ParamType.bool,
+          false,
+        ),
+        isPrivate: convertAlgoliaParam(
+          data['isPrivate'],
+          ParamType.bool,
+          false,
+        ),
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),
@@ -519,7 +590,10 @@ class ThreadStruct extends FFFirebaseStruct {
         link == other.link &&
         summary == other.summary &&
         listEquality.equals(comments, other.comments) &&
-        isStealth == other.isStealth;
+        isStealth == other.isStealth &&
+        space == other.space &&
+        commentsAllowed == other.commentsAllowed &&
+        isPrivate == other.isPrivate;
   }
 
   @override
@@ -541,7 +615,10 @@ class ThreadStruct extends FFFirebaseStruct {
         link,
         summary,
         comments,
-        isStealth
+        isStealth,
+        space,
+        commentsAllowed,
+        isPrivate
       ]);
 }
 
@@ -560,6 +637,9 @@ ThreadStruct createThreadStruct({
   String? link,
   String? summary,
   bool? isStealth,
+  String? space,
+  bool? commentsAllowed,
+  bool? isPrivate,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -580,6 +660,9 @@ ThreadStruct createThreadStruct({
       link: link,
       summary: summary,
       isStealth: isStealth,
+      space: space,
+      commentsAllowed: commentsAllowed,
+      isPrivate: isPrivate,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

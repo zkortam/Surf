@@ -13,25 +13,21 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'thread_model.dart';
 export 'thread_model.dart';
 
 class ThreadWidget extends StatefulWidget {
   const ThreadWidget({
-    Key? key,
+    super.key,
     required this.thread,
     bool? isComment,
     this.isCommentAllowed,
-  })  : this.isComment = isComment ?? false,
-        super(key: key);
+  })  : isComment = isComment ?? false;
 
   final ThreadRecord? thread;
   final bool isComment;
@@ -100,16 +96,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
               },
             ).then((value) => safeSetState(() {}));
           },
-          child: Container(
+          child: SizedBox(
             width: 500.0,
             child: Stack(
               children: [
-                if (widget.thread?.thread?.isPoll ?? true)
+                if (widget.thread?.thread.isPoll ?? true)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
                       width: double.infinity,
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minHeight: 170.0,
                         maxHeight: 1000.0,
                       ),
@@ -121,7 +117,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 5.0, 5.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -138,7 +134,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     'uid',
                                     isEqualTo: widget.thread!.thread.isStealth
                                         ? 'anon'
-                                        : widget.thread?.thread?.author,
+                                        : widget.thread?.thread.author,
                                   ),
                                   singleRecord: true,
                                 ),
@@ -173,13 +169,13 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 0.0, 0.0),
                                             child: Container(
                                               width: 50.0,
                                               height: 50.0,
                                               clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Image.network(
@@ -193,7 +189,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 0.0, 0.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -219,14 +215,14 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 ),
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    '${valueOrDefault<String>(
+                                                    valueOrDefault<String>(
                                                       widget.thread?.thread
-                                                                  ?.isStealth ==
+                                                                  .isStealth ==
                                                               true
                                                           ? '@Anonymous'
                                                           : '@${rowUsersRecord?.displayName}',
                                                       '@Anonymous',
-                                                    )}',
+                                                    ),
                                                     '@Anonymous',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -243,11 +239,11 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         ],
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 20.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            '${widget.thread!.thread.netVotes > 0 ? '+' : ' '}${widget.thread?.thread?.netVotes?.toString()}',
+                                            '${widget.thread!.thread.netVotes > 0 ? '+' : ' '}${widget.thread?.thread.netVotes.toString()}',
                                             '0',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -257,7 +253,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 color: valueOrDefault<Color>(
                                                   () {
                                                     if (widget.thread?.thread
-                                                            ?.netVotes ==
+                                                            .netVotes ==
                                                         0) {
                                                       return FlutterFlowTheme
                                                               .of(context)
@@ -265,9 +261,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     } else if (widget.thread!
                                                             .thread.netVotes >
                                                         0) {
-                                                      return Color(0xFF21E744);
+                                                      return const Color(0xFF21E744);
                                                     } else {
-                                                      return Color(0xFFE5200B);
+                                                      return const Color(0xFFE5200B);
                                                     }
                                                   }(),
                                                   FlutterFlowTheme.of(context)
@@ -284,9 +280,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.00, 0.00),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 10.0, 0.0, 0.0),
                               child: Text(
                                 widget.thread!.thread.title,
@@ -301,9 +297,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.00, 0.00),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 dateTimeFormat(
@@ -326,7 +322,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                           Flexible(
                             child: Container(
                               width: 500.0,
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 minHeight: 100.0,
                                 maxHeight: 400.0,
                               ),
@@ -345,14 +341,14 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 8.0, 0.0, 10.0, 5.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 5.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -438,7 +434,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         },
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 0.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderColor: Colors.transparent,
@@ -525,7 +521,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 0.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderColor: Colors.transparent,
@@ -568,7 +564,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: Row(
@@ -583,7 +579,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   color: FlutterFlowTheme.of(context).accent4,
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -605,7 +601,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                 Stack(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 5.0, 10.0, 5.0),
                                       child:
                                           StreamBuilder<List<CommentsRecord>>(
@@ -614,7 +610,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                               commentsRecord.where(
                                             'comment.idReplyTo',
                                             isEqualTo:
-                                                widget.thread?.thread?.id,
+                                                widget.thread?.thread.id,
                                           ),
                                           limit: 3,
                                         ),
@@ -652,17 +648,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                   comment: columnCommentsRecord
                                                       .comment,
                                                 );
-                                              }).divide(SizedBox(height: 4.0)),
+                                              }).divide(const SizedBox(height: 4.0)),
                                             ),
                                           );
                                         },
                                       ),
                                     ),
                                     if (widget
-                                            .thread?.thread?.comments?.length ==
-                                        0)
+                                            .thread?.thread.comments.isEmpty)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 15.0, 10.0, 15.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -683,7 +678,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                 ),
                                 if (widget.thread!.thread.comments.length > 3)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 10.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -741,7 +736,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
                       width: double.infinity,
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minHeight: 170.0,
                         maxHeight: 1000.0,
                       ),
@@ -751,7 +746,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -761,7 +756,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 0.0),
                                   child: Container(
                                     width: double.infinity,
@@ -779,7 +774,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                           isEqualTo: widget
                                                   .thread!.thread.isStealth
                                               ? 'anon'
-                                              : widget.thread?.thread?.author,
+                                              : widget.thread?.thread.author,
                                         ),
                                         singleRecord: true,
                                       ),
@@ -837,7 +832,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Container(
@@ -845,7 +840,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                       height: 50.0,
                                                       clipBehavior:
                                                           Clip.antiAlias,
-                                                      decoration: BoxDecoration(
+                                                      decoration: const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Image.network(
@@ -860,7 +855,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Column(
@@ -898,7 +893,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                             widget
                                                                         .thread
                                                                         ?.thread
-                                                                        ?.isStealth ==
+                                                                        .isStealth ==
                                                                     true
                                                                 ? '@Anonymous'
                                                                 : '@${rowUsersRecord?.displayName}',
@@ -920,12 +915,12 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 20.0, 0.0),
                                               child: Text(
                                                 valueOrDefault<String>(
-                                                  '${widget.thread!.thread.netVotes > 0 ? '+' : ' '}${widget.thread?.thread?.netVotes?.toString()}',
+                                                  '${widget.thread!.thread.netVotes > 0 ? '+' : ' '}${widget.thread?.thread.netVotes.toString()}',
                                                   '0',
                                                 ),
                                                 style: FlutterFlowTheme.of(
@@ -939,7 +934,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           if (widget
                                                                   .thread
                                                                   ?.thread
-                                                                  ?.netVotes ==
+                                                                  .netVotes ==
                                                               0) {
                                                             return FlutterFlowTheme
                                                                     .of(context)
@@ -949,10 +944,10 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                   .thread
                                                                   .netVotes >
                                                               0) {
-                                                            return Color(
+                                                            return const Color(
                                                                 0xFF21E744);
                                                           } else {
-                                                            return Color(
+                                                            return const Color(
                                                                 0xFFE5200B);
                                                           }
                                                         }(),
@@ -971,9 +966,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
+                                  alignment: const AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 4.0, 0.0, 0.0),
                                     child: Text(
                                       widget.thread!.thread.title,
@@ -988,9 +983,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
+                                  alignment: const AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 4.0),
                                     child: Text(
                                       dateTimeFormat(
@@ -1017,10 +1012,10 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         999)
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-1.00, 0.00),
+                                            const AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: SelectionArea(
                                               child: AutoSizeText(
@@ -1039,11 +1034,11 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     if (valueOrDefault<bool>(
                                       functions.getStringLength(
                                               widget.thread!.thread.text) >
-                                          999,
+                                          1499,
                                       true,
                                     ))
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
@@ -1057,7 +1052,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 5.0, 0.0),
                                                 child: Container(
@@ -1102,7 +1097,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                           .summary) >
                                                   5)
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 10.0, 0.0, 0.0),
                                                   child: Container(
@@ -1125,7 +1120,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       3.0,
                                                                       3.0,
@@ -1138,7 +1133,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                             children: [
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             5.0,
                                                                             0.0,
@@ -1155,7 +1150,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                               ),
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             8.0,
                                                                             0.0,
@@ -1185,7 +1180,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -1196,10 +1191,10 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                 double.infinity,
                                                             height: 62.0,
                                                             decoration:
-                                                                BoxDecoration(),
+                                                                const BoxDecoration(),
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -1217,7 +1212,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                           .start,
                                                                   children: [
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           3.0,
                                                                           0.0,
                                                                           0.0,
@@ -1255,7 +1250,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   3.0, 0.0, 5.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1266,24 +1261,24 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   Container(
                                     width: 160.0,
                                     height: 45.0,
-                                    decoration: BoxDecoration(),
+                                    decoration: const BoxDecoration(),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     2.0, 0.0, 5.0, 0.0),
                                             child: Stack(
                                               children: [
                                                 if ((widget.thread?.thread
-                                                                ?.link !=
+                                                                .link !=
                                                             null &&
                                                         widget.thread?.thread
-                                                                ?.link !=
+                                                                .link !=
                                                             '') &&
                                                     (functions
                                                             .identifySocialMediaPlatform(
@@ -1294,8 +1289,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         -1))
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
                                                         await showModalBottomSheet(
@@ -1316,7 +1311,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                 link: widget
                                                                     .thread
                                                                     ?.thread
-                                                                    ?.link,
+                                                                    .link,
                                                               ),
                                                             );
                                                           },
@@ -1333,21 +1328,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         width: 110.0,
                                                         height: 37.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
+                                                            const EdgeInsets.all(0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            Color(0xFFDA721A),
+                                                            const Color(0xFFDA721A),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1361,7 +1351,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                       FontWeight
                                                                           .normal,
                                                                 ),
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                         ),
@@ -1372,12 +1362,11 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     ),
                                                   ),
                                                 if (widget.thread!.thread
-                                                        .hashtags.length >
-                                                    0)
+                                                        .hashtags.isNotEmpty)
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
                                                         await showModalBottomSheet(
@@ -1416,21 +1405,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         width: 110.0,
                                                         height: 37.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
+                                                            const EdgeInsets.all(0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            Color(0xFF284EFB),
+                                                            const Color(0xFF284EFB),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1444,7 +1428,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                       FontWeight
                                                                           .normal,
                                                                 ),
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                         ),
@@ -1455,18 +1439,17 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     ),
                                                   ),
                                                 if ((widget.thread?.thread
-                                                                ?.link !=
+                                                                .link !=
                                                             null &&
                                                         widget.thread?.thread
-                                                                ?.link !=
+                                                                .link !=
                                                             '') &&
                                                     (widget.thread!.thread
-                                                            .hashtags.length >
-                                                        0))
+                                                            .hashtags.isNotEmpty))
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
                                                         await showModalBottomSheet(
@@ -1510,14 +1493,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         width: 110.0,
                                                         height: 37.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
+                                                            const EdgeInsets.all(0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -1541,7 +1519,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                                       FontWeight
                                                                           .normal,
                                                                 ),
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                         ),
@@ -1819,22 +1797,17 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                             ),
                                           ),
                                           if (widget.thread?.thread
-                                                  ?.isPolitical ==
+                                                  .isPolitical ==
                                               true)
                                             Stack(
                                               children: [
                                                 if (widget.thread?.thread
-                                                        ?.politicalPosition ==
+                                                        .politicalPosition ==
                                                     1)
                                                   AlignedTooltip(
                                                     content: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0),
+                                                            const EdgeInsets.all(4.0),
                                                         child: Text(
                                                           FFLocalizations.of(
                                                                   context)
@@ -1858,9 +1831,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     elevation: 4.0,
                                                     tailBaseWidth: 24.0,
                                                     tailLength: 12.0,
-                                                    waitDuration: Duration(
+                                                    waitDuration: const Duration(
                                                         milliseconds: 50),
-                                                    showDuration: Duration(
+                                                    showDuration: const Duration(
                                                         milliseconds: 100),
                                                     triggerMode:
                                                         TooltipTriggerMode.tap,
@@ -1868,7 +1841,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                       visible: widget
                                                               .thread
                                                               ?.thread
-                                                              ?.politicalPosition ==
+                                                              .politicalPosition ==
                                                           1,
                                                       child:
                                                           FlutterFlowIconButton(
@@ -1876,8 +1849,8 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                         borderWidth: 0.0,
                                                         buttonSize: 37.0,
                                                         fillColor:
-                                                            Color(0xFFE5200B),
-                                                        icon: Icon(
+                                                            const Color(0xFFE5200B),
+                                                        icon: const Icon(
                                                           Icons
                                                               .local_fire_department_outlined,
                                                           color: Colors.white,
@@ -1891,17 +1864,12 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     ),
                                                   ),
                                                 if (widget.thread?.thread
-                                                        ?.politicalPosition ==
+                                                        .politicalPosition ==
                                                     0)
                                                   AlignedTooltip(
                                                     content: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0),
+                                                            const EdgeInsets.all(4.0),
                                                         child: Text(
                                                           FFLocalizations.of(
                                                                   context)
@@ -1925,9 +1893,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     elevation: 4.0,
                                                     tailBaseWidth: 24.0,
                                                     tailLength: 12.0,
-                                                    waitDuration: Duration(
+                                                    waitDuration: const Duration(
                                                         milliseconds: 50),
-                                                    showDuration: Duration(
+                                                    showDuration: const Duration(
                                                         milliseconds: 100),
                                                     triggerMode:
                                                         TooltipTriggerMode.tap,
@@ -1935,7 +1903,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                       visible: widget
                                                               .thread
                                                               ?.thread
-                                                              ?.politicalPosition ==
+                                                              .politicalPosition ==
                                                           0,
                                                       child:
                                                           FlutterFlowIconButton(
@@ -1961,17 +1929,12 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     ),
                                                   ),
                                                 if (widget.thread?.thread
-                                                        ?.politicalPosition ==
+                                                        .politicalPosition ==
                                                     -1)
                                                   AlignedTooltip(
                                                     content: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0,
-                                                                    4.0),
+                                                            const EdgeInsets.all(4.0),
                                                         child: Text(
                                                           FFLocalizations.of(
                                                                   context)
@@ -1995,9 +1958,9 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                     elevation: 4.0,
                                                     tailBaseWidth: 24.0,
                                                     tailLength: 12.0,
-                                                    waitDuration: Duration(
+                                                    waitDuration: const Duration(
                                                         milliseconds: 50),
-                                                    showDuration: Duration(
+                                                    showDuration: const Duration(
                                                         milliseconds: 100),
                                                     triggerMode:
                                                         TooltipTriggerMode.tap,
@@ -2005,15 +1968,15 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                       visible: widget
                                                               .thread
                                                               ?.thread
-                                                              ?.politicalPosition ==
+                                                              .politicalPosition ==
                                                           -1,
                                                       child:
                                                           FlutterFlowIconButton(
                                                         borderRadius: 20.0,
                                                         buttonSize: 37.0,
                                                         fillColor:
-                                                            Color(0xFF284EFB),
-                                                        icon: FaIcon(
+                                                            const Color(0xFF284EFB),
+                                                        icon: const FaIcon(
                                                           FontAwesomeIcons.dove,
                                                           color: Colors.white,
                                                           size: 17.0,
@@ -2211,7 +2174,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         if (!widget.isComment)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 3.0, 0.0),
                                             child: FlutterFlowIconButton(
                                               borderRadius: 20.0,
@@ -2254,7 +2217,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 0.0),
                                     child: Row(
@@ -2269,7 +2232,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                     color: FlutterFlowTheme.of(context).accent4,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -2291,7 +2254,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   Stack(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child:
                                             StreamBuilder<List<CommentsRecord>>(
@@ -2300,7 +2263,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                 commentsRecord.where(
                                               'comment.idReplyTo',
                                               isEqualTo:
-                                                  widget.thread?.thread?.id,
+                                                  widget.thread?.thread.id,
                                             ),
                                             limit: 3,
                                           ),
@@ -2340,18 +2303,16 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                                             .comment,
                                                   );
                                                 }).divide(
-                                                    SizedBox(height: 4.0)),
+                                                    const SizedBox(height: 4.0)),
                                               ),
                                             );
                                           },
                                         ),
                                       ),
-                                      if (widget.thread?.thread?.comments
-                                              ?.length ==
-                                          0)
+                                      if (widget.thread?.thread.comments.isEmpty)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 15.0, 10.0, 15.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -2372,7 +2333,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                   ),
                                   if (widget.thread!.thread.comments.length > 3)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           15.0, 0.0, 10.0, 15.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,

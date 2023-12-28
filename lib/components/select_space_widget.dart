@@ -4,17 +4,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'select_space_model.dart';
 export 'select_space_model.dart';
 
 class SelectSpaceWidget extends StatefulWidget {
-  const SelectSpaceWidget({Key? key}) : super(key: key);
+  const SelectSpaceWidget({super.key});
 
   @override
   _SelectSpaceWidgetState createState() => _SelectSpaceWidgetState();
@@ -71,12 +68,12 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
         Container(
           width: 600.0,
           height: 400.0,
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 600.0,
           ),
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(0.0),
               topLeft: Radius.circular(30.0),
@@ -89,12 +86,12 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                 child: Container(
                   width: double.infinity,
                   height: 50.0,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
                       stops: [0.0, 1.0],
                       begin: AlignmentDirectional(1.0, 0.0),
@@ -108,13 +105,13 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 5.0, 0.0),
                         child: FlutterFlowIconButton(
                           borderColor: Colors.white,
                           borderRadius: 30.0,
                           borderWidth: 3.0,
                           buttonSize: 40.0,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back_rounded,
                             color: Colors.white,
                             size: 20.0,
@@ -130,9 +127,9 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.00, 0.00),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 25.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -158,8 +155,7 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: StreamBuilder<List<SpacesRecord>>(
                     stream: querySpacesRecord(),
                     builder: (context, snapshot) {
@@ -249,7 +245,7 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
                                     width: double.infinity,
                                     height: 100.0,
                                     decoration: BoxDecoration(
-                                      color: Color(0xA814181B),
+                                      color: const Color(0xA814181B),
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Column(
@@ -274,8 +270,8 @@ class _SelectSpaceWidgetState extends State<SelectSpaceWidget>
                               ],
                             );
                           })
-                              .divide(SizedBox(height: 10.0))
-                              .addToStart(SizedBox(height: 10.0)),
+                              .divide(const SizedBox(height: 10.0))
+                              .addToStart(const SizedBox(height: 10.0)),
                         ),
                       ).animateOnPageLoad(
                           animationsMap['columnOnPageLoadAnimation']!);
