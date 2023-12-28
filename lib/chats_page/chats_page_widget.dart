@@ -499,12 +499,7 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                               chatsPageChatsRecord
                                                           .users.length ==
                                                       2
-                                                  ? functions.returnOtherUser(
-                                                      currentUserUid,
-                                                      chatsPageChatsRecord
-                                                          .users.first,
-                                                      chatsPageChatsRecord
-                                                          .users.last)
+                                                  ? textUsersRecord?.displayName
                                                   : chatsPageChatsRecord.title,
                                               'Chat',
                                             ),
