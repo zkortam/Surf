@@ -1,21 +1,17 @@
 import 'dart:async';
 
-import 'package:from_css_color/from_css_color.dart';
-import '/backend/algolia/serialization_util.dart';
 import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class ThreadRecord extends FirestoreRecord {
   ThreadRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -24,8 +20,20 @@ class ThreadRecord extends FirestoreRecord {
   ThreadStruct get thread => _thread ?? ThreadStruct();
   bool hasThread() => _thread != null;
 
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "text" field.
+  String? _text;
+  String get text => _text ?? '';
+  bool hasText() => _text != null;
+
   void _initializeFields() {
     _thread = ThreadStruct.maybeFromMap(snapshotData['thread']);
+    _title = snapshotData['title'] as String?;
+    _text = snapshotData['text'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -53,6 +61,8 @@ class ThreadRecord extends FirestoreRecord {
         {
           'thread': ThreadStruct.fromAlgoliaData(snapshot.data['thread'] ?? {})
               .toMap(),
+          'title': snapshot.data['title'],
+          'text': snapshot.data['text'],
         },
         ThreadRecord.collection.doc(snapshot.objectID),
       );
@@ -90,10 +100,14 @@ class ThreadRecord extends FirestoreRecord {
 
 Map<String, dynamic> createThreadRecordData({
   ThreadStruct? thread,
+  String? title,
+  String? text,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'thread': ThreadStruct().toMap(),
+      'title': title,
+      'text': text,
     }.withoutNulls,
   );
 
@@ -108,11 +122,14 @@ class ThreadRecordDocumentEquality implements Equality<ThreadRecord> {
 
   @override
   bool equals(ThreadRecord? e1, ThreadRecord? e2) {
-    return e1?.thread == e2?.thread;
+    return e1?.thread == e2?.thread &&
+        e1?.title == e2?.title &&
+        e1?.text == e2?.text;
   }
 
   @override
-  int hash(ThreadRecord? e) => const ListEquality().hash([e?.thread]);
+  int hash(ThreadRecord? e) =>
+      const ListEquality().hash([e?.thread, e?.title, e?.text]);
 
   @override
   bool isValidKey(Object? o) => o is ThreadRecord;

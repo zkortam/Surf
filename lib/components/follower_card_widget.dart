@@ -5,21 +5,18 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'follower_card_model.dart';
 export 'follower_card_model.dart';
 
 class FollowerCardWidget extends StatefulWidget {
   const FollowerCardWidget({
-    Key? key,
+    super.key,
     required this.user,
     required this.id,
-  }) : super(key: key);
+  });
 
   final UsersRecord? user;
   final String? id;
@@ -112,7 +109,7 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                       ),
                     }.withoutNulls,
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                       ),
@@ -124,12 +121,12 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                       child: Container(
                         width: 45.0,
                         height: 45.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
@@ -140,7 +137,7 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -179,19 +176,19 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
             children: [
               if ((functions.stringInArr(
                           widget.user!.uid,
-                          (currentUserDocument?.following?.toList() ?? [])
+                          (currentUserDocument?.following.toList() ?? [])
                               .toList()) ==
                       false) &&
                   (currentUserUid != widget.user?.uid))
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => FlutterFlowIconButton(
                       borderRadius: 20.0,
                       borderWidth: 0.0,
                       buttonSize: 40.0,
                       fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.person_add,
                         color: Colors.white,
                         size: 20.0,
@@ -220,7 +217,7 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                 ),
               if (currentUserUid == widget.id)
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       await currentUserReference!.update({
@@ -247,9 +244,9 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryText,
                       textStyle: FlutterFlowTheme.of(context)
                           .titleSmall
@@ -259,7 +256,7 @@ class _FollowerCardWidgetState extends State<FollowerCardWidget> {
                                 FlutterFlowTheme.of(context).primaryBackground,
                           ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

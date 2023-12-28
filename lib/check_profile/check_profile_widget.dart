@@ -1,18 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'check_profile_model.dart';
 export 'check_profile_model.dart';
 
 class CheckProfileWidget extends StatefulWidget {
-  const CheckProfileWidget({Key? key}) : super(key: key);
+  const CheckProfileWidget({super.key});
 
   @override
   _CheckProfileWidgetState createState() => _CheckProfileWidgetState();
@@ -30,15 +27,11 @@ class _CheckProfileWidgetState extends State<CheckProfileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((currentUserPhoto != null && currentUserPhoto != '') &&
-          (valueOrDefault(currentUserDocument?.banner, '') != null &&
-              valueOrDefault(currentUserDocument?.banner, '') != '') &&
-          (valueOrDefault(currentUserDocument?.pincode, '') != null &&
-              valueOrDefault(currentUserDocument?.pincode, '') != '') &&
-          (valueOrDefault(currentUserDocument?.realName, '') != null &&
-              valueOrDefault(currentUserDocument?.realName, '') != '') &&
-          (valueOrDefault(currentUserDocument?.bio, '') != null &&
-              valueOrDefault(currentUserDocument?.bio, '') != '')) {
+      if ((currentUserPhoto != '') &&
+          (valueOrDefault(currentUserDocument?.banner, '') != '') &&
+          (valueOrDefault(currentUserDocument?.pincode, '') != '') &&
+          (valueOrDefault(currentUserDocument?.realName, '') != '') &&
+          (valueOrDefault(currentUserDocument?.bio, '') != '')) {
         // Proceed
 
         context.goNamed('Home');
@@ -91,9 +84,9 @@ class _CheckProfileWidgetState extends State<CheckProfileWidget> {
                     FlutterFlowTheme.of(context).primary,
                     FlutterFlowTheme.of(context).secondary
                   ],
-                  stops: [0.0, 1.0],
-                  begin: AlignmentDirectional(0.0, -1.0),
-                  end: AlignmentDirectional(0, 1.0),
+                  stops: const [0.0, 1.0],
+                  begin: const AlignmentDirectional(0.0, -1.0),
+                  end: const AlignmentDirectional(0, 1.0),
                 ),
               ),
               child: Column(

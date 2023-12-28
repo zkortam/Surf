@@ -2,18 +2,15 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'view_image_model.dart';
 export 'view_image_model.dart';
 
 class ViewImageWidget extends StatefulWidget {
   const ViewImageWidget({
-    Key? key,
+    super.key,
     required this.image,
-  }) : super(key: key);
+  });
 
   final String? image;
 
@@ -50,7 +47,7 @@ class _ViewImageWidgetState extends State<ViewImageWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
@@ -64,9 +61,9 @@ class _ViewImageWidgetState extends State<ViewImageWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Align(
-              alignment: AlignmentDirectional(-1.00, 0.00),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 20.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 20.0),
                 child: FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primaryText,
                   borderRadius: 20.0,
@@ -84,11 +81,11 @@ class _ViewImageWidgetState extends State<ViewImageWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
               child: Container(
                 width: double.infinity,
                 height: 700.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(

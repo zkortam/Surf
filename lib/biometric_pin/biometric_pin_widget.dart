@@ -4,20 +4,16 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 import 'biometric_pin_model.dart';
 export 'biometric_pin_model.dart';
 
 class BiometricPinWidget extends StatefulWidget {
-  const BiometricPinWidget({Key? key}) : super(key: key);
+  const BiometricPinWidget({super.key});
 
   @override
   _BiometricPinWidgetState createState() => _BiometricPinWidgetState();
@@ -45,22 +41,22 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 140.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 140.0),
+          end: const Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.9, 0.9),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.9, 0.9),
+          end: const Offset(1.0, 1.0),
         ),
         TiltEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(-0.349, 0),
-          end: Offset(0, 0),
+          begin: const Offset(-0.349, 0),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -112,7 +108,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0xFF6E09B3), Color(0xFF040F46)],
                         stops: [0.0, 1.0],
@@ -120,23 +116,22 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                         end: AlignmentDirectional(-0.87, 1.0),
                       ),
                     ),
-                    alignment: AlignmentDirectional(0.00, -1.00),
+                    alignment: const AlignmentDirectional(0.0, -1.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             height: 200.0,
-                            constraints: BoxConstraints(
+                            constraints: const BoxConstraints(
                               maxWidth: 570.0,
                             ),
                             decoration: BoxDecoration(
-                              color: Color(0xFF161A1D),
-                              boxShadow: [
+                              color: const Color(0xFF161A1D),
+                              boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 4.0,
                                   color: Color(0x33000000),
@@ -146,7 +141,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, -0.30),
+                              alignment: const AlignmentDirectional(0.0, -0.3),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +159,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                         ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         44.0, 8.0, 44.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
@@ -182,7 +177,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -191,19 +186,19 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                       children: [
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            var _shouldSetState = false;
-                                            final _localAuth =
+                                            var shouldSetState = false;
+                                            final localAuth =
                                                 LocalAuthentication();
-                                            bool _isBiometricSupported =
-                                                await _localAuth
+                                            bool isBiometricSupported =
+                                                await localAuth
                                                     .isDeviceSupported();
                                             bool canCheckBiometrics =
-                                                await _localAuth
+                                                await localAuth
                                                     .canCheckBiometrics;
-                                            if (_isBiometricSupported &&
+                                            if (isBiometricSupported &&
                                                 canCheckBiometrics) {
                                               _model.isBiometric =
-                                                  await _localAuth.authenticate(
+                                                  await localAuth.authenticate(
                                                       localizedReason:
                                                           FFLocalizations.of(
                                                                   context)
@@ -217,8 +212,8 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                               setState(() {});
                                             }
 
-                                            _shouldSetState = true;
-                                            if (_model.isBiometric!) {
+                                            shouldSetState = true;
+                                            if (_model.isBiometric) {
                                               context.goNamed('welcome');
 
                                               await currentUserReference!
@@ -226,13 +221,15 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                                 isBiometric: true,
                                               ));
                                             } else {
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             }
 
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(
@@ -241,11 +238,9 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                           options: FFButtonOptions(
                                             width: 120.0,
                                             height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
+                                            padding: const EdgeInsets.all(0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: Colors.white,
                                             textStyle:
@@ -256,7 +251,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                                       color: Colors.black,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -266,7 +261,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -284,9 +279,8 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                             options: FFButtonOptions(
                                               width: 120.0,
                                               height: 40.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              padding: const EdgeInsets.all(0.0),
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -299,7 +293,7 @@ class _BiometricPinWidgetState extends State<BiometricPinWidget>
                                                         color: Colors.white,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),

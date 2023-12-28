@@ -7,7 +7,7 @@ bool _isVideoPath(String path) =>
     _kSupportedVideoMimes.contains(mime(path.split('?').first));
 
 class FlutterFlowMediaDisplay extends StatelessWidget {
-  const FlutterFlowMediaDisplay({
+  const FlutterFlowMediaDisplay({super.key, 
     required this.path,
     required this.imageBuilder,
     required this.videoPlayerBuilder,

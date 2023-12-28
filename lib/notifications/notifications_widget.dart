@@ -7,19 +7,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notifications_model.dart';
 export 'notifications_model.dart';
 
 class NotificationsWidget extends StatefulWidget {
-  const NotificationsWidget({Key? key}) : super(key: key);
+  const NotificationsWidget({super.key});
 
   @override
   _NotificationsWidgetState createState() => _NotificationsWidgetState();
@@ -39,8 +35,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 48.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 48.0),
+          end: const Offset(0.0, 0.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -104,7 +100,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                     wrapWithModel(
                       model: _model.pCNavBarModel,
                       updateCallback: () => setState(() {}),
-                      child: PCNavBarWidget(
+                      child: const PCNavBarWidget(
                         currentPage: 2,
                       ),
                     ),
@@ -116,14 +112,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                         Flexible(
                           child: Container(
                             width: 600.0,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 if (!valueOrDefault<bool>(
                                     currentUserDocument?.isSilentMode, false))
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: AuthUserStreamWidget(
                                       builder: (context) => Column(
@@ -131,7 +127,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 10.0, 0.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
@@ -153,7 +149,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -162,7 +158,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       3.0,
                                                                       0.0,
@@ -173,7 +169,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                             height: 40.0,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xFFE2414B),
                                                               borderRadius:
                                                                   BorderRadius
@@ -191,7 +187,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 Text(
                                                                   (currentUserDocument
                                                                               ?.notifications
-                                                                              ?.toList() ??
+                                                                              .toList() ??
                                                                           [])
                                                                       .where((e) =>
                                                                           e.category ==
@@ -217,7 +213,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -264,7 +260,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     3.0,
                                                                     0.0,
@@ -294,7 +290,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                               Text(
                                                                 (currentUserDocument
                                                                             ?.notifications
-                                                                            ?.toList() ??
+                                                                            .toList() ??
                                                                         [])
                                                                     .where((e) =>
                                                                         e.category ==
@@ -325,7 +321,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -369,7 +365,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Row(
@@ -378,7 +374,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       3.0,
                                                                       0.0,
@@ -408,7 +404,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 Text(
                                                                   (currentUserDocument
                                                                               ?.notifications
-                                                                              ?.toList() ??
+                                                                              .toList() ??
                                                                           [])
                                                                       .where((e) =>
                                                                           e.category ==
@@ -438,7 +434,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -478,7 +474,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 20.0, 10.0, 5.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -506,7 +502,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 5.0, 0.0),
                                                   child: FFButtonWidget(
@@ -546,7 +542,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                   .viewInsetsOf(
                                                                       context),
                                                               child:
-                                                                  BottomNotifWidget(
+                                                                  const BottomNotifWidget(
                                                                 text:
                                                                     'Notifications cleared',
                                                               ),
@@ -564,14 +560,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                     options: FFButtonOptions(
                                                       height: 26.0,
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   24.0,
                                                                   0.0,
                                                                   24.0,
                                                                   0.0),
                                                       iconPadding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -593,7 +589,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 fontSize: 11.0,
                                                               ),
                                                       elevation: 3.0,
-                                                      borderSide: BorderSide(
+                                                      borderSide: const BorderSide(
                                                         color:
                                                             Colors.transparent,
                                                         width: 1.0,
@@ -609,14 +605,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 10.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
                                                 final notifications =
                                                     (currentUserDocument
                                                                 ?.notifications
-                                                                ?.toList() ??
+                                                                .toList() ??
                                                             [])
                                                         .where((e) =>
                                                             e.isMarkedAsRead ==
@@ -640,7 +636,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                         animationsMap[
                                                             'notificationOnPageLoadAnimation']!);
                                                   }).divide(
-                                                      SizedBox(height: 5.0)),
+                                                      const SizedBox(height: 5.0)),
                                                 );
                                               },
                                             ),
@@ -653,8 +649,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                     currentUserDocument?.isSilentMode, false))
                                   Flexible(
                                     child: Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: AuthUserStreamWidget(
                                         builder: (context) => Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -693,7 +688,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: Icon(
@@ -707,7 +702,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
@@ -737,21 +732,21 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       options: FFButtonOptions(
                                                         height: 44.0,
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     24.0,
                                                                     0.0,
                                                                     24.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            Color(0xFFD98131),
+                                                            const Color(0xFFD98131),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -763,7 +758,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                       .white,
                                                                 ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,

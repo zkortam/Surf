@@ -5,21 +5,16 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'p_c_nav_bar_model.dart';
 export 'p_c_nav_bar_model.dart';
 
 class PCNavBarWidget extends StatefulWidget {
   const PCNavBarWidget({
-    Key? key,
+    super.key,
     this.currentPage,
-  }) : super(key: key);
+  });
 
   final int? currentPage;
 
@@ -65,7 +60,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
           if (!valueOrDefault<bool>(currentUserDocument?.isCompressed, false) ||
               (!_model.isCollapsed && _model.isFirstTime))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 5.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 5.0),
               child: AuthUserStreamWidget(
                 builder: (context) => Container(
                   width: 248.0,
@@ -79,13 +74,13 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 15.0, 16.0, 24.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -96,7 +91,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   context.pushNamed(
                                     'Home',
                                     extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
+                                      kTransitionInfoKey: const TransitionInfo(
                                         hasTransition: true,
                                         transitionType: PageTransitionType.fade,
                                       ),
@@ -111,7 +106,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       width: 45.0,
                                       height: 45.0,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.asset(
@@ -120,7 +115,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -146,7 +141,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               color: FlutterFlowTheme.of(context).accent4,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -157,7 +152,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -168,7 +163,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'Home',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -189,7 +184,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -210,7 +205,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -221,7 +216,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -232,7 +227,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'Threads',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -245,15 +240,15 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        FaIcon(
-                                          FontAwesomeIcons.bullseye,
+                                        Icon(
+                                          Icons.gesture,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
                                           size: 26.0,
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   11.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -274,7 +269,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -285,7 +280,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -296,7 +291,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'Notifications',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -317,7 +312,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -338,7 +333,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -349,7 +344,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -360,7 +355,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'chat_main',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -381,7 +376,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -402,7 +397,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -413,7 +408,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -424,7 +419,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'Search',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -445,7 +440,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -466,7 +461,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -477,7 +472,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -488,7 +483,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'enterPin',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -509,7 +504,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -530,13 +525,13 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
                                 height: 50.0,
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                     colors: [
                                       Color(0xFF9F1CFA),
                                       Color(0xFF0D28A2)
@@ -556,7 +551,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     context.pushNamed(
                                       'createPost',
                                       extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
+                                        kTransitionInfoKey: const TransitionInfo(
                                           hasTransition: true,
                                           transitionType:
                                               PageTransitionType.fade,
@@ -590,12 +585,12 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 15.0, 25.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -614,8 +609,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        7.0, 7.0, 7.0, 7.0),
+                                    padding: const EdgeInsets.all(7.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -636,7 +630,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: LogoutCompWidget(),
+                                                  child: const LogoutCompWidget(),
                                                 );
                                               },
                                             ).then(
@@ -646,7 +640,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                             width: 50.0,
                                             height: 50.0,
                                             clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
                                             child: Image.network(
@@ -657,7 +651,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 0.0, 0.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -680,7 +674,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                '@${currentUserDisplayName}',
+                                                '@$currentUserDisplayName',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
@@ -695,7 +689,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   26.0, 0.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -723,7 +717,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       size: 25.0,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -755,7 +749,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
           if (valueOrDefault<bool>(currentUserDocument?.isCompressed, false) ||
               (_model.isCollapsed && _model.isFirstTime))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 5.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 5.0),
               child: AuthUserStreamWidget(
                 builder: (context) => Container(
                   width: 88.0,
@@ -769,13 +763,13 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 15.0, 16.0, 24.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -790,7 +784,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'Home',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -802,7 +796,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       width: 45.0,
                                       height: 45.0,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.asset(
@@ -819,7 +813,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               color: FlutterFlowTheme.of(context).accent4,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -830,7 +824,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -838,9 +832,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -868,9 +860,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -882,7 +874,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'Home',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -907,7 +899,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -918,7 +910,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -926,9 +918,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -956,9 +946,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -970,7 +960,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'Threads',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -978,8 +968,8 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               },
                                             );
                                           },
-                                          child: FaIcon(
-                                            FontAwesomeIcons.bullseye,
+                                          child: Icon(
+                                            Icons.gesture,
                                             color: widget.currentPage == 1
                                                 ? FlutterFlowTheme.of(context)
                                                     .primaryText
@@ -995,7 +985,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -1006,7 +996,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1014,9 +1004,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -1044,9 +1032,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1058,7 +1046,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'Notifications',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -1083,7 +1071,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -1094,7 +1082,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1102,9 +1090,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -1132,9 +1118,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1146,7 +1132,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'chat_main',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -1171,7 +1157,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -1182,7 +1168,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1190,9 +1176,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -1220,9 +1204,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1234,7 +1218,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'Search',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -1259,7 +1243,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 12.0),
                               child: Container(
                                 width: double.infinity,
@@ -1270,7 +1254,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1278,9 +1262,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                     children: [
                                       AlignedTooltip(
                                         content: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 4.0, 4.0, 4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -1308,9 +1290,9 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                         tailBaseWidth: 24.0,
                                         tailLength: 12.0,
                                         waitDuration:
-                                            Duration(milliseconds: 50),
+                                            const Duration(milliseconds: 50),
                                         showDuration:
-                                            Duration(milliseconds: 100),
+                                            const Duration(milliseconds: 100),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1322,7 +1304,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                               'enterPin',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    TransitionInfo(
+                                                    const TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -1350,7 +1332,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 12.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -1361,7 +1343,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       context.pushNamed(
                                         'createPost',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -1373,7 +1355,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                       width: 50.0,
                                       height: 50.0,
                                       decoration: BoxDecoration(
-                                        gradient: LinearGradient(
+                                        gradient: const LinearGradient(
                                           colors: [
                                             Color(0xFF9F1CFA),
                                             Color(0xFF0D28A2)
@@ -1394,7 +1376,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                           FlutterFlowIconButton(
                                             borderRadius: 40.0,
                                             buttonSize: 40.0,
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.add,
                                               color: Colors.white,
                                               size: 23.0,
@@ -1404,7 +1386,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                                                 'createPost',
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
-                                                      TransitionInfo(
+                                                      const TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
                                                         PageTransitionType.fade,
@@ -1438,7 +1420,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                               width: 50.0,
                               height: 50.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
@@ -1448,7 +1430,7 @@ class _PCNavBarWidgetState extends State<PCNavBarWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 12.0),
                             child: Container(
                               width: double.infinity,

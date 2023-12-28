@@ -1,13 +1,10 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/view_image_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'p_c_comment_light_model.dart';
@@ -15,10 +12,10 @@ export 'p_c_comment_light_model.dart';
 
 class PCCommentLightWidget extends StatefulWidget {
   const PCCommentLightWidget({
-    Key? key,
+    super.key,
     required this.comment,
     required this.authorIDreplyto,
-  }) : super(key: key);
+  });
 
   final CommentStruct? comment;
   final String? authorIDreplyto;
@@ -59,7 +56,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
         width: double.infinity,
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           minHeight: 105.0,
           maxHeight: 550.0,
         ),
@@ -67,7 +64,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +74,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(3.0, 3.0, 3.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 3.0, 3.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       height: 45.0,
@@ -137,13 +134,13 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Container(
                                         width: 35.0,
                                         height: 35.0,
                                         clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.network(
@@ -156,7 +153,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -197,7 +194,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: StreamBuilder<List<UsersRecord>>(
                                   stream: queryUsersRecord(
@@ -248,7 +245,7 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                                             ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -288,10 +285,10 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.00, 0.00),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(7.0, 5.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(7.0, 5.0, 0.0, 0.0),
                       child: Text(
                         dateTimeFormat(
                           'M/d h:mm a',
@@ -307,10 +304,10 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.00, 0.00),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
                       child: SelectionArea(
                           child: AutoSizeText(
                         widget.comment!.text.maybeHandleOverflow(maxChars: 400),
@@ -324,13 +321,13 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                   ),
                 ],
               ),
-              if (widget.comment?.imageHash?.image != null &&
-                  widget.comment?.imageHash?.image != '')
+              if (widget.comment?.imageHash.image != null &&
+                  widget.comment?.imageHash.image != '')
                 Align(
-                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 10.0),
                     child: Container(
                       width: double.infinity,
                       height: 340.0,
@@ -338,8 +335,8 @@ class _PCCommentLightWidgetState extends State<PCCommentLightWidget> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Visibility(
-                        visible: widget.comment?.imageHash?.image != null &&
-                            widget.comment?.imageHash?.image != '',
+                        visible: widget.comment?.imageHash.image != null &&
+                            widget.comment?.imageHash.image != '',
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,

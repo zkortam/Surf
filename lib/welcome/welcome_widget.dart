@@ -3,18 +3,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'welcome_model.dart';
 export 'welcome_model.dart';
 
 class WelcomeWidget extends StatefulWidget {
-  const WelcomeWidget({Key? key}) : super(key: key);
+  const WelcomeWidget({super.key});
 
   @override
   _WelcomeWidgetState createState() => _WelcomeWidgetState();
@@ -34,8 +31,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, -32.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, -32.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -46,8 +43,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 15.999999999999986),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 15.999999999999986),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -96,7 +93,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF9F1CFA), Color(0xFF0D28A2)],
                     stops: [0.0, 1.0],
@@ -104,12 +101,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                     end: AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
-                alignment: AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: FaIcon(
@@ -131,7 +128,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                         animationsMap['textOnPageLoadAnimation']!),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.goNamed('Home');
@@ -142,9 +139,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                         options: FFButtonOptions(
                           width: 150.0,
                           height: 47.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsets.all(0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: Colors.white,
                           textStyle:
@@ -153,7 +149,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                                     color: Colors.black,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

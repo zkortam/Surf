@@ -14,12 +14,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'single_thread_model.dart';
@@ -27,11 +25,11 @@ export 'single_thread_model.dart';
 
 class SingleThreadWidget extends StatefulWidget {
   const SingleThreadWidget({
-    Key? key,
+    super.key,
     required this.thread,
     this.action,
     this.username,
-  }) : super(key: key);
+  });
 
   final ThreadRecord? thread;
   final int? action;
@@ -56,7 +54,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
       _model.currentPageLink = await generateCurrentPageLink(
         context,
         title: '@${widget.username}\'s Thread',
-        description: widget.thread?.thread?.title,
+        description: widget.thread?.thread.title,
         forceRedirect: true,
       );
 
@@ -80,7 +78,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                     : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
-                  child: BottomNotifWidget(
+                  child: const BottomNotifWidget(
                     text: 'Copied to clipboard',
                   ),
                 ),
@@ -140,7 +138,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                       wrapWithModel(
                         model: _model.pCNavBarModel,
                         updateCallback: () => setState(() {}),
-                        child: PCNavBarWidget(),
+                        child: const PCNavBarWidget(),
                       ),
                     Flexible(
                       child: Row(
@@ -150,7 +148,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                           Flexible(
                             child: Container(
                               width: 600.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -162,13 +160,13 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                       desktop: false,
                                     ))
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xFF9F1CFA),
                                                 Color(0xFF0D28A2)
@@ -184,7 +182,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -196,7 +194,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                   borderRadius: 25.0,
                                                   borderWidth: 3.0,
                                                   buttonSize: 40.0,
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.arrow_back_rounded,
                                                     color: Colors.white,
                                                     size: 15.0,
@@ -211,7 +209,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                               .width *
                                                           0.75,
                                                   height: 50.0,
-                                                  decoration: BoxDecoration(),
+                                                  decoration: const BoxDecoration(),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -254,12 +252,12 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                 .where(
                                                   'thread.id',
                                                   isEqualTo:
-                                                      widget.thread?.thread?.id,
+                                                      widget.thread?.thread.id,
                                                 )
                                                 .where(
                                                   'thread.timestamp',
                                                   isEqualTo: widget.thread
-                                                      ?.thread?.timestamp,
+                                                      ?.thread.timestamp,
                                                 ),
                                         singleRecord: true,
                                       ),
@@ -294,7 +292,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 5.0, 5.0),
                                               child: wrapWithModel(
@@ -314,14 +312,14 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                       },
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(15.0),
                                         child: Container(
                                           width: 500.0,
-                                          constraints: BoxConstraints(
+                                          constraints: const BoxConstraints(
                                             minHeight: 150.0,
                                             maxHeight: 500.0,
                                           ),
@@ -333,7 +331,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 5.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -349,7 +347,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   3.0,
                                                                   3.0,
@@ -381,7 +379,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                       .max,
                                                               children: [
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -399,7 +397,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                       clipBehavior:
                                                                           Clip.antiAlias,
                                                                       decoration:
-                                                                          BoxDecoration(
+                                                                          const BoxDecoration(
                                                                         shape: BoxShape
                                                                             .circle,
                                                                       ),
@@ -417,7 +415,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -454,7 +452,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                         builder:
                                                                             (context) =>
                                                                                 Text(
-                                                                          '@${currentUserDisplayName}',
+                                                                          '@$currentUserDisplayName',
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
@@ -470,7 +468,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -489,7 +487,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                     isEqualTo: widget
                                                                         .thread
                                                                         ?.thread
-                                                                        ?.author,
+                                                                        .author,
                                                                   ),
                                                                   singleRecord:
                                                                       true,
@@ -588,7 +586,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                   ],
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 10.0, 5.0, 5.0),
                                                   child: TextFormField(
@@ -663,12 +661,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                 .circular(10.0),
                                                       ),
                                                       contentPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  10.0,
-                                                                  10.0,
-                                                                  10.0,
-                                                                  10.0),
+                                                          const EdgeInsets.all(10.0),
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -685,12 +678,10 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                   ),
                                                 ),
                                                 if (_model.uploadedFileUrl !=
-                                                        null &&
-                                                    _model.uploadedFileUrl !=
                                                         '')
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 5.0, 5.0),
                                                     child: Container(
@@ -705,14 +696,11 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                 .circular(20.0),
                                                       ),
                                                       child: Visibility(
-                                                        visible: _model
-                                                                    .uploadedFileUrl !=
-                                                                null &&
-                                                            _model.uploadedFileUrl !=
+                                                        visible: _model.uploadedFileUrl !=
                                                                 '',
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       5.0,
@@ -762,9 +750,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                     ),
                                                   ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 5.0, 5.0, 5.0),
+                                                  padding: const EdgeInsets.all(5.0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -773,7 +759,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -886,7 +872,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                             isEqualTo: widget
                                                                 .thread
                                                                 ?.thread
-                                                                ?.author,
+                                                                .author,
                                                           ),
                                                           singleRecord: true,
                                                         ),
@@ -944,18 +930,18 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                                 getCommentFirestoreData(
                                                                                   createCommentStruct(
                                                                                     isPostComment: false,
-                                                                                    idReplyTo: widget.thread?.thread?.id,
+                                                                                    idReplyTo: widget.thread?.thread.id,
                                                                                     text: _model.textController.text,
                                                                                     authorid: currentUserUid,
                                                                                     timestamp: getCurrentTimestamp,
-                                                                                    id: 'C${currentUserUid}RT${widget.thread?.thread?.author}',
+                                                                                    id: 'C${currentUserUid}RT${widget.thread?.thread.author}',
                                                                                     imageHash: createImageHashStruct(
                                                                                       image: _model.uploadedFileUrl,
                                                                                       blurHash: _model.uploadedLocalFile.blurHash,
                                                                                       clearUnsetFields: false,
                                                                                     ),
                                                                                     isStealth: valueOrDefault<bool>(currentUserDocument?.isStealth, false),
-                                                                                    isAuthorStealth: widget.thread?.thread?.isStealth,
+                                                                                    isAuthorStealth: widget.thread?.thread.isStealth,
                                                                                     clearUnsetFields: false,
                                                                                   ),
                                                                                   true,
@@ -978,14 +964,14 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                             isPostComment:
                                                                                 false,
                                                                             idReplyTo:
-                                                                                widget.thread?.thread?.id,
+                                                                                widget.thread?.thread.id,
                                                                             text:
                                                                                 _model.textController.text,
                                                                             authorid:
                                                                                 currentUserUid,
                                                                             timestamp:
                                                                                 getCurrentTimestamp,
-                                                                            id: 'C${currentUserUid}RT${widget.thread?.thread?.author}',
+                                                                            id: 'C${currentUserUid}RT${widget.thread?.thread.author}',
                                                                             imageHash:
                                                                                 createImageHashStruct(
                                                                               image: _model.uploadedFileUrl,
@@ -996,7 +982,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                             isStealth:
                                                                                 valueOrDefault<bool>(currentUserDocument?.isStealth, false),
                                                                             isAuthorStealth:
-                                                                                widget.thread?.thread?.isStealth,
+                                                                                widget.thread?.thread.isStealth,
                                                                             clearUnsetFields:
                                                                                 false,
                                                                             create:
@@ -1006,7 +992,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                 if (widget
                                                                         .thread
                                                                         ?.thread
-                                                                        ?.author ==
+                                                                        .author ==
                                                                     currentUserUid) {
                                                                   return;
                                                                 }
@@ -1030,11 +1016,11 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                             getNotificationFirestoreData(
                                                                               createNotificationStruct(
                                                                                 category: 1,
-                                                                                itemID: widget.thread?.thread?.id,
+                                                                                itemID: widget.thread?.thread.id,
                                                                                 time: getCurrentTimestamp,
                                                                                 userID: currentUserUid,
                                                                                 isMarkedAsRead: false,
-                                                                                notifID: 'NT${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                                notifID: 'NT${buttonUsersRecord.notifications.length.toString()}',
                                                                                 iDUserFrom: currentUserUid,
                                                                                 clearUnsetFields: false,
                                                                               ),
@@ -1052,15 +1038,12 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                           .textController
                                                                           .text,
                                                                   notificationImageUrl: _model.uploadedFileUrl !=
-                                                                              null &&
-                                                                          _model.uploadedFileUrl !=
                                                                               ''
                                                                       ? _model
                                                                           .uploadedFileUrl
                                                                       : 'null',
                                                                   userRefs: [
-                                                                    buttonUsersRecord!
-                                                                        .reference
+                                                                    buttonUsersRecord.reference
                                                                   ],
                                                                   initialPageName:
                                                                       'singleThread',
@@ -1099,14 +1082,14 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                 FFButtonOptions(
                                                               height: 35.0,
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           24.0,
                                                                           0.0,
                                                                           24.0,
                                                                           0.0),
                                                               iconPadding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -1127,7 +1110,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                                       ),
                                                               elevation: 3.0,
                                                               borderSide:
-                                                                  BorderSide(
+                                                                  const BorderSide(
                                                                 color: Colors
                                                                     .transparent,
                                                                 width: 1.0,
@@ -1150,7 +1133,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child:
                                           StreamBuilder<List<CommentsRecord>>(
@@ -1160,7 +1143,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                   .where(
                                                     'comment.idReplyTo',
                                                     isEqualTo: widget
-                                                        .thread?.thread?.id,
+                                                        .thread?.thread.id,
                                                   )
                                                   .orderBy('comment.timestamp',
                                                       descending: true),
@@ -1194,7 +1177,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                       columnIndex];
                                               return Container(
                                                 width: 500.0,
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Stack(
                                                   children: [
                                                     if (responsiveVisibility(
@@ -1205,12 +1188,7 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                     ))
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0),
+                                                            const EdgeInsets.all(5.0),
                                                         child: CommentWidget(
                                                           key: Key(
                                                               'Keyone_${columnIndex}_of_${columnCommentsRecordList.length}'),

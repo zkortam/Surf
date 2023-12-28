@@ -1,22 +1,19 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notification_model.dart';
 export 'notification_model.dart';
 
 class NotificationWidget extends StatefulWidget {
   const NotificationWidget({
-    Key? key,
+    super.key,
     required this.notification,
-  }) : super(key: key);
+  });
 
   final NotificationStruct? notification;
 
@@ -67,7 +64,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(
                     queryBuilder: (usersRecord) => usersRecord.where(
@@ -110,12 +107,12 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                           'Profile',
                           queryParameters: {
                             'userID': serializeParam(
-                              circleImageUsersRecord?.uid,
+                              circleImageUsersRecord.uid,
                               ParamType.String,
                             ),
                           }.withoutNulls,
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                             ),
@@ -126,7 +123,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                         width: 45.0,
                         height: 45.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
@@ -139,7 +136,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +188,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                 ),
                               }.withoutNulls,
                               extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
+                                kTransitionInfoKey: const TransitionInfo(
                                   hasTransition: true,
                                   transitionType: PageTransitionType.fade,
                                 ),
@@ -275,7 +272,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: FutureBuilder<List<PostsRecord>>(
                       future: queryPostsRecordOnce(
                         queryBuilder: (postsRecord) => postsRecord.where(
@@ -310,7 +307,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                           borderWidth: 0.0,
                           buttonSize: 35.0,
                           fillColor: FlutterFlowTheme.of(context).primary,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.navigate_next,
                             color: Colors.white,
                             size: 20.0,
@@ -334,7 +331,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                   }.withoutNulls,
                                   extra: <String, dynamic>{
                                     'posts': iconButtonPostsRecord,
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                     ),
@@ -351,7 +348,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                   }.withoutNulls,
                                   extra: <String, dynamic>{
                                     'thread': stackThreadRecord,
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                     ),
@@ -371,7 +368,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                     ),
                                   }.withoutNulls,
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                     ),

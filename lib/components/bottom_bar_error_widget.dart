@@ -2,18 +2,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'bottom_bar_error_model.dart';
 export 'bottom_bar_error_model.dart';
 
 class BottomBarErrorWidget extends StatefulWidget {
   const BottomBarErrorWidget({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   final String? text;
 
@@ -56,14 +53,14 @@ class _BottomBarErrorWidgetState extends State<BottomBarErrorWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 1.00),
+      alignment: const AlignmentDirectional(0.0, 1.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
         child: Container(
           width: double.infinity,
           height: 50.0,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color(0xFFF93333), Color(0xFFDA940A)],
               stops: [0.0, 1.0],
               begin: AlignmentDirectional(1.0, 0.0),

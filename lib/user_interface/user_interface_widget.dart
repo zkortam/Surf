@@ -6,12 +6,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'user_interface_model.dart';
@@ -19,10 +16,9 @@ export 'user_interface_model.dart';
 
 class UserInterfaceWidget extends StatefulWidget {
   const UserInterfaceWidget({
-    Key? key,
+    super.key,
     bool? settingsKey,
-  })  : this.settingsKey = settingsKey ?? false,
-        super(key: key);
+  })  : settingsKey = settingsKey ?? false;
 
   final bool settingsKey;
 
@@ -93,7 +89,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(
+                    child: const PCNavBarWidget(
                       currentPage: 5,
                     ),
                   ),
@@ -106,13 +102,13 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 0.0),
                                     child: Material(
                                       color: Colors.transparent,
@@ -125,7 +121,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF9F1CFA),
                                               Color(0xFF0D28A2)
@@ -141,7 +137,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -153,7 +149,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                 borderRadius: 25.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 40.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -170,7 +166,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                     }.withoutNulls,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
-                                                          TransitionInfo(
+                                                          const TransitionInfo(
                                                         hasTransition: true,
                                                         transitionType:
                                                             PageTransitionType
@@ -189,7 +185,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -226,7 +222,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -238,9 +234,9 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                             BorderRadius.circular(15.0),
                                       ),
                                       alignment:
-                                          AlignmentDirectional(-1.00, 0.00),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -249,7 +245,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                           children: [
                                             Flexible(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 child: Text(
@@ -276,7 +272,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
@@ -288,7 +284,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                             BorderRadius.circular(15.0),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -296,7 +292,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 20.0, 0.0, 0.0),
                                               child: Row(
@@ -321,7 +317,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                     Brightness.dark)
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: InkWell(
@@ -344,7 +340,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                         decoration:
                                                             BoxDecoration(
                                                           gradient:
-                                                              LinearGradient(
+                                                              const LinearGradient(
                                                             colors: [
                                                               Color(0xFF1861A0),
                                                               Color(0xFF1A105D)
@@ -364,7 +360,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -407,7 +403,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                     Brightness.light)
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: InkWell(
@@ -430,7 +426,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                         decoration:
                                                             BoxDecoration(
                                                           gradient:
-                                                              LinearGradient(
+                                                              const LinearGradient(
                                                             colors: [
                                                               Color(0xFFD2B41B),
                                                               Color(0xFFC95012)
@@ -450,7 +446,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -491,7 +487,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                               ],
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 10.0),
                                               child: InkWell(
@@ -529,7 +525,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomNotifWidget(
+                                                                const BottomNotifWidget(
                                                               text: 'Disabling',
                                                             ),
                                                           ),
@@ -571,7 +567,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                 .viewInsetsOf(
                                                                     context),
                                                             child:
-                                                                BottomNotifWidget(
+                                                                const BottomNotifWidget(
                                                               text: 'Enabling',
                                                             ),
                                                           ),
@@ -603,7 +599,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Row(
@@ -639,7 +635,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                 .swipeable)
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -651,7 +647,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xFF43A514),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -686,7 +682,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                 .swipeable)
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -698,7 +694,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xFFE72B36),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -739,7 +735,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 0.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -757,7 +753,7 @@ class _UserInterfaceWidgetState extends State<UserInterfaceWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Container(

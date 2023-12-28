@@ -29,7 +29,7 @@ Future<String> chatGPT(
 
   final headers = {
     'Authorization':
-        'Bearer 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',
+        'Bearer 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',
     'Content-Type': 'application/json'
   };
   final request = http.Request(

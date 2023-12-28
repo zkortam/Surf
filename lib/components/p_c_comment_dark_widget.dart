@@ -1,12 +1,9 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'p_c_comment_dark_model.dart';
@@ -14,9 +11,9 @@ export 'p_c_comment_dark_model.dart';
 
 class PCCommentDarkWidget extends StatefulWidget {
   const PCCommentDarkWidget({
-    Key? key,
+    super.key,
     required this.comment,
-  }) : super(key: key);
+  });
 
   final CommentStruct? comment;
 
@@ -56,7 +53,7 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
         width: 500.0,
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           minHeight: 60.0,
           maxHeight: 450.0,
         ),
@@ -69,7 +66,7 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
           children: [
             Flexible(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -77,7 +74,7 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
                       child: StreamBuilder<List<UsersRecord>>(
                         stream: queryUsersRecord(
                           queryBuilder: (usersRecord) => usersRecord.where(
@@ -129,13 +126,13 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Container(
                                         width: 25.0,
                                         height: 25.0,
                                         clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.network(
@@ -150,7 +147,7 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -185,9 +182,9 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                                   ))
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-1.00, 0.00),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             7.0, 5.0, 0.0, 0.0),
                                         child: Text(
                                           dateTimeFormat(
@@ -219,15 +216,15 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                         widget.comment?.text != '')
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     7.0, 2.0, 0.0, 0.0),
                                 child: SelectionArea(
                                     child: AutoSizeText(
@@ -246,11 +243,10 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                           ],
                         ),
                       ),
-                    if (widget.comment?.imageHash?.image != null &&
-                        widget.comment?.imageHash?.image != '')
+                    if (widget.comment?.imageHash.image != null &&
+                        widget.comment?.imageHash.image != '')
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Container(
                           width: 300.0,
                           height: 200.0,
@@ -260,8 +256,8 @@ class _PCCommentDarkWidgetState extends State<PCCommentDarkWidget> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Visibility(
-                            visible: widget.comment?.imageHash?.image != null &&
-                                widget.comment?.imageHash?.image != '',
+                            visible: widget.comment?.imageHash.image != null &&
+                                widget.comment?.imageHash.image != '',
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: OctoImage(

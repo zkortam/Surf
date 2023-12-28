@@ -4,20 +4,18 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'following_model.dart';
 export 'following_model.dart';
 
 class FollowingWidget extends StatefulWidget {
   const FollowingWidget({
-    Key? key,
+    super.key,
     required this.uid,
-  }) : super(key: key);
+  });
 
   final String? uid;
 
@@ -109,7 +107,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                       wrapWithModel(
                         model: _model.pCNavBarModel,
                         updateCallback: () => setState(() {}),
-                        child: PCNavBarWidget(),
+                        child: const PCNavBarWidget(),
                       ),
                       Flexible(
                         child: Row(
@@ -120,13 +118,13 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                               child: Container(
                                 width: 700.0,
                                 height: double.infinity,
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 0.0),
                                         child: Material(
                                           color: Colors.transparent,
@@ -139,7 +137,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                             width: double.infinity,
                                             height: 50.0,
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xFF9F1CFA),
                                                   Color(0xFF0D28A2)
@@ -154,7 +152,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                   BorderRadius.circular(200.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -166,7 +164,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                     borderRadius: 25.0,
                                                     borderWidth: 3.0,
                                                     buttonSize: 40.0,
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.arrow_back_rounded,
                                                       color: Colors.white,
                                                       size: 15.0,
@@ -184,7 +182,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                         extra: <String,
                                                             dynamic>{
                                                           kTransitionInfoKey:
-                                                              TransitionInfo(
+                                                              const TransitionInfo(
                                                             hasTransition: true,
                                                             transitionType:
                                                                 PageTransitionType
@@ -204,7 +202,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -245,10 +243,9 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           if (followingUsersRecord!
-                                                  .following.length >
-                                              0)
+                                                  .following.isNotEmpty)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 0.0),
                                               child: StreamBuilder<
@@ -258,10 +255,10 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                       usersRecord.whereIn(
                                                           'uid',
                                                           followingUsersRecord
-                                                                      ?.following !=
+                                                                      .following !=
                                                                   ''
                                                               ? followingUsersRecord
-                                                                  ?.following
+                                                                  .following
                                                               : null),
                                                 ),
                                                 builder: (context, snapshot) {
@@ -299,7 +296,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                                         user: columnUsersRecord,
                                                       );
                                                     }).divide(
-                                                        SizedBox(height: 5.0)),
+                                                        const SizedBox(height: 5.0)),
                                                   );
                                                 },
                                               ),

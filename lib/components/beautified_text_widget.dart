@@ -4,18 +4,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'beautified_text_model.dart';
 export 'beautified_text_model.dart';
 
 class BeautifiedTextWidget extends StatefulWidget {
   const BeautifiedTextWidget({
-    Key? key,
+    super.key,
     this.text,
-  }) : super(key: key);
+  });
 
   final String? text;
 
@@ -52,11 +50,12 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
     context.watch<FFAppState>();
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
       child: Container(
         width: double.infinity,
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           minHeight: 90.0,
+          maxWidth: 600.0,
           maxHeight: 340.0,
         ),
         decoration: BoxDecoration(
@@ -68,12 +67,12 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
               child: Container(
                 width: double.infinity,
                 height: 40.0,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [Color(0xFF0F66E2), Color(0xFF541BE3)],
                     stops: [0.0, 1.0],
                     begin: AlignmentDirectional(1.0, 0.0),
@@ -87,13 +86,13 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
                       child: FlutterFlowIconButton(
                         borderColor: Colors.white,
                         borderRadius: 20.0,
                         borderWidth: 3.0,
                         buttonSize: 30.0,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_rounded,
                           color: Colors.white,
                           size: 15.0,
@@ -109,9 +108,9 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.00, 0.00),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 40.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -136,11 +135,11 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(7.0, 5.0, 7.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(7.0, 5.0, 7.0, 0.0),
               child: Container(
                 width: double.infinity,
                 height: 265.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -148,7 +147,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
                           widget.text!.maybeHandleOverflow(maxChars: 750),
                           textAlign: TextAlign.start,
@@ -165,13 +164,13 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 5.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 5.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 5.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 5.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -188,7 +187,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                           builder: (context) {
                             return Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: BottomNotifWidget(
+                              child: const BottomNotifWidget(
                                 text: 'Copied',
                               ),
                             );
@@ -218,7 +217,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: BottomNotifWidget(
+                            child: const BottomNotifWidget(
                               text: 'Copied',
                             ),
                           );

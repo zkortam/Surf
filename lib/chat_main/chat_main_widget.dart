@@ -9,13 +9,12 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'chat_main_model.dart';
 export 'chat_main_model.dart';
 
 class ChatMainWidget extends StatefulWidget {
-  const ChatMainWidget({Key? key}) : super(key: key);
+  const ChatMainWidget({super.key});
 
   @override
   _ChatMainWidgetState createState() => _ChatMainWidgetState();
@@ -101,7 +100,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                       wrapWithModel(
                         model: _model.pCNavBarModel,
                         updateCallback: () => setState(() {}),
-                        child: PCNavBarWidget(
+                        child: const PCNavBarWidget(
                           currentPage: 3,
                         ),
                       ),
@@ -112,17 +111,17 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                           children: [
                             Flexible(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Container(
                                   width: 600.0,
                                   height: double.infinity,
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 5.0, 10.0, 0.0),
                                         child: Material(
                                           color: Colors.transparent,
@@ -135,7 +134,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                             width: double.infinity,
                                             height: 50.0,
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xFF9F1CFA),
                                                   Color(0xFF0D28A2)
@@ -150,7 +149,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                   BorderRadius.circular(200.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -163,7 +162,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                     borderRadius: 25.0,
                                                     borderWidth: 3.0,
                                                     buttonSize: 40.0,
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.arrow_back_rounded,
                                                       color: Colors.white,
                                                       size: 15.0,
@@ -213,7 +212,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                         borderRadius: 25.0,
                                                         borderWidth: 3.0,
                                                         buttonSize: 40.0,
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.add,
                                                           color: Colors.white,
                                                           size: 20.0,
@@ -224,7 +223,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                             extra: <String,
                                                                 dynamic>{
                                                               kTransitionInfoKey:
-                                                                  TransitionInfo(
+                                                                  const TransitionInfo(
                                                                 hasTransition:
                                                                     true,
                                                                 transitionType:
@@ -246,7 +245,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                       Flexible(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 12.0, 20.0, 24.0),
                                           child: SingleChildScrollView(
                                             child: Column(
@@ -256,7 +255,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                     null))
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 0.0,
                                                                 100.0,
@@ -310,7 +309,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                     ),
                                                               ),
                                                               Padding(
-                                                                padding: EdgeInsetsDirectional
+                                                                padding: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         10.0,
@@ -339,13 +338,13 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                 options:
                                                                     FFButtonOptions(
                                                                   height: 45.0,
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           24.0,
                                                                           0.0,
                                                                           24.0,
                                                                           0.0),
-                                                                  iconPadding: EdgeInsetsDirectional
+                                                                  iconPadding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -366,7 +365,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                   elevation:
                                                                       3.0,
                                                                   borderSide:
-                                                                      BorderSide(
+                                                                      const BorderSide(
                                                                     color: Colors
                                                                         .transparent,
                                                                     width: 1.0,
@@ -383,170 +382,167 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                       ],
                                                     ),
                                                   ),
-                                                Flexible(
-                                                  child: StreamBuilder<
-                                                      List<ChatsRecord>>(
-                                                    stream: queryChatsRecord(
-                                                      queryBuilder:
-                                                          (chatsRecord) =>
-                                                              chatsRecord.where(
-                                                        'users',
-                                                        arrayContains:
-                                                            currentUserUid,
-                                                      ),
+                                                StreamBuilder<
+                                                    List<ChatsRecord>>(
+                                                  stream: queryChatsRecord(
+                                                    queryBuilder:
+                                                        (chatsRecord) =>
+                                                            chatsRecord.where(
+                                                      'users',
+                                                      arrayContains:
+                                                          currentUserUid,
                                                     ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            child:
-                                                                SpinKitRipple(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 50.0,
-                                                            ),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child: SpinKitRipple(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 50.0,
                                                           ),
-                                                        );
-                                                      }
-                                                      List<ChatsRecord>
-                                                          listViewChatsRecordList =
-                                                          snapshot.data!;
-                                                      return ListView.separated(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount:
-                                                            listViewChatsRecordList
-                                                                .length,
-                                                        separatorBuilder:
-                                                            (_, __) => SizedBox(
-                                                                height: 20.0),
-                                                        itemBuilder: (context,
-                                                            listViewIndex) {
-                                                          final listViewChatsRecord =
-                                                              listViewChatsRecordList[
-                                                                  listViewIndex];
-                                                          return Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        10.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: FutureBuilder<
-                                                                List<
-                                                                    UsersRecord>>(
-                                                              future:
-                                                                  queryUsersRecordOnce(
-                                                                queryBuilder:
-                                                                    (usersRecord) =>
-                                                                        usersRecord
-                                                                            .where(
-                                                                  'uid',
-                                                                  isEqualTo: functions.returnOtherUser(
-                                                                      currentUserUid,
-                                                                      listViewChatsRecord
-                                                                          .users
-                                                                          .first,
-                                                                      listViewChatsRecord
-                                                                          .users
-                                                                          .last),
-                                                                  isNull: (functions.returnOtherUser(
-                                                                          currentUserUid,
-                                                                          listViewChatsRecord
-                                                                              .users
-                                                                              .first,
-                                                                          listViewChatsRecord
-                                                                              .users
-                                                                              .last)) ==
-                                                                      null,
-                                                                ),
-                                                                singleRecord:
-                                                                    true,
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<ChatsRecord>
+                                                        listViewChatsRecordList =
+                                                        snapshot.data!;
+                                                    return ListView.separated(
+                                                      padding: EdgeInsets.zero,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemCount:
+                                                          listViewChatsRecordList
+                                                              .length,
+                                                      separatorBuilder:
+                                                          (_, __) => const SizedBox(
+                                                              height: 20.0),
+                                                      itemBuilder: (context,
+                                                          listViewIndex) {
+                                                        final listViewChatsRecord =
+                                                            listViewChatsRecordList[
+                                                                listViewIndex];
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: FutureBuilder<
+                                                              List<
+                                                                  UsersRecord>>(
+                                                            future:
+                                                                queryUsersRecordOnce(
+                                                              queryBuilder:
+                                                                  (usersRecord) =>
+                                                                      usersRecord
+                                                                          .where(
+                                                                'uid',
+                                                                isEqualTo: functions.returnOtherUser(
+                                                                    currentUserUid,
+                                                                    listViewChatsRecord
+                                                                        .users
+                                                                        .first,
+                                                                    listViewChatsRecord
+                                                                        .users
+                                                                        .last),
+                                                                isNull: (functions.returnOtherUser(
+                                                                        currentUserUid,
+                                                                        listViewChatsRecord
+                                                                            .users
+                                                                            .first,
+                                                                        listViewChatsRecord
+                                                                            .users
+                                                                            .last)) ==
+                                                                    null,
                                                               ),
-                                                              builder: (context,
-                                                                  snapshot) {
-                                                                // Customize what your widget looks like when it's loading.
-                                                                if (!snapshot
-                                                                    .hasData) {
-                                                                  return Center(
+                                                              singleRecord:
+                                                                  true,
+                                                            ),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              // Customize what your widget looks like when it's loading.
+                                                              if (!snapshot
+                                                                  .hasData) {
+                                                                return Center(
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 50.0,
+                                                                    height:
+                                                                        50.0,
                                                                     child:
-                                                                        SizedBox(
-                                                                      width:
+                                                                        SpinKitRipple(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size:
                                                                           50.0,
-                                                                      height:
-                                                                          50.0,
-                                                                      child:
-                                                                          SpinKitRipple(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        size:
-                                                                            50.0,
-                                                                      ),
                                                                     ),
-                                                                  );
-                                                                }
-                                                                List<UsersRecord>
-                                                                    rowUsersRecordList =
-                                                                    snapshot
-                                                                        .data!;
-                                                                final rowUsersRecord =
-                                                                    rowUsersRecordList
-                                                                            .isNotEmpty
-                                                                        ? rowUsersRecordList
-                                                                            .first
-                                                                        : null;
-                                                                return InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    context
-                                                                        .pushNamed(
-                                                                      'chats_page',
-                                                                      queryParameters:
-                                                                          {
-                                                                        'chat':
-                                                                            serializeParam(
+                                                                  ),
+                                                                );
+                                                              }
+                                                              List<UsersRecord>
+                                                                  rowUsersRecordList =
+                                                                  snapshot
+                                                                      .data!;
+                                                              final rowUsersRecord =
+                                                                  rowUsersRecordList
+                                                                          .isNotEmpty
+                                                                      ? rowUsersRecordList
+                                                                          .first
+                                                                      : null;
+                                                              return InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'chats_page',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'chat':
+                                                                          serializeParam(
+                                                                        listViewChatsRecord,
+                                                                        ParamType
+                                                                            .Document,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                    extra: <String,
+                                                                        dynamic>{
+                                                                      'chat':
                                                                           listViewChatsRecord,
-                                                                          ParamType
-                                                                              .Document,
-                                                                        ),
-                                                                      }.withoutNulls,
-                                                                      extra: <String,
-                                                                          dynamic>{
-                                                                        'chat':
-                                                                            listViewChatsRecord,
-                                                                      },
-                                                                    );
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      Row(
+                                                                    },
+                                                                  );
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child:
+                                                                          Row(
                                                                         mainAxisSize:
-                                                                            MainAxisSize.max,
+                                                                            MainAxisSize.min,
                                                                         children: [
                                                                           Container(
                                                                             width:
@@ -556,7 +552,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                             clipBehavior:
                                                                                 Clip.antiAlias,
                                                                             decoration:
-                                                                                BoxDecoration(
+                                                                                const BoxDecoration(
                                                                               shape: BoxShape.circle,
                                                                             ),
                                                                             child:
@@ -566,7 +562,7 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                             ),
                                                                           ),
                                                                           Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                                                 10.0,
                                                                                 0.0,
                                                                                 0.0,
@@ -578,26 +574,46 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                               children: [
                                                                                 Text(
                                                                                   valueOrDefault<String>(
-                                                                                    listViewChatsRecord.users.length > 2 ? listViewChatsRecord.title : rowUsersRecord?.displayName,
+                                                                                    listViewChatsRecord.users.length > 2 ? listViewChatsRecord.title : rowUsersRecord.displayName,
                                                                                     'User',
                                                                                   ),
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                ),
+                                                                                Text(
+                                                                                  listViewChatsRecord.lastMessage.text,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                        fontSize: 13.0,
+                                                                                      ),
+                                                                                ),
+                                                                                Text(
+                                                                                  dateTimeFormat(
+                                                                                    'relative',
+                                                                                    listViewChatsRecord.lastMessage.timestamp!,
+                                                                                    locale: FFLocalizations.of(context).languageCode,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                        fontSize: 12.0,
+                                                                                      ),
                                                                                 ),
                                                                               ],
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                    ],
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                  ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
                                                 ),
                                               ],
                                             ),

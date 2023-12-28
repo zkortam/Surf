@@ -3,22 +3,20 @@ import '/components/post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'scroll_post_model.dart';
 export 'scroll_post_model.dart';
 
 class ScrollPostWidget extends StatefulWidget {
   const ScrollPostWidget({
-    Key? key,
+    super.key,
     required this.uid,
     required this.post,
-  }) : super(key: key);
+  });
 
   final String? uid;
   final PostsRecord? post;
@@ -41,7 +39,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await _model.listViewController?.animateTo(
         _model.listViewController!.position.maxScrollExtent,
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         curve: Curves.ease,
       );
     });
@@ -89,7 +87,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 10.0, 0.0),
                           child: StreamBuilder<List<PostsRecord>>(
                             stream: queryPostsRecord(
@@ -100,7 +98,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                   )
                                   .where(
                                     'post.timestamp',
-                                    isLessThan: widget.post?.post?.timestamp,
+                                    isLessThan: widget.post?.post.timestamp,
                                   )
                                   .where(
                                     'post.isStealth',
@@ -138,7 +136,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                     post: columnPostsRecord,
                                     isComment: false,
                                   );
-                                }).divide(SizedBox(height: 10.0)),
+                                }).divide(const SizedBox(height: 10.0)),
                               );
                             },
                           ),
@@ -147,9 +145,10 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
+                          controller: _model.listViewController,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 0.0),
                               child: wrapWithModel(
                                 model: _model.postModel2,
@@ -161,10 +160,9 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                               ),
                             ),
                           ],
-                          controller: _model.listViewController,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 5.0, 10.0, 0.0),
                           child: StreamBuilder<List<PostsRecord>>(
                             stream: queryPostsRecord(
@@ -175,7 +173,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                   )
                                   .where(
                                     'post.timestamp',
-                                    isGreaterThan: widget.post?.post?.timestamp,
+                                    isGreaterThan: widget.post?.post.timestamp,
                                   )
                                   .where(
                                     'post.isStealth',
@@ -214,13 +212,13 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                     isComment: false,
                                   );
                                 })
-                                        .divide(SizedBox(height: 10.0))
-                                        .addToStart(SizedBox(height: 0.0)),
+                                        .divide(const SizedBox(height: 10.0))
+                                        .addToStart(const SizedBox(height: 0.0)),
                               );
                             },
                           ),
                         ),
-                      ].divide(SizedBox(height: 10.0)),
+                      ].divide(const SizedBox(height: 10.0)),
                     ),
                   ),
                   if (responsiveVisibility(
@@ -231,7 +229,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                   ))
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 5.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 5.0, 10.0, 0.0),
                       child: Material(
                         color: Colors.transparent,
                         elevation: 2.0,
@@ -242,7 +240,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                           width: double.infinity,
                           height: 50.0,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [Color(0xFF9F1CFA), Color(0xFF0D28A2)],
                               stops: [0.0, 1.0],
                               begin: AlignmentDirectional(0.87, -1.0),
@@ -251,7 +249,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                             borderRadius: BorderRadius.circular(200.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 5.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -262,7 +260,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                   borderRadius: 25.0,
                                   borderWidth: 3.0,
                                   buttonSize: 40.0,
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_back_rounded,
                                     color: Colors.white,
                                     size: 15.0,
@@ -275,7 +273,7 @@ class _ScrollPostWidgetState extends State<ScrollPostWidget> {
                                   width:
                                       MediaQuery.sizeOf(context).width * 0.75,
                                   height: 50.0,
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,

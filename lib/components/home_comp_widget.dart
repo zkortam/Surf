@@ -4,21 +4,18 @@ import '/components/edit_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_comp_model.dart';
 export 'home_comp_model.dart';
 
 class HomeCompWidget extends StatefulWidget {
   const HomeCompWidget({
-    Key? key,
+    super.key,
     required this.post,
-  }) : super(key: key);
+  });
 
   final PostsRecord? post;
 
@@ -55,7 +52,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Stack(
         children: [
           if (responsiveVisibility(
@@ -64,7 +61,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
             tablet: false,
           ))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -78,15 +75,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, 1.00),
+                      alignment: const AlignmentDirectional(0.0, 1.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Stack(
-                          alignment: AlignmentDirectional(0.0, 1.0),
+                          alignment: const AlignmentDirectional(0.0, 1.0),
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 10.0),
                               child: Container(
                                 width: 600.0,
@@ -101,13 +98,13 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
                                         height: 40.0,
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF0F66E2),
                                               Color(0xFF541BE3)
@@ -126,14 +123,14 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(6.0, 0.0, 0.0, 0.0),
                                               child: FlutterFlowIconButton(
                                                 borderColor: Colors.white,
                                                 borderRadius: 20.0,
                                                 borderWidth: 3.0,
                                                 buttonSize: 30.0,
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_back_rounded,
                                                   color: Colors.white,
                                                   size: 15.0,
@@ -151,11 +148,11 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 children: [
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -173,7 +170,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                             isEqualTo: widget
                                                                 .post
                                                                 ?.post
-                                                                ?.author,
+                                                                .author,
                                                           ),
                                                           singleRecord: true,
                                                         ),
@@ -251,7 +248,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         children: [
                                           Flexible(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 0.0, 0.0),
                                               child: FutureBuilder<
@@ -261,7 +258,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                       usersRecord.where(
                                                     'uid',
                                                     isEqualTo: widget
-                                                        .post?.post?.author,
+                                                        .post?.post.author,
                                                   ),
                                                   singleRecord: true,
                                                 ),
@@ -349,7 +346,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -366,8 +363,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                           ),
                                                           Align(
                                                             alignment:
-                                                                AlignmentDirectional(
-                                                                    0.00, 0.00),
+                                                                const AlignmentDirectional(
+                                                                    0.0, 0.0),
                                                             child: Text(
                                                               FFLocalizations.of(
                                                                       context)
@@ -401,7 +398,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                           ),
                                           Flexible(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 5.0, 0.0),
                                               child: FutureBuilder<
@@ -411,7 +408,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                       usersRecord.where(
                                                     'uid',
                                                     isEqualTo: widget
-                                                        .post?.post?.author,
+                                                        .post?.post.author,
                                                   ),
                                                   singleRecord: true,
                                                 ),
@@ -499,7 +496,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -516,8 +513,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                           ),
                                                           Align(
                                                             alignment:
-                                                                AlignmentDirectional(
-                                                                    0.00, 0.00),
+                                                                const AlignmentDirectional(
+                                                                    0.0, 0.0),
                                                             child: Text(
                                                               FFLocalizations.of(
                                                                       context)
@@ -553,9 +550,9 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                       ),
                                     ),
                                     if (currentUserUid ==
-                                        widget.post?.post?.author)
+                                        widget.post?.post.author)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 10.0, 5.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -599,7 +596,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 10.0, 0.0),
                                                   child: FaIcon(
@@ -612,8 +609,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
@@ -638,7 +635,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         ),
                                       ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 10.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -650,7 +647,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                             ...mapToFirestore(
                                               {
                                                 'saved': FieldValue.arrayUnion(
-                                                    [widget.post?.post?.id]),
+                                                    [widget.post?.post.id]),
                                               },
                                             ),
                                           });
@@ -670,7 +667,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 10.0, 0.0),
                                                 child: Icon(
@@ -682,8 +679,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
@@ -709,15 +706,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                       ),
                                     ),
                                     if (currentUserUid !=
-                                        widget.post?.post?.author)
+                                        widget.post?.post.author)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 5.0, 10.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            color: Color(0xFFE1343E),
+                                            color: const Color(0xFFE1343E),
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
@@ -737,8 +734,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
@@ -761,15 +758,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         ),
                                       ),
                                     if (currentUserUid ==
-                                        widget.post?.post?.author)
+                                        widget.post?.post.author)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 5.0, 10.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            color: Color(0xFFE1343E),
+                                            color: const Color(0xFFE1343E),
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
@@ -815,8 +812,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
@@ -841,7 +838,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                     if (valueOrDefault<bool>(
                                         currentUserDocument?.admin, false))
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 10.0, 5.0, 5.0),
                                         child: AuthUserStreamWidget(
                                           builder: (context) => Container(
@@ -852,19 +849,19 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 colors: [
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                                  Color(0xFF3999D2)
+                                                  const Color(0xFF3999D2)
                                                 ],
-                                                stops: [0.0, 1.0],
-                                                begin: AlignmentDirectional(
+                                                stops: const [0.0, 1.0],
+                                                begin: const AlignmentDirectional(
                                                     1.0, 0.0),
-                                                end: AlignmentDirectional(
+                                                end: const AlignmentDirectional(
                                                     -1.0, 0),
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(300.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 0.0, 10.0, 0.0),
                                               child: Row(
@@ -872,7 +869,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(6.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: StreamBuilder<
@@ -884,7 +881,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                     .where(
                                                           'uid',
                                                           isEqualTo: widget.post
-                                                              ?.post?.author,
+                                                              ?.post.author,
                                                         ),
                                                         singleRecord: true,
                                                       ),
@@ -926,7 +923,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                           borderRadius: 30.0,
                                                           borderWidth: 3.0,
                                                           buttonSize: 40.0,
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.delete,
                                                             color: Colors.white,
                                                             size: 20.0,
@@ -972,7 +969,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(20.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: StreamBuilder<
@@ -984,7 +981,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                     .where(
                                                           'uid',
                                                           isEqualTo: widget.post
-                                                              ?.post?.author,
+                                                              ?.post.author,
                                                         ),
                                                         singleRecord: true,
                                                       ),
@@ -1026,7 +1023,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                           borderRadius: 30.0,
                                                           borderWidth: 3.0,
                                                           buttonSize: 40.0,
-                                                          icon: FaIcon(
+                                                          icon: const FaIcon(
                                                             FontAwesomeIcons
                                                                 .hammer,
                                                             color: Colors.white,
@@ -1048,7 +1045,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(20.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: StreamBuilder<
@@ -1060,7 +1057,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                     .where(
                                                           'uid',
                                                           isEqualTo: widget.post
-                                                              ?.post?.author,
+                                                              ?.post.author,
                                                         ),
                                                         singleRecord: true,
                                                       ),
@@ -1102,7 +1099,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                           borderRadius: 30.0,
                                                           borderWidth: 3.0,
                                                           buttonSize: 40.0,
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.arrow_forward,
                                                             color: Colors.white,
                                                             size: 20.0,
@@ -1116,7 +1113,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                   widget
                                                                       .post
                                                                       ?.post
-                                                                      ?.author,
+                                                                      .author,
                                                                   ParamType
                                                                       .String,
                                                                 ),
@@ -1163,15 +1160,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.00, 1.00),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: Stack(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 10.0),
                             child: Container(
                               width: 600.0,
@@ -1186,13 +1183,13 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 10.0, 5.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
                                       height: 40.0,
                                       decoration: BoxDecoration(
-                                        gradient: LinearGradient(
+                                        gradient: const LinearGradient(
                                           colors: [
                                             Color(0xFF0F66E2),
                                             Color(0xFF541BE3)
@@ -1211,14 +1208,14 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     6.0, 0.0, 0.0, 0.0),
                                             child: FlutterFlowIconButton(
                                               borderColor: Colors.white,
                                               borderRadius: 20.0,
                                               borderWidth: 3.0,
                                               buttonSize: 30.0,
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.arrow_back_rounded,
                                                 color: Colors.white,
                                                 size: 15.0,
@@ -1236,11 +1233,11 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 40.0, 0.0),
                                                     child: FutureBuilder<
@@ -1253,7 +1250,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                     .where(
                                                           'uid',
                                                           isEqualTo: widget.post
-                                                              ?.post?.author,
+                                                              ?.post.author,
                                                         ),
                                                         singleRecord: true,
                                                       ),
@@ -1330,7 +1327,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         Flexible(
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 0.0, 0.0),
                                             child: FutureBuilder<
                                                 List<UsersRecord>>(
@@ -1339,7 +1336,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                     usersRecord.where(
                                                   'uid',
                                                   isEqualTo:
-                                                      widget.post?.post?.author,
+                                                      widget.post?.post.author,
                                                 ),
                                                 singleRecord: true,
                                               ),
@@ -1426,7 +1423,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -1442,8 +1439,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         ),
                                                         Align(
                                                           alignment:
-                                                              AlignmentDirectional(
-                                                                  0.00, 0.00),
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
                                                           child: Text(
                                                             FFLocalizations.of(
                                                                     context)
@@ -1477,7 +1474,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                         Flexible(
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 5.0, 0.0),
                                             child: FutureBuilder<
                                                 List<UsersRecord>>(
@@ -1486,7 +1483,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                     usersRecord.where(
                                                   'uid',
                                                   isEqualTo:
-                                                      widget.post?.post?.author,
+                                                      widget.post?.post.author,
                                                 ),
                                                 singleRecord: true,
                                               ),
@@ -1573,7 +1570,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -1590,8 +1587,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         ),
                                                         Align(
                                                           alignment:
-                                                              AlignmentDirectional(
-                                                                  0.00, 0.00),
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
                                                           child: Text(
                                                             FFLocalizations.of(
                                                                     context)
@@ -1626,9 +1623,9 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                     ),
                                   ),
                                   if (currentUserUid ==
-                                      widget.post?.post?.author)
+                                      widget.post?.post.author)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -1670,7 +1667,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 10.0, 0.0),
                                                 child: FaIcon(
@@ -1682,8 +1679,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
@@ -1709,7 +1706,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                       ),
                                     ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 10.0, 5.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1721,7 +1718,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                           ...mapToFirestore(
                                             {
                                               'saved': FieldValue.arrayUnion(
-                                                  [widget.post?.post?.id]),
+                                                  [widget.post?.post.id]),
                                             },
                                           ),
                                         });
@@ -1741,7 +1738,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 10.0, 0.0),
                                               child: Icon(
@@ -1753,8 +1750,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.00, 0.00),
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
@@ -1779,15 +1776,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                     ),
                                   ),
                                   if (currentUserUid !=
-                                      widget.post?.post?.author)
+                                      widget.post?.post.author)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE1343E),
+                                          color: const Color(0xFFE1343E),
                                           borderRadius:
                                               BorderRadius.circular(15.0),
                                         ),
@@ -1806,8 +1803,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
@@ -1830,15 +1827,15 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                       ),
                                     ),
                                   if (currentUserUid ==
-                                      widget.post?.post?.author)
+                                      widget.post?.post.author)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
                                         height: 50.0,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE1343E),
+                                          color: const Color(0xFFE1343E),
                                           borderRadius:
                                               BorderRadius.circular(15.0),
                                         ),
@@ -1883,8 +1880,8 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 0.00),
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
@@ -1909,7 +1906,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                   if (valueOrDefault<bool>(
                                       currentUserDocument?.admin, false))
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 10.0, 5.0, 5.0),
                                       child: AuthUserStreamWidget(
                                         builder: (context) => Container(
@@ -1920,26 +1917,26 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                               colors: [
                                                 FlutterFlowTheme.of(context)
                                                     .primary,
-                                                Color(0xFF3999D2)
+                                                const Color(0xFF3999D2)
                                               ],
-                                              stops: [0.0, 1.0],
-                                              begin: AlignmentDirectional(
+                                              stops: const [0.0, 1.0],
+                                              begin: const AlignmentDirectional(
                                                   1.0, 0.0),
                                               end:
-                                                  AlignmentDirectional(-1.0, 0),
+                                                  const AlignmentDirectional(-1.0, 0),
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(300.0),
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           6.0, 0.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -1950,7 +1947,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                               usersRecord.where(
                                                         'uid',
                                                         isEqualTo: widget
-                                                            .post?.post?.author,
+                                                            .post?.post.author,
                                                       ),
                                                       singleRecord: true,
                                                     ),
@@ -1992,7 +1989,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         borderRadius: 30.0,
                                                         borderWidth: 3.0,
                                                         buttonSize: 40.0,
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.delete,
                                                           color: Colors.white,
                                                           size: 20.0,
@@ -2039,7 +2036,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           20.0, 0.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -2050,7 +2047,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                               usersRecord.where(
                                                         'uid',
                                                         isEqualTo: widget
-                                                            .post?.post?.author,
+                                                            .post?.post.author,
                                                       ),
                                                       singleRecord: true,
                                                     ),
@@ -2092,7 +2089,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         borderRadius: 30.0,
                                                         borderWidth: 3.0,
                                                         buttonSize: 40.0,
-                                                        icon: FaIcon(
+                                                        icon: const FaIcon(
                                                           FontAwesomeIcons
                                                               .hammer,
                                                           color: Colors.white,
@@ -2112,7 +2109,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           20.0, 0.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -2123,7 +2120,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                               usersRecord.where(
                                                         'uid',
                                                         isEqualTo: widget
-                                                            .post?.post?.author,
+                                                            .post?.post.author,
                                                       ),
                                                       singleRecord: true,
                                                     ),
@@ -2165,7 +2162,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                         borderRadius: 30.0,
                                                         borderWidth: 3.0,
                                                         buttonSize: 40.0,
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.arrow_forward,
                                                           color: Colors.white,
                                                           size: 20.0,
@@ -2179,7 +2176,7 @@ class _HomeCompWidgetState extends State<HomeCompWidget> {
                                                                 widget
                                                                     .post
                                                                     ?.post
-                                                                    ?.author,
+                                                                    .author,
                                                                 ParamType
                                                                     .String,
                                                               ),

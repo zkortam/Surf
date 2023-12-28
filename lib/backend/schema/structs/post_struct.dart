@@ -3,7 +3,6 @@ import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -23,6 +22,8 @@ class PostStruct extends FFFirebaseStruct {
     List<String>? spoilerClickers,
     List<CommentStruct>? comments,
     bool? isStealth,
+    String? videos,
+    bool? isshort,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _timestamp = timestamp,
         _caption = caption,
@@ -37,6 +38,8 @@ class PostStruct extends FFFirebaseStruct {
         _spoilerClickers = spoilerClickers,
         _comments = comments,
         _isStealth = isStealth,
+        _videos = videos,
+        _isshort = isshort,
         super(firestoreUtilData);
 
   // "timestamp" field.
@@ -128,6 +131,18 @@ class PostStruct extends FFFirebaseStruct {
   set isStealth(bool? val) => _isStealth = val;
   bool hasIsStealth() => _isStealth != null;
 
+  // "videos" field.
+  String? _videos;
+  String get videos => _videos ?? '';
+  set videos(String? val) => _videos = val;
+  bool hasVideos() => _videos != null;
+
+  // "isshort" field.
+  bool? _isshort;
+  bool get isshort => _isshort ?? false;
+  set isshort(bool? val) => _isshort = val;
+  bool hasIsshort() => _isshort != null;
+
   static PostStruct fromMap(Map<String, dynamic> data) => PostStruct(
         timestamp: data['timestamp'] as DateTime?,
         caption: data['caption'] as String?,
@@ -148,10 +163,12 @@ class PostStruct extends FFFirebaseStruct {
           CommentStruct.fromMap,
         ),
         isStealth: data['isStealth'] as bool?,
+        videos: data['videos'] as String?,
+        isshort: data['isshort'] as bool?,
       );
 
   static PostStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? PostStruct.fromMap(data) : null;
+      data is Map ? PostStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'timestamp': _timestamp,
@@ -167,6 +184,8 @@ class PostStruct extends FFFirebaseStruct {
         'spoilerClickers': _spoilerClickers,
         'comments': _comments?.map((e) => e.toMap()).toList(),
         'isStealth': _isStealth,
+        'videos': _videos,
+        'isshort': _isshort,
       }.withoutNulls;
 
   @override
@@ -226,6 +245,14 @@ class PostStruct extends FFFirebaseStruct {
         ),
         'isStealth': serializeParam(
           _isStealth,
+          ParamType.bool,
+        ),
+        'videos': serializeParam(
+          _videos,
+          ParamType.String,
+        ),
+        'isshort': serializeParam(
+          _isshort,
           ParamType.bool,
         ),
       }.withoutNulls;
@@ -299,6 +326,16 @@ class PostStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
+        videos: deserializeParam(
+          data['videos'],
+          ParamType.String,
+          false,
+        ),
+        isshort: deserializeParam(
+          data['isshort'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   static PostStruct fromAlgoliaData(Map<String, dynamic> data) => PostStruct(
@@ -369,7 +406,17 @@ class PostStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
-        firestoreUtilData: FirestoreUtilData(
+        videos: convertAlgoliaParam(
+          data['videos'],
+          ParamType.String,
+          false,
+        ),
+        isshort: convertAlgoliaParam(
+          data['isshort'],
+          ParamType.bool,
+          false,
+        ),
+        firestoreUtilData: const FirestoreUtilData(
           clearUnsetFields: false,
           create: true,
         ),
@@ -394,7 +441,9 @@ class PostStruct extends FFFirebaseStruct {
         isSpoiler == other.isSpoiler &&
         listEquality.equals(spoilerClickers, other.spoilerClickers) &&
         listEquality.equals(comments, other.comments) &&
-        isStealth == other.isStealth;
+        isStealth == other.isStealth &&
+        videos == other.videos &&
+        isshort == other.isshort;
   }
 
   @override
@@ -411,7 +460,9 @@ class PostStruct extends FFFirebaseStruct {
         isSpoiler,
         spoilerClickers,
         comments,
-        isStealth
+        isStealth,
+        videos,
+        isshort
       ]);
 }
 
@@ -424,6 +475,8 @@ PostStruct createPostStruct({
   bool? isExpanded,
   bool? isSpoiler,
   bool? isStealth,
+  String? videos,
+  bool? isshort,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -438,6 +491,8 @@ PostStruct createPostStruct({
       isExpanded: isExpanded,
       isSpoiler: isSpoiler,
       isStealth: isStealth,
+      videos: videos,
+      isshort: isshort,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

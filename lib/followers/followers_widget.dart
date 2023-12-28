@@ -4,20 +4,18 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'followers_model.dart';
 export 'followers_model.dart';
 
 class FollowersWidget extends StatefulWidget {
   const FollowersWidget({
-    Key? key,
+    super.key,
     required this.uid,
-  }) : super(key: key);
+  });
 
   final String? uid;
 
@@ -105,7 +103,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                       wrapWithModel(
                         model: _model.pCNavBarModel,
                         updateCallback: () => setState(() {}),
-                        child: PCNavBarWidget(),
+                        child: const PCNavBarWidget(),
                       ),
                       Flexible(
                         child: Row(
@@ -116,12 +114,12 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                               child: Container(
                                 width: 700.0,
                                 height: double.infinity,
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 5.0, 5.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
@@ -134,7 +132,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xFF9F1CFA),
                                                 Color(0xFF0D28A2)
@@ -150,7 +148,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -162,7 +160,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                   borderRadius: 25.0,
                                                   borderWidth: 3.0,
                                                   buttonSize: 40.0,
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.arrow_back_rounded,
                                                     color: Colors.white,
                                                     size: 15.0,
@@ -179,7 +177,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
                                                         kTransitionInfoKey:
-                                                            TransitionInfo(
+                                                            const TransitionInfo(
                                                           hasTransition: true,
                                                           transitionType:
                                                               PageTransitionType
@@ -199,7 +197,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -235,10 +233,9 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                         ),
                                       ),
                                     ),
-                                    if (followersUsersRecord!.followers.length >
-                                        0)
+                                    if (followersUsersRecord!.followers.isNotEmpty)
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 10.0, 10.0, 0.0),
                                         child: StreamBuilder<List<UsersRecord>>(
                                           stream: queryUsersRecord(
@@ -246,10 +243,10 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                 usersRecord.whereIn(
                                                     'uid',
                                                     followersUsersRecord
-                                                                ?.followers !=
+                                                                .followers !=
                                                             ''
                                                         ? followersUsersRecord
-                                                            ?.followers
+                                                            .followers
                                                         : null),
                                           ),
                                           builder: (context, snapshot) {
@@ -284,7 +281,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                       .following
                                                       .contains(
                                                           followersUsersRecord
-                                                              ?.uid),
+                                                              .uid),
                                                   child: FollowerCardWidget(
                                                     key: Key(
                                                         'Key1t6_${columnIndex}_of_${columnUsersRecordList.length}'),
@@ -292,7 +289,7 @@ class _FollowersWidgetState extends State<FollowersWidget> {
                                                     id: widget.uid!,
                                                   ),
                                                 );
-                                              }).divide(SizedBox(height: 5.0)),
+                                              }).divide(const SizedBox(height: 5.0)),
                                             );
                                           },
                                         ),

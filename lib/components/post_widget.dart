@@ -12,11 +12,9 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'post_model.dart';
@@ -24,11 +22,10 @@ export 'post_model.dart';
 
 class PostWidget extends StatefulWidget {
   const PostWidget({
-    Key? key,
+    super.key,
     required this.post,
     bool? isComment,
-  })  : this.isComment = isComment ?? false,
-        super(key: key);
+  })  : isComment = isComment ?? false;
 
   final PostsRecord? post;
   final bool isComment;
@@ -119,7 +116,7 @@ class _PostWidgetState extends State<PostWidget> {
               ),
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 500.0,
                     child: PageView(
@@ -144,7 +141,7 @@ class _PostWidgetState extends State<PostWidget> {
                       ],
                     ),
                   ),
-                  if ((widget.post?.post?.isSpoiler == true) &&
+                  if ((widget.post?.post.isSpoiler == true) &&
                       (functions.stringInArr(currentUserUid,
                               widget.post!.post.spoilerClickers.toList()) ==
                           false))
@@ -169,7 +166,7 @@ class _PostWidgetState extends State<PostWidget> {
                         width: double.infinity,
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xFD14181B),
+                          color: const Color(0xFD14181B),
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         child: Column(
@@ -217,7 +214,7 @@ class _PostWidgetState extends State<PostWidget> {
                         },
                         child: Container(
                           width: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0x6E000000),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(8.0),
@@ -227,14 +224,13 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                2.0, 2.0, 2.0, 2.0),
+                            padding: const EdgeInsets.all(2.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       1.0, 2.0, 0.0, 2.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -246,22 +242,22 @@ class _PostWidgetState extends State<PostWidget> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                -1.00, -1.00),
+                                            alignment: const AlignmentDirectional(
+                                                -1.0, -1.0),
                                             child: Container(
                                               height: 32.0,
-                                              constraints: BoxConstraints(
+                                              constraints: const BoxConstraints(
                                                 minWidth: 90.0,
                                                 maxWidth: 200.0,
                                               ),
                                               decoration: BoxDecoration(
-                                                color: Color(0x40000000),
+                                                color: const Color(0x40000000),
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         300.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 0.0, 0.0),
                                                 child: StreamBuilder<
@@ -275,7 +271,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                               .post.isStealth
                                                           ? 'anon'
                                                           : widget.post?.post
-                                                              ?.author,
+                                                              .author,
                                                     ),
                                                     singleRecord: true,
                                                   ),
@@ -340,7 +336,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         1.0,
                                                                         0.0,
@@ -352,7 +348,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                               clipBehavior: Clip
                                                                   .antiAlias,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -372,7 +368,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                           Flexible(
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           2.0,
                                                                           0.0,
@@ -410,20 +406,20 @@ class _PostWidgetState extends State<PostWidget> {
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                -1.00, -1.00),
+                                            alignment: const AlignmentDirectional(
+                                                -1.0, -1.0),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(2.0, 0.0, 0.0, 0.0),
                                               child: Container(
                                                 width: 32.0,
                                                 height: 32.0,
-                                                constraints: BoxConstraints(
+                                                constraints: const BoxConstraints(
                                                   minWidth: 40.0,
                                                   maxWidth: 90.0,
                                                 ),
                                                 decoration: BoxDecoration(
-                                                  color: Color(0x3F000000),
+                                                  color: const Color(0x3F000000),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30.0),
@@ -436,7 +432,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                   children: [
                                                     Text(
                                                       valueOrDefault<String>(
-                                                        '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
+                                                        '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post.netVotes.toString()}',
                                                         '0',
                                                       ),
                                                       style: FlutterFlowTheme
@@ -452,7 +448,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                 if (widget
                                                                         .post
                                                                         ?.post
-                                                                        ?.netVotes ==
+                                                                        .netVotes ==
                                                                     0) {
                                                                   return Colors
                                                                       .white;
@@ -461,10 +457,10 @@ class _PostWidgetState extends State<PostWidget> {
                                                                         .post
                                                                         .netVotes >
                                                                     0) {
-                                                                  return Color(
+                                                                  return const Color(
                                                                       0xFF21E744);
                                                                 } else {
-                                                                  return Color(
+                                                                  return const Color(
                                                                       0xFFE5200B);
                                                                 }
                                                               }(),
@@ -492,7 +488,7 @@ class _PostWidgetState extends State<PostWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 2.0, 0.0, 0.0),
                                           child: Text(
                                             widget.post!.post.caption
@@ -513,7 +509,7 @@ class _PostWidgetState extends State<PostWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 10.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -811,7 +807,7 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                     child: Stack(
                       children: [
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           height: 600.0,
                           child: PageView(
@@ -836,7 +832,7 @@ class _PostWidgetState extends State<PostWidget> {
                             ],
                           ),
                         ),
-                        if ((widget.post?.post?.isSpoiler == true) &&
+                        if ((widget.post?.post.isSpoiler == true) &&
                             (functions.stringInArr(
                                     currentUserUid,
                                     widget.post!.post.spoilerClickers
@@ -863,7 +859,7 @@ class _PostWidgetState extends State<PostWidget> {
                               width: double.infinity,
                               height: double.infinity,
                               decoration: BoxDecoration(
-                                color: Color(0xFD14181B),
+                                color: const Color(0xFD14181B),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Column(
@@ -887,13 +883,13 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ),
                         Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     3.0, 0.0, 3.0, 3.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -918,12 +914,11 @@ class _PostWidgetState extends State<PostWidget> {
                                     width: double.infinity,
                                     height: 65.0,
                                     decoration: BoxDecoration(
-                                      color: Color(0x6E000000),
+                                      color: const Color(0x6E000000),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          2.0, 2.0, 2.0, 2.0),
+                                      padding: const EdgeInsets.all(2.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -932,9 +927,9 @@ class _PostWidgetState extends State<PostWidget> {
                                           Container(
                                             width: 400.0,
                                             height: 60.0,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(1.0, 0.0, 0.0, 0.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
@@ -949,18 +944,18 @@ class _PostWidgetState extends State<PostWidget> {
                                                     children: [
                                                       Align(
                                                         alignment:
-                                                            AlignmentDirectional(
-                                                                -1.00, -1.00),
+                                                            const AlignmentDirectional(
+                                                                -1.0, -1.0),
                                                         child: Container(
                                                           height: 32.0,
                                                           constraints:
-                                                              BoxConstraints(
+                                                              const BoxConstraints(
                                                             minWidth: 90.0,
                                                             maxWidth: 200.0,
                                                           ),
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0x40000000),
                                                             borderRadius:
                                                                 BorderRadius
@@ -969,7 +964,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -993,7 +988,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       : widget
                                                                           .post
                                                                           ?.post
-                                                                          ?.author,
+                                                                          .author,
                                                                 ),
                                                                 singleRecord:
                                                                     true,
@@ -1074,7 +1069,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                             .start,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             1.0,
                                                                             0.0,
                                                                             5.0,
@@ -1088,7 +1083,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                           clipBehavior:
                                                                               Clip.antiAlias,
                                                                           decoration:
-                                                                              BoxDecoration(
+                                                                              const BoxDecoration(
                                                                             shape:
                                                                                 BoxShape.circle,
                                                                           ),
@@ -1106,7 +1101,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       Flexible(
                                                                         child:
                                                                             Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               2.0,
                                                                               0.0,
                                                                               15.0,
@@ -1136,11 +1131,11 @@ class _PostWidgetState extends State<PostWidget> {
                                                       ),
                                                       Align(
                                                         alignment:
-                                                            AlignmentDirectional(
-                                                                -1.00, -1.00),
+                                                            const AlignmentDirectional(
+                                                                -1.0, -1.0),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       2.0,
                                                                       0.0,
@@ -1150,13 +1145,13 @@ class _PostWidgetState extends State<PostWidget> {
                                                             width: 32.0,
                                                             height: 32.0,
                                                             constraints:
-                                                                BoxConstraints(
+                                                                const BoxConstraints(
                                                               minWidth: 40.0,
                                                               maxWidth: 90.0,
                                                             ),
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0x3F000000),
                                                               borderRadius:
                                                                   BorderRadius
@@ -1174,7 +1169,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                 Text(
                                                                   valueOrDefault<
                                                                       String>(
-                                                                    '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post?.netVotes?.toString()}',
+                                                                    '${widget.post!.post.netVotes > 0 ? '+' : ' '}${widget.post?.post.netVotes.toString()}',
                                                                     '0',
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
@@ -1186,14 +1181,14 @@ class _PostWidgetState extends State<PostWidget> {
                                                                         color: valueOrDefault<
                                                                             Color>(
                                                                           () {
-                                                                            if (widget.post?.post?.netVotes ==
+                                                                            if (widget.post?.post.netVotes ==
                                                                                 0) {
                                                                               return Colors.white;
                                                                             } else if (widget.post!.post.netVotes >
                                                                                 0) {
-                                                                              return Color(0xFF21E744);
+                                                                              return const Color(0xFF21E744);
                                                                             } else {
-                                                                              return Color(0xFFE5200B);
+                                                                              return const Color(0xFFE5200B);
                                                                             }
                                                                           }(),
                                                                           Colors
@@ -1221,7 +1216,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                       ))
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       8.0,
                                                                       2.0,
@@ -1256,7 +1251,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                       ))
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       8.0,
                                                                       2.0,
@@ -1293,7 +1288,7 @@ class _PostWidgetState extends State<PostWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 20.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -1307,7 +1302,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                 ))
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 5.0, 0.0),
                                                     child:
@@ -1317,7 +1312,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                       borderRadius: 20.0,
                                                       borderWidth: 1.0,
                                                       buttonSize: 40.0,
-                                                      icon: Icon(
+                                                      icon: const Icon(
                                                         Icons.comment_rounded,
                                                         color: Colors.white,
                                                         size: 30.0,
@@ -1447,7 +1442,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                   },
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 0.0, 0.0),
                                                   child: FlutterFlowIconButton(
@@ -1589,7 +1584,7 @@ class _PostWidgetState extends State<PostWidget> {
                     tablet: false,
                   ))
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                   child: Container(
                     width: 350.0,
                     height: 600.0,
@@ -1605,14 +1600,13 @@ class _PostWidgetState extends State<PostWidget> {
                           child: Stack(
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: StreamBuilder<List<CommentsRecord>>(
                                   stream: queryCommentsRecord(
                                     queryBuilder: (commentsRecord) =>
                                         commentsRecord.where(
                                       'comment.idReplyTo',
-                                      isEqualTo: widget.post?.post?.id,
+                                      isEqualTo: widget.post?.post.id,
                                     ),
                                   ),
                                   builder: (context, snapshot) {
@@ -1651,8 +1645,8 @@ class _PostWidgetState extends State<PostWidget> {
                                                 widget.post!.post.author,
                                           );
                                         })
-                                            .divide(SizedBox(height: 10.0))
-                                            .addToEnd(SizedBox(height: 50.0)),
+                                            .divide(const SizedBox(height: 10.0))
+                                            .addToEnd(const SizedBox(height: 50.0)),
                                       ),
                                     );
                                   },
@@ -1664,8 +1658,7 @@ class _PostWidgetState extends State<PostWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
                                           'irblc1ry' /* No comments */,
@@ -1701,14 +1694,14 @@ class _PostWidgetState extends State<PostWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: AuthUserStreamWidget(
                                         builder: (context) => Container(
                                           width: 35.0,
                                           height: 35.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.network(
@@ -1722,7 +1715,7 @@ class _PostWidgetState extends State<PostWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -1749,7 +1742,7 @@ class _PostWidgetState extends State<PostWidget> {
                                           ),
                                           AuthUserStreamWidget(
                                             builder: (context) => Text(
-                                              '@${currentUserDisplayName}',
+                                              '@$currentUserDisplayName',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -1767,14 +1760,14 @@ class _PostWidgetState extends State<PostWidget> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 5.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 10.0, 5.0, 5.0),
                                     child: TextFormField(
                                       controller: _model.textController,
@@ -1827,9 +1820,7 @@ class _PostWidgetState extends State<PostWidget> {
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                10.0, 10.0, 10.0, 10.0),
+                                        contentPadding: const EdgeInsets.all(10.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -1843,10 +1834,9 @@ class _PostWidgetState extends State<PostWidget> {
                                           .asValidator(context),
                                     ),
                                   ),
-                                  if (_model.uploadedFileUrl != null &&
-                                      _model.uploadedFileUrl != '')
+                                  if (_model.uploadedFileUrl != '')
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 5.0),
                                       child: Container(
                                         width: double.infinity,
@@ -1859,11 +1849,10 @@ class _PostWidgetState extends State<PostWidget> {
                                         ),
                                         child: Visibility(
                                           visible:
-                                              _model.uploadedFileUrl != null &&
-                                                  _model.uploadedFileUrl != '',
+                                              _model.uploadedFileUrl != '',
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: FlutterFlowMediaDisplay(
                                               path: _model.uploadedFileUrl,
@@ -1894,15 +1883,14 @@ class _PostWidgetState extends State<PostWidget> {
                                       ),
                                     ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 5.0, 5.0, 5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 5.0, 0.0),
                                           child: FlutterFlowIconButton(
                                             borderColor:
@@ -2000,7 +1988,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                 usersRecord.where(
                                               'uid',
                                               isEqualTo:
-                                                  widget.post?.post?.author,
+                                                  widget.post?.post.author,
                                             ),
                                             singleRecord: true,
                                           ),
@@ -2054,13 +2042,13 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       widget
                                                                           .post
                                                                           ?.post
-                                                                          ?.id,
+                                                                          .id,
                                                                   text: _model
                                                                       .textController
                                                                       .text,
                                                                   authorid:
                                                                       currentUserUid,
-                                                                  id: 'C${currentUserUid}RT${widget.post?.post?.id}${widget.post?.post?.comments?.length?.toString()}',
+                                                                  id: 'C${currentUserUid}RT${widget.post?.post.id}${widget.post?.post.comments.length.toString()}',
                                                                   timestamp:
                                                                       getCurrentTimestamp,
                                                                   imageHash:
@@ -2082,7 +2070,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                       widget
                                                                           .post
                                                                           ?.post
-                                                                          ?.isStealth,
+                                                                          .isStealth,
                                                                   clearUnsetFields:
                                                                       false,
                                                                 ),
@@ -2103,7 +2091,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                             createCommentStruct(
                                                           isPostComment: true,
                                                           idReplyTo: widget
-                                                              .post?.post?.id,
+                                                              .post?.post.id,
                                                           text: _model
                                                               .textController
                                                               .text,
@@ -2111,7 +2099,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                               currentUserUid,
                                                           timestamp:
                                                               getCurrentTimestamp,
-                                                          id: 'C${currentUserUid}RT${widget.post?.post?.id}${widget.post?.post?.comments?.length?.toString()}',
+                                                          id: 'C${currentUserUid}RT${widget.post?.post.id}${widget.post?.post.comments.length.toString()}',
                                                           imageHash:
                                                               createImageHashStruct(
                                                             image: _model
@@ -2130,14 +2118,14 @@ class _PostWidgetState extends State<PostWidget> {
                                                               false),
                                                           isAuthorStealth:
                                                               widget.post?.post
-                                                                  ?.isStealth,
+                                                                  .isStealth,
                                                           clearUnsetFields:
                                                               false,
                                                           create: true,
                                                         ),
                                                       ));
                                                   if (widget
-                                                          .post?.post?.author ==
+                                                          .post?.post.author ==
                                                       currentUserUid) {
                                                     return;
                                                   }
@@ -2164,7 +2152,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                   itemID: widget
                                                                       .post
                                                                       ?.post
-                                                                      ?.id,
+                                                                      .id,
                                                                   time:
                                                                       getCurrentTimestamp,
                                                                   userID:
@@ -2172,7 +2160,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                                   isMarkedAsRead:
                                                                       false,
                                                                   notifID:
-                                                                      'NP${buttonUsersRecord?.notifications?.length?.toString()}',
+                                                                      'NP${buttonUsersRecord.notifications.length.toString()}',
                                                                   iDUserFrom:
                                                                       currentUserUid,
                                                                   clearUnsetFields:
@@ -2191,15 +2179,12 @@ class _PostWidgetState extends State<PostWidget> {
                                                         .textController.text,
                                                     notificationImageUrl:
                                                         _model.uploadedFileUrl !=
-                                                                    null &&
-                                                                _model.uploadedFileUrl !=
                                                                     ''
                                                             ? _model
                                                                 .uploadedFileUrl
                                                             : 'null',
                                                     userRefs: [
-                                                      buttonUsersRecord!
-                                                          .reference
+                                                      buttonUsersRecord.reference
                                                     ],
                                                     initialPageName:
                                                         'singlePost',
@@ -2231,11 +2216,11 @@ class _PostWidgetState extends State<PostWidget> {
                                               ),
                                               options: FFButtonOptions(
                                                 height: 35.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         24.0, 0.0, 24.0, 0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -2249,7 +2234,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                           color: Colors.white,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),

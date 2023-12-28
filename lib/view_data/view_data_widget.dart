@@ -3,21 +3,17 @@ import '/components/p_c_nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'view_data_model.dart';
 export 'view_data_model.dart';
 
 class ViewDataWidget extends StatefulWidget {
   const ViewDataWidget({
-    Key? key,
+    super.key,
     bool? settingsKey,
-  })  : this.settingsKey = settingsKey ?? false,
-        super(key: key);
+  })  : settingsKey = settingsKey ?? false;
 
   final bool settingsKey;
 
@@ -76,7 +72,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                   wrapWithModel(
                     model: _model.pCNavBarModel,
                     updateCallback: () => setState(() {}),
-                    child: PCNavBarWidget(),
+                    child: const PCNavBarWidget(),
                   ),
                   Flexible(
                     child: Row(
@@ -87,7 +83,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                           child: Container(
                             width: 700.0,
                             height: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Visibility(
                               visible: widget.settingsKey,
                               child: SingleChildScrollView(
@@ -95,7 +91,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 5.0, 5.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
@@ -108,7 +104,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                           width: double.infinity,
                                           height: 50.0,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xFF9F1CFA),
                                                 Color(0xFF0D28A2)
@@ -124,7 +120,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -136,7 +132,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   borderRadius: 25.0,
                                                   borderWidth: 3.0,
                                                   buttonSize: 40.0,
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.arrow_back_rounded,
                                                     color: Colors.white,
                                                     size: 15.0,
@@ -153,7 +149,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
                                                         kTransitionInfoKey:
-                                                            TransitionInfo(
+                                                            const TransitionInfo(
                                                           hasTransition: true,
                                                           transitionType:
                                                               PageTransitionType
@@ -201,7 +197,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 10.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
@@ -213,10 +209,10 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                               BorderRadius.circular(15.0),
                                         ),
                                         alignment:
-                                            AlignmentDirectional(-1.00, 0.00),
+                                            const AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
@@ -225,7 +221,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                             children: [
                                               Flexible(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 5.0, 0.0),
                                                   child: Text(
@@ -251,7 +247,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 10.0, 0.0),
                                       child: Container(
                                         width: double.infinity,
@@ -264,7 +260,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   30.0, 20.0, 30.0, 10.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -285,7 +281,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -316,7 +312,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -351,7 +347,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -383,7 +379,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -422,7 +418,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -461,7 +457,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -500,7 +496,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -512,7 +508,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                             Text(
                                                           (currentUserDocument
                                                                       ?.threads
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .length
                                                               .toString(),
@@ -540,7 +536,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -552,7 +548,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                             Text(
                                                           (currentUserDocument
                                                                       ?.posts
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .length
                                                               .toString(),
@@ -580,7 +576,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -592,7 +588,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                             Text(
                                                           (currentUserDocument
                                                                       ?.saved
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .length
                                                               .toString(),
@@ -619,7 +615,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -647,7 +643,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -685,7 +681,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -723,7 +719,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -735,7 +731,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                             Text(
                                                           (currentUserDocument
                                                                       ?.blocked
-                                                                      ?.toList() ??
+                                                                      .toList() ??
                                                                   [])
                                                               .length
                                                               .toString(),
@@ -762,7 +758,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -796,7 +792,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -804,7 +800,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                           Text(
                                                         (currentUserDocument
                                                                     ?.notifications
-                                                                    ?.toList() ??
+                                                                    .toList() ??
                                                                 [])
                                                             .length
                                                             .toString(),
@@ -831,7 +827,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -865,7 +861,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -873,7 +869,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                           Text(
                                                         (currentUserDocument
                                                                     ?.blocked
-                                                                    ?.toList() ??
+                                                                    .toList() ??
                                                                 [])
                                                             .length
                                                             .toString(),
@@ -900,7 +896,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -934,7 +930,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(
@@ -968,7 +964,7 @@ class _ViewDataWidgetState extends State<ViewDataWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AuthUserStreamWidget(

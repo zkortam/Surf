@@ -3,11 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'thread_poll_model.dart';
@@ -15,9 +11,9 @@ export 'thread_poll_model.dart';
 
 class ThreadPollWidget extends StatefulWidget {
   const ThreadPollWidget({
-    Key? key,
+    super.key,
     this.thrad,
-  }) : super(key: key);
+  });
 
   final ThreadRecord? thrad;
 
@@ -55,7 +51,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
 
     return Container(
       width: 500.0,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Stack(
         children: [
           if (!((functions.stringInArr(currentUserUid,
@@ -82,7 +78,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                   Flexible(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 5.0, 0.0),
                       child: Container(
                         width: double.infinity,
                         height: 55.0,
@@ -116,11 +112,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                           lineHeight: 50.0,
                                           animation: true,
                                           animateFromLastPercent: true,
-                                          progressColor: Color(0xFF558DD6),
+                                          progressColor: const Color(0xFF558DD6),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          barRadius: Radius.circular(150.0),
+                                          barRadius: const Radius.circular(150.0),
                                           padding: EdgeInsets.zero,
                                         ),
                                       if (responsiveVisibility(
@@ -137,24 +133,24 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                           lineHeight: 50.0,
                                           animation: true,
                                           animateFromLastPercent: true,
-                                          progressColor: Color(0xFF558DD6),
+                                          progressColor: const Color(0xFF558DD6),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          barRadius: Radius.circular(150.0),
+                                          barRadius: const Radius.circular(150.0),
                                           padding: EdgeInsets.zero,
                                         ),
                                     ],
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 10.0, 0.0, 0.0),
                                           child: Text(
                                             widget
@@ -178,7 +174,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             true)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 0.0, 0.0),
                                             child: Icon(
                                               Icons.check_circle,
@@ -195,7 +191,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   7.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 valueOrDefault<String>(
@@ -221,7 +217,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                   Flexible(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                       child: Container(
                         width: double.infinity,
                         height: 55.0,
@@ -254,11 +250,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                           lineHeight: 50.0,
                                           animation: true,
                                           animateFromLastPercent: true,
-                                          progressColor: Color(0xFF558DD6),
+                                          progressColor: const Color(0xFF558DD6),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          barRadius: Radius.circular(150.0),
+                                          barRadius: const Radius.circular(150.0),
                                           padding: EdgeInsets.zero,
                                         ),
                                       if (responsiveVisibility(
@@ -275,24 +271,24 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                           lineHeight: 50.0,
                                           animation: true,
                                           animateFromLastPercent: true,
-                                          progressColor: Color(0xFF558DD6),
+                                          progressColor: const Color(0xFF558DD6),
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          barRadius: Radius.circular(100.0),
+                                          barRadius: const Radius.circular(100.0),
                                           padding: EdgeInsets.zero,
                                         ),
                                     ],
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 10.0, 0.0, 0.0),
                                           child: Text(
                                             widget
@@ -316,7 +312,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             true)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 0.0, 0.0),
                                             child: Icon(
                                               Icons.check_circle,
@@ -333,7 +329,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   7.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 valueOrDefault<String>(
@@ -356,11 +352,12 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                       ),
                     ),
                   ),
-                  if (widget.thrad!.thread.poll.options.length >= 3)
+                  if ((widget.thrad?.thread.poll.options[2]) != null &&
+                      (widget.thrad?.thread.poll.options[2]) != '')
                     Flexible(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 55.0,
@@ -389,11 +386,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             lineHeight: 50.0,
                                             animation: true,
                                             animateFromLastPercent: true,
-                                            progressColor: Color(0xFF558DD6),
+                                            progressColor: const Color(0xFF558DD6),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            barRadius: Radius.circular(150.0),
+                                            barRadius: const Radius.circular(150.0),
                                             padding: EdgeInsets.zero,
                                           ),
                                         if (responsiveVisibility(
@@ -414,29 +411,29 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             lineHeight: 50.0,
                                             animation: true,
                                             animateFromLastPercent: true,
-                                            progressColor: Color(0xFF558DD6),
+                                            progressColor: const Color(0xFF558DD6),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            barRadius: Radius.circular(150.0),
+                                            barRadius: const Radius.circular(150.0),
                                             padding: EdgeInsets.zero,
                                           ),
                                       ],
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 0.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget.thrad?.thread?.poll
-                                                    ?.options?[2],
+                                                widget.thrad?.thread.poll
+                                                    .options[2],
                                                 'None',
                                               ),
                                               style:
@@ -458,7 +455,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                                       .toList()) ==
                                               true)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 0.0, 0.0),
                                               child: Icon(
@@ -476,7 +473,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     7.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
@@ -499,11 +496,12 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                         ),
                       ),
                     ),
-                  if (widget.thrad?.thread?.poll?.options?.length == 4)
+                  if ((widget.thrad?.thread.poll.options[3]) != null &&
+                      (widget.thrad?.thread.poll.options[3]) != '')
                     Flexible(
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 55.0,
@@ -532,11 +530,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             lineHeight: 50.0,
                                             animation: true,
                                             animateFromLastPercent: true,
-                                            progressColor: Color(0xFF558DD6),
+                                            progressColor: const Color(0xFF558DD6),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            barRadius: Radius.circular(100.0),
+                                            barRadius: const Radius.circular(100.0),
                                             padding: EdgeInsets.zero,
                                           ),
                                         if (responsiveVisibility(
@@ -557,29 +555,29 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                             lineHeight: 50.0,
                                             animation: true,
                                             animateFromLastPercent: true,
-                                            progressColor: Color(0xFF558DD6),
+                                            progressColor: const Color(0xFF558DD6),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            barRadius: Radius.circular(100.0),
+                                            barRadius: const Radius.circular(100.0),
                                             padding: EdgeInsets.zero,
                                           ),
                                       ],
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 0.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget.thrad?.thread?.poll
-                                                    ?.options?[3],
+                                                widget.thrad?.thread.poll
+                                                    .options[3],
                                                 'None',
                                               ),
                                               style:
@@ -601,7 +599,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                                       .toList()) ==
                                               true)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 0.0, 0.0),
                                               child: Icon(
@@ -619,7 +617,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     7.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
@@ -664,20 +662,20 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 5.0, 5.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -714,8 +712,8 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                   children: [
                                     Text(
                                       valueOrDefault<String>(
-                                        widget.thrad?.thread?.poll?.options
-                                            ?.first,
+                                        widget.thrad?.thread.poll.options
+                                            .first,
                                         'None',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -734,7 +732,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                         ),
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 5.0, 5.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -771,7 +769,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                   children: [
                                     Text(
                                       valueOrDefault<String>(
-                                        widget.thrad?.thread?.poll?.options?[1],
+                                        widget.thrad?.thread.poll.options[1],
                                         'None',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -788,10 +786,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                             ),
                           ),
                         ),
-                        if (widget.thrad!.thread.poll.options.length >= 3)
+                        if ((widget.thrad?.thread.poll.options[2]) != null &&
+                            (widget.thrad?.thread.poll.options[2]) != '')
                           Flexible(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -830,7 +829,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                       Text(
                                         valueOrDefault<String>(
                                           widget
-                                              .thrad?.thread?.poll?.options?[2],
+                                              .thrad?.thread.poll.options[2],
                                           'None',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -847,10 +846,11 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                               ),
                             ),
                           ),
-                        if (widget.thrad?.thread?.poll?.options?.length == 4)
+                        if ((widget.thrad?.thread.poll.options[3]) != null &&
+                            (widget.thrad?.thread.poll.options[3]) != '')
                           Flexible(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -889,7 +889,7 @@ class _ThreadPollWidgetState extends State<ThreadPollWidget> {
                                       Text(
                                         valueOrDefault<String>(
                                           widget
-                                              .thrad?.thread?.poll?.options?[3],
+                                              .thrad?.thread.poll.options[3],
                                           'None',
                                         ),
                                         style: FlutterFlowTheme.of(context)

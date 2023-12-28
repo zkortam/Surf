@@ -4,21 +4,18 @@ import '/components/edit_thread_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'threads_comp_model.dart';
 export 'threads_comp_model.dart';
 
 class ThreadsCompWidget extends StatefulWidget {
   const ThreadsCompWidget({
-    Key? key,
+    super.key,
     required this.thread,
-  }) : super(key: key);
+  });
 
   final ThreadRecord? thread;
 
@@ -55,7 +52,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Stack(
         children: [
           if (responsiveVisibility(
@@ -64,7 +61,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
             tablet: false,
           ))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -78,17 +75,17 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, 1.00),
+                      alignment: const AlignmentDirectional(0.0, 1.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Stack(
-                          alignment: AlignmentDirectional(0.0, 1.0),
+                          alignment: const AlignmentDirectional(0.0, 1.0),
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.00, 1.00),
+                              alignment: const AlignmentDirectional(0.0, 1.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 10.0, 10.0),
                                 child: Container(
                                   width: 500.0,
@@ -98,7 +95,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 5.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -109,13 +106,13 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: 40.0,
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xFF0F66E2),
                                                   Color(0xFF541BE3)
@@ -135,7 +132,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           6.0, 0.0, 0.0, 0.0),
                                                   child: FlutterFlowIconButton(
@@ -143,7 +140,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     borderRadius: 20.0,
                                                     borderWidth: 3.0,
                                                     buttonSize: 30.0,
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.arrow_back_rounded,
                                                       color: Colors.white,
                                                       size: 15.0,
@@ -163,11 +160,11 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     children: [
                                                       Align(
                                                         alignment:
-                                                            AlignmentDirectional(
-                                                                0.00, 0.00),
+                                                            const AlignmentDirectional(
+                                                                0.0, 0.0),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -186,7 +183,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                                 isEqualTo: widget
                                                                     .thread
                                                                     ?.thread
-                                                                    ?.author,
+                                                                    .author,
                                                               ),
                                                               singleRecord:
                                                                   true,
@@ -258,7 +255,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 10.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -267,7 +264,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                             children: [
                                               Flexible(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 10.0, 0.0, 0.0),
                                                   child: FutureBuilder<
@@ -279,7 +276,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               usersRecord.where(
                                                         'uid',
                                                         isEqualTo: widget.thread
-                                                            ?.thread?.author,
+                                                            ?.thread.author,
                                                       ),
                                                       singleRecord: true,
                                                     ),
@@ -376,7 +373,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             children: [
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -393,9 +390,9 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               ),
                                                               Align(
                                                                 alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.00,
-                                                                        0.00),
+                                                                    const AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0),
                                                                 child: Text(
                                                                   FFLocalizations.of(
                                                                           context)
@@ -428,7 +425,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                               ),
                                               Flexible(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 10.0, 5.0, 0.0),
                                                   child: FutureBuilder<
@@ -440,7 +437,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               usersRecord.where(
                                                         'uid',
                                                         isEqualTo: widget.thread
-                                                            ?.thread?.author,
+                                                            ?.thread.author,
                                                       ),
                                                       singleRecord: true,
                                                     ),
@@ -542,7 +539,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             children: [
                                                               Padding(
                                                                 padding:
-                                                                    EdgeInsetsDirectional
+                                                                    const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -559,9 +556,9 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               ),
                                                               Align(
                                                                 alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.00,
-                                                                        0.00),
+                                                                    const AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0),
                                                                 child: Text(
                                                                   FFLocalizations.of(
                                                                           context)
@@ -596,10 +593,10 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                           ),
                                         ),
                                         if (currentUserUid ==
-                                            widget.thread?.thread?.author)
+                                            widget.thread?.thread.author)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 10.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
@@ -647,7 +644,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -664,8 +661,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          AlignmentDirectional(
-                                                              0.00, 0.00),
+                                                          const AlignmentDirectional(
+                                                              0.0, 0.0),
                                                       child: Text(
                                                         FFLocalizations.of(
                                                                 context)
@@ -695,16 +692,16 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                             ),
                                           ),
                                         if (currentUserUid !=
-                                            widget.thread?.thread?.author)
+                                            widget.thread?.thread.author)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 10.0),
                                             child: Container(
                                               width: double.infinity,
                                               height: 50.0,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFFE1343E),
+                                                color: const Color(0xFFE1343E),
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
                                               ),
@@ -715,8 +712,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                 children: [
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: Text(
                                                       FFLocalizations.of(
                                                               context)
@@ -741,16 +738,16 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                             ),
                                           ),
                                         if (currentUserUid ==
-                                            widget.thread?.thread?.author)
+                                            widget.thread?.thread.author)
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 10.0),
                                             child: Container(
                                               width: double.infinity,
                                               height: 50.0,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFFE1343E),
+                                                color: const Color(0xFFE1343E),
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
                                               ),
@@ -800,8 +797,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   children: [
                                                     Align(
                                                       alignment:
-                                                          AlignmentDirectional(
-                                                              0.00, 0.00),
+                                                          const AlignmentDirectional(
+                                                              0.0, 0.0),
                                                       child: Text(
                                                         FFLocalizations.of(
                                                                 context)
@@ -831,7 +828,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                             currentUserDocument?.admin, false))
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 5.0, 5.0),
                                             child: AuthUserStreamWidget(
                                               builder: (context) => Container(
@@ -843,12 +840,12 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .primary,
-                                                      Color(0xFF3999D2)
+                                                      const Color(0xFF3999D2)
                                                     ],
-                                                    stops: [0.0, 1.0],
-                                                    begin: AlignmentDirectional(
+                                                    stops: const [0.0, 1.0],
+                                                    begin: const AlignmentDirectional(
                                                         1.0, 0.0),
-                                                    end: AlignmentDirectional(
+                                                    end: const AlignmentDirectional(
                                                         -1.0, 0),
                                                   ),
                                                   borderRadius:
@@ -856,7 +853,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                           300.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 10.0, 0.0),
                                                   child: Row(
@@ -865,7 +862,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     6.0,
                                                                     0.0,
@@ -883,7 +880,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               isEqualTo: widget
                                                                   .thread
                                                                   ?.thread
-                                                                  ?.author,
+                                                                  .author,
                                                             ),
                                                             singleRecord: true,
                                                           ),
@@ -927,7 +924,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                                   30.0,
                                                               borderWidth: 3.0,
                                                               buttonSize: 40.0,
-                                                              icon: Icon(
+                                                              icon: const Icon(
                                                                 Icons.delete,
                                                                 color: Colors
                                                                     .white,
@@ -975,7 +972,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     0.0,
@@ -993,7 +990,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               isEqualTo: widget
                                                                   .thread
                                                                   ?.thread
-                                                                  ?.author,
+                                                                  .author,
                                                             ),
                                                             singleRecord: true,
                                                           ),
@@ -1037,7 +1034,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                                   30.0,
                                                               borderWidth: 3.0,
                                                               buttonSize: 40.0,
-                                                              icon: FaIcon(
+                                                              icon: const FaIcon(
                                                                 FontAwesomeIcons
                                                                     .hammer,
                                                                 color: Colors
@@ -1061,7 +1058,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     20.0,
                                                                     0.0,
@@ -1079,7 +1076,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               isEqualTo: widget
                                                                   .thread
                                                                   ?.thread
-                                                                  ?.author,
+                                                                  .author,
                                                             ),
                                                             singleRecord: true,
                                                           ),
@@ -1118,7 +1115,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                                   30.0,
                                                               borderWidth: 3.0,
                                                               buttonSize: 40.0,
-                                                              icon: Icon(
+                                                              icon: const Icon(
                                                                 Icons
                                                                     .arrow_forward,
                                                                 color: Colors
@@ -1184,17 +1181,17 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.00, 1.00),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: Stack(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.00, 1.00),
+                            alignment: const AlignmentDirectional(0.0, 1.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 10.0),
                               child: Container(
                                 width: 600.0,
@@ -1204,7 +1201,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -1213,13 +1210,13 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 5.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 40.0,
                                           decoration: BoxDecoration(
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               colors: [
                                                 Color(0xFF0F66E2),
                                                 Color(0xFF541BE3)
@@ -1239,7 +1236,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         6.0, 0.0, 0.0, 0.0),
                                                 child: FlutterFlowIconButton(
@@ -1247,7 +1244,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   borderRadius: 20.0,
                                                   borderWidth: 3.0,
                                                   buttonSize: 30.0,
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.arrow_back_rounded,
                                                     color: Colors.white,
                                                     size: 15.0,
@@ -1266,11 +1263,11 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   children: [
                                                     Align(
                                                       alignment:
-                                                          AlignmentDirectional(
-                                                              0.00, 0.00),
+                                                          const AlignmentDirectional(
+                                                              0.0, 0.0),
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -1288,7 +1285,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                               isEqualTo: widget
                                                                   .thread
                                                                   ?.thread
-                                                                  ?.author,
+                                                                  .author,
                                                             ),
                                                             singleRecord: true,
                                                           ),
@@ -1360,7 +1357,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                         children: [
                                           Flexible(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 0.0, 0.0),
                                               child: FutureBuilder<
@@ -1370,7 +1367,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                       usersRecord.where(
                                                     'uid',
                                                     isEqualTo: widget
-                                                        .thread?.thread?.author,
+                                                        .thread?.thread.author,
                                                   ),
                                                   singleRecord: true,
                                                 ),
@@ -1459,7 +1456,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1476,8 +1473,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                           ),
                                                           Align(
                                                             alignment:
-                                                                AlignmentDirectional(
-                                                                    0.00, 0.00),
+                                                                const AlignmentDirectional(
+                                                                    0.0, 0.0),
                                                             child: Text(
                                                               FFLocalizations.of(
                                                                       context)
@@ -1511,7 +1508,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                           ),
                                           Flexible(
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 5.0, 0.0),
                                               child: FutureBuilder<
@@ -1521,7 +1518,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                       usersRecord.where(
                                                     'uid',
                                                     isEqualTo: widget
-                                                        .thread?.thread?.author,
+                                                        .thread?.thread.author,
                                                   ),
                                                   singleRecord: true,
                                                 ),
@@ -1614,7 +1611,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -1631,8 +1628,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                           ),
                                                           Align(
                                                             alignment:
-                                                                AlignmentDirectional(
-                                                                    0.00, 0.00),
+                                                                const AlignmentDirectional(
+                                                                    0.0, 0.0),
                                                             child: Text(
                                                               FFLocalizations.of(
                                                                       context)
@@ -1667,10 +1664,10 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                         ],
                                       ),
                                       if (currentUserUid ==
-                                          widget.thread?.thread?.author)
+                                          widget.thread?.thread.author)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 10.0, 5.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -1715,7 +1712,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 10.0, 0.0),
                                                     child: FaIcon(
@@ -1729,8 +1726,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: Text(
                                                       FFLocalizations.of(
                                                               context)
@@ -1759,16 +1756,16 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                           ),
                                         ),
                                       if (currentUserUid !=
-                                          widget.thread?.thread?.author)
+                                          widget.thread?.thread.author)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 10.0, 5.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: 50.0,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFE1343E),
+                                              color: const Color(0xFFE1343E),
                                               borderRadius:
                                                   BorderRadius.circular(15.0),
                                             ),
@@ -1779,8 +1776,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          0.00, 0.00),
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
@@ -1802,16 +1799,16 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                           ),
                                         ),
                                       if (currentUserUid ==
-                                          widget.thread?.thread?.author)
+                                          widget.thread?.thread.author)
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 10.0, 5.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: 50.0,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFE1343E),
+                                              color: const Color(0xFFE1343E),
                                               borderRadius:
                                                   BorderRadius.circular(15.0),
                                             ),
@@ -1859,8 +1856,8 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                 children: [
                                                   Align(
                                                     alignment:
-                                                        AlignmentDirectional(
-                                                            0.00, 0.00),
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
                                                     child: Text(
                                                       FFLocalizations.of(
                                                               context)
@@ -1889,7 +1886,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                           currentUserDocument?.admin, false))
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 10.0, 5.0, 5.0),
                                           child: AuthUserStreamWidget(
                                             builder: (context) => Container(
@@ -1900,12 +1897,12 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   colors: [
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                    Color(0xFF3999D2)
+                                                    const Color(0xFF3999D2)
                                                   ],
-                                                  stops: [0.0, 1.0],
-                                                  begin: AlignmentDirectional(
+                                                  stops: const [0.0, 1.0],
+                                                  begin: const AlignmentDirectional(
                                                       1.0, 0.0),
-                                                  end: AlignmentDirectional(
+                                                  end: const AlignmentDirectional(
                                                       -1.0, 0),
                                                 ),
                                                 borderRadius:
@@ -1913,7 +1910,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                         300.0),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 0.0, 10.0, 0.0),
                                                 child: Row(
@@ -1922,7 +1919,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   6.0,
                                                                   0.0,
@@ -1940,7 +1937,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             isEqualTo: widget
                                                                 .thread
                                                                 ?.thread
-                                                                ?.author,
+                                                                .author,
                                                           ),
                                                           singleRecord: true,
                                                         ),
@@ -1983,7 +1980,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             borderRadius: 30.0,
                                                             borderWidth: 3.0,
                                                             buttonSize: 40.0,
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons.delete,
                                                               color:
                                                                   Colors.white,
@@ -2031,7 +2028,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   20.0,
                                                                   0.0,
@@ -2049,7 +2046,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             isEqualTo: widget
                                                                 .thread
                                                                 ?.thread
-                                                                ?.author,
+                                                                .author,
                                                           ),
                                                           singleRecord: true,
                                                         ),
@@ -2092,7 +2089,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             borderRadius: 30.0,
                                                             borderWidth: 3.0,
                                                             buttonSize: 40.0,
-                                                            icon: FaIcon(
+                                                            icon: const FaIcon(
                                                               FontAwesomeIcons
                                                                   .hammer,
                                                               color:
@@ -2116,7 +2113,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   20.0,
                                                                   0.0,
@@ -2134,7 +2131,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             isEqualTo: widget
                                                                 .thread
                                                                 ?.thread
-                                                                ?.author,
+                                                                .author,
                                                           ),
                                                           singleRecord: true,
                                                         ),
@@ -2172,7 +2169,7 @@ class _ThreadsCompWidgetState extends State<ThreadsCompWidget> {
                                                             borderRadius: 30.0,
                                                             borderWidth: 3.0,
                                                             buttonSize: 40.0,
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons
                                                                   .arrow_forward,
                                                               color:
