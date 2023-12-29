@@ -57,7 +57,7 @@ class _BottomNotifWidgetState extends State<BottomNotifWidget> {
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
         child: Container(
-          width: double.infinity,
+          width: 600.0,
           height: 50.0,
           decoration: BoxDecoration(
             gradient: const LinearGradient(

@@ -52,7 +52,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
       child: Container(
-        width: double.infinity,
+        width: 600.0,
         constraints: const BoxConstraints(
           minHeight: 90.0,
           maxWidth: 600.0,
@@ -154,7 +154,7 @@ class _BeautifiedTextWidgetState extends State<BeautifiedTextWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Outfit',
-                                    fontSize: 13.0,
+                                    fontSize: 14.0,
                                   ),
                         ),
                       ),

@@ -49,7 +49,7 @@ class _ThreadsHashtagsWidgetState extends State<ThreadsHashtagsWidget> {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
       child: Container(
-        width: double.infinity,
+        width: 600.0,
         constraints: const BoxConstraints(
           minHeight: 90.0,
           maxHeight: 340.0,

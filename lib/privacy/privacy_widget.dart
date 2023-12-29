@@ -6,7 +6,6 @@ import '/components/stealth_message_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -276,7 +275,7 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                                         10.0, 10.0, 10.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
-                                      height: 520.0,
+                                      height: 465.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -568,61 +567,6 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'lvcyg7vp' /* Allow Everyone to Message You */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                            FFButtonWidget(
-                                              onPressed: () async {
-                                                await currentUserReference!
-                                                    .update(
-                                                        createUsersRecordData(
-                                                  messagesetting: valueOrDefault<
-                                                              bool>(
-                                                          currentUserDocument
-                                                              ?.messagesetting,
-                                                          false)
-                                                      ? false
-                                                      : true,
-                                                ));
-                                              },
-                                              text: FFLocalizations.of(context)
-                                                  .getText(
-                                                'f98ivqua' /* Button */,
-                                              ),
-                                              options: FFButtonOptions(
-                                                height: 40.0,
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        24.0, 0.0, 24.0, 0.0),
-                                                iconPadding:
-                                                    const EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: Colors.white,
-                                                        ),
-                                                elevation: 3.0,
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                            ),
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 0.0, 0.0),
@@ -661,12 +605,20 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                                                             createUsersRecordData(
                                                       messagesetting: false,
                                                     ));
+                                                    setState(() {
+                                                      _model.messageSetting =
+                                                          false;
+                                                    });
                                                   } else {
                                                     await currentUserReference!
                                                         .update(
                                                             createUsersRecordData(
                                                       messagesetting: false,
                                                     ));
+                                                    setState(() {
+                                                      _model.messageSetting =
+                                                          true;
+                                                    });
                                                   }
                                                 },
                                                 child: Container(
@@ -696,7 +648,7 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'hmcpxbi1' /* Allow Everyone to Message You */,
+                                                            't7nidjw7' /* Allow Everyone to Message You */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
