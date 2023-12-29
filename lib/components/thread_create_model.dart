@@ -29,7 +29,7 @@ class ThreadCreateModel extends FlutterFlowModel<ThreadCreateWidget> {
   void updateThreadStruct(Function(ThreadStruct) updateFn) =>
       updateFn(thread ??= ThreadStruct());
 
-  String apiKey = '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';
+  String apiKey = '0000';
 
   bool isSettings = false;
 

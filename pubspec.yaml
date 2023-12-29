@@ -27,6 +27,7 @@ dependencies:
     sdk: flutter
   algolia: 1.1.1
   aligned_tooltip: 0.0.1
+  appinio_video_player: ^1.2.2
   auto_size_text: 3.0.0
   blurhash_dart: 1.2.1
   cached_network_image: 3.2.1
@@ -110,6 +111,7 @@ dependencies:
   sign_in_with_apple_web: 1.0.1
   sqflite: 2.2.6
   stream_transform: 2.1.0
+  tiktoklikescroller: ^0.2.6
   timeago: 3.2.2
   universal_io: 2.2.2
   url_launcher: 6.1.10

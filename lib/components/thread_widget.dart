@@ -1016,7 +1016,7 @@ class _ThreadWidgetState extends State<ThreadWidget> {
                                         child: Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
+                                                  10.0, 0.0, 10.0, 0.0),
                                           child: SelectionArea(
                                               child: AutoSizeText(
                                             widget.thread!.thread.text
