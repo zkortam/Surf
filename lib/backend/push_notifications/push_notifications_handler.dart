@@ -218,6 +218,8 @@ final parametersBuilderMap =
         },
       ),
   'preentry': ParameterData.none(),
+  'Shorts': ParameterData.none(),
+  'ShortsDebug': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

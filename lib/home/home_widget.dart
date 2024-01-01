@@ -238,6 +238,21 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.white,
+                                            borderRadius: 25.0,
+                                            borderWidth: 3.0,
+                                            buttonSize: 40.0,
+                                            icon: const Icon(
+                                              Icons.notifications_sharp,
+                                              color: Colors.white,
+                                              size: 19.0,
+                                            ),
+                                            onPressed: () async {
+                                              context
+                                                  .pushNamed('Notifications');
+                                            },
+                                          ),
                                           Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *

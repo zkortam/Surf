@@ -219,7 +219,6 @@ class _ThreadCreateWidgetState extends State<ThreadCreateWidget>
                                   child: TextFormField(
                                     controller: _model.textController2,
                                     focusNode: _model.textFieldFocusNode1,
-                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,

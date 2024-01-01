@@ -11,6 +11,7 @@ import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
 
@@ -243,7 +244,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Home': const HomeWidget(),
       'Threads': const ThreadsWidget(),
       'createPost': const CreatePostWidget(),
-      'Notifications': const NotificationsWidget(),
+      'Shorts': const ShortsWidget(),
       'Profile': const ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -327,11 +328,11 @@ class _NavBarPageState extends State<NavBarPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.notifications_none,
+                    FontAwesomeIcons.sort,
                     color: currentIndex == 3
                         ? const Color(0xFF574CF6)
                         : FlutterFlowTheme.of(context).secondaryText,
-                    size: 24.0,
+                    size: 22.0,
                   ),
                 ],
               ),

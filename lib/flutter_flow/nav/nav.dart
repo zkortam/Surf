@@ -122,12 +122,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Notifications',
               path: 'Notifications',
               requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? const NavBarPage(initialPage: 'Notifications')
-                  : const NavBarPage(
-                      initialPage: 'Notifications',
-                      page: NotificationsWidget(),
-                    ),
+              builder: (context, params) => const NavBarPage(
+                initialPage: '',
+                page: NotificationsWidget(),
+              ),
             ),
             FFRoute(
               name: 'createProfile',
@@ -404,6 +402,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'preentry',
               path: 'preentry',
               builder: (context, params) => const PreentryWidget(),
+            ),
+            FFRoute(
+              name: 'Shorts',
+              path: 'shorts',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'Shorts')
+                  : const NavBarPage(
+                      initialPage: 'Shorts',
+                      page: ShortsWidget(),
+                    ),
+            ),
+            FFRoute(
+              name: 'ShortsDebug',
+              path: 'shortsDebug',
+              requireAuth: true,
+              builder: (context, params) => const ShortsDebugWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
