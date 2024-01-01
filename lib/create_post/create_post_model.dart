@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/components/p_c_nav_bar_widget.dart';
-import '/components/thread_create_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'create_post_widget.dart' show CreatePostWidget;
 import 'package:flutter/material.dart';
@@ -17,44 +16,9 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   void updateImagesAtIndex(int index, Function(ImageHashStruct) updateFn) =>
       images[index] = updateFn(images[index]);
 
-  bool option3 = true;
-
-  bool option4 = true;
-
-  int isMorePressed = 0;
-
-  bool isPoll = true;
-
-  List<String> options = [];
-  void addToOptions(String item) => options.add(item);
-  void removeFromOptions(String item) => options.remove(item);
-  void removeAtIndexFromOptions(int index) => options.removeAt(index);
-  void insertAtIndexInOptions(int index, String item) =>
-      options.insert(index, item);
-  void updateOptionsAtIndex(int index, Function(String) updateFn) =>
-      options[index] = updateFn(options[index]);
-
   bool isSpoiler = true;
 
   String postID = 'a';
-
-  String apiKey = '0000';
-
-  bool isSettings = false;
-
-  bool isStealthBypass = false;
-
-  bool isCommentAllowed = true;
-
-  bool isPrivate = false;
-
-  bool isAiEnabled = false;
-
-  bool isShorts = false;
-
-  ThreadStruct? thread;
-  void updateThreadStruct(Function(ThreadStruct) updateFn) =>
-      updateFn(thread ??= ThreadStruct());
 
   ///  State fields for stateful widgets in this page.
 
@@ -69,23 +33,30 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   PostsRecord? post;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  FocusNode? textFieldFocusNode1;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+  String uploadedFileUrl1 = '';
 
-  // Model for threadCreate component.
-  late ThreadCreateModel threadCreateModel;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  ShortsRecord? createdVar;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController2;
+  String? Function(BuildContext, String?)? textController2Validator;
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
     pCNavBarModel = createModel(context, () => PCNavBarModel());
-    threadCreateModel = createModel(context, () => ThreadCreateModel());
   }
 
   @override
@@ -93,10 +64,11 @@ class CreatePostModel extends FlutterFlowModel<CreatePostWidget> {
     unfocusNode.dispose();
     pCNavBarModel.dispose();
     tabBarController?.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    textFieldFocusNode1?.dispose();
+    textController1?.dispose();
 
-    threadCreateModel.dispose();
+    textFieldFocusNode2?.dispose();
+    textController2?.dispose();
   }
 
   /// Action blocks are added here.

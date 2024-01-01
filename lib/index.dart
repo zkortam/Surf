@@ -42,3 +42,5 @@ export '/muluploadtest/muluploadtest_widget.dart' show MuluploadtestWidget;
 export '/logging_in/logging_in_widget.dart' show LoggingInWidget;
 export '/spaces/spaces_widget.dart' show SpacesWidget;
 export '/preentry/preentry_widget.dart' show PreentryWidget;
+export '/shorts/shorts_widget.dart' show ShortsWidget;
+export '/shorts_debug/shorts_debug_widget.dart' show ShortsDebugWidget;
