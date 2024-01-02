@@ -594,7 +594,6 @@ class _SingleThreadWidgetState extends State<SingleThreadWidget> {
                                                         _model.textController,
                                                     focusNode: _model
                                                         .textFieldFocusNode,
-                                                    autofocus: true,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
                                                       isDense: true,

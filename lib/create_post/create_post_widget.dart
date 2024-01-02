@@ -1466,7 +1466,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                                 text: FFLocalizations.of(
                                                                         context)
                                                                     .getText(
-                                                                  '7dd4pva9' /* Post */,
+                                                                  'ofv3vig3' /* Post */,
                                                                 ),
                                                                 options:
                                                                     FFButtonOptions(

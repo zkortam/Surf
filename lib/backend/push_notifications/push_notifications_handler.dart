@@ -210,7 +210,6 @@ final parametersBuilderMap =
               data, 'chat', ChatsRecord.fromSnapshot),
         },
       ),
-  'muluploadtest': ParameterData.none(),
   'LoggingIn': ParameterData.none(),
   'spaces': (data) async => ParameterData(
         allParams: {
@@ -219,7 +218,6 @@ final parametersBuilderMap =
       ),
   'preentry': ParameterData.none(),
   'Shorts': ParameterData.none(),
-  'ShortsDebug': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
