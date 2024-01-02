@@ -376,12 +376,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'muluploadtest',
-              path: 'muluploadtest',
-              requireAuth: true,
-              builder: (context, params) => const MuluploadtestWidget(),
-            ),
-            FFRoute(
               name: 'LoggingIn',
               path: 'loggingIn',
               requireAuth: true,
@@ -413,12 +407,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       initialPage: 'Shorts',
                       page: ShortsWidget(),
                     ),
-            ),
-            FFRoute(
-              name: 'ShortsDebug',
-              path: 'shortsDebug',
-              requireAuth: true,
-              builder: (context, params) => const ShortsDebugWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

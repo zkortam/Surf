@@ -115,39 +115,34 @@ class _ShortsWidgetState extends State<ShortsWidget> {
                                 snapshot.data!;
                             return SizedBox(
                               width: double.infinity,
-                              height: 500.0,
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 40.0),
-                                child: PageView.builder(
-                                  controller: _model.pageViewController ??=
-                                      PageController(
-                                          initialPage: min(
-                                              0,
-                                              pageViewShortsRecordList.length -
-                                                  1)),
-                                  onPageChanged: (_) => setState(() {}),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: pageViewShortsRecordList.length,
-                                  itemBuilder: (context, pageViewIndex) {
-                                    final pageViewShortsRecord =
-                                        pageViewShortsRecordList[pageViewIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        ShortWidget(
-                                          key: Key(
-                                              'Keyl13_${pageViewIndex}_of_${pageViewShortsRecordList.length}'),
-                                          videoURL:
-                                              pageViewShortsRecord.videourl,
-                                          authorID:
-                                              pageViewShortsRecord.author!.id,
-                                          caption: pageViewShortsRecord.caption,
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
+                              height: MediaQuery.sizeOf(context).height * 1.0,
+                              child: PageView.builder(
+                                controller: _model.pageViewController ??=
+                                    PageController(
+                                        initialPage: min(
+                                            0,
+                                            pageViewShortsRecordList.length -
+                                                1)),
+                                onPageChanged: (_) => setState(() {}),
+                                scrollDirection: Axis.vertical,
+                                itemCount: pageViewShortsRecordList.length,
+                                itemBuilder: (context, pageViewIndex) {
+                                  final pageViewShortsRecord =
+                                      pageViewShortsRecordList[pageViewIndex];
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      ShortWidget(
+                                        key: Key(
+                                            'Keyl13_${pageViewIndex}_of_${pageViewShortsRecordList.length}'),
+                                        videoURL: pageViewShortsRecord.videourl,
+                                        authorID:
+                                            pageViewShortsRecord.author!.id,
+                                        caption: pageViewShortsRecord.caption,
+                                      ),
+                                    ],
+                                  );
+                                },
                               ),
                             );
                           },

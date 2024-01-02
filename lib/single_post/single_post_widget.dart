@@ -626,7 +626,6 @@ class _SinglePostWidgetState extends State<SinglePostWidget> {
                                                                 .textController,
                                                             focusNode: _model
                                                                 .textFieldFocusNode,
-                                                            autofocus: true,
                                                             obscureText: false,
                                                             decoration:
                                                                 InputDecoration(
