@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/util/schema_util.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -82,6 +83,13 @@ Map<String, dynamic> mapToFirestore(Map<String, dynamic> data) =>
       // Handle list of Color
       if (value is Iterable && value.isNotEmpty && value.first is Color) {
         value = value.map((v) => (v as Color).toCssString()).toList();
+      } // Handle Enums.
+      if (value is Enum) {
+        value = value.serialize();
+      }
+      // Handle list of Enums.
+      if (value is Iterable && value.isNotEmpty && value.first is Enum) {
+        value = value.map((v) => (v as Enum).serialize()).toList();
       }
       // Handle nested data.
       if (value is Map) {

@@ -60,176 +60,192 @@ class _ShortWidgetState extends State<ShortWidget> {
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
-        child: Stack(
-          children: [
-            Align(
-              alignment: const AlignmentDirectional(-1.0, 0.0),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                decoration: const BoxDecoration(),
-                child: FlutterFlowVideoPlayer(
-                  path: '${widget.videoURL}',
-                  videoType: VideoType.network,
-                  width: MediaQuery.sizeOf(context).width * 1.0,
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 1.0,
+          child: Stack(
+            children: [
+              Align(
+                alignment: const AlignmentDirectional(-1.0, 0.0),
+                child: Container(
+                  width: double.infinity,
                   height: MediaQuery.sizeOf(context).height * 1.0,
-                  autoPlay: true,
-                  looping: true,
-                  showControls: false,
-                  allowFullScreen: false,
-                  allowPlaybackSpeedMenu: false,
+                  decoration: const BoxDecoration(),
+                  child: FlutterFlowVideoPlayer(
+                    path: '${widget.videoURL}',
+                    videoType: VideoType.network,
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    autoPlay: true,
+                    looping: true,
+                    showControls: false,
+                    allowFullScreen: false,
+                    allowPlaybackSpeedMenu: false,
+                  ),
                 ),
               ),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 10.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderRadius: 20.0,
-                          buttonSize: 55.0,
-                          icon: Icon(
-                            Icons.favorite,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 40.0,
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 10.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 20.0,
+                            buttonSize: 55.0,
+                            icon: Icon(
+                              Icons.favorite,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 40.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 20.0,
-                          buttonSize: 55.0,
-                          icon: Icon(
-                            Icons.comment,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 40.0,
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 20.0,
+                            buttonSize: 55.0,
+                            icon: Icon(
+                              Icons.comment,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 40.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                      ],
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 20.0,
+                            buttonSize: 55.0,
+                            icon: Icon(
+                              Icons.share_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 35.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 50.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: 60.0,
-                      decoration: const BoxDecoration(
-                        color: Color(0xD814181B),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15.0),
-                          bottomRight: Radius.circular(15.0),
-                          topLeft: Radius.circular(15.0),
-                          topRight: Radius.circular(15.0),
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, 1.0),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          10.0, 10.0, 10.0, 50.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 60.0,
+                        decoration: const BoxDecoration(
+                          color: Color(0xD814181B),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15.0),
+                            bottomRight: Radius.circular(15.0),
+                            topLeft: Radius.circular(15.0),
+                            topRight: Radius.circular(15.0),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            StreamBuilder<List<UsersRecord>>(
-                              stream: queryUsersRecord(
-                                queryBuilder: (usersRecord) =>
-                                    usersRecord.where(
-                                  'uid',
-                                  isEqualTo: widget.authorID,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 10.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              StreamBuilder<List<UsersRecord>>(
+                                stream: queryUsersRecord(
+                                  queryBuilder: (usersRecord) =>
+                                      usersRecord.where(
+                                    'uid',
+                                    isEqualTo: widget.authorID,
+                                  ),
+                                  singleRecord: true,
                                 ),
-                                singleRecord: true,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 50.0,
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: SpinKitRipple(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 50.0,
+                                        ),
                                       ),
+                                    );
+                                  }
+                                  List<UsersRecord> textUsersRecordList =
+                                      snapshot.data!;
+                                  // Return an empty Container when the item does not exist.
+                                  if (snapshot.data!.isEmpty) {
+                                    return Container();
+                                  }
+                                  final textUsersRecord =
+                                      textUsersRecordList.isNotEmpty
+                                          ? textUsersRecordList.first
+                                          : null;
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'Profile',
+                                        queryParameters: {
+                                          'userID': serializeParam(
+                                            widget.authorID,
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        textUsersRecord?.displayName,
+                                        'Anonymous',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                     ),
                                   );
-                                }
-                                List<UsersRecord> textUsersRecordList =
-                                    snapshot.data!;
-                                // Return an empty Container when the item does not exist.
-                                if (snapshot.data!.isEmpty) {
-                                  return Container();
-                                }
-                                final textUsersRecord =
-                                    textUsersRecordList.isNotEmpty
-                                        ? textUsersRecordList.first
-                                        : null;
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'Profile',
-                                      queryParameters: {
-                                        'userID': serializeParam(
-                                          widget.authorID,
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      textUsersRecord?.displayName,
-                                      'Anonymous',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
-                                );
-                              },
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                widget.caption,
-                                'Caption',
+                                },
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                            ),
-                          ],
+                              Text(
+                                valueOrDefault<String>(
+                                  widget.caption,
+                                  'Caption',
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
